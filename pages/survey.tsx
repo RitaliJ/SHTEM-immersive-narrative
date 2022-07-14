@@ -6,8 +6,9 @@ import { AccountType } from "../util/types";
 
 export default function Survey() {
     const [account, setAccount] = useState<AccountType>();
-    const [interests, setInterests] = useState([""]);
+    const [interests, setInterests] = useState([""]);//array of interest names
 
+    //get account info from localStorage; if it doesn't exist, send user to login page
     useEffect(() => {
         const acc = localStorage.getItem("shtemAccount");
         if (acc === "undefined" || acc === null) {
@@ -19,6 +20,7 @@ export default function Survey() {
         }
     });
 
+    //function to add/remove an interest
     const updateInterests = (name: string, on: boolean) => {
         if (on) {
             setInterests([...interests, name].filter(e => e !== ""));
@@ -27,6 +29,7 @@ export default function Survey() {
         }
     }
 
+    //set localStorage and go to index
     const handleSubmit = () => {
         localStorage.setItem("shtemInterests", JSON.stringify(interests));
         location.href = "/";

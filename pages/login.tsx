@@ -4,10 +4,12 @@ import InputGroup from '../components/InputGroup'
 import { AccountType } from '../util/types';
 
 export default function Login() {
+    //useStates for account fields
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
 
+    //set localStorage and go to interest survey page
     const handleSubmit = (account: AccountType) => {
         localStorage.setItem("shtemAccount", JSON.stringify(account));
         location.href = "/survey";

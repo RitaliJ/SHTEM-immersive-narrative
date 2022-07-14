@@ -1,3 +1,4 @@
+//component for a text input with label
 export default function InputGroup(props: {
     label: string,
     placeholder: string,
