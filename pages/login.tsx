@@ -1,25 +1,23 @@
 import Head from 'next/head'
 import { useState } from 'react';
 import InputGroup from '../components/InputGroup'
+import { AccountType } from '../util/types';
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
 
-    const createAccount = (email: string, firstName: string, lastName: string) => {
-        localStorage.setItem("shtemAccount", JSON.stringify({
-            email,
-            firstName,
-            lastName,
-        }));
+    const handleSubmit = (account: AccountType) => {
+        localStorage.setItem("shtemAccount", JSON.stringify(account));
+        location.href = "/survey";
     }
 
     return (
         <div className="w-screen h-screen bg-gray-300">
             <Head>
-                <title>SHTEM Website</title>
-                <meta name="description" content="Shtem website" />
+                <title>SHTEM Website | Login</title>
+                <meta name="description" content="Login" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
         
@@ -31,9 +29,9 @@ export default function Login() {
                     <InputGroup label="Email" placeholder="type here..." callback={setEmail} />
                     <InputGroup label="First Name" placeholder="type here..." callback={setFirstName} />
                     <InputGroup label="Last Name" placeholder="type here..." callback={setLastName} />
-                    <div className="flex gap-2 mt-2 justify-center">
+                    <div className="flex mt-2 justify-center">
                         <button
-                            onClick={() => createAccount(email, firstName, lastName)}
+                            onClick={() => handleSubmit({email, firstName, lastName})}
                             className="bg-blue-500 rounded-lg px-3 pt-1 pb-1.5 text-white"
                         >
                             Create account
