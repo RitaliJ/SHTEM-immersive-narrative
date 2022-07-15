@@ -10,11 +10,11 @@ export default function Survey() {
 
     //get account info from localStorage; if it doesn't exist, send user to login page
     useEffect(() => {
-        const acc = localStorage.getItem("shtemAccount");
-        if (acc === "undefined" || acc === null) {
-            location.href = "/login";
-        } else {
-            if (!account) {
+        if (!account) {
+            const acc = localStorage.getItem("shtemAccount");
+            if (acc === "undefined" || acc === null) {
+                location.href = "/login";
+            } else {
                 setAccount(JSON.parse(acc));
             }
         }
@@ -32,7 +32,7 @@ export default function Survey() {
     //set localStorage and go to index
     const handleSubmit = () => {
         localStorage.setItem("shtemInterests", JSON.stringify(interests));
-        location.href = "/";
+        location.href = "/home";
     }
 
     return (
