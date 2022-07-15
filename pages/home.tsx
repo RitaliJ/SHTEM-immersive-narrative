@@ -2,10 +2,12 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import ProductPreview from '../components/ProductPreview';
-import { AccountType } from '../util/types';
+import { AccountType, ProductType } from '../util/types';
+const mod = require('../util/products');
 
 export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
+    const [products, setProducts] = useState([{} as ProductType]);
 
     useEffect(() => {
         if (!account.email) {
@@ -15,6 +17,9 @@ export default function Home() {
             } else {
                 setAccount(JSON.parse(acc));
             }
+        }
+        if (!products[0].name) {
+            setProducts(mod.products);
         }
     });
 
@@ -33,62 +38,9 @@ export default function Home() {
                     Buy our things
                 </h1>
                 <div className="flex justify-center gap-4 flex-wrap">
-                    <ProductPreview
-                        imgSrc="https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg"
-                        name="MICKE desk"
-                        desc="Top 10 desk of all time"
-                        price={39.99}
-                        id={0}
-                    />
-                    <ProductPreview
-                        imgSrc="https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg"
-                        name="MICKE desk"
-                        desc="Top 10 desk of all time"
-                        price={39.99}
-                        id={0}
-                    />
-                    <ProductPreview
-                        imgSrc="https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg"
-                        name="MICKE desk"
-                        desc="Top 10 desk of all time"
-                        price={39.99}
-                        id={0}
-                    />
-                    <ProductPreview
-                        imgSrc="https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg"
-                        name="MICKE desk"
-                        desc="Top 10 desk of all time"
-                        price={39.99}
-                        id={0}
-                    />
-                    <ProductPreview
-                        imgSrc="https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg"
-                        name="MICKE desk"
-                        desc="Top 10 desk of all time"
-                        price={39.99}
-                        id={0}
-                    />
-                    <ProductPreview
-                        imgSrc="https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg"
-                        name="MICKE desk"
-                        desc="Top 10 desk of all time"
-                        price={39.99}
-                        id={0}
-                    />
-                    <ProductPreview
-                        imgSrc="https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg"
-                        name="MICKE desk"
-                        desc="Top 10 desk of all time"
-                        price={39.99}
-                        id={0}
-                    />
-                    <ProductPreview
-                        imgSrc="https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg"
-                        name="MICKE desk"
-                        desc="Top 10 desk of all time"
-                        price={39.99}
-                        id={0}
-                    />
+                    {products.map(p =>
+                        <ProductPreview {...p} />    
+                    )}
                 </div>
             </main>
         </div>

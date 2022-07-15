@@ -6,9 +6,8 @@ export default function ProductPreview(props: {
     desc: string,
     price: number,
     id: number,
-    className?: string,
 }) {
-    const {imgSrc, name, desc, price, id, className} = props;
+    const {imgSrc, name, desc, price, id} = props;
     
     return (
         <Link href={"/products/" + id}>
