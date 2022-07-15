@@ -33,7 +33,7 @@ export default function Login() {
                     <InputGroup label="Last Name" placeholder="type here..." callback={setLastName} />
                     <div className="flex mt-2 justify-center">
                         <button
-                            onClick={() => handleSubmit({email, firstName, lastName})}
+                            onClick={() => handleSubmit({email, firstName, lastName, balance: 1000})}
                             className="bg-blue-500 rounded-lg px-3 pt-1 pb-1.5 text-white"
                         >
                             Create account
