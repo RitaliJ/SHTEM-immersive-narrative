@@ -2,14 +2,23 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import ProductPreview from '../components/ProductPreview';
-import { ProductType } from '../util/types';
+import { AccountType, ProductType } from '../util/types';
 const mod = require('../util/products');
 
 export default function Home() {
+    const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([{} as ProductType]);
 
-    //get products from util/products.ts on page load
+    //get account from localStorage and products from util/products.ts on page load
     useEffect(() => {
+        if (!account.email) {
+            const acc = localStorage.getItem("shtemAccount");
+            if (acc === "undefined" || acc === null) {
+                location.href = "/login";
+            } else {
+                setAccount(JSON.parse(acc));
+            }
+        }
         if (!products[0].name) {
             setProducts(mod.products);
         }
@@ -31,7 +40,7 @@ export default function Home() {
                 </h1>
                 <div className="flex justify-center gap-4 flex-wrap">
                     {products.map(p =>
-                        <ProductPreview {...p} />    
+                        <ProductPreview product={p} balance={account.balance} />    
                     )}
                 </div>
             </main>
