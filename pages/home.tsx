@@ -6,32 +6,24 @@ import { AccountType, ProductType } from '../util/types';
 const mod = require('../util/products');
 
 export default function Home() {
-    const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([{} as ProductType]);
 
+    //get products from util/products.ts on page load
     useEffect(() => {
-        if (!account.email) {
-            const acc = localStorage.getItem("shtemAccount");
-            if (acc === "undefined" || acc === null) {
-                location.href = "/login";
-            } else {
-                setAccount(JSON.parse(acc));
-            }
-        }
         if (!products[0].name) {
             setProducts(mod.products);
         }
     });
 
     return (
-        <div className="bg-white">
+        <>
             <Head>
                 <title>SHTEM Website</title>
                 <meta name="description" content="Shtem website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <Header account={account} />
+            <Header />
 
             <main className="container pt-12 pb-24">
                 <h1 className="text-7xl font-bold text-center mb-12">
@@ -43,6 +35,6 @@ export default function Home() {
                     )}
                 </div>
             </main>
-        </div>
+        </>
     )
 }
