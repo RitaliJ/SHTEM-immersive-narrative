@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import ProductPreview from '../components/ProductPreview';
-import { AccountType, ProductType } from '../util/types';
+import { ProductType } from '../util/types';
 const mod = require('../util/products');
 
 export default function Home() {
