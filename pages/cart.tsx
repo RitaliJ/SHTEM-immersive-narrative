@@ -32,6 +32,15 @@ export default function Cart() {
         setTotal(t);
     }, [account]);
 
+    //function to remove item from cart
+    const removeItem = (id: number) => {
+        let acc = {} as AccountType;
+        Object.assign(acc, account);
+        acc.items = acc.items.filter(i => i.product.id !== id);
+        localStorage.setItem("shtemAccount", JSON.stringify(acc));
+        setAccount(acc);
+    }
+
     return (
         <>
             <Head>
@@ -53,7 +62,7 @@ export default function Cart() {
                 </h1>
                 <div className="flex flex-col gap-2 divide-y-2 divide-gray-300">
                     {account.email && account.items.map(i =>
-                        <CartProduct {...i} />
+                        <CartProduct {...{...i, callback: () => removeItem(i.product.id)}} />
                     )}
                     {Number(total.toFixed(2)) > account.balance ? (
                         <div className="flex flex-col gap-1">
