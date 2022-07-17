@@ -38,10 +38,7 @@ export default function Login() {
                                 firstName,
                                 lastName,
                                 balance: 1000,
-                                items: [{
-                                    product: undefined as unknown as ProductType,
-                                    quantity: 0,
-                                }],
+                                items: [undefined as unknown as {product: ProductType, quantity: number}],
                             })}
                             className="bg-blue-500 rounded-lg px-3 pt-1 pb-1.5 text-white"
                         >
