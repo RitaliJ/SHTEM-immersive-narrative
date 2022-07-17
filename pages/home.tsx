@@ -5,10 +5,12 @@ import ProductPreview from '../components/ProductPreview';
 import { AccountType, ProductType } from '../util/types';
 const mod = require('../util/products');
 
+//home page with product list to scroll through
 export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([{} as ProductType]);
 
+    //get account from localStorage and products from util/products.ts on page load
     useEffect(() => {
         if (!account.email) {
             const acc = localStorage.getItem("shtemAccount");
@@ -24,25 +26,25 @@ export default function Home() {
     });
 
     return (
-        <div className="bg-white">
+        <>
             <Head>
                 <title>SHTEM Website</title>
                 <meta name="description" content="Shtem website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <Header account={account} />
+            <Header />
 
             <main className="container pt-12 pb-24">
-                <h1 className="text-7xl font-bold text-center mb-12">
+                <h1 className="text-5xl font-bold text-center mb-12">
                     Buy our things
                 </h1>
                 <div className="flex justify-center gap-4 flex-wrap">
                     {products.map(p =>
-                        <ProductPreview {...p} />    
+                        <ProductPreview product={p} />
                     )}
                 </div>
             </main>
-        </div>
+        </>
     )
 }

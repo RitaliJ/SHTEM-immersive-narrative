@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { useState } from 'react';
 import InputGroup from '../components/InputGroup'
-import { AccountType } from '../util/types';
+import { AccountType, ProductType } from '../util/types';
 
+//page for creating an account; information is saved in localStorage
 export default function Login() {
     //useStates for account fields
     const [email, setEmail] = useState("");
@@ -38,7 +39,17 @@ export default function Login() {
                     
                     <div className="flex mt-2 justify-center">
                         <button
-                            onClick={() => handleSubmit({email, firstName, lastName, phone, balance: 2000})}
+
+
+                            onClick={() => handleSubmit({
+                                email,
+                                firstName,
+                                lastName,
+                                phone,
+                                balance: 1000,
+                                items: [undefined as unknown as {product: ProductType, quantity: number}],
+                            })}
+
                             className="bg-blue-500 rounded-lg px-3 pt-1 pb-1.5 text-white"
                         >
                             Create account
