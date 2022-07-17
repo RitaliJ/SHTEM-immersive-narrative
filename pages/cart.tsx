@@ -70,7 +70,9 @@ export default function Cart() {
                     ) : (
                         <div className="flex gap-2 justify-end pt-4 text-right text-3xl font-bold">
                             <p>Total:</p>
-                            <p>{total.toFixed(2)} V Bucks</p>
+                            <p className="text-green-600">
+                                {total.toFixed(2)} V Bucks
+                            </p>
                         </div>
                     )}
                 </div>
