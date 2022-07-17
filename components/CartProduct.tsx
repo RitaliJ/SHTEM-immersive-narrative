@@ -4,17 +4,17 @@ export default function CartProduct(props: {product: ProductType, quantity: numb
     const {product, quantity} = props;
 
     return (
-        <div className="flex gap-2 items-center text-3xl font-bold">
+        <div className="flex gap-4 items-center text-3xl font-bold">
             <img
                 src={product.imgSrc}
                 alt={product.name}
                 className="w-36"
             />
-            <div className="grow flex gap-4">
-                <span>{quantity}×</span>
-                <span>{product.name}</span>
-            </div>
-            <span>
+            <span>{quantity}×</span>
+            <span className="grow line-clamp-1">
+                {product.name}
+            </span>
+            <span className="whitespace-nowrap">
                 {(product.price * quantity).toFixed(2)} V Bucks
             </span>
         </div>
