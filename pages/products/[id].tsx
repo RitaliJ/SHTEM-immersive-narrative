@@ -4,12 +4,14 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AccountType, ProductType } from '../../util/types';
 import Head from 'next/head';
+
 import AddToCart from '../../components/AddToCart';
 import Link from 'next/link';
 const mod = require('../../util/products')
 
 export default function Product(){
     const [product, setProduct] = useState({} as ProductType);
+
     const [account, setAccount] = useState({} as AccountType);
     const router = useRouter();
     const id = router.query.id;
@@ -33,7 +35,21 @@ export default function Product(){
         console.log("Purchasing Product");
     }
 
+
+    //get account info from localStorage; if it doesn't exist, send user to login page
+    useEffect(() => {
+        if (!account) {
+            const acc = localStorage.getItem("shtemAccount");
+            if (acc === "undefined" || acc === null) {
+                location.href = "/login";
+            } else {
+                setAccount(JSON.parse(acc));
+            }
+        }
+    });
+
     return(
+
         <>
             <Head>
                 <title>SHTEM | {product && product.name}</title>
@@ -76,6 +92,7 @@ export default function Product(){
                     </p>
                 </div>
             </div>
+
         </>
     );
 }
