@@ -32,7 +32,19 @@ module.exports = {products: [
         name: "POÄNG Armchair",
         desc: "Top 10 chair of all time",
         price: 0.49,
-        id: 2,
-    },
+        id: 3,
+    },{
+        imgSrc: 'https://media.restocks.net/products/GV6774/adidas-yeezy-foam-rnnr-mist-1-400.png',
+        name: 'Yeezy Foam Rnnnr',
+        desc: 'Thinking outside the box...',
+        price: 1000,
+        id: 4,
+    },{
+        imgSrc: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/og-airpods-max-202011?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1603996970000',
+        name:'Apple Headphones',
+        desc:'Good Headphones',
+        price: 500,
+        id: 5,
+    }
 
 ]}

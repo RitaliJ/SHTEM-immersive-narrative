@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import { useState } from 'react';
 import InputGroup from '../components/InputGroup'
 import { AccountType, ProductType } from '../util/types';
