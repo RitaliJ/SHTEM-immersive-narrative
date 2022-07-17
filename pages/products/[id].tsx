@@ -36,14 +36,13 @@ export default function Product(){
 
     return(
         <> 
-            <h1>Product Name: {product.name}</h1>
+            <h1>Product Name:</h1>
             <img
-                src={product.imgSrc} // Route of the image file // currently a fake file src
                 height={144} // Desired size with correct aspect ratio
-                width={144} // Desired size with correct aspect ratio
-                alt={product.name}
+                width={144} // Desired size with correct aspect ratio             
             />
-            <p>Description of product: {product.desc}</p>
+            
+            
         </>
     );
 }
