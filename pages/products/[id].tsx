@@ -51,7 +51,6 @@ export default function Product(){
                     <img
                         src={product.imgSrc}
                         alt={product.name}
-                        className="w-1/2"
                         loading="lazy"
                     />
                 </div>
