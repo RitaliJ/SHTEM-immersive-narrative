@@ -5,20 +5,22 @@ export default function AddToCart(props: {product: ProductType}) {
     const {product} = props;
     const [num, setNum] = useState(1);
 
+    //change num when you press the left and right buttons
     const increment = (amount: number) => {
         if (num + amount > 0) {
             setNum(num + amount);
         }
     }
 
+    //add {num} copies of this product to the cart
     const addToCart = () => {
         const acc = localStorage.getItem("shtemAccount");
         if (!acc) return;
         let newAcc = JSON.parse(acc);
         if (newAcc.items[0] === null) {
-            newAcc.items[0] = product;
+            newAcc.items[0] = {product, quantity: num};
         } else {
-            newAcc.items.push(product);
+            newAcc.items.push({product, quantity: num});
         }
         localStorage.setItem("shtemAccount", JSON.stringify(newAcc));
     }
