@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ProductType } from "../util/types";
 
-export default function ProductPreview(props: {product: ProductType, balance: number}) {
-    const {product, balance} = props;
+export default function ProductPreview(props: {product: ProductType}) {
+    const {product} = props;
     
     return (
         <Link href={"/products/" + product.id}>
@@ -13,8 +13,7 @@ export default function ProductPreview(props: {product: ProductType, balance: nu
                     <p className="font-bold grow line-clamp-2">
                         {product.name}
                     </p>
-                    <p className={"whitespace-nowrap font-bold "
-                        + (balance > product.price ? "text-green-600" : "text-red-500")}>
+                    <p className={"whitespace-nowrap font-bold text-green-600"}>
                         {product.price + " V Bucks"}
                     </p>
                 </div>

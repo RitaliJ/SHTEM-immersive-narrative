@@ -40,7 +40,7 @@ export default function Home() {
                 </h1>
                 <div className="flex justify-center gap-4 flex-wrap">
                     {products.map(p =>
-                        <ProductPreview product={p} balance={account.balance} />    
+                        <ProductPreview product={p} />
                     )}
                 </div>
             </main>
