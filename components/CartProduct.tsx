@@ -1,5 +1,6 @@
 import { ProductType } from "../util/types";
 
+//component for item in shopping cart list
 export default function CartProduct(props: {product: ProductType, quantity: number}) {
     const {product, quantity} = props;
 

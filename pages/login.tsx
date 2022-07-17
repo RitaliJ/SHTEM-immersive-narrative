@@ -3,6 +3,7 @@ import { useState } from 'react';
 import InputGroup from '../components/InputGroup'
 import { AccountType, ProductType } from '../util/types';
 
+//page for creating an account; information is saved in localStorage
 export default function Login() {
     //useStates for account fields
     const [email, setEmail] = useState("");

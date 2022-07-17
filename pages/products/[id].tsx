@@ -6,6 +6,7 @@ import Head from 'next/head';
 import AddToCart from '../../components/AddToCart';
 const mod = require('../../util/products')
 
+//page for an individual product
 export default function Product() {
     const [product, setProduct] = useState({} as ProductType);
     const router = useRouter();

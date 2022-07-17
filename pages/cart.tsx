@@ -4,6 +4,7 @@ import CartProduct from "../components/CartProduct";
 import Header from "../components/Header";
 import { AccountType } from "../util/types";
 
+//page for viewing shopping cart
 export default function Cart() {
     const [account, setAccount] = useState({} as AccountType);
     const [total, setTotal] = useState(0);

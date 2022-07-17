@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import InputGroup from "../components/InputGroup";
 import ToggleButton from "../components/ToggleButton";
 import { AccountType } from "../util/types";
 
+//page for collecting additional information about the user
 export default function Survey() {
     const [account, setAccount] = useState<AccountType>();
     const [interests, setInterests] = useState([""]);//array of interest names

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProductType } from "../util/types";
 
+//component for product image and details to display on home page
 export default function ProductPreview(props: {product: ProductType}) {
     const {product} = props;
     

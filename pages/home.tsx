@@ -5,6 +5,7 @@ import ProductPreview from '../components/ProductPreview';
 import { AccountType, ProductType } from '../util/types';
 const mod = require('../util/products');
 
+//home page with product list to scroll through
 export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([{} as ProductType]);

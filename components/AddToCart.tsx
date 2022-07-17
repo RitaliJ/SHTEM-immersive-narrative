@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ProductType } from "../util/types";
 
+//component for quantity selection and "Add to cart" button on product pages
 export default function AddToCart(props: {product: ProductType}) {
     const {product} = props;
     const [num, setNum] = useState(1);
