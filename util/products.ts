@@ -10,7 +10,7 @@ module.exports = {products: [
     },
     {
         imgSrc: "https://www.ikea.com/us/en/images/products/micke-desk-black-brown__0735981_pe740299_s5.jpg",
-        name: "MICKE Desk but the title is very very very very very very very very very long",
+        name: "MICKE Desk but the title is very very very very very very very very very very very very very very very very very very very long",
         desc: `long description long description long description long description long description long
             description long description long description long description long description long description
             long description long description long description long description long description
