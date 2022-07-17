@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import CartProduct from "../components/CartProduct";
 import Header from "../components/Header";
@@ -42,6 +43,11 @@ export default function Cart() {
             <Header />
 
             <main className="container pt-12 pb-24">
+                <Link href="/home">
+                    <button className="bg-blue-500 text-2xl text-white px-3 pb-1.5 pt-1 rounded-lg mb-6">
+                        ← Continue shopping
+                    </button>
+                </Link>
                 <h1 className="text-7xl font-bold mb-12">
                     Your cart
                 </h1>
