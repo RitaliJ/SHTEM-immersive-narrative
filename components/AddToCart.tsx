@@ -38,37 +38,37 @@ export default function AddToCart(props: {product: ProductType}) {
     }
 
     return (
-        <div className="bg-gray-100 p-2 pl-4 flex gap-4 items-center text-2xl w-min whitespace-nowrap rounded-lg">
+        <div className="bg-slate-100 p-2 pl-4 flex gap-4 items-center text-md w-min whitespace-nowrap rounded-lg">
             <span>Quantity:</span>
-            <div className="flex gap-2 text-xl">
+            <div className="flex gap-2 text-lg">
                 {num === 1 ? (
                     <button
-                        className="text-gray-400 bg-gray-200 duration-150 rounded-full px-3">
+                        className="text-slate-400 bg-slate-200 duration-150 rounded-full px-3">
                         {"ᐸ"}
                     </button>
                 ) : (
                     <button
                         onClick={() => increment(-1)}
-                        className="bg-gray-300 hover:bg-gray-400 duration-150 rounded-full px-3">
+                        className="bg-slate-300 hover:bg-slate-400 duration-150 rounded-full px-3">
                         {"ᐸ"}
                     </button>
                 )}
-                <span className="text-2xl min-w-[2rem] text-center">
+                <span className="min-w-[2rem] text-center">
                     {num}
                 </span>
                 <button
                     onClick={() => increment(1)}
-                    className="bg-gray-300 hover:bg-gray-400 duration-150 rounded-full px-3">
+                    className="bg-slate-300 hover:bg-slate-400 duration-150 rounded-full px-3">
                     {"ᐳ"}
                 </button>
             </div>
             <span className="text-green-600 font-bold">
-                {product.price} V Bucks
+                {(product.price * num).toFixed(2)} V Bucks
             </span>
             <Link href="/cart">
                 <button
                     onClick={() => addToCart()}
-                    className="bg-blue-500 text-white px-2 py-1 rounded-lg">
+                    className="bg-black text-white px-2 py-1 rounded-lg">
                     Add to cart
                 </button>
             </Link>

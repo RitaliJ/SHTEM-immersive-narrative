@@ -19,14 +19,14 @@ export default function Header() {
     });
 
     return (
-        <div className="bg-white flex items-center gap-4 sticky top-0 px-6 drop-shadow bg-opacity-50 backdrop-blur-lg">
+        <div className="bg-slate-200 flex items-center gap-4 sticky top-0 px-6 bg-opacity-50 backdrop-blur-lg">
             <Link href="/home">
-                <button className="text-2xl font-bold">
+                <button className="text-xl font-bold">
                     Legendary Site
                 </button>
             </Link>
             <span className="grow"></span>
-            <span className="text-xl text-green-600 font-bold">
+            <span className="text-lg text-green-600 font-bold">
                 {account.balance} V Bucks
             </span>
             <Link href="/cart">
@@ -41,7 +41,7 @@ export default function Header() {
                     }
                 </button>
             </Link>
-            <span className="text-xl">
+            <span className="text-lg">
                 Logged in as {account.firstName}
             </span>
         </div>

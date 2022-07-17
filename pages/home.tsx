@@ -36,7 +36,7 @@ export default function Home() {
             <Header />
 
             <main className="container pt-12 pb-24">
-                <h1 className="text-7xl font-bold text-center mb-12">
+                <h1 className="text-5xl font-bold text-center mb-12">
                     Buy our things
                 </h1>
                 <div className="flex justify-center gap-4 flex-wrap">

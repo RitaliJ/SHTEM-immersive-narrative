@@ -53,11 +53,11 @@ export default function Cart() {
 
             <main className="container pt-12 pb-24">
                 <Link href="/home">
-                    <button className="bg-blue-500 text-2xl text-white px-3 pb-1.5 pt-1 rounded-lg mb-6">
+                    <button className="bg-blue-500 text-lg text-white px-3 py-1 rounded-lg mb-6">
                         ← Continue shopping
                     </button>
                 </Link>
-                <h1 className="text-7xl font-bold mb-12">
+                <h1 className="text-5xl font-bold mb-12">
                     Your cart
                 </h1>
                 <div className="flex flex-col gap-2 divide-y-2 divide-gray-300">
@@ -66,18 +66,18 @@ export default function Cart() {
                     )}
                     {Number(total.toFixed(2)) > account.balance ? (
                         <div className="flex flex-col gap-1">
-                            <div className="flex gap-2 justify-end pt-4 text-right text-3xl font-bold">
+                            <div className="flex gap-2 justify-end pt-4 text-right text-xl font-bold">
                                 <p>Total:</p>
                                 <p className="text-red-500">
                                     {total.toFixed(2)} V Bucks
                                 </p>
                             </div>
-                            <p className="text-right text-xl italic">
+                            <p className="text-right text-lg italic">
                                 You can't afford this purchase!
                             </p>
                         </div>
                     ) : (
-                        <div className="flex gap-2 justify-end pt-4 text-right text-3xl font-bold">
+                        <div className="flex gap-2 justify-end pt-4 text-right text-xl font-bold">
                             <p>Total:</p>
                             <p className="text-green-600">
                                 {total.toFixed(2)} V Bucks
