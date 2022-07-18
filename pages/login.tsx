@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import { useState } from 'react';
 import InputGroup from '../components/InputGroup'
 import { AccountType, ProductType } from '../util/types';
@@ -9,6 +9,8 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [phone, setPhone] = useState("");
+    
 
     //set localStorage and go to interest survey page
     const handleSubmit = (account: AccountType) => {
@@ -32,15 +34,22 @@ export default function Login() {
                     <InputGroup label="Email" placeholder="type here..." callback={setEmail} />
                     <InputGroup label="First Name" placeholder="type here..." callback={setFirstName} />
                     <InputGroup label="Last Name" placeholder="type here..." callback={setLastName} />
+                    <InputGroup label="Phone Number" placeholder='typehere...' callback={setPhone} /> 
+                    
+                    
                     <div className="flex mt-2 justify-center">
                         <button
+
+
                             onClick={() => handleSubmit({
                                 email,
                                 firstName,
                                 lastName,
+                                phone,
                                 balance: 1000,
                                 items: [undefined as unknown as {product: ProductType, quantity: number}],
                             })}
+
                             className="bg-blue-500 rounded-lg px-3 pt-1 pb-1.5 text-white"
                         >
                             Create account
