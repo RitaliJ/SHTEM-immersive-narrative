@@ -10,7 +10,6 @@ export default function Login() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phone, setPhone] = useState("");
-    
 
     //set localStorage and go to interest survey page
     const handleSubmit = (account: AccountType) => {
@@ -36,11 +35,8 @@ export default function Login() {
                     <InputGroup label="Last Name" placeholder="type here..." callback={setLastName} />
                     <InputGroup label="Phone Number" placeholder='typehere...' callback={setPhone} /> 
                     
-                    
                     <div className="flex mt-2 justify-center">
                         <button
-
-
                             onClick={() => handleSubmit({
                                 email,
                                 firstName,

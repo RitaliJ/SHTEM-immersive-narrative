@@ -29,10 +29,6 @@ export default function Product(){
         }
     });
 
-    const buyProduct = () => {
-        console.log("Purchasing Product");
-    }
-
     return(
         <>
             <Head>
