@@ -34,7 +34,6 @@ export default function Login() {
                     <InputGroup label="First Name" placeholder="type here..." callback={setFirstName} />
                     <InputGroup label="Last Name" placeholder="type here..." callback={setLastName} />
                     <InputGroup label="Phone Number" placeholder='type here...' callback={setPhone} />
-
                     
                     <div className="flex mt-2 justify-center">
                         <button
