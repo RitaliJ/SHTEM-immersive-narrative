@@ -6,7 +6,7 @@ export default function terms () {
 
             <main className="container pt-12 pb-24">
                 <h1 className="text-5xl font-bold text-center mb-12">
-                    Buy our things
+                   Terms and Conditions
                 </h1>
                 <div className=" flex justify-center gap-4 flex-wrap">
                     <p>
