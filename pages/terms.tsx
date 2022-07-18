@@ -1,7 +1,17 @@
 import Link from "next/link"
+import { useState } from "react";
 
 //terms and conditions page
 export default function Terms() {
+    const [read, setRead] = useState(false);
+
+    //set read to true if user has scrolled to the bottom of element
+    const handleScroll = (e: React.UIEvent<HTMLParagraphElement, UIEvent>) => {
+        if (!read && e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+            setRead(true);
+        }
+    }
+
     return (
         <div className="w-screen h-screen bg-gray-300">
             <main className="container w-min h-4/5 flex justify-center items-center">
@@ -9,7 +19,7 @@ export default function Terms() {
                     <h1 className="text-5xl font-bold text-center whitespace-nowrap px-24">
                         Terms and Conditions
                     </h1>
-                    <p className="h-96 overflow-y-scroll">
+                    <p onScroll={e => handleScroll(e)} className="h-96 overflow-y-scroll border-y-2 py-2">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum elit non magna mollis, in porttitor eros iaculis. Integer ut nisl congue, laoreet tortor nec, lacinia quam. Quisque et urna elementum, imperdiet est eu, ornare nisi. Ut pretium, sem eu pretium imperdiet, arcu nibh blandit leo, non mollis felis nisi eget justo. Morbi nisi nisl, ultricies id turpis eget, ullamcorper placerat arcu. Cras sollicitudin pharetra ipsum. Vivamus at massa in justo placerat consequat. Suspendisse non sodales nunc. Phasellus scelerisque rutrum venenatis. Maecenas posuere tellus lorem, posuere tempus turpis pellentesque ac. Fusce sit amet maximus turpis. Donec pellentesque ante sed semper condimentum. Cras eu nunc congue, dictum mi ac, tristique ex. Phasellus luctus maximus ultrices. Morbi ornare vehicula eros, sit amet mattis nunc malesuada et. Nunc semper gravida lorem nec iaculis.
                         Integer hendrerit, leo eleifend varius accumsan, magna sapien commodo libero, efficitur vestibulum tellus risus vel sem. Nam pretium id sapien non maximus. Quisque sed lorem leo. Quisque pharetra rutrum commodo. Morbi sagittis sapien a ex pharetra, nec pretium enim vulputate. Phasellus id tellus vitae justo consequat scelerisque non ut enim. Sed condimentum arcu ac libero ultricies tristique. Donec vitae condimentum enim. Fusce faucibus eros ut nibh placerat vestibulum. Phasellus non urna eu quam sagittis molestie nec in elit. Cras nulla neque, interdum sit amet venenatis a, pellentesque id felis. Proin venenatis sollicitudin sem, et venenatis felis tempor in. Donec tincidunt aliquam quam vel pellentesque. Donec ex quam, congue quis nulla eget, convallis eleifend est.
                         Sed vitae efficitur enim. Cras ac mi non metus placerat porttitor. Mauris vel varius nunc. Vestibulum lacinia posuere lorem eu ultricies. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque nec dui vel orci elementum convallis tincidunt vitae dui. Etiam a semper eros. Donec aliquam vel tellus dictum mattis. Morbi sed varius sem, quis elementum felis. Quisque venenatis iaculis quam dictum interdum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
@@ -41,8 +51,12 @@ export default function Terms() {
                         Suspendisse sodales pellentesque elit quis rhoncus. Nunc imperdiet rutrum vestibulum. Donec efficitur dolor eget odio ultrices, in semper massa consectetur. Nunc eget ante sit amet velit pellentesque vestibulum interdum non enim. Sed accumsan purus non magna eleifend laoreet. Nulla imperdiet rutrum mauris, vitae gravida ex vehicula et. Nullam tempor sollicitudin quam ut fringilla. In tincidunt leo eu semper pulvinar.
                         Aenean vel iaculis quam. Sed cursus mauris vel orci gravida, eget sodales sem dictum. Suspendisse in lectus id quam efficitur lacinia ac et velit. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam consectetur mollis tristique. Etiam eu nisi vel nisl efficitur gravida. Suspendisse metus ipsum, eleifend sed vehicula a, vestibulum nec purus. Nulla velit lectus, porttitor ac justo vel, pellentesque varius nulla. Praesent luctus tortor eget nunc rutrum viverra. Quisque tempor vulputate mi, at ultricies quam tristique vitae. Suspendisse nec malesuada nisi. Fusce tempor facilisis nunc eu mattis. Cras facilisis tellus eros, sed consequat diam congue eu. Morbi eget malesuada nunc, eget luctus tellus.
                     </p>
-                    <Link href="/home">
-                        <button className="bg-blue-500 px-3 py-1 text-xl text-white rounded-lg w-min whitespace-nowrap">
+                    <p className="italic h-6">
+                        {!read && "You must read the terms and conditions to continue"}
+                    </p>
+                    <Link href={read ? "/home" : "/terms"}>
+                        <button className={"px-3 py-1 text-xl rounded-lg w-min whitespace-nowrap duration-150 "
+                            + (read ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
                             I agree to Terms and Conditions
                         </button>
                     </Link>
