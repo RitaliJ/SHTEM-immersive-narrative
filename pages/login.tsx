@@ -30,10 +30,10 @@ export default function Login() {
                     <h1 className="text-3xl font-bold text-center">
                         Create a new account
                     </h1>
-                    <InputGroup label="Email" placeholder="type here..." callback={setEmail} />
-                    <InputGroup label="First Name" placeholder="type here..." callback={setFirstName} />
-                    <InputGroup label="Last Name" placeholder="type here..." callback={setLastName} />
-                    <InputGroup label="Phone Number" placeholder='type here...' callback={setPhone} />
+                    <InputGroup label="Email" callback={setEmail} />
+                    <InputGroup label="First Name" callback={setFirstName} />
+                    <InputGroup label="Last Name" callback={setLastName} />
+                    <InputGroup label="Phone Number" callback={setPhone} />
                     
                     <div className="flex mt-2 justify-center">
                         <button
