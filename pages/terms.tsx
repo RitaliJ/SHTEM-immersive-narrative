@@ -4,9 +4,9 @@ import Link from "next/link"
 export default function Terms() {
     return (
         <div className="w-screen h-screen bg-gray-300">
-            <main className="container h-4/5 flex justify-center items-center">
+            <main className="container w-min h-4/5 flex justify-center items-center">
                 <div className="bg-white p-6 rounded-lg flex flex-col gap-3 items-center">
-                    <h1 className="text-5xl font-bold text-center">
+                    <h1 className="text-5xl font-bold text-center whitespace-nowrap px-24">
                         Terms and Conditions
                     </h1>
                     <p className="h-96 overflow-y-scroll">
