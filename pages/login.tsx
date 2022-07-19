@@ -11,11 +11,11 @@ export default function Login() {
     const [lastName, setLastName] = useState("");
     const [phone, setPhone] = useState("");
 
-    //set localStorage and go to interest survey page
+    //set localStorage and go to terms page
     const handleSubmit = (account: AccountType) => {
         if (email && firstName && lastName && phone) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
-            location.href = "/survey";
+            location.href = "/terms";
         }
     }
 

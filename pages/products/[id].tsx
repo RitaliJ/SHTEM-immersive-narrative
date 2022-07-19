@@ -44,7 +44,7 @@ export default function Product(){
                 <title>SHTEM | {product && product.name}</title>
             </Head>
             
-            <Header addedToCart={addedToCart} callback={setAddedToCart} />
+            <Header addedToCart={addedToCart} callback={setAddedToCart} personalShopper='You can purchase this product!'/>
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">
                 <BannerAd imgSrc="" href="/products/0" className="w-72" />

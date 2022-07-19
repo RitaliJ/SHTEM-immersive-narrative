@@ -18,6 +18,9 @@ export default function Checkout() {
     const [state, setState] = useState("");
     const [zip, setZip] = useState("");
     const [shipping, setShipping] = useState(5);
+    const [cardNumber, setCardNumber] = useState("");
+    const [securityPin, setSecurityPin] = useState("");
+
 
     //get account from localStorage on page load
     useEffect(() => {
@@ -97,6 +100,10 @@ export default function Checkout() {
                         <InputGroup label="City" callback={setCity} />
                         <InputGroup label="State" callback={setState} />
                         <InputGroup label="ZIP Code" callback={setZip} />
+                    </div>
+                    <div className="flex gap-2">
+                        <InputGroup label="Card Number" callback={setCardNumber} />
+                        <InputGroup label="Security Pin" callback={setSecurityPin} />
                     </div>
                     <div className="flex items-center mt-4">
                         <div className="grow">
