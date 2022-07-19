@@ -8,7 +8,7 @@ const mod = require('../util/products');
 //home page with product list to scroll through
 export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
-    const [products, setProducts] = useState([{} as ProductType]);
+    const [products, setProducts] = useState([undefined as unknown as ProductType]);
 
     //get account from localStorage and products from util/products.ts on page load
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function Home() {
                 setAccount(JSON.parse(acc));
             }
         }
-        if (!products[0].name) {
+        if (!products[0]) {
             setProducts(mod.products);
         }
     });
@@ -40,7 +40,7 @@ export default function Home() {
                     Buy our things
                 </h1>
                 <div className="flex justify-center gap-4 flex-wrap">
-                    {products.map(p =>
+                    {products[0] && products.map(p =>
                         <ProductPreview product={p} />
                     )}
                 </div>

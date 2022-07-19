@@ -70,9 +70,9 @@ export default function Checkout() {
                     </div>
                     <div className="flex mt-4 items-center">
                         <div className="grow">
-                            <Link href="/cart">
+                            <Link href="/home">
                                 <a className="text-lg text-blue-500">
-                                    ← Return to cart
+                                    ← Back
                                 </a>
                             </Link>
                         </div>

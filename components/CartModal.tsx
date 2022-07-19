@@ -85,11 +85,17 @@ export default function CartModal(props: {
                                     {total.toFixed(2)} V Bucks
                                 </p>
                             </div>
-                            <Link href="/checkout">
-                                <button className="bg-green-600 text-lg text-white px-10 py-3 rounded-lg">
+                            {account.email && account.items[0] ? (
+                                <Link href="/checkout">
+                                    <button className="bg-green-600 text-lg text-white px-10 py-3 rounded-lg">
+                                        Continue to checkout
+                                    </button>
+                                </Link>
+                            ) : (
+                                <button className="bg-gray-200 text-lg text-gray-400 px-10 py-3 rounded-lg">
                                     Continue to checkout
                                 </button>
-                            </Link>
+                            )}
                         </div>
                     )}
                 </div>
