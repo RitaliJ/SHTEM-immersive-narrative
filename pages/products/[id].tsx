@@ -11,6 +11,7 @@ const mod = require('../../util/products')
 export default function Product(){
     const [product, setProduct] = useState({} as ProductType);
     const [account, setAccount] = useState({} as AccountType);
+    const [addedToCart, setAddedToCart] = useState(false); //useState for opening/closing cart modal
     const router = useRouter();
     const id = router.query.id;
 
@@ -35,7 +36,7 @@ export default function Product(){
                 <title>SHTEM | {product && product.name}</title>
             </Head>
             
-            <Header />
+            <Header addedToCart={addedToCart} callback={setAddedToCart} />
 
             <div className="container flex gap-8 mt-8">
                 <div className="flex flex-col gap-2">
@@ -67,7 +68,7 @@ export default function Product(){
                     <p className="pb-6 border-b border-slate-200 space-x-2">
                         {product.desc}
                     </p>
-                    <AddToCart product={product} />
+                    <AddToCart product={product} callback={setAddedToCart} />
                     <p className="text-sm text-slate-700">
                         Free shipping on all continental US orders.
                     </p>
