@@ -53,20 +53,23 @@ export default function Cart() {
 
             <main className="container pt-12 pb-24">
                 <Link href="/home">
-                    <button className="bg-blue-500 text-lg text-white px-3 py-1 rounded-lg mb-6">
-                        ← Continue shopping
-                    </button>
+                    <a className="text-xl text-blue-500">
+                        <p className="mb-6">
+                            ← Continue shopping
+                        </p>
+                    </a>
                 </Link>
                 <h1 className="text-5xl font-bold mb-12">
                     Your cart
                 </h1>
-                <div className="flex flex-col gap-2 divide-y-2 divide-gray-300">
+                <div className="flex flex-col divide-y divide-gray-300">
                     {account.email && account.items.map(i =>
-                        <CartProduct {...{...i, callback: () => removeItem(i.product.id)}} />
+                        <CartProduct {...{...i, className: "h-24 text-xl",
+                            callback: () => removeItem(i.product.id)}} />
                     )}
                     {Number(total.toFixed(2)) > account.balance ? (
-                        <div className="flex flex-col gap-1">
-                            <div className="flex gap-2 justify-end pt-4 text-right text-xl font-bold">
+                        <div className="flex flex-col gap-1 items-end pt-4 px-2">
+                            <div className="flex gap-2 text-2xl">
                                 <p>Total:</p>
                                 <p className="text-red-500">
                                     {total.toFixed(2)} V Bucks
@@ -77,11 +80,18 @@ export default function Cart() {
                             </p>
                         </div>
                     ) : (
-                        <div className="flex gap-2 justify-end pt-4 text-right text-xl font-bold">
-                            <p>Total:</p>
-                            <p className="text-green-600">
-                                {total.toFixed(2)} V Bucks
-                            </p>
+                        <div className="flex flex-col gap-3 items-end pt-4 px-2">
+                            <div className="flex gap-2 text-2xl">
+                                <p>Total:</p>
+                                <p className="text-green-600">
+                                    {total.toFixed(2)} V Bucks
+                                </p>
+                            </div>
+                            <Link href="/checkout">
+                                <button className="bg-green-600 text-lg text-white px-10 py-3 rounded-lg">
+                                    Continue to checkout
+                                </button>
+                            </Link>
                         </div>
                     )}
                 </div>

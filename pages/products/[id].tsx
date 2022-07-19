@@ -40,9 +40,11 @@ export default function Product(){
             <div className="container flex gap-8 mt-8">
                 <div className="flex flex-col gap-2">
                     <Link href="/home">
-                        <button className="bg-blue-500 text-lg text-white px-3 py-1 rounded-lg mb-6 w-min whitespace-nowrap">
-                            ← Continue shopping
-                        </button>
+                        <a className="text-xl text-blue-500 mb-6">
+                            <p className="mb-6">
+                                ← Continue shopping
+                            </p>
+                        </a>
                     </Link>
                     <img
                         src={product.imgSrc}
