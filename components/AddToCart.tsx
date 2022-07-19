@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState } from "react";
 import { ProductType } from "../util/types";
 
@@ -64,7 +63,7 @@ export default function AddToCart(props: {product: ProductType, callback: (value
                 </button>
             </div>
             <span className="text-green-600 font-bold">
-                {(product.price * num).toFixed(2)} V Bucks
+                {product && (product.price * num).toFixed(2)} V Bucks
             </span>
             <button
                 onClick={() => addToCart()}
