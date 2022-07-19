@@ -16,7 +16,7 @@ export default function HelpPopover() {
                 enterFrom="opacity-0 scale-95 -translate-y-2"
                 enterTo="opacity-100 scale-100"
                 leave="ease-in duration-150"
-                leaveFrom="opacity-100 scale-100"
+                leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
                 <Popover.Panel className="absolute top-[3.5rem] right-0 w-48">
