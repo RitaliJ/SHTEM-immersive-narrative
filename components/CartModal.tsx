@@ -1,12 +1,11 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CartProduct from "../components/CartProduct";
-import Header from "../components/Header";
 import { AccountType } from "../util/types";
+import CartProduct from "./CartProduct";
+import CenteredModal from "./CenteredModal";
 
-//page for viewing shopping cart
-export default function Cart() {
+export default function CartModal(props: {isOpen: boolean, setIsOpen: (value: boolean) => void}) {
+    const {isOpen, setIsOpen} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [total, setTotal] = useState(0);
 
@@ -42,23 +41,13 @@ export default function Cart() {
     }
 
     return (
-        <>
-            <Head>
-                <title>SHTEM Website | Cart</title>
-                <meta name="description" content="Cart" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            
-            <Header />
-
-            <main className="container pt-12 pb-24">
-                <Link href="/home">
-                    <a className="text-xl text-blue-500">
-                        <p className="mb-6">
-                            ← Continue shopping
-                        </p>
-                    </a>
-                </Link>
+        <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
+            <div className="relative bg-white container px-8 py-6 rounded-lg">
+                <button
+                    onClick={() => setIsOpen(false)}
+                    className="absolute top-2 right-4 text-5xl">
+                    ×
+                </button>
                 <h1 className="text-5xl font-bold mb-12">
                     Your cart
                 </h1>
@@ -95,7 +84,7 @@ export default function Cart() {
                         </div>
                     )}
                 </div>
-            </main>
-        </>
+            </div>
+        </CenteredModal>
     )
 }
