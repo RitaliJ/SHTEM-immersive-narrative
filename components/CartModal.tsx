@@ -4,30 +4,32 @@ import { AccountType } from "../util/types";
 import CartProduct from "./CartProduct";
 import CenteredModal from "./CenteredModal";
 
-export default function CartModal(props: {isOpen: boolean, setIsOpen: (value: boolean) => void}) {
-    const {isOpen, setIsOpen} = props;
+export default function CartModal(props: {
+    isOpen: boolean,
+    setIsOpen: (value: boolean) => void,
+    callback: () => void,
+}) {
+    const {isOpen, setIsOpen, callback} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [total, setTotal] = useState(0);
 
-    //get account from localStorage on page load
+    //refresh account every time modal opens
     useEffect(() => {
-        if (!account.email) {
-            const acc = localStorage.getItem("shtemAccount");
-            if (acc === "undefined" || acc === null) {
-                location.href = "/login";
-            } else {
-                setAccount(JSON.parse(acc));
-            }
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc === "undefined" || acc === null) {
+            location.href = "/login";
+        } else {
+            setAccount(JSON.parse(acc));
         }
-    });
+    }, [isOpen]);
 
     //set total price once account is retrieved
     useEffect(() => {
         if (!account.email) return;
         let t = 0;
         for (let i of account.items) {
-            if(i){
-                t += i.product.price * i.quantity
+            if (i) {
+                t += i.product.price * i.quantity;
             }
         };
         setTotal(t);
@@ -40,6 +42,7 @@ export default function CartModal(props: {isOpen: boolean, setIsOpen: (value: bo
         acc.items = acc.items.filter(i => i.product.id !== id);
         localStorage.setItem("shtemAccount", JSON.stringify(acc));
         setAccount(acc);
+        callback();
     }
 
     return (
@@ -54,9 +57,13 @@ export default function CartModal(props: {isOpen: boolean, setIsOpen: (value: bo
                     Your cart
                 </h1>
                 <div className="flex flex-col divide-y divide-gray-300">
-                    {account.email && account.items.map(i =>
-                        <CartProduct {...{...i, className: "h-24 text-xl",
-                            callback: () => removeItem(i.product.id)}} />
+                    {account.email && account.items[0] ? (
+                        account.items.map(i =>
+                            <CartProduct {...{...i, className: "h-24 text-xl",
+                                callback: () => removeItem(i.product.id)}} />
+                        )
+                    ) : (
+                        <p className="text-xl p-2">Your cart is empty.</p>
                     )}
                     {Number(total.toFixed(2)) > account.balance ? (
                         <div className="flex flex-col gap-1 items-end pt-4 px-2">

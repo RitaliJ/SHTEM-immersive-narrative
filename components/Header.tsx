@@ -26,14 +26,26 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
     useEffect(() => {
         if (addedToCart) {
             setIsOpen(true);
+            const acc = localStorage.getItem("shtemAccount");
+            if (acc !== "undefined" && acc !== null) {
+                setAccount(JSON.parse(acc));
+            }
         }
     }, [addedToCart]);
 
+    //close modal
     useEffect(() => {
         if (!isOpen && callback) {
             callback(false);
         }
     }, [isOpen]);
+
+    const refreshAccount = () => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc !== "undefined" && acc !== null) {
+            setAccount(JSON.parse(acc));
+        }
+    }
 
     return (
         <div className="bg-slate-200 flex items-center gap-4 sticky top-0 px-6 bg-opacity-50 backdrop-blur-lg">
@@ -61,7 +73,7 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
             <span className="text-lg">
                 Logged in as {account.firstName}
             </span>
-            <CartModal isOpen={isOpen} setIsOpen={setIsOpen} />
+            <CartModal isOpen={isOpen} setIsOpen={setIsOpen} callback={refreshAccount} />
         </div>
     )
 }
