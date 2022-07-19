@@ -21,8 +21,8 @@ export default function HelpPopover() {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0"
                     >
-                        <Popover.Panel className="absolute top-[3.5rem] right-0">
-                            <div className="w-48 bg-white border-2 border-slate-200 shadow-lg rounded-lg p-6">
+                        <Popover.Panel className="absolute top-[3.5rem] right-0 w-48">
+                            <div className="bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg p-6">
                                 This is the help menu
                             </div>
                         </Popover.Panel>
