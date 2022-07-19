@@ -42,6 +42,27 @@ export default function Checkout() {
         setLastName(account.lastName);
     }, [account]);
 
+    const handleSubmit = () => {
+        if (firstName && lastName && address && city && state && zip) {
+            const data = {
+                email: account.email,
+                firstName: account.firstName,
+                lastName: account.lastName,
+                billingFirstName: firstName,
+                billingLastName: lastName,
+                message: "what is poppin",
+            };
+            fetch("/api/email", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        }
+    }
+
     return (
         <>
             <Head>
@@ -77,8 +98,10 @@ export default function Checkout() {
                             </Link>
                         </div>
                         <Link href={firstName && lastName && address && city && state && zip ?
-                            "/shipping" : "/checkout"}>
-                            <button className={"duration-150 text-lg px-10 py-3 rounded-lg "
+                            "/checkout" : "/checkout"}>
+                            <button
+                                onClick={() => handleSubmit()}
+                                className={"duration-150 text-lg px-10 py-3 rounded-lg "
                                 + (firstName && lastName && address && city && state && zip ?
                                 "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
