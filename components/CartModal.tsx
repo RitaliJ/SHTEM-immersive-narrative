@@ -25,9 +25,11 @@ export default function CartModal(props: {isOpen: boolean, setIsOpen: (value: bo
     useEffect(() => {
         if (!account.email) return;
         let t = 0;
-        account.items.forEach(i =>
-            t += i.product.price * i.quantity
-        );
+        for (let i of account.items) {
+            if(i){
+                t += i.product.price * i.quantity
+            }
+        };
         setTotal(t);
     }, [account]);
 

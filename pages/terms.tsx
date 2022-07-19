@@ -15,7 +15,7 @@ export default function Terms() {
     return (
         <div className="w-screen h-screen bg-gray-300">
             <main className="container w-min h-4/5 flex justify-center items-center">
-                <div className="bg-white p-6 rounded-lg flex flex-col gap-3 items-center">
+                <div className="bg-white p-6 rounded-lg flex flex-col gap-3 items-center mt-24">
                     <h1 className="text-5xl font-bold text-center whitespace-nowrap px-24">
                         Terms and Conditions
                     </h1>
