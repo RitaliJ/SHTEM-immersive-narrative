@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    /* classes for removing scrollbar and making scrollbar look nicer */
+    .scrollbar-none::-webkit-scrollbar {
+        @apply hidden;
+    }
+    .scrollbar::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    .scrollbar::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        background: #ddd;
+    }
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: #aaa;
+        border-radius: 100vh;
+    }
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #999;
+    }
+}
