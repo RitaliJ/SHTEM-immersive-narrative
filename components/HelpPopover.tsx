@@ -1,8 +1,8 @@
-import {Fragment, ReactNode} from 'react';
+import {Fragment, JSXElementConstructor, ReactElement, ReactFragment, ReactNode, ReactPortal} from 'react';
 import {Popover, Transition} from '@headlessui/react';
 
 //modal for help popup
-export default function HelpPopover() {
+export default function HelpPopover(props: { instructions: string }) {
     return (
         <Popover as="div" className="relative">
             {({open}) => (
@@ -23,7 +23,7 @@ export default function HelpPopover() {
                     >
                         <Popover.Panel className="absolute top-[3.5rem] right-0 w-48">
                             <div className="bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg p-6">
-                                This is the help menu
+                                {props.instructions}
                             </div>
                         </Popover.Panel>
                     </Transition>

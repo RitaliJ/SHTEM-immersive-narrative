@@ -35,7 +35,7 @@ export default function Survey() {
     const handleSubmit = () => {
         localStorage.setItem("shtemInterests", JSON.stringify(interests));
         localStorage.setItem("shtemInterests", JSON.stringify(birthYear));
-        location.href = "/terms";
+        location.href = "/home";
         console.log(interests);
         console.log(birthYear);
     }
