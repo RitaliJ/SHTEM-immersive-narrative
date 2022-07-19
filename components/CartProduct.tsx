@@ -1,14 +1,10 @@
 import Link from "next/link";
-import { ProductType } from "../util/types";
+import { ItemType, ProductType } from "../util/types";
 
 //component for item in shopping cart list
-export default function CartProduct(props: {
-    product: ProductType,
-    quantity: number,
-    className?: string,
-    callback?: () => void,
-}) {
-    const {product, quantity, className, callback} = props;
+export default function CartProduct(props: {item: ItemType, className?: string, callback?: () => void}) {
+    const {item, className, callback} = props;
+    const {product, quantity} = item;
 
     return (
         <div className={"flex gap-4 items-center p-2 " + className}>

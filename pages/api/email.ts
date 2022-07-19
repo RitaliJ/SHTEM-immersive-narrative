@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { ItemType } from "../../util/types";
 const nodemailer = require('nodemailer')
 require('dotenv').config()
 
 //api route to send email to provided email address
 export default (req: NextApiRequest, res: NextApiResponse) => {
-    const {email, firstName, billingFirstName, billingLastName, address} = req.body;
+    const {email, firstName, billingFirstName, billingLastName, address, items} = req.body;
     const transporter = nodemailer.createTransport({
         port: 465,
         host: "smtp.gmail.com",
@@ -19,10 +20,14 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
         to: email,
         subject: "Purchase confirmation",
         html: `
-            <h1>Thank you for your purchase, ${firstName}</h1>
+            <h2>Thank you for your purchase, ${firstName}</h2>
             <h3>Billing information</h3>
             <p>Name: ${billingFirstName} ${billingLastName}</p>
             <p>Address: ${address}</p>
+            <h3>Items purchased</h3>
+            ${items.map((i: ItemType) =>
+                "<p>" + i.quantity + "× " + i.product.name + "</p>"    
+            ).join("")}
         `,
     };
     transporter.sendMail(mailData);
