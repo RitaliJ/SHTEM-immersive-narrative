@@ -7,12 +7,14 @@ import Head from 'next/head';
 import AddToCart from '../../components/AddToCart';
 import Link from 'next/link';
 import BannerAd from '../../components/BannerAd';
+import PopupAd from '../../components/PopupAd';
 const mod = require('../../util/products')
 
 export default function Product(){
     const [product, setProduct] = useState(undefined as unknown as ProductType);
     const [account, setAccount] = useState({} as AccountType);
     const [addedToCart, setAddedToCart] = useState(false); //useState for opening/closing cart modal
+    const [adIsOpen, setAdIsOpen] = useState(false); //useState for showing/hiding popup ad
     const router = useRouter();
     const id = router.query.id;
 
@@ -28,6 +30,9 @@ export default function Product(){
         }
         if (!product) {
             setProduct(mod.products[Number(id)]);
+            setTimeout(() => { //show pop up ad after 5 seconds of inital page load
+                setAdIsOpen(true);
+            }, 3000);
         }
     });
 
@@ -77,6 +82,7 @@ export default function Product(){
                 </div>
                 <BannerAd imgSrc="" href="/products/0" className="w-72" />
             </div>
+            <PopupAd isOpen={adIsOpen} setIsOpen={setAdIsOpen} />
         </div>
     );
 }
