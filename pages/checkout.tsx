@@ -52,6 +52,7 @@ export default function Checkout() {
                 billingFirstName: firstName,
                 billingLastName: lastName,
                 address,
+                items: account.items
             };
             fetch("/api/email", {
                 method: "POST",
@@ -118,7 +119,7 @@ export default function Checkout() {
                 </div>
                 <div className="w-full flex flex-col p-4 pl-8 divide-y divide-gray-300">
                     {account.email && account.items.map(i =>
-                        <CartProduct {...{...i, className: "text-lg h-24"}} />
+                        <CartProduct item={i} className="text-lg h-24" />
                     )}
                     <div className="flex flex-col gap-2 pt-4">
                         <div className="flex gap-2 px-2 text-lg">
