@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import CartProduct from "../components/CartProduct";
 import Header from "../components/Header";
 import InputGroup from "../components/InputGroup";
-import { AccountType } from "../util/types";
+import { AccountType, ItemType } from "../util/types";
 
 export default function Checkout() {
     const [account, setAccount] = useState({} as AccountType);
@@ -44,6 +44,7 @@ export default function Checkout() {
         setLastName(account.lastName);
     }, [account]);
 
+    //handle clicking on order button
     const handleSubmit = () => {
         if (firstName && lastName && address && city && state && zip) {
             const data = {
@@ -51,9 +52,11 @@ export default function Checkout() {
                 firstName: account.firstName,
                 billingFirstName: firstName,
                 billingLastName: lastName,
-                address,
+                address: `${address}, ${city}, ${state} ${zip}`,
+                items: account.items,
+                total,
             };
-            fetch("/api/email", {
+            fetch("/api/email", { //send email request to api route
                 method: "POST",
                 headers: {
                     "Accept": "application/json, text/plain, */*",
@@ -61,6 +64,10 @@ export default function Checkout() {
                 },
                 body: JSON.stringify(data),
             });
+            let acc = account; //reset shopping cart in localStorage account info
+            acc.items = [undefined as unknown as ItemType];
+            acc.balance -= total; //remove spent money from balance
+            localStorage.setItem("shtemAccount", JSON.stringify(acc));
         }
     }
 
@@ -100,7 +107,7 @@ export default function Checkout() {
                             </Link>
                         </div>
                         <Link href={firstName && lastName && address && city && state && zip ?
-                            "/checkout" : "/checkout"}>
+                            "/purchase" : "/checkout"}>
                             <button
                                 onClick={() => handleSubmit()}
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
@@ -118,7 +125,7 @@ export default function Checkout() {
                 </div>
                 <div className="w-full flex flex-col p-4 pl-8 divide-y divide-gray-300">
                     {account.email && account.items.map(i =>
-                        <CartProduct {...{...i, className: "text-lg h-24"}} />
+                        <CartProduct item={i} className="text-lg h-24" />
                     )}
                     <div className="flex flex-col gap-2 pt-4">
                         <div className="flex gap-2 px-2 text-lg">

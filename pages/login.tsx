@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import InputGroup from '../components/InputGroup'
-import { AccountType, ProductType } from '../util/types';
+import { AccountType, ItemType, ProductType } from '../util/types';
 
 //page for creating an account; information is saved in localStorage
 export default function Login() {
@@ -45,7 +45,7 @@ export default function Login() {
                                 lastName,
                                 phone,
                                 balance: 1000,
-                                items: [undefined as unknown as {product: ProductType, quantity: number}],
+                                items: [undefined as unknown as ItemType],
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName
                                 && lastName && phone ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}

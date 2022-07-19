@@ -30,9 +30,11 @@ export default function Product(){
         }
         if (!product) {
             setProduct(mod.products[Number(id)]);
-            setTimeout(() => { //show pop up ad after 5 seconds of inital page load
-                setAdIsOpen(true);
-            }, 3000);
+            setInterval(() => { //show pop up ad after 5 seconds of inital page load
+                if (!adIsOpen) {
+                    setAdIsOpen(true);
+                }
+            }, 8000);
         }
     });
 
