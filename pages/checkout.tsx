@@ -9,6 +9,7 @@ import { AccountType } from "../util/types";
 export default function Checkout() {
     const [account, setAccount] = useState({} as AccountType);
     const [total, setTotal] = useState(0);
+    const [email, setEmail] = useState(""); //useStates for input field values
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
@@ -38,9 +39,30 @@ export default function Checkout() {
             t += i.product.price * i.quantity
         );
         setTotal(t);
+        setEmail(account.email);
         setFirstName(account.firstName);
         setLastName(account.lastName);
     }, [account]);
+
+    const handleSubmit = () => {
+        if (firstName && lastName && address && city && state && zip) {
+            const data = {
+                email,
+                firstName: account.firstName,
+                billingFirstName: firstName,
+                billingLastName: lastName,
+                address,
+            };
+            fetch("/api/email", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        }
+    }
 
     return (
         <>
@@ -57,6 +79,7 @@ export default function Checkout() {
                     <h3 className="text-2xl mb-4">
                         Shipping address
                     </h3>
+                    <InputGroup label="Email" value={email} callback={setEmail} />
                     <div className="flex gap-2">
                         <InputGroup label="First name" value={firstName} callback={setFirstName} />
                         <InputGroup label="Last name" value={lastName} callback={setLastName} />
@@ -77,8 +100,10 @@ export default function Checkout() {
                             </Link>
                         </div>
                         <Link href={firstName && lastName && address && city && state && zip ?
-                            "/shipping" : "/checkout"}>
-                            <button className={"duration-150 text-lg px-10 py-3 rounded-lg "
+                            "/checkout" : "/checkout"}>
+                            <button
+                                onClick={() => handleSubmit()}
+                                className={"duration-150 text-lg px-10 py-3 rounded-lg "
                                 + (firstName && lastName && address && city && state && zip ?
                                 "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
