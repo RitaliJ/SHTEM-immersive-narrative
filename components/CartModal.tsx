@@ -4,6 +4,7 @@ import { AccountType } from "../util/types";
 import CartProduct from "./CartProduct";
 import CenteredModal from "./CenteredModal";
 
+//modal for viewing cart contents
 export default function CartModal(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,

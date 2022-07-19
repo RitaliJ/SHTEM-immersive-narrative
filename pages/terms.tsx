@@ -51,15 +51,15 @@ export default function Terms() {
                         Suspendisse sodales pellentesque elit quis rhoncus. Nunc imperdiet rutrum vestibulum. Donec efficitur dolor eget odio ultrices, in semper massa consectetur. Nunc eget ante sit amet velit pellentesque vestibulum interdum non enim. Sed accumsan purus non magna eleifend laoreet. Nulla imperdiet rutrum mauris, vitae gravida ex vehicula et. Nullam tempor sollicitudin quam ut fringilla. In tincidunt leo eu semper pulvinar.
                         Aenean vel iaculis quam. Sed cursus mauris vel orci gravida, eget sodales sem dictum. Suspendisse in lectus id quam efficitur lacinia ac et velit. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam consectetur mollis tristique. Etiam eu nisi vel nisl efficitur gravida. Suspendisse metus ipsum, eleifend sed vehicula a, vestibulum nec purus. Nulla velit lectus, porttitor ac justo vel, pellentesque varius nulla. Praesent luctus tortor eget nunc rutrum viverra. Quisque tempor vulputate mi, at ultricies quam tristique vitae. Suspendisse nec malesuada nisi. Fusce tempor facilisis nunc eu mattis. Cras facilisis tellus eros, sed consequat diam congue eu. Morbi eget malesuada nunc, eget luctus tellus.
                     </p>
-                    <p className="italic h-6">
-                        {!read && "You must read the terms and conditions to continue"}
-                    </p>
                     <Link href={read ? "/home" : "/terms"}>
                         <button className={"px-3 py-1 text-xl rounded-lg w-min whitespace-nowrap duration-150 "
                             + (read ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
                             I agree to Terms and Conditions
                         </button>
                     </Link>
+                    <p className="italic text-red-500">
+                        {!read && "You must read the terms and conditions to continue"}
+                    </p>
                 </div>
             </main>
         </div>

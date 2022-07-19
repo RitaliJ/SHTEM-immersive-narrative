@@ -13,8 +13,10 @@ export default function Login() {
 
     //set localStorage and go to interest survey page
     const handleSubmit = (account: AccountType) => {
-        localStorage.setItem("shtemAccount", JSON.stringify(account));
-        location.href = "/survey";
+        if (email && firstName && lastName && phone) {
+            localStorage.setItem("shtemAccount", JSON.stringify(account));
+            location.href = "/survey";
+        }
     }
 
     return (
@@ -35,7 +37,7 @@ export default function Login() {
                     <InputGroup label="Last Name" callback={setLastName} />
                     <InputGroup label="Phone Number" callback={setPhone} />
                     
-                    <div className="flex mt-2 justify-center">
+                    <div className="flex flex-col gap-1 mt-2 justify-center items-center">
                         <button
                             onClick={() => handleSubmit({
                                 email,
@@ -45,11 +47,16 @@ export default function Login() {
                                 balance: 1000,
                                 items: [undefined as unknown as {product: ProductType, quantity: number}],
                             })}
-
-                            className="bg-blue-500 rounded-lg px-3 pt-1 pb-1.5 text-white"
+                            className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName
+                                && lastName && phone ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
                         >
                             Create account
                         </button>
+                        <p className="italic text-red-500">
+                            {!(email && firstName && lastName && phone) &&
+                                "* Please fill all required fields"
+                            }
+                        </p>
                     </div>
                 </div>
             </main>

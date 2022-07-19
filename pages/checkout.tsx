@@ -62,13 +62,13 @@ export default function Checkout() {
                         <InputGroup label="Last name" value={lastName} callback={setLastName} />
                     </div>
                     <InputGroup label="Address" callback={setAddress} />
-                    <InputGroup label="Apartment, suite, etc." callback={setAddress2} />
+                    <InputGroup label="Apartment, suite, etc." optional callback={setAddress2} />
                     <div className="flex gap-2">
                         <InputGroup label="City" callback={setCity} />
                         <InputGroup label="State" callback={setState} />
                         <InputGroup label="ZIP Code" callback={setZip} />
                     </div>
-                    <div className="flex mt-4 items-center">
+                    <div className="flex items-center mt-4">
                         <div className="grow">
                             <Link href="/home">
                                 <a className="text-lg text-blue-500">
@@ -76,12 +76,20 @@ export default function Checkout() {
                                 </a>
                             </Link>
                         </div>
-                        <Link href="/shipping">
-                            <button className="bg-green-600 text-lg text-white px-10 py-3 rounded-lg">
+                        <Link href={firstName && lastName && address && city && state && zip ?
+                            "/shipping" : "/checkout"}>
+                            <button className={"duration-150 text-lg px-10 py-3 rounded-lg "
+                                + (firstName && lastName && address && city && state && zip ?
+                                "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
                             </button>
                         </Link>
                     </div>
+                    <p className="italic text-red-500 text-right">
+                        {!(firstName && lastName && address && city && state && zip) &&
+                            "* Please fill all required fields"
+                        }
+                    </p>
                 </div>
                 <div className="w-full flex flex-col p-4 pl-8 divide-y divide-gray-300">
                     {account.email && account.items.map(i =>
