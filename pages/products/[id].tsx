@@ -6,6 +6,7 @@ import { AccountType, ProductType } from '../../util/types';
 import Head from 'next/head';
 import AddToCart from '../../components/AddToCart';
 import Link from 'next/link';
+import BannerAd from '../../components/BannerAd';
 const mod = require('../../util/products')
 
 export default function Product(){
@@ -31,15 +32,16 @@ export default function Product(){
     });
 
     return(
-        <>
+        <div className="h-screen flex flex-col">
             <Head>
                 <title>SHTEM | {product && product.name}</title>
             </Head>
             
             <Header addedToCart={addedToCart} callback={setAddedToCart} />
 
-            <div className="container flex gap-8 mt-8">
-                <div className="flex flex-col gap-2">
+            <div className="grow flex gap-8 my-8 mx-4 justify-center">
+                <BannerAd imgSrc="" href="/products/0" className="w-72" />
+                <div className="max-w-[30rem] flex-col gap-2">
                     <Link href="/home">
                         <a className="text-xl text-blue-500 mb-6">
                             <p className="mb-6">
@@ -53,7 +55,7 @@ export default function Product(){
                         loading="lazy"
                     />
                 </div>
-                <div className="w-full flex flex-col gap-4">
+                <div className="grow flex flex-col gap-4">
                     <div className="flex text-lg font-semibold">
                         <h1 className="grow text-slate-900">
                             {product && product.name}
@@ -73,7 +75,8 @@ export default function Product(){
                         Free shipping on all continental US orders.
                     </p>
                 </div>
+                <BannerAd imgSrc="" href="/products/0" className="w-72" />
             </div>
-        </>
+        </div>
     );
 }

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import BannerAd from '../components/BannerAd';
 import Header from '../components/Header'
 import ProductPreview from '../components/ProductPreview';
 import { AccountType, ProductType } from '../util/types';
@@ -35,15 +36,19 @@ export default function Home() {
             
             <Header />
 
-            <main className="container pt-12 pb-24">
-                <h1 className="text-5xl font-bold text-center mb-12">
-                    Buy our things
-                </h1>
-                <div className="flex justify-center gap-4 flex-wrap">
-                    {products[0] && products.map(p =>
-                        <ProductPreview product={p} />
-                    )}
+            <main className="flex gap-4 mt-12 mb-8 mx-4 justify-center">
+                <BannerAd imgSrc="" href="/products/0" className="w-72" />
+                <div>
+                    <h1 className="text-5xl font-bold text-center mb-12">
+                        Buy our things
+                    </h1>
+                    <div className="flex justify-center gap-4 flex-wrap">
+                        {products[0] && products.map(p =>
+                            <ProductPreview product={p} />
+                        )}
+                    </div>
                 </div>
+                <BannerAd imgSrc="" href="/products/2" className="w-72" />
             </main>
         </>
     )
