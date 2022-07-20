@@ -38,7 +38,7 @@ export default function AddToCart(props: {product: ProductType, callback: (value
     }
 
     return (
-        <div className="bg-slate-100 p-2 pl-4 flex gap-4 items-center text-md w-min whitespace-nowrap rounded-lg">
+        <div className="shadow-md bg-slate-100 p-2 pl-4 flex gap-4 items-center text-md w-min whitespace-nowrap rounded-lg">
             <span>Quantity:</span>
             <div className="flex gap-2 text-lg">
                 {num === 1 ? (

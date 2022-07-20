@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CartProduct from "../components/CartProduct";
+import DropdownMenu from "../components/DropdownMenu";
 import Header from "../components/Header";
 import InputGroup from "../components/InputGroup";
 import { AccountType, ItemType } from "../util/types";
@@ -20,7 +21,11 @@ export default function Checkout() {
     const [shipping, setShipping] = useState(5);
     const [cardNumber, setCardNumber] = useState("");
     const [securityPin, setSecurityPin] = useState("");
-
+    const states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", //states for dropdown menu
+                    "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
+                    "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH",
+                    "NJ", "NM", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+                    "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",];
 
     //get account from localStorage on page load
     useEffect(() => {
@@ -98,7 +103,7 @@ export default function Checkout() {
                     <InputGroup label="Apartment, suite, etc." optional callback={setAddress2} />
                     <div className="flex gap-2">
                         <InputGroup label="City" callback={setCity} />
-                        <InputGroup label="State" callback={setState} />
+                        <DropdownMenu label="State" callback={setState} options={states} />
                         <InputGroup label="ZIP Code" callback={setZip} />
                     </div>
                     <div className="flex gap-2">

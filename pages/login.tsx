@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { useState } from 'react';
+import DropdownMenu from '../components/DropdownMenu';
 import InputGroup from '../components/InputGroup'
-import { AccountType, ItemType, ProductType } from '../util/types';
+import { AccountType, DOBType, ItemType, ProductType } from '../util/types';
 
 //page for creating an account; information is saved in localStorage
 export default function Login() {
@@ -10,10 +11,19 @@ export default function Login() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phone, setPhone] = useState("");
+    const [year, setYear] = useState(undefined as unknown as number); //date of birth useStates
+    const [month, setMonth] = useState(undefined as unknown as number);
+    const [day, setDay] = useState(undefined as unknown as number);
+    const years = Array.from(new Array(100), (x, i) => 2022 - i); //for choosing date of birth
+    const months = Array.from(new Array(12), (x, i) => i + 1);
+    const days = Array.from(new Array(31), (x, i) => i + 1);
 
     //set localStorage and go to terms page
     const handleSubmit = (account: AccountType) => {
-        if (email && firstName && lastName && phone) {
+        console.log(month);
+        if (email && firstName && lastName && phone
+            && year !== undefined && month !== undefined && day !== undefined
+            && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
             location.href = "/terms";
         }
@@ -36,6 +46,11 @@ export default function Login() {
                     <InputGroup label="First Name" callback={setFirstName} />
                     <InputGroup label="Last Name" callback={setLastName} />
                     <InputGroup label="Phone Number" callback={setPhone} />
+                    <div className="flex gap-1">
+                        <DropdownMenu label="Birth month" callback={x => setMonth(Number(x))} options={months}/>
+                        <DropdownMenu label="Birth day" callback={x => setDay(Number(x))} options={days}/>
+                        <DropdownMenu label="Birth year" callback={x => setYear(Number(x))} options={years}/>
+                    </div>
                     
                     <div className="flex flex-col gap-1 mt-2 justify-center items-center">
                         <button
@@ -44,16 +59,21 @@ export default function Login() {
                                 firstName,
                                 lastName,
                                 phone,
+                                DOB: {year, month, day},
                                 balance: 1000,
                                 items: [undefined as unknown as ItemType],
                             })}
-                            className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName
-                                && lastName && phone ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
+                            className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
+                                && year !== undefined && month !== undefined && day !== undefined
+                                && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)
+                                ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
                         >
                             Create account
                         </button>
                         <p className="italic text-red-500">
-                            {!(email && firstName && lastName && phone) &&
+                            {!(email && firstName && lastName && phone
+                                && year !== undefined && month !== undefined && day !== undefined
+                                && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) &&
                                 "* Please fill all required fields"
                             }
                         </p>

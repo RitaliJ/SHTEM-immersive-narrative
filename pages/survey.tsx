@@ -8,7 +8,6 @@ import { AccountType } from "../util/types";
 export default function Survey() {
     const [account, setAccount] = useState<AccountType>();
     const [interests, setInterests] = useState([""]);//array of interest names
-    const [birthYear, setBirthYear] = useState("");
 
     //get account info from localStorage; if it doesn't exist, send user to login page
     useEffect(() => {
@@ -34,10 +33,7 @@ export default function Survey() {
     //set localStorage and go to index
     const handleSubmit = () => {
         localStorage.setItem("shtemInterests", JSON.stringify(interests));
-        localStorage.setItem("shtemInterests", JSON.stringify(birthYear));
         location.href = "/home";
-        console.log(interests);
-        console.log(birthYear);
     }
 
     return (
@@ -69,7 +65,6 @@ export default function Survey() {
                         <ToggleButton label="Adipiscing" callback={updateInterests} />
                         <ToggleButton label="Elit" callback={updateInterests} />
                     </div>
-                    <InputGroup label="Year of Birth" callback={setBirthYear}/>
 
                     <div className="flex mt-2 justify-center">
                         <button
