@@ -10,7 +10,6 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
     const {addedToCart, callback} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
-    const [helpOpen, setHelpOpen] = useState(false); //useState for help modal opening/closing
     const router = useRouter();
 
     //get account from localStorage on page load
@@ -62,7 +61,7 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
             </Link>
             <span className="grow"></span>
             <span className="text-lg text-green-600 font-bold">
-                {account.balance && account.balance.toFixed(2)} V Bucks
+                {account.balance && account.balance.toFixed(2)} Tokens
             </span>
             <button
                 onClick={() => {router.pathname !== "/checkout" && setIsOpen(true)}}

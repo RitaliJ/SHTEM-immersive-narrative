@@ -27,7 +27,7 @@ export default function CartProduct(props: {item: ItemType, className?: string, 
                 </span>
             </Link>
             <span className="whitespace-nowrap">
-                {(product.price * quantity).toFixed(2)} V Bucks
+                {(product.price * quantity).toFixed(2)} Tokens
             </span>
         </div>
     )

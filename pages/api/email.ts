@@ -28,7 +28,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
             ${items.map((i: ItemType) =>
                 `<p>${i.quantity}× ${i.product.name}</p>`   
             ).join("")}
-            <p>Total: ${total.toFixed(2)} V Bucks</p>
+            <p>Total: ${total.toFixed(2)} Tokens</p>
         `,
     };
     transporter.sendMail(mailData);

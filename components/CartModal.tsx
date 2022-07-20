@@ -83,7 +83,7 @@ export default function CartModal(props: {
                             <div className="flex gap-2 text-2xl">
                                 <p>Total:</p>
                                 <p className="text-green-600">
-                                    {total.toFixed(2)} V Bucks
+                                    {total.toFixed(2)} Tokens
                                 </p>
                             </div>
                             {account.email && account.items[0] ? (

@@ -150,7 +150,7 @@ export default function Checkout() {
                         </div>
                         <div className="flex gap-2 px-2 text-2xl">
                             <p className="grow">Total</p>
-                            <p>{(total + shipping).toFixed(2)} V Bucks</p>
+                            <p>{(total + shipping).toFixed(2)} Tokens</p>
                         </div>
                     </div>
                 </div>

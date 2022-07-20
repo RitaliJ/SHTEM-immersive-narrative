@@ -63,7 +63,7 @@ export default function AddToCart(props: {product: ProductType, callback: (value
                 </button>
             </div>
             <span className="min-w-[8rem] text-right text-green-600 font-bold">
-                {product && (product.price * num).toFixed(2)} V Bucks
+                {product && (product.price * num).toFixed(2)} Tokens
             </span>
             <button
                 onClick={() => addToCart()}
