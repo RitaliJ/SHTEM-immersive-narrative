@@ -1,10 +1,9 @@
-import Link from "next/link";
 import { useState } from "react";
 import { ProductType } from "../util/types";
 
 //component for quantity selection and "Add to cart" button on product pages
-export default function AddToCart(props: {product: ProductType}) {
-    const {product} = props;
+export default function AddToCart(props: {product: ProductType, callback: (value: boolean) => void}) {
+    const {product, callback} = props;
     const [num, setNum] = useState(1);
 
     //change num when you press the left and right buttons
@@ -35,10 +34,11 @@ export default function AddToCart(props: {product: ProductType}) {
             }
         }
         localStorage.setItem("shtemAccount", JSON.stringify(newAcc));
+        callback(true);
     }
 
     return (
-        <div className="bg-slate-100 p-2 pl-4 flex gap-4 items-center text-md w-min whitespace-nowrap rounded-lg">
+        <div className="shadow-md bg-slate-100 p-2 pl-4 flex gap-4 items-center text-md w-min whitespace-nowrap rounded-lg">
             <span>Quantity:</span>
             <div className="flex gap-2 text-lg">
                 {num === 1 ? (
@@ -62,16 +62,14 @@ export default function AddToCart(props: {product: ProductType}) {
                     {"ᐳ"}
                 </button>
             </div>
-            <span className="text-green-600 font-bold">
-                {(product.price * num).toFixed(2)} V Bucks
+            <span className="min-w-[8rem] text-right text-green-600 font-bold">
+                {product && (product.price * num).toFixed(2)} V Bucks
             </span>
-            <Link href="/cart">
-                <button
-                    onClick={() => addToCart()}
-                    className="bg-black text-white px-2 py-1 rounded-lg">
-                    Add to cart
-                </button>
-            </Link>
+            <button
+                onClick={() => addToCart()}
+                className="bg-black text-white px-2 py-1 rounded-lg">
+                Add to cart
+            </button>
         </div>
     )
 }

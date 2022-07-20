@@ -1,14 +1,16 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import BannerAd from '../components/BannerAd';
 import Header from '../components/Header'
 import ProductPreview from '../components/ProductPreview';
 import { AccountType, ProductType } from '../util/types';
+import next from 'next';
 const mod = require('../util/products');
 
 //home page with product list to scroll through
 export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
-    const [products, setProducts] = useState([{} as ProductType]);
+    const [products, setProducts] = useState([undefined as unknown as ProductType]);
 
     //get account from localStorage and products from util/products.ts on page load
     useEffect(() => {
@@ -20,7 +22,7 @@ export default function Home() {
                 setAccount(JSON.parse(acc));
             }
         }
-        if (!products[0].name) {
+        if (!products[0]) {
             setProducts(mod.products);
         }
     });
@@ -33,17 +35,23 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <Header />
+            <Header personalShopper='This is your personal shopping assistant!'/>
 
-            <main className="container pt-12 pb-24">
-                <h1 className="text-5xl font-bold text-center mb-12">
-                    Buy our things
-                </h1>
-                <div className="flex justify-center gap-4 flex-wrap">
-                    {products.map(p =>
-                        <ProductPreview product={p} />
-                    )}
+            <main className="flex gap-4 mt-12 mb-8 mx-4 justify-center">
+                <BannerAd imgSrc="" href="/products/0" className="w-72" />
+                <div>
+                    <h1 className="text-5xl font-bold text-center mb-12">
+                        Buy our things
+                    </h1>
+                    <div className="flex justify-center gap-4 flex-wrap">
+                        {products[0] && products.map(p =>
+                            <ProductPreview product={p} />
+                        )}
+                    </div>
                 </div>
+
+                <BannerAd imgSrc="" href="/products/1" className="w-72" />
+
             </main>
         </>
     )
