@@ -6,12 +6,16 @@ import { useRouter } from 'next/router'
 import HelpPopover from "./HelpPopover";
 
 //header component
-export default function Header(props: {addedToCart?: boolean, callback?: (value: boolean) => void, personalShopper?: string}) {
+export default function Header(props: {
+    addedToCart?: boolean,
+    callback?: (value: boolean) => void,
+    personalShopper?: string,
+}) {
     const {addedToCart, callback, personalShopper} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
+    const [PSA, setPSA] = useState("This is your P.S.A");
     const router = useRouter();
-    const PSA = personalShopper ? personalShopper : "This is your P.S.A";
 
     //get account from localStorage on page load
     useEffect(() => {
@@ -24,6 +28,13 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
             }
         }
     });
+
+    //update personal shopper message
+    useEffect(() => {
+        if (personalShopper) {
+            setPSA(personalShopper);
+        }
+    }, [personalShopper])
 
     //open modal when addedToCart becomes true
     useEffect(() => {

@@ -12,7 +12,7 @@ const mod = require('../../util/products')
 
 export default function Product(){
     const [product, setProduct] = useState(undefined as unknown as ProductType);
-    const [account, setAccount] = useState({} as AccountType);
+    const [account, setAccount] = useState(undefined as unknown as AccountType);
     const [addedToCart, setAddedToCart] = useState(false); //useState for opening/closing cart modal
     const [adIsOpen, setAdIsOpen] = useState(false); //useState for showing/hiding popup ad
     const router = useRouter();
@@ -47,19 +47,22 @@ export default function Product(){
             <Header
                 addedToCart={addedToCart}
                 callback={setAddedToCart}
-                personalShopper='You can purchase this product!'
+                personalShopper={product && account && product.price > account.balance
+                    ? "You can't afford this product!"
+                    : "You can purchase this product!"
+                }
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">
                 <BannerAd imgSrc="" href="/products/0" className="w-72" />
                 <div className="max-w-[30rem] flex-col gap-2">
-                    <Link href="/home">
-                        <a className="text-xl text-blue-500 mb-6">
-                            <p className="mb-6">
+                    <div className="mb-6">
+                        <Link href="/home">
+                            <a className="text-lg text-blue-500">
                                 ← Continue shopping
-                            </p>
-                        </a>
-                    </Link>
+                            </a>
+                        </Link>
+                    </div>
                     <img
                         src={product && product.imgSrc}
                         alt={product && product.name}
@@ -67,11 +70,11 @@ export default function Product(){
                     />
                 </div>
                 <div className="grow flex flex-col gap-4">
-                    <div className="flex text-lg font-semibold">
+                    <div className="flex gap-4 text-lg font-semibold">
                         <h1 className="grow text-slate-900">
                             {product && product.name}
                         </h1>
-                        <p className="text-slate-500">
+                        <p className="text-slate-500 whitespace-nowrap">
                             {product && product.price} Tokens
                         </p>
                     </div>
