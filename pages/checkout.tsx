@@ -18,7 +18,7 @@ export default function Checkout() {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zip, setZip] = useState("");
-    const [shipping, setShipping] = useState(5);
+    const [shipping, setShipping] = useState(5); //shipping cost
     const [cardNumber, setCardNumber] = useState("");
     const [securityPin, setSecurityPin] = useState("");
     const states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", //states for dropdown menu
@@ -54,13 +54,16 @@ export default function Checkout() {
 
     //handle clicking on order button
     const handleSubmit = () => {
-        if (firstName && lastName && address && city && state && zip) {
+        if (firstName && lastName && address && city && state
+            && zip.toString().length === 5 && cardNumber.toString().length === 16
+            && securityPin.toString().length === 3) {
             const data = {
                 email,
                 firstName: account.firstName,
                 billingFirstName: firstName,
                 billingLastName: lastName,
                 address: `${address}, ${city}, ${state} ${zip}`,
+                address2,
                 items: account.items,
                 total,
             };
@@ -87,7 +90,7 @@ export default function Checkout() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <Header />
+            <Header personalShopper="Order things here!" />
 
             <main className="container pt-12 pb-24 flex text-lg divide-x divide-gray-300">
                 <div className="w-2/5 flex flex-col gap-2 p-4 pr-8 h-min">
@@ -104,11 +107,11 @@ export default function Checkout() {
                     <div className="flex gap-2">
                         <InputGroup label="City" callback={setCity} />
                         <DropdownMenu label="State" callback={setState} options={states} />
-                        <InputGroup label="ZIP Code" callback={setZip} />
+                        <InputGroup label="ZIP Code" value={zip} callback={setZip} onlyNumbers maxLength={5} />
                     </div>
                     <div className="flex gap-2">
-                        <InputGroup label="Card Number" callback={setCardNumber} />
-                        <InputGroup label="Security Pin" callback={setSecurityPin} />
+                        <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} />
+                        <InputGroup label="Security PIN" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={3} />
                     </div>
                     <div className="flex items-center mt-4">
                         <div className="grow">
@@ -118,7 +121,9 @@ export default function Checkout() {
                                 </a>
                             </Link>
                         </div>
-                        <Link href={firstName && lastName && address && city && state && zip ?
+                        <Link href={firstName && lastName && address && city && state
+                            && zip.toString().length === 5 && cardNumber.toString().length === 16
+                            && securityPin.toString().length === 3 ?
                             "/purchase" : "/checkout"}>
                             <button
                                 onClick={() => handleSubmit()}
@@ -130,8 +135,11 @@ export default function Checkout() {
                         </Link>
                     </div>
                     <p className="italic text-red-500 text-right">
-                        {!(firstName && lastName && address && city && state && zip) &&
-                            "* Please fill all required fields"
+                        {firstName && lastName && address && city && state && zip && cardNumber && securityPin
+                            ? (zip.toString().length !== 5 || cardNumber.toString().length !== 16
+                                || securityPin.toString().length !== 3
+                                ? "* Invalid ZIP code, card number, or security PIN" : "")
+                            : "* Please fill all required fields"
                         }
                     </p>
                 </div>
@@ -142,15 +150,61 @@ export default function Checkout() {
                     <div className="flex flex-col gap-2 pt-4">
                         <div className="flex gap-2 px-2 text-lg">
                             <p className="grow">Subtotal</p>
-                            <p>{total.toFixed(2)} V Bucks</p>
+                            <p>{total.toFixed(2)} Tokens</p>
                         </div>
                         <div className="flex gap-2 px-2 text-lg">
                             <p className="grow">Shipping</p>
-                            <p>{shipping.toFixed(2)} V Bucks</p>
+                            <p>{shipping.toFixed(2)} Tokens</p>
                         </div>
                         <div className="flex gap-2 px-2 text-2xl">
                             <p className="grow">Total</p>
-                            <p>{(total + shipping).toFixed(2)} V Bucks</p>
+                            <p>{(total + shipping).toFixed(2)} Tokens</p>
+                        </div>
+
+                        <h3 className="text-2xl mt-12 mb-4">
+                            Choose shipping
+                        </h3>
+                        <div className="flex gap-2 flex-wrap">
+                            <button
+                                onClick={() => setShipping(0)}
+                                className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
+                                    + (shipping === 0 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                            >
+                                Free
+                            </button>
+                            <button
+                                onClick={() => setShipping(5)}
+                                className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
+                                    + (shipping === 5 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                            >
+                                <div className="flex gap-2">
+                                    <p>Standard</p>
+                                    <p>•</p>
+                                    <p>5 Tokens</p>
+                                </div>
+                            </button>
+                            <button
+                                onClick={() => setShipping(15)}
+                                className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
+                                    + (shipping === 15 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                            >
+                                <div className="flex gap-2">
+                                    <p>Express</p>
+                                    <p>•</p>
+                                    <p>15 Tokens</p>
+                                </div>
+                            </button>
+                            <button
+                                onClick={() => setShipping(25)}
+                                className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
+                                    + (shipping === 25 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                            >
+                                <div className="flex gap-2">
+                                    <p>Overnight</p>
+                                    <p>•</p>
+                                    <p>25 Tokens</p>
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </div>

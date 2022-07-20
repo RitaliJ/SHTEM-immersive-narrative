@@ -1,9 +1,8 @@
 import Head from "next/head";
- import Link from "next/link";
- import Header from "../components/Header";
+import Link from "next/link";
+import Header from "../components/Header";
 
-
-
+//confirmation page after purchasing products
 export default function Purchase() {
     return (
         <>
@@ -26,9 +25,6 @@ export default function Purchase() {
                      </a>
                  </Link>
              </main>
-  
-
-                     
         </>
     )
-}           
+}

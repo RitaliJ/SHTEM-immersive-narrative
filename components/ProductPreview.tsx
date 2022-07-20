@@ -15,7 +15,7 @@ export default function ProductPreview(props: {product: ProductType}) {
                         {product.name}
                     </p>
                     <p className={"whitespace-nowrap font-bold text-green-600"}>
-                        {product.price + " V Bucks"}
+                        {product.price} Tokens
                     </p>
                 </div>
                 <p className="line-clamp-5">

@@ -1,8 +1,10 @@
-import {Fragment, ReactNode} from 'react';
 import {Popover, Transition} from '@headlessui/react';
+import { useEffect, useState } from 'react';
 
 //modal for help popup
-export default function HelpPopover() {
+export default function HelpPopover(props: {instructions: string}) {
+    const {instructions} = props;
+
     return (
         <Popover as="div" className="relative">
             <Popover.Button className="outline-none flex items-center hover:bg-gray-200 duration-150 p-2 rounded-lg">
@@ -11,7 +13,7 @@ export default function HelpPopover() {
                 </svg>
             </Popover.Button>
             <Transition
-                as={Fragment}
+                as="div"
                 enter="ease-out duration-300"
                 enterFrom="opacity-0 scale-95 -translate-y-2"
                 enterTo="opacity-100 scale-100"
@@ -19,9 +21,15 @@ export default function HelpPopover() {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
-                <Popover.Panel className="absolute top-[3.5rem] right-0 w-48">
-                    <div className="bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg p-6">
-                        This is the help menu
+                <Popover.Panel static className="absolute top-1 right-0 w-48">
+                    <div className="overflow-hidden flex flex-col bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg">
+                        <img
+                            src="https://steamuserimages-a.akamaihd.net/ugc/942844394047374257/FBE1C6921B8A98FEDE1309EEB49C3137BC3D88EE/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+                            alt="Shopping assistant"
+                        />
+                        <p className="px-4 py-3 leading-5">
+                            {instructions}
+                        </p>
                     </div>
                 </Popover.Panel>
             </Transition>

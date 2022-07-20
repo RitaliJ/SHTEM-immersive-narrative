@@ -6,11 +6,15 @@ import { useRouter } from 'next/router'
 import HelpPopover from "./HelpPopover";
 
 //header component
-export default function Header(props: {addedToCart?: boolean, callback?: (value: boolean) => void, personalShopper?: string}) {
-    const {addedToCart, callback} = props;
+export default function Header(props: {
+    addedToCart?: boolean,
+    callback?: (value: boolean) => void,
+    personalShopper?: string,
+}) {
+    const {addedToCart, callback, personalShopper} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
-    const [helpOpen, setHelpOpen] = useState(false); //useState for help modal opening/closing
+    const [PSA, setPSA] = useState("This is your P.S.A");
     const router = useRouter();
 
     //get account from localStorage on page load
@@ -24,6 +28,13 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
             }
         }
     });
+
+    //update personal shopper message
+    useEffect(() => {
+        if (personalShopper) {
+            setPSA(personalShopper);
+        }
+    }, [personalShopper])
 
     //open modal when addedToCart becomes true
     useEffect(() => {
@@ -50,8 +61,6 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
         }
     }
 
-    const PSA = props.personalShopper ? props.personalShopper : "This is your P.S.A";
-
     return (
         <div className="flex items-center gap-4 sticky top-0 px-6 duration-150
             bg-slate-200 shadow-md hover:shadow-lg bg-opacity-50 backdrop-blur-lg">
@@ -62,7 +71,7 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
             </Link>
             <span className="grow"></span>
             <span className="text-lg text-green-600 font-bold">
-                {account.balance && account.balance.toFixed(2)} V Bucks
+                {account.balance && account.balance.toFixed(2)} Tokens
             </span>
             <button
                 onClick={() => {router.pathname !== "/checkout" && setIsOpen(true)}}
