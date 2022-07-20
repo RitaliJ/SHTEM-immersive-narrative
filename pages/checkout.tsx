@@ -61,6 +61,7 @@ export default function Checkout() {
                 billingFirstName: firstName,
                 billingLastName: lastName,
                 address: `${address}, ${city}, ${state} ${zip}`,
+                address2,
                 items: account.items,
                 total,
             };
@@ -151,6 +152,52 @@ export default function Checkout() {
                         <div className="flex gap-2 px-2 text-2xl">
                             <p className="grow">Total</p>
                             <p>{(total + shipping).toFixed(2)} Tokens</p>
+                        </div>
+
+                        <h3 className="text-2xl mt-12 mb-4">
+                            Choose shipping
+                        </h3>
+                        <div className="flex gap-2 flex-wrap">
+                            <button
+                                onClick={() => setShipping(0)}
+                                className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
+                                    + (shipping === 0 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                            >
+                                Free
+                            </button>
+                            <button
+                                onClick={() => setShipping(5)}
+                                className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
+                                    + (shipping === 5 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                            >
+                                <div className="flex gap-2">
+                                    <p>Standard</p>
+                                    <p>•</p>
+                                    <p>5 Tokens</p>
+                                </div>
+                            </button>
+                            <button
+                                onClick={() => setShipping(15)}
+                                className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
+                                    + (shipping === 15 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                            >
+                                <div className="flex gap-2">
+                                    <p>Express</p>
+                                    <p>•</p>
+                                    <p>15 Tokens</p>
+                                </div>
+                            </button>
+                            <button
+                                onClick={() => setShipping(25)}
+                                className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
+                                    + (shipping === 25 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                            >
+                                <div className="flex gap-2">
+                                    <p>Overnight</p>
+                                    <p>•</p>
+                                    <p>25 Tokens</p>
+                                </div>
+                            </button>
                         </div>
                     </div>
                 </div>
