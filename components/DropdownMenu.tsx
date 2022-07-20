@@ -42,20 +42,22 @@ export default function DropdownMenu(props: {
                     >
                         <Listbox.Options className="border border-gray-400 scrollbar absolute bg-white mt-1 flex flex-col divide-y max-h-60 w-full overflow-y-auto rounded-lg">
                             {newOptions.map(o =>
-                                <button
-                                    onClick={() => {
-                                        setSelected(o);
-                                        if (newOptions[0] === o) {
-                                            callback(undefined as unknown as string);
-                                        } else {
-                                            callback(o.toString());
-                                        }
-                                    }}
-                                    className={"rounded-lg px-2 py-1 text-left"
-                                        + (selected === o ? " bg-gray-200" : " hover:bg-gray-100")
-                                        + (newOptions[0] === o ? " text-gray-400" : "")}>
-                                    {o}
-                                </button>
+                                <Listbox.Option value={o}>
+                                    <button
+                                        onClick={() => {
+                                            setSelected(o);
+                                            if (newOptions[0] === o) {
+                                                callback(undefined as unknown as string);
+                                            } else {
+                                                callback(o.toString());
+                                            }
+                                        }}
+                                        className={"w-full rounded-lg px-2 py-1 text-left"
+                                            + (selected === o ? " bg-gray-200" : " hover:bg-gray-100")
+                                            + (newOptions[0] === o ? " text-gray-400" : "")}>
+                                        {o}
+                                    </button>
+                                </Listbox.Option>
                             )}
                         </Listbox.Options>
                     </Transition>
