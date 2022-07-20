@@ -104,11 +104,11 @@ export default function Checkout() {
                     <div className="flex gap-2">
                         <InputGroup label="City" callback={setCity} />
                         <DropdownMenu label="State" callback={setState} options={states} />
-                        <InputGroup label="ZIP Code" callback={setZip} />
+                        <InputGroup label="ZIP Code" value={zip} callback={setZip} onlyNumbers maxLength={5} />
                     </div>
                     <div className="flex gap-2">
-                        <InputGroup label="Card Number" callback={setCardNumber} />
-                        <InputGroup label="Security Pin" callback={setSecurityPin} />
+                        <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} />
+                        <InputGroup label="Security Pin" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={3} />
                     </div>
                     <div className="flex items-center mt-4">
                         <div className="grow">
@@ -142,11 +142,11 @@ export default function Checkout() {
                     <div className="flex flex-col gap-2 pt-4">
                         <div className="flex gap-2 px-2 text-lg">
                             <p className="grow">Subtotal</p>
-                            <p>{total.toFixed(2)} V Bucks</p>
+                            <p>{total.toFixed(2)} Tokens</p>
                         </div>
                         <div className="flex gap-2 px-2 text-lg">
                             <p className="grow">Shipping</p>
-                            <p>{shipping.toFixed(2)} V Bucks</p>
+                            <p>{shipping.toFixed(2)} Tokens</p>
                         </div>
                         <div className="flex gap-2 px-2 text-2xl">
                             <p className="grow">Total</p>
