@@ -22,12 +22,12 @@ export default function HelpPopover(props: {instructions: string}) {
                 leaveTo="opacity-0"
             >
                 <Popover.Panel className="absolute top-[3.5rem] right-0 w-48">
-                    <div className="overflow-hidden flex flex-col gap-3 bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg">
+                    <div className="overflow-hidden flex flex-col bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg">
                         <img
                             src="https://steamuserimages-a.akamaihd.net/ugc/942844394047374257/FBE1C6921B8A98FEDE1309EEB49C3137BC3D88EE/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
                             alt="Shopping assistant"
                         />
-                        <p className="px-6 pb-6">
+                        <p className="px-4 py-3 leading-5">
                             {instructions}
                         </p>
                     </div>
