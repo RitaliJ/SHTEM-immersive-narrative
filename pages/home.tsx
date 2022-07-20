@@ -4,7 +4,6 @@ import BannerAd from '../components/BannerAd';
 import Header from '../components/Header'
 import ProductPreview from '../components/ProductPreview';
 import { AccountType, ProductType } from '../util/types';
-import next from 'next';
 const mod = require('../util/products');
 
 //home page with product list to scroll through

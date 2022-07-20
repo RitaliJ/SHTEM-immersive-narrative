@@ -6,7 +6,7 @@ export default function PopupAd(props: {isOpen: boolean, setIsOpen: (value: bool
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
-            <div className="relative bg-white container rounded-lg h-10">
+            <div className="relative bg-white container rounded-lg h-96">
                 <button
                     onClick={() => setIsOpen(false)}
                     className="absolute top-2 right-4 text-5xl">
