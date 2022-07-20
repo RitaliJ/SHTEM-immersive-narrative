@@ -7,10 +7,11 @@ import HelpPopover from "./HelpPopover";
 
 //header component
 export default function Header(props: {addedToCart?: boolean, callback?: (value: boolean) => void, personalShopper?: string}) {
-    const {addedToCart, callback} = props;
+    const {addedToCart, callback, personalShopper} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const router = useRouter();
+    const PSA = personalShopper ? personalShopper : "This is your P.S.A";
 
     //get account from localStorage on page load
     useEffect(() => {
@@ -48,8 +49,6 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
             setAccount(JSON.parse(acc));
         }
     }
-
-    const PSA = props.personalShopper ? props.personalShopper : "This is your P.S.A";
 
     return (
         <div className="flex items-center gap-4 sticky top-0 px-6 duration-150
