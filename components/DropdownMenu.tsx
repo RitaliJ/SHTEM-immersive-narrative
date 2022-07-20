@@ -40,7 +40,7 @@ export default function DropdownMenu(props: {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0 -translate-y-2"
                     >
-                        <Listbox.Options className="scrollbar absolute bg-white mt-1 flex flex-col divide-y max-h-60 w-full overflow-y-auto rounded-lg">
+                        <Listbox.Options className="border border-gray-400 scrollbar absolute bg-white mt-1 flex flex-col divide-y max-h-60 w-full overflow-y-auto rounded-lg">
                             {newOptions.map(o =>
                                 <button
                                     onClick={() => {
