@@ -6,11 +6,12 @@ export default function BannerAd(props: {imgSrc: string, href: string, className
 
     return (
         <Link href={href}>
-            <div className={"hover:cursor-pointer bg-gray-300 flex-none " + className}>
+            <div className={"hover:cursor-pointer bg-gray-200 flex-none " + className}>
                 <p className="text-5xl font-bold uppercase p-4">
                     This is an ad
                 </p>
             </div>
         </Link>
+        
     )
 }

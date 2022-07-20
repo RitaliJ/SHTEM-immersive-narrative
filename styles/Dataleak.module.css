@@ -1,0 +1,20 @@
+.main{
+    background-color:black;
+}
+
+.heading{
+    background-color: black;
+    color: white;
+    font-size: 48px;
+    text-align:center;
+    padding: 10px;
+    
+}
+
+.moreinfo{
+    background-color: black;
+    color: white; 
+    font-size: 24px;
+    text-align:center;
+    padding:350px;
+}
