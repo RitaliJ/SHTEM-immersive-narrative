@@ -19,7 +19,9 @@ export default function Checkout() {
     const [state, setState] = useState("");
     const [zip, setZip] = useState("");
     const [shipping, setShipping] = useState(5);
-    const states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL",
+    const [cardNumber, setCardNumber] = useState("");
+    const [securityPin, setSecurityPin] = useState("");
+    const states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", //states for dropdown menu
                     "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
                     "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH",
                     "NJ", "NM", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
@@ -103,6 +105,10 @@ export default function Checkout() {
                         <InputGroup label="City" callback={setCity} />
                         <DropdownMenu label="State" callback={setState} options={states} />
                         <InputGroup label="ZIP Code" callback={setZip} />
+                    </div>
+                    <div className="flex gap-2">
+                        <InputGroup label="Card Number" callback={setCardNumber} />
+                        <InputGroup label="Security Pin" callback={setSecurityPin} />
                     </div>
                     <div className="flex items-center mt-4">
                         <div className="grow">

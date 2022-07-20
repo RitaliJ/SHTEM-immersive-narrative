@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import HelpPopover from "./HelpPopover";
 
 //header component
-export default function Header(props: {addedToCart?: boolean, callback?: (value: boolean) => void}) {
+export default function Header(props: {addedToCart?: boolean, callback?: (value: boolean) => void, personalShopper?: string}) {
     const {addedToCart, callback} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
@@ -50,6 +50,8 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
         }
     }
 
+    const PSA = props.personalShopper ? props.personalShopper : "This is your P.S.A";
+
     return (
         <div className="flex items-center gap-4 sticky top-0 px-6 duration-150
             bg-slate-200 shadow-md hover:shadow-lg bg-opacity-50 backdrop-blur-lg">
@@ -78,7 +80,7 @@ export default function Header(props: {addedToCart?: boolean, callback?: (value:
             <span className="text-lg">
                 Logged in as {account.firstName}
             </span>
-            <HelpPopover />
+            <HelpPopover instructions={PSA} />
             <CartModal isOpen={isOpen} setIsOpen={setIsOpen} callback={refreshAccount} />
         </div>
     )

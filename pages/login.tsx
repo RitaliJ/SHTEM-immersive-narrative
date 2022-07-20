@@ -18,14 +18,14 @@ export default function Login() {
     const months = Array.from(new Array(12), (x, i) => i + 1);
     const days = Array.from(new Array(31), (x, i) => i + 1);
 
-    //set localStorage and go to interest survey page
+    //set localStorage and go to terms page
     const handleSubmit = (account: AccountType) => {
         console.log(month);
         if (email && firstName && lastName && phone
             && year !== undefined && month !== undefined && day !== undefined
             && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
-            location.href = "/survey";
+            location.href = "/terms";
         }
     }
 
