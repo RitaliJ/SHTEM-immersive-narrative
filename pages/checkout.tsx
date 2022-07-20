@@ -18,7 +18,7 @@ export default function Checkout() {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zip, setZip] = useState("");
-    const [shipping, setShipping] = useState(5);
+    const [shipping, setShipping] = useState(5); //shipping cost
     const [cardNumber, setCardNumber] = useState("");
     const [securityPin, setSecurityPin] = useState("");
     const states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", //states for dropdown menu
@@ -54,7 +54,9 @@ export default function Checkout() {
 
     //handle clicking on order button
     const handleSubmit = () => {
-        if (firstName && lastName && address && city && state && zip) {
+        if (firstName && lastName && address && city && state
+            && zip.toString().length === 5 && cardNumber.toString().length === 16
+            && securityPin.toString().length === 3) {
             const data = {
                 email,
                 firstName: account.firstName,
@@ -109,7 +111,7 @@ export default function Checkout() {
                     </div>
                     <div className="flex gap-2">
                         <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} />
-                        <InputGroup label="Security Pin" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={3} />
+                        <InputGroup label="Security PIN" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={3} />
                     </div>
                     <div className="flex items-center mt-4">
                         <div className="grow">
@@ -119,7 +121,9 @@ export default function Checkout() {
                                 </a>
                             </Link>
                         </div>
-                        <Link href={firstName && lastName && address && city && state && zip ?
+                        <Link href={firstName && lastName && address && city && state
+                            && zip.toString().length === 5 && cardNumber.toString().length === 16
+                            && securityPin.toString().length === 3 ?
                             "/purchase" : "/checkout"}>
                             <button
                                 onClick={() => handleSubmit()}
@@ -131,8 +135,11 @@ export default function Checkout() {
                         </Link>
                     </div>
                     <p className="italic text-red-500 text-right">
-                        {!(firstName && lastName && address && city && state && zip) &&
-                            "* Please fill all required fields"
+                        {firstName && lastName && address && city && state && zip && cardNumber && securityPin
+                            ? (zip.toString().length !== 5 || cardNumber.toString().length !== 16
+                                || securityPin.toString().length !== 3
+                                ? "* Invalid ZIP code, card number, or security PIN" : "")
+                            : "* Please fill all required fields"
                         }
                     </p>
                 </div>
