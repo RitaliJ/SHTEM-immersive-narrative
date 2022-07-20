@@ -68,7 +68,7 @@ export default function Product(){
                             {product && product.name}
                         </h1>
                         <p className="text-slate-500">
-                            {product && product.price} V Bucks
+                            {product && product.price} Tokens
                         </p>
                     </div>
                     <p className="w-full text-sm font-medium text-slate-700">
