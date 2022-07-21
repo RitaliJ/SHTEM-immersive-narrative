@@ -43,8 +43,8 @@ export default function Home() {
                         Buy our things
                     </h1>
                     <div className="flex justify-center gap-4 flex-wrap">
-                        {products[0] && products.map(p =>
-                            <ProductPreview product={p} />
+                        {products[0] && products.map((p, i) =>
+                            <ProductPreview key={i} product={p} />
                         )}
                     </div>
                 </div>

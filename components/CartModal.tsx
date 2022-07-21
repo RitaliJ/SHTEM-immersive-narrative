@@ -60,7 +60,7 @@ export default function CartModal(props: {
                 <div className="flex flex-col divide-y divide-gray-300">
                     {account.email && account.items[0] ? (
                         account.items.map(i =>
-                            <CartProduct item={i} className="h-24 text-xl"
+                            <CartProduct key={i.product.id} item={i} className="h-24 text-xl"
                                 callback={() => removeItem(i.product.id)} />
                         )
                     ) : (
