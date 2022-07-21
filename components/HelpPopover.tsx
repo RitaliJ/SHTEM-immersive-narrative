@@ -1,9 +1,9 @@
-import {Popover, Transition} from '@headlessui/react';
-import { useEffect, useState } from 'react';
+import { Popover, Transition } from '@headlessui/react';
+import { ReactNode } from 'react';
 
 //modal for help popup
-export default function HelpPopover(props: {instructions: string}) {
-    const {instructions} = props;
+export default function HelpPopover(props: {html: ReactNode}) {
+    const {html} = props;
 
     return (
         <Popover as="div" className="relative">
@@ -27,9 +27,7 @@ export default function HelpPopover(props: {instructions: string}) {
                             src="https://steamuserimages-a.akamaihd.net/ugc/942844394047374257/FBE1C6921B8A98FEDE1309EEB49C3137BC3D88EE/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
                             alt="Shopping assistant"
                         />
-                        <p className="px-4 py-3 leading-5">
-                            {instructions}
-                        </p>
+                        {html}
                     </div>
                 </Popover.Panel>
             </Transition>

@@ -38,7 +38,7 @@ export default function Product(){
         }
     });
 
-    return(
+    return (
         <div className="h-screen flex flex-col">
             <Head>
                 <title>SHTEM | {product && product.name}</title>
@@ -47,8 +47,14 @@ export default function Product(){
             <Header
                 addedToCart={addedToCart}
                 callback={setAddedToCart}
-                personalShopper={product && account && product.price > account.balance
-                    ? "You can't afford this product!"
+                psaHtml={product && account && product.price > account.balance
+                    ? <div className="px-4 py-3 flex flex-col items-center gap-3 leading-5">
+                        It looks like you can't afford this purchase! You can fill out a quick survey
+                        to get more tokens:
+                        <button className="bg-blue-500 text-white rounded-lg px-2 py-1 w-min">
+                            Survey
+                        </button>
+                    </div>
                     : "You can purchase this product!"
                 }
             />

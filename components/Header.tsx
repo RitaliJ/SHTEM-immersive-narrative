@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { AccountType } from "../util/types";
 import CartModal from "./CartModal";
 import { useRouter } from 'next/router'
@@ -10,8 +10,9 @@ export default function Header(props: {
     addedToCart?: boolean,
     callback?: (value: boolean) => void,
     personalShopper?: string,
+    psaHtml?: ReactNode,
 }) {
-    const {addedToCart, callback, personalShopper} = props;
+    const {addedToCart, callback, personalShopper, psaHtml} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const [PSA, setPSA] = useState("This is your P.S.A");
@@ -89,7 +90,7 @@ export default function Header(props: {
             <span className="text-lg">
                 Logged in as {account.firstName}
             </span>
-            <HelpPopover instructions={PSA} />
+            <HelpPopover html={psaHtml} />
             <CartModal isOpen={isOpen} setIsOpen={setIsOpen} callback={refreshAccount} />
         </div>
     )
