@@ -27,39 +27,19 @@ export default function Captcha(props: {
                     {text}
                 </p>
                 <div className="flex flex-col gap-6">
-                    <div className="flex gap-6">
-                        {[0, 1, 2].map(i =>
-                            <img
-                                onClick={() => flipAtIndex(i)}
-                                className={"border-4 border-white ring-8 w-48 h-48 duration-150 hover:cursor-pointer "
-                                    + (selected[i] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
-                                src={imgSrcs[i]}
-                                alt={i.toString()}
-                            />
-                        )}
-                    </div>
-                    <div className="flex gap-6">
-                        {[3, 4, 5].map(i =>
-                            <img
-                                onClick={() => flipAtIndex(i)}
-                                className={"border-4 border-white ring-8 w-48 h-48 duration-150 hover:cursor-pointer "
-                                    + (selected[i] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
-                                src={imgSrcs[i]}
-                                alt={i.toString()}
-                            />
-                        )}
-                    </div>
-                    <div className="flex gap-6">
-                        {[6, 7, 8].map(i =>
-                            <img
-                                onClick={() => flipAtIndex(i)}
-                                className={"border-4 border-white ring-8 w-48 h-48 duration-150 hover:cursor-pointer "
-                                    + (selected[i] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
-                                src={imgSrcs[i]}
-                                alt={i.toString()}
-                            />
-                        )}
-                    </div>
+                    {[0, 1, 2].map(i =>
+                        <div className="flex gap-6">
+                            {[0, 1, 2].map(j =>
+                                <img
+                                    onClick={() => flipAtIndex(3 * i + j)}
+                                    className={"border-4 border-white ring-8 w-48 h-48 duration-150 hover:cursor-pointer "
+                                        + (selected[3 * i + j] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
+                                    src={imgSrcs[3 * i + j]}
+                                    alt={i.toString()}
+                                />
+                            )}
+                        </div>
+                    )}
                 </div>
                 <button
                     onClick={() => {handleSubmit(); setIsOpen(false)}}
