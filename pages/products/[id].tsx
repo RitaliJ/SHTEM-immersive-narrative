@@ -8,6 +8,7 @@ import BannerAd from '../../components/BannerAd';
 import PopupAd from '../../components/PopupAd';
 import SurveyModal from '../../components/SurveyModal';
 import NiceLink from '../../components/NiceLink';
+import ToggleButton from "../../components/ToggleButton";
 const mod = require('../../util/constants')
 
 export default function Product(){
@@ -18,6 +19,7 @@ export default function Product(){
     const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
     const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
     const [surveyDone, setSurveyDone] = useState(false); //for updating account balance on survey submit
+    const [size, setSize] = useState([""]);
     const router = useRouter();
     const id = router.query.id;
 
@@ -54,6 +56,14 @@ export default function Product(){
         setTimeout(() => { //get a new random survey after exit transition finishes
             setSurvey(mod.surveys[Math.floor(Math.random()*mod.surveys.length)]);
         }, 200);
+    }
+
+    const updateSize = (name: string, on: boolean) => {
+        if (on) {
+            setSize([...size, name].filter(e => e !== ""));
+        } else {
+            setSize(size.filter(e => e !== name));
+        }
     }
 
     return (
@@ -115,6 +125,18 @@ export default function Product(){
                     <p className="pb-6 border-b border-slate-200 space-x-2">
                         {product && product.desc}
                     </p>
+                    <p>Choose Size</p>
+                    <a href = 'https://www.theshopforward.com/pages/poly-cotton-unisex-t-shirt-size-chart'>Size Chart</a>
+                    <div className="flex flex-wrap gap-1 justify-center">
+                        <ToggleButton label="XXS" callback={updateSize} />
+                        <ToggleButton label="XS" callback={updateSize} />
+                        <ToggleButton label="S" callback={updateSize} />
+                        <ToggleButton label="M" callback={updateSize} />
+                        <ToggleButton label="L" callback={updateSize} />
+                        <ToggleButton label="XL" callback={updateSize} />
+                        <ToggleButton label="2XL" callback={updateSize} />
+                        <ToggleButton label="3XL" callback={updateSize} />
+                    </div>
                     <AddToCart product={product} callback={setAddedToCart} />
                     <p className="text-sm text-slate-700">
                         Free shipping on all continental US orders.
