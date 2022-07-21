@@ -28,9 +28,10 @@ export default function Captcha(props: {
                 </p>
                 <div className="flex flex-col gap-6">
                     {[0, 1, 2].map(i =>
-                        <div className="flex gap-6">
+                        <div key={i} className="flex gap-6">
                             {[0, 1, 2].map(j =>
                                 <img
+                                    key={j}
                                     onClick={() => flipAtIndex(3 * i + j)}
                                     className={"border-4 border-white ring-8 w-48 h-48 duration-150 hover:cursor-pointer "
                                         + (selected[3 * i + j] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
