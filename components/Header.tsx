@@ -9,13 +9,11 @@ import HelpPopover from "./HelpPopover";
 export default function Header(props: {
     addedToCart?: boolean,
     callback?: (value: boolean) => void,
-    personalShopper?: string,
     psaHtml?: ReactNode,
 }) {
-    const {addedToCart, callback, personalShopper, psaHtml} = props;
+    const {addedToCart, callback, psaHtml} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
-    const [PSA, setPSA] = useState("This is your P.S.A");
     const router = useRouter();
 
     //get account from localStorage on page load
@@ -29,13 +27,6 @@ export default function Header(props: {
             }
         }
     });
-
-    //update personal shopper message
-    useEffect(() => {
-        if (personalShopper) {
-            setPSA(personalShopper);
-        }
-    }, [personalShopper])
 
     //open modal when addedToCart becomes true
     useEffect(() => {

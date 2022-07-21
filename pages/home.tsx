@@ -34,7 +34,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <Header personalShopper='This is your personal shopping assistant!' />
+            <Header psaHtml="This is your personal shopping assistant!" />
 
             <main className="flex gap-4 mt-12 mb-8 mx-4 justify-center">
                 <BannerAd imgSrc="" href="/products/0" className="w-72" />
