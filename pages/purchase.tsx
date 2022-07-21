@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import Header from "../components/Header";
+import NiceLink from "../components/NiceLink";
 
 //confirmation page after purchasing products
 export default function Purchase() {
@@ -19,11 +20,7 @@ export default function Purchase() {
                  <p className="text-xl">
                      You should receive a confirmation email shortly.
                  </p>
-                 <Link href="/home">
-                     <a className="text-lg text-blue-500">
-                         ← Back to homepage
-                     </a>
-                 </Link>
+                <NiceLink href="/home" text="← Back to homepage" className="mb-6" />
              </main>
         </>
     )

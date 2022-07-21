@@ -2,19 +2,23 @@ import Header from '../../components/Header';
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { AccountType, ProductType } from '../../util/types';
+import { AccountType, ProductType, SurveyType } from '../../util/types';
 import Head from 'next/head';
 import AddToCart from '../../components/AddToCart';
 import Link from 'next/link';
 import BannerAd from '../../components/BannerAd';
 import PopupAd from '../../components/PopupAd';
-const mod = require('../../util/products')
+import SurveyModal from '../../components/SurveyModal';
+import NiceLink from '../../components/NiceLink';
+const mod = require('../../util/constants')
 
 export default function Product(){
     const [product, setProduct] = useState(undefined as unknown as ProductType);
     const [account, setAccount] = useState(undefined as unknown as AccountType);
     const [addedToCart, setAddedToCart] = useState(false); //useState for opening/closing cart modal
     const [adIsOpen, setAdIsOpen] = useState(false); //useState for showing/hiding popup ad
+    const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
+    const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
     const router = useRouter();
     const id = router.query.id;
 
@@ -36,9 +40,12 @@ export default function Product(){
             //     }
             // }, 8000);
         }
+        if (!survey.title) { //choose a random survey from list of surveys
+            setSurvey(mod.surveys[Math.floor(Math.random()*mod.surveys.length)]);
+        }
     });
 
-    return(
+    return (
         <div className="h-screen flex flex-col">
             <Head>
                 <title>SHTEM | {product && product.name}</title>
@@ -47,22 +54,27 @@ export default function Product(){
             <Header
                 addedToCart={addedToCart}
                 callback={setAddedToCart}
-                personalShopper={product && account && product.price > account.balance
-                    ? "You can't afford this product!"
+                psaHtml={product && account && product.price > account.balance
+                    ? <div className="flex flex-col items-center gap-3 leading-5">
+                        It looks like you can't afford this purchase! You can fill out a quick survey
+                        to get more tokens:
+                        <button
+                            onClick={() => setSurveyOpen(true)}
+                            className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min">
+                            Survey
+                        </button>
+                    </div>
                     : "You can purchase this product!"
+                }
+                psaOuterHtml={
+                    <SurveyModal isOpen={surveyOpen} setIsOpen={setSurveyOpen} survey={survey} />
                 }
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">
                 <BannerAd imgSrc="" href="/products/0" className="w-72" />
                 <div className="max-w-[30rem] flex-col gap-2">
-                    <div className="mb-6">
-                        <Link href="/home">
-                            <a className="text-lg text-blue-500">
-                                ← Continue shopping
-                            </a>
-                        </Link>
-                    </div>
+                    <NiceLink href="/home" text="← Continue shopping" className="mb-6" />
                     <img
                         src={product && product.imgSrc}
                         alt={product && product.name}
