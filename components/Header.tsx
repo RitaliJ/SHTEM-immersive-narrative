@@ -10,8 +10,9 @@ export default function Header(props: {
     addedToCart?: boolean,
     callback?: (value: boolean) => void,
     psaHtml?: ReactNode,
+    psaOuterHtml?: ReactNode,
 }) {
-    const {addedToCart, callback, psaHtml} = props;
+    const {addedToCart, callback, psaHtml, psaOuterHtml} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const router = useRouter();
@@ -81,7 +82,7 @@ export default function Header(props: {
             <span className="text-lg">
                 Logged in as {account.firstName}
             </span>
-            <HelpPopover html={psaHtml} />
+            <HelpPopover html={psaHtml} outerHtml={psaOuterHtml} />
             <CartModal isOpen={isOpen} setIsOpen={setIsOpen} callback={refreshAccount} />
         </div>
     )
