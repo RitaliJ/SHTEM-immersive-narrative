@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SurveyDataType, SurveyType } from "../util/types";
+import { AccountType, SurveyDataType, SurveyType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 import InputGroup from "./InputGroup";
 import MultipleChoice from "./MultipleChoice";
@@ -9,8 +9,10 @@ export default function SurveyModal(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
     survey: SurveyType,
+    account: AccountType,
+    callback: (value: boolean) => void,
 }) {
-    const {isOpen, setIsOpen, survey} = props;
+    const {isOpen, setIsOpen, survey, account, callback} = props;
     const [data, setData] = useState({} as SurveyDataType);
 
     //helper function for setting a particular key-value pair in data object
@@ -23,6 +25,7 @@ export default function SurveyModal(props: {
     //function for checking if all questions have a response
     const checkValid = () => {
         let bool = true;
+        if (!survey.questions) return false;
         survey.questions.forEach(q => {
             if (!(q.label in data && data[q.label])) {
                 bool = false;
@@ -30,6 +33,17 @@ export default function SurveyModal(props: {
             }
         });
         return bool;
+    }
+
+    //update account balance and add survey data to localStorage on submit
+    const handleSubmit = () => {
+        if (checkValid()) {
+            let acc = structuredClone(account);
+            acc.balance += survey.reward;
+            localStorage.setItem("shtemAccount", JSON.stringify(acc));
+            localStorage.setItem(survey.title, JSON.stringify(data));
+            callback(true); //callback to update account balance in header
+        }
     }
 
     return (
@@ -45,7 +59,7 @@ export default function SurveyModal(props: {
                         {survey.title}
                     </h1>
                     <>
-                        {survey.questions.map((q, i) => {
+                        {survey.questions && survey.questions.map((q, i) => {
                             if ("options" in q) { //multiple choice
                                 return (
                                     <MultipleChoice
@@ -61,6 +75,7 @@ export default function SurveyModal(props: {
                                     <InputGroup
                                         key={i}
                                         label={q.label}
+                                        value={data[q.label] ?? ""}
                                         callback={(x) => setValue(q.label, x)}
                                     />
                                 )
@@ -68,7 +83,7 @@ export default function SurveyModal(props: {
                         })}
                     </>
                     <button
-                        onClick={() => setIsOpen(false)}
+                        onClick={() => {handleSubmit(); setIsOpen(false)}}
                         className={"px-4 py-2 whitespace-nowrap w-min rounded-lg "
                             + (checkValid() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
                         Submit
