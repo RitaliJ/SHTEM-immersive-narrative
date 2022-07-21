@@ -48,7 +48,7 @@ export default function Product(){
     return (
         <div className="h-screen flex flex-col">
             <Head>
-                <title>SHTEM | {product && product.name}</title>
+                <title>{"SHTEM | " + (product && product.name)}</title>
             </Head>
             
             <Header
