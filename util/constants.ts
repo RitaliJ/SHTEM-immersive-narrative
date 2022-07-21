@@ -22,7 +22,25 @@ module.exports = {
                     ],
                 },
             ],
-        }
+        },
+        {
+            title: "Epic Survey 2",
+            reward: 150,
+            questions: [
+                {
+                    label: "yo",
+                },
+            ],
+        },
+        {
+            title: "Epic Survey 3",
+            reward: 500,
+            questions: [
+                {
+                    label: "e",
+                },
+            ],
+        },
     ],
     products: [
         {
