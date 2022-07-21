@@ -25,6 +25,7 @@ module.exports = {
     ],
     products: [
         {
+
             imgSrc: "https://i.pinimg.com/736x/3e/6f/5f/3e6f5f92ac57fad94b918904ee29bc96--funny-fashion-fashion-fail.jpg",
             name: "Accordion Outfit",
             desc: "An outfit for those that love music and symmetry, because the outfit is symmertric and the pants look like accordions.",
@@ -32,6 +33,7 @@ module.exports = {
             id: 0,
         },
         {
+
             imgSrc: "https://teddyfeed.com/wp-content/uploads/2020/02/d3d9446802a44259755d38e6d163e820-8.jpg",
             name: "Avocado",
             desc:"A fit with a fluffy texture, suited mainly for those who love avocados.",
@@ -39,6 +41,7 @@ module.exports = {
             id: 1,
         },
         {
+
             imgSrc: "https://i2-prod.mirror.co.uk/incoming/article15007504.ece/ALTERNATES/s1200c/0_The-2019-Met-Gala-Celebrating-Camp-Notes-on-Fashion-Arrivals.jpg",
             name: "Pheonix",
             desc: "This fit, modeled by Cardi B, is a fit inspired by the pheonix, a mythological creature that can breathe out fire. Intimidating for sure, but confidence displayed as well.",
@@ -46,6 +49,7 @@ module.exports = {
             id: 2,
         },
         {
+
             imgSrc: "https://miro.medium.com/max/1400/1*o1sbsqRiFra5pyLjQHpQug.jpeg",
             name: "Sugar Wedding",
             desc: "This piece looks like sugar cubes were stitched together to create a wedding dress. It looks perfect, nearly flawless, but there is one downfall: you can't use your hands. Enjoy the snowman suit.",
@@ -53,6 +57,7 @@ module.exports = {
             id: 3,
         },
         {
+
             imgSrc: 'https://qph.cf2.quoracdn.net/main-qimg-05059316efb58156fe3153d1b3e8d166-lq',
             name: 'Wrong Side of the Bed',
             desc: 'Ever had such a terrible sleep that the bed morphed into your body? Well, this relatable piece conveys the feeling of sleeping on the wrong side of the bed.',
@@ -60,6 +65,7 @@ module.exports = {
             id: 4,
         },
         {
+
             imgSrc: 'https://hips.hearstapps.com/hbz.h-cdn.co/assets/17/10/hbz-unpractical-runway-looks-molly-goddard-gettyimages-642836062.jpg',
             name:'Blue Christmas',
             desc:"You heard about white christmas. There's green christmas as well. But have you heard about blue christmas?This piece, a blue christmas tree, chooses to challenge the idea that society has conformed to a green or white christmas. Masterpiece.",
