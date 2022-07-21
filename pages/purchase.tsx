@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import CenteredModal from "../components/CenteredModal";
 import Header from "../components/Header";
+import NiceLink from "../components/NiceLink";
 
 //confirmation page after purchasing products
 export default function Purchase() {
@@ -30,15 +31,13 @@ export default function Purchase() {
                  <p className="text-xl">
                     You should receive a confirmation email shortly.
                  </p>
+
                  <div>
                     <button onClick={() => setIsOpen(true)} className="w-5/12 duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-lg bg-green-500 hover:bg-green-700 text-white mt-8 float-left">I have received my confirmation email.</button>
                     <button onClick={() => setIsOpen(true)} className="w-5/12 duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-lg bg-red-500 hover:bg-red-700 text-white mt-8 float-right">I have not received my confirmation email.</button>
                  </div>
-                 <Link href="/home">
-                     <a className="text-lg text-blue-500">
-                         ← Back to homepage
-                     </a>
-                 </Link>
+                <NiceLink href="/home" text="← Back to homepage" className="mb-6" />
+                
              </main>
         </>
     );

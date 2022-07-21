@@ -12,7 +12,7 @@ export default function InputGroup(props: {
     const {label, value, optional, onlyNumbers, maxLength, callback} = props;
 
     return (
-        <div className="grow flex flex-col gap-1 min-w-0">
+        <div className="grow w-full flex flex-col gap-1 min-w-0">
             <div className="flex gap-1">
                 {!optional && <p className="text-red-500">
                     *
