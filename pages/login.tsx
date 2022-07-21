@@ -18,10 +18,17 @@ export default function Login() {
     const months = Array.from(new Array(12), (x, i) => i + 1);
     const days = Array.from(new Array(31), (x, i) => i + 1);
 
+    function validateEmail(email: string){
+        var re = /\S+@\S+\.\S+/;
+        console.log(email);
+        console.log(re.test(email))
+        return re.test(email);
+    }
+
     //set localStorage and go to terms page
     const handleSubmit = (account: AccountType) => {
         console.log(month);
-        if (email && firstName && lastName && phone
+        if (validateEmail(email) && firstName && lastName && phone
             && year !== undefined && month !== undefined && day !== undefined
             && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
@@ -64,7 +71,7 @@ export default function Login() {
                                 items: [undefined as unknown as ItemType],
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
-                                && year !== undefined && month !== undefined && day !== undefined
+                                && year !== undefined && validateEmail(email)==true && month !== undefined && day !== undefined
                                 && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)
                                 ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
                         >
@@ -75,6 +82,11 @@ export default function Login() {
                                 && year !== undefined && month !== undefined && day !== undefined
                                 && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) &&
                                 "* Please fill all required fields"
+                            }
+                            {(email && firstName && lastName && phone
+                                && year !== undefined && month !== undefined && day !== undefined
+                                && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day) && validateEmail(email)==false) &&
+                                "* Please provide a valid email address"
                             }
                         </p>
                     </div>
