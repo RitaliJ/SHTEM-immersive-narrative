@@ -25,6 +25,7 @@ export default function SurveyModal(props: {
     //function for checking if all questions have a response
     const checkValid = () => {
         let bool = true;
+        if (!survey.questions) return false;
         survey.questions.forEach(q => {
             if (!(q.label in data && data[q.label])) {
                 bool = false;
@@ -58,7 +59,7 @@ export default function SurveyModal(props: {
                         {survey.title}
                     </h1>
                     <>
-                        {survey.questions.map((q, i) => {
+                        {survey.questions && survey.questions.map((q, i) => {
                             if ("options" in q) { //multiple choice
                                 return (
                                     <MultipleChoice
