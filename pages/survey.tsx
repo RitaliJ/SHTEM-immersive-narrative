@@ -56,14 +56,15 @@ export default function Survey() {
                         Click to select any number of interests
                     </p>
                     <div className="flex flex-wrap gap-1 justify-center">
-                        <ToggleButton label="Lorem" callback={updateInterests} />
-                        <ToggleButton label="Ipsum" callback={updateInterests} />
-                        <ToggleButton label="Dolor" callback={updateInterests} />
-                        <ToggleButton label="Sit" callback={updateInterests} />
-                        <ToggleButton label="Amet" callback={updateInterests} />
-                        <ToggleButton label="Consectetur" callback={updateInterests} />
-                        <ToggleButton label="Adipiscing" callback={updateInterests} />
-                        <ToggleButton label="Elit" callback={updateInterests} />
+                        <ToggleButton label="Balenciaga" callback={updateInterests} />
+                        <ToggleButton label="GUCCI" callback={updateInterests} />
+                        <ToggleButton label="Louis Vuitton" callback={updateInterests} />
+                        <ToggleButton label="Armani" callback={updateInterests} />
+                        <ToggleButton label="Prada" callback={updateInterests} />
+                        <ToggleButton label="Chanel" callback={updateInterests} />
+                        <ToggleButton label="Versace" callback={updateInterests} />
+                        <ToggleButton label="Cartier" callback={updateInterests} />
+                        <ToggleButton label="Hermes" callback={updateInterests} />
                     </div>
 
                     <div className="flex mt-2 justify-center">
