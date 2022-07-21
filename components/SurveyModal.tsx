@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { SurveyType } from "../util/types";
 import CenteredModal from "./CenteredModal";
+import InputGroup from "./InputGroup";
 
 //component for modal with survey on it
 export default function SurveyModal(props: {
@@ -8,6 +10,13 @@ export default function SurveyModal(props: {
     survey: SurveyType,
 }) {
     const {isOpen, setIsOpen, survey} = props;
+    const [data, setData] = useState({});
+
+    const setValue = (key: string, value: string) => {
+        let d = structuredClone(data);
+        d = {...d, [key]: value}; //add key-0value pair
+        setData(d);
+    }
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -21,7 +30,17 @@ export default function SurveyModal(props: {
                     <h1 className="text-2xl font-bold">
                         {survey.title}
                     </h1>
-                    {survey.content}
+                    <>
+                        {survey.questions.map(q => {
+                            if ("options" in q) { //multiple choice
+                                
+                            } else { //short answer
+                                return (
+                                    <InputGroup label={q.label} callback={(x) => setValue(q.label, x)} />
+                                )
+                            }
+                        })}
+                    </>
                     <button
                         onClick={() => setIsOpen(false)}
                         className="bg-blue-500 text-white px-4 py-2 whitespace-nowrap w-min rounded-lg">

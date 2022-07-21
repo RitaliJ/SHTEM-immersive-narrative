@@ -5,4 +5,6 @@ export type AccountType = {email: string, firstName: string, lastName: string, p
 export type ProductType ={imgSrc: string, name: string, desc: string, price: number, id: number};
 export type ItemType = {product: ProductType, quantity: number};
 export type DOBType = {year: number, month: number, day: number};
-export type SurveyType = {title: string, content: ReactNode};
+export type SurveyType = {title: string, questions: (ShortAnswer | MultipleChoice)[]};
+export type ShortAnswer = {label: string}; //types for survey questions
+export type MultipleChoice = {label: string, options: string[]}
