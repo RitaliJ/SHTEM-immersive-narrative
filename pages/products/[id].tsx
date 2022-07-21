@@ -44,13 +44,16 @@ export default function Product(){
         }
     });
 
-    //set surveyDone usestate and update account for new balance
+    //handle survey submit
     const surveySubmit = () => {
-        setSurveyDone(true);
+        setSurveyDone(true); //update usestate so account balance refreshes in header
         const acc = localStorage.getItem("shtemAccount");
         if (acc !== "undefined" && acc !== null) {
             setAccount(JSON.parse(acc));
         }
+        setTimeout(() => { //get a new random survey after exit transition finishes
+            setSurvey(mod.surveys[Math.floor(Math.random()*mod.surveys.length)]);
+        }, 200);
     }
 
     return (
@@ -78,7 +81,7 @@ export default function Product(){
                     <SurveyModal
                         isOpen={surveyOpen}
                         setIsOpen={setSurveyOpen}
-                        survey={mod.surveys[0]}
+                        survey={survey}
                         account={account}
                         callback={surveySubmit}
                     />
