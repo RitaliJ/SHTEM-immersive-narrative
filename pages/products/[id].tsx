@@ -67,7 +67,7 @@ export default function Product(){
                     : "You can purchase this product!"
                 }
                 psaOuterHtml={
-                    <SurveyModal isOpen={surveyOpen} setIsOpen={setSurveyOpen} survey={survey} />
+                    <SurveyModal isOpen={surveyOpen} setIsOpen={setSurveyOpen} survey={mod.surveys[0]} />
                 }
             />
 

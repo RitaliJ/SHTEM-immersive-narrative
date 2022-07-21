@@ -1,17 +1,26 @@
-import InputGroup from "../components/InputGroup"
-
 export {}
 
-//constant array of proudct objects to retrieve by id in dynamic routes
+//constant array of survey and proudct objects to retrieve in dynamic routes
 module.exports = {
     surveys: [
         {
             title: "Epic Survey",
-            content: (<>
-                <InputGroup label="What is up?" callback={() => {}} optional />
-                <InputGroup label="What is up 2?" callback={() => {}} optional />
-                <InputGroup label="What is up 3?" callback={() => {}} optional />
-            </>),
+            questions: [
+                {
+                    label: "What is up?",
+                },
+                {
+                    label: "What is up 2?",
+                },
+                {
+                    label: "Multiple choice?",
+                    options: [
+                        "yes",
+                        "no",
+                        "perhaps",
+                    ],
+                },
+            ],
         }
     ],
     products: [
