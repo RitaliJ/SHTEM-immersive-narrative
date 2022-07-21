@@ -5,6 +5,7 @@ module.exports = {
     surveys: [
         {
             title: "Epic Survey",
+            reward: 100,
             questions: [
                 {
                     label: "What is up?",

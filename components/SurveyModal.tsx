@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SurveyDataType, SurveyType } from "../util/types";
+import { AccountType, SurveyDataType, SurveyType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 import InputGroup from "./InputGroup";
 import MultipleChoice from "./MultipleChoice";
@@ -9,8 +9,10 @@ export default function SurveyModal(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
     survey: SurveyType,
+    account: AccountType,
+    callback: (value: boolean) => void,
 }) {
-    const {isOpen, setIsOpen, survey} = props;
+    const {isOpen, setIsOpen, survey, account, callback} = props;
     const [data, setData] = useState({} as SurveyDataType);
 
     //helper function for setting a particular key-value pair in data object
@@ -32,10 +34,14 @@ export default function SurveyModal(props: {
         return bool;
     }
 
-    //add to localStorage on submit
+    //update account balance and add survey data to localStorage on submit
     const handleSubmit = () => {
         if (checkValid()) {
+            let acc = structuredClone(account);
+            acc.balance += survey.reward;
+            localStorage.setItem("shtemAccount", JSON.stringify(acc));
             localStorage.setItem(survey.title, JSON.stringify(data));
+            callback(true); //callback to update account balance in header
         }
     }
 

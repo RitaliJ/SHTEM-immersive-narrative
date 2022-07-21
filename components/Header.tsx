@@ -11,8 +11,10 @@ export default function Header(props: {
     callback?: (value: boolean) => void,
     psaHtml?: ReactNode,
     psaOuterHtml?: ReactNode,
+    surveySubmit?: boolean,
+    callback2?: (value: boolean) => void,
 }) {
-    const {addedToCart, callback, psaHtml, psaOuterHtml} = props;
+    const {addedToCart, callback, psaHtml, psaOuterHtml, surveySubmit, callback2} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const router = useRouter();
@@ -33,10 +35,7 @@ export default function Header(props: {
     useEffect(() => {
         if (addedToCart) {
             setIsOpen(true);
-            const acc = localStorage.getItem("shtemAccount");
-            if (acc !== "undefined" && acc !== null) {
-                setAccount(JSON.parse(acc));
-            }
+            refreshAccount();
         }
     }, [addedToCart]);
 
@@ -47,6 +46,15 @@ export default function Header(props: {
         }
     }, [isOpen]);
 
+    //update account balance when user submits survey
+    useEffect(() => {
+        if (surveySubmit && callback2) {
+            refreshAccount();
+            callback2(false);
+        }
+    }, [surveySubmit]);
+
+    //helper to refresh account
     const refreshAccount = () => {
         const acc = localStorage.getItem("shtemAccount");
         if (acc !== "undefined" && acc !== null) {

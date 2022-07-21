@@ -1,11 +1,9 @@
 import Header from '../../components/Header';
-import Image from 'next/image'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AccountType, ProductType, SurveyType } from '../../util/types';
 import Head from 'next/head';
 import AddToCart from '../../components/AddToCart';
-import Link from 'next/link';
 import BannerAd from '../../components/BannerAd';
 import PopupAd from '../../components/PopupAd';
 import SurveyModal from '../../components/SurveyModal';
@@ -19,6 +17,7 @@ export default function Product(){
     const [adIsOpen, setAdIsOpen] = useState(false); //useState for showing/hiding popup ad
     const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
     const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
+    const [surveyDone, setSurveyDone] = useState(false); //for updating account balance on survey submit
     const router = useRouter();
     const id = router.query.id;
 
@@ -45,6 +44,15 @@ export default function Product(){
         }
     });
 
+    //set surveyDone usestate and update account for new balance
+    const surveySubmit = () => {
+        setSurveyDone(true);
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc !== "undefined" && acc !== null) {
+            setAccount(JSON.parse(acc));
+        }
+    }
+
     return (
         <div className="h-screen flex flex-col">
             <Head>
@@ -67,8 +75,16 @@ export default function Product(){
                     : "You can purchase this product!"
                 }
                 psaOuterHtml={
-                    <SurveyModal isOpen={surveyOpen} setIsOpen={setSurveyOpen} survey={mod.surveys[0]} />
+                    <SurveyModal
+                        isOpen={surveyOpen}
+                        setIsOpen={setSurveyOpen}
+                        survey={mod.surveys[0]}
+                        account={account}
+                        callback={surveySubmit}
+                    />
                 }
+                surveySubmit={surveyDone}
+                callback2={setSurveyDone}
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">
