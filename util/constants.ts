@@ -1,6 +1,6 @@
 export {}
 
-//constant array of proudct objects to retrieve by id in dynamic routes
+//constant array of survey and proudct objects to retrieve in dynamic routes
 module.exports = {
     surveys: [
         {
@@ -13,7 +13,12 @@ module.exports = {
                     label: "What is up 2?",
                 },
                 {
-                    label: "What is up 3?",
+                    label: "Multiple choice?",
+                    options: [
+                        "yes",
+                        "no",
+                        "perhaps",
+                    ],
                 },
             ],
         }
