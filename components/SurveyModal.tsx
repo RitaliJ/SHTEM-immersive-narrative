@@ -31,12 +31,12 @@ export default function SurveyModal(props: {
                         {survey.title}
                     </h1>
                     <>
-                        {survey.questions.map(q => {
+                        {survey.questions.map((q, i) => {
                             if ("options" in q) { //multiple choice
                                 
                             } else { //short answer
                                 return (
-                                    <InputGroup label={q.label} callback={(x) => setValue(q.label, x)} />
+                                    <InputGroup key={i} label={q.label} callback={(x) => setValue(q.label, x)} />
                                 )
                             }
                         })}
