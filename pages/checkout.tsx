@@ -5,6 +5,7 @@ import CartProduct from "../components/CartProduct";
 import DropdownMenu from "../components/DropdownMenu";
 import Header from "../components/Header";
 import InputGroup from "../components/InputGroup";
+import NiceLink from "../components/NiceLink";
 import { AccountType, ItemType } from "../util/types";
 
 export default function Checkout() {
@@ -90,7 +91,7 @@ export default function Checkout() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             
-            <Header personalShopper="Order things here!" />
+            <Header psaHtml="Order things here!" />
 
             <main className="container pt-12 pb-24 flex text-lg divide-x divide-gray-300">
                 <div className="w-2/5 flex flex-col gap-2 p-4 pr-8 h-min">
@@ -115,11 +116,7 @@ export default function Checkout() {
                     </div>
                     <div className="flex items-center mt-4">
                         <div className="grow">
-                            <Link href="/home">
-                                <a className="text-lg text-blue-500">
-                                    ← Back
-                                </a>
-                            </Link>
+                            <NiceLink href="/home" text="← Back" className="mb-6" />
                         </div>
                         <Link href={firstName && lastName && address && city && state
                             && zip.toString().length === 5 && cardNumber.toString().length === 16
