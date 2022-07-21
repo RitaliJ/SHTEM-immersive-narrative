@@ -32,6 +32,13 @@ export default function SurveyModal(props: {
         return bool;
     }
 
+    //add to localStorage on submit
+    const handleSubmit = () => {
+        if (checkValid()) {
+            localStorage.setItem(survey.title, JSON.stringify(data));
+        }
+    }
+
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className="relative bg-white container px-8 py-6 rounded-lg w-96">
@@ -61,6 +68,7 @@ export default function SurveyModal(props: {
                                     <InputGroup
                                         key={i}
                                         label={q.label}
+                                        value={data[q.label] ?? ""}
                                         callback={(x) => setValue(q.label, x)}
                                     />
                                 )
@@ -68,7 +76,7 @@ export default function SurveyModal(props: {
                         })}
                     </>
                     <button
-                        onClick={() => setIsOpen(false)}
+                        onClick={() => {handleSubmit(); setIsOpen(false)}}
                         className={"px-4 py-2 whitespace-nowrap w-min rounded-lg "
                             + (checkValid() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
                         Submit
