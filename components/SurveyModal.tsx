@@ -9,10 +9,9 @@ export default function SurveyModal(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
     survey: SurveyType,
-    account: AccountType,
     callback: (value: boolean) => void,
 }) {
-    const {isOpen, setIsOpen, survey, account, callback} = props;
+    const {isOpen, setIsOpen, survey, callback} = props;
     const [data, setData] = useState({} as SurveyDataType);
 
     //helper function for setting a particular key-value pair in data object
@@ -39,9 +38,12 @@ export default function SurveyModal(props: {
     //update account balance and add survey data to localStorage on submit
     const handleSubmit = () => {
         if (checkValid()) {
-            let acc = structuredClone(account);
-            acc.balance += survey.reward;
-            localStorage.setItem("shtemAccount", JSON.stringify(acc));
+            const acc = localStorage.getItem("shtemAccount");
+            if (acc !== "undefined" && acc !== null) {
+                let acc2 = JSON.parse(acc)
+                acc2.balance += survey.reward;
+                localStorage.setItem("shtemAccount", JSON.stringify(acc));
+            }
             localStorage.setItem(survey.title, JSON.stringify(data));
             callback(true); //callback to update account balance in header
         }

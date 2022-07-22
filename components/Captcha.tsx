@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { CaptchaType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 
 export default function Captcha(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
-    text: string,
-    imgSrcs: string[],
+    captcha: CaptchaType,
 }) {
-    const {isOpen, setIsOpen, text, imgSrcs} = props;
+    const {isOpen, setIsOpen, captcha} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
 
     const flipAtIndex = (i: number) => {
@@ -24,10 +24,10 @@ export default function Captcha(props: {
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className="flex flex-col gap-8 items-center bg-white container p-8 rounded-lg w-max whitespace-nowrap">
                 <p className="text-2xl font-bold">
-                    {text}
+                    {captcha.title}
                 </p>
                 <div className="flex flex-col gap-6">
-                    {[0, 1, 2].map(i =>
+                    {captcha.imgSrcs && [0, 1, 2].map(i =>
                         <div key={i} className="flex gap-6">
                             {[0, 1, 2].map(j =>
                                 <img
@@ -35,7 +35,7 @@ export default function Captcha(props: {
                                     onClick={() => flipAtIndex(3 * i + j)}
                                     className={"border-4 border-white ring-8 w-48 h-48 duration-150 hover:cursor-pointer "
                                         + (selected[3 * i + j] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
-                                    src={imgSrcs[3 * i + j]}
+                                    src={captcha.imgSrcs[3 * i + j]}
                                     alt={i.toString()}
                                 />
                             )}

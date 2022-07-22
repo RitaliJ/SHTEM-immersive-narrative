@@ -7,3 +7,4 @@ export type SurveyType = {title: string, reward: number, questions: (ShortAnswer
 export type ShortAnswerType = {label: string}; //types for survey questions
 export type MultipleChoiceType = {label: string, options: string[]};
 export type SurveyDataType = {[key: string]: string}; //for indexing survey data with strings
+export type CaptchaType = {title: string, imgSrcs: string[]};
