@@ -9,6 +9,7 @@ import PopupAd from '../../components/PopupAd';
 import SurveyModal from '../../components/SurveyModal';
 import NiceLink from '../../components/NiceLink';
 import ToggleButton from "../../components/ToggleButton";
+import Captcha from '../../components/Captcha';
 const mod = require('../../util/constants')
 
 export default function Product(){
@@ -17,8 +18,10 @@ export default function Product(){
     const [addedToCart, setAddedToCart] = useState(false); //useState for opening/closing cart modal
     const [adIsOpen, setAdIsOpen] = useState(false); //useState for showing/hiding popup ad
     const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
+    const [captchaOpen, setCaptchaOpen] = useState(false); //useState for opening/closing survey modal
     const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
     const [surveyDone, setSurveyDone] = useState(false); //for updating account balance on survey submit
+    const [outOfSurveys, setOutOfSurveys] = useState(false); //true when all surveys are done
     const [size, setSize] = useState([""]);
     const router = useRouter();
     const id = router.query.id;
@@ -31,6 +34,7 @@ export default function Product(){
                 location.href = "/login";
             } else {
                 setAccount(JSON.parse(acc));
+                chooseNextSurvey();
             }
         }
         if (!product) {
@@ -40,9 +44,6 @@ export default function Product(){
             //         setAdIsOpen(true);
             //     }
             // }, 8000);
-        }
-        if (!survey.title) { //choose a random survey from list of surveys
-            setSurvey(mod.surveys[Math.floor(Math.random()*mod.surveys.length)]);
         }
     });
 
@@ -54,10 +55,23 @@ export default function Product(){
             setAccount(JSON.parse(acc));
         }
         setTimeout(() => { //get a new random survey after exit transition finishes
-            setSurvey(mod.surveys[Math.floor(Math.random()*mod.surveys.length)]);
+            chooseNextSurvey();
         }, 200);
     }
 
+    //helper top choose the first survey not completed yet
+    const chooseNextSurvey = () => {
+        for (let i = 0; i < mod.surveys.length; i++) {
+            if (localStorage.getItem(mod.surveys[i].title) === "undefined") {
+                setSurvey(mod.surveys[i]);
+                break;
+            } else if (i === mod.surveys.length - 1) { //if out of surveys, set usestate
+                setOutOfSurveys(true);
+            }
+        }
+    }
+
+    //helper for setting size
     const updateSize = (name: string, on: boolean) => {
         if (on) {
             setSize([...size, name].filter(e => e !== ""));
@@ -76,25 +90,66 @@ export default function Product(){
                 addedToCart={addedToCart}
                 callback={setAddedToCart}
                 psaHtml={product && account && product.price > account.balance
-                    ? <div className="flex flex-col items-center gap-3 leading-5">
-                        It looks like you can't afford this purchase! You can fill out a quick survey
-                        to get more tokens:
+                    ? <div className="flex flex-col items-center gap-1 leading-6 text-lg">
+                        <p className="mb-2">
+                            It looks like you can't afford this purchase! Here are some options for earning
+                            more tokens:
+                        </p>
                         <button
-                            onClick={() => setSurveyOpen(true)}
-                            className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min">
-                            Survey
+                            onClick={() => {if (!outOfSurveys) setSurveyOpen(true)}}
+                            className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap "
+                                + (outOfSurveys ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
+                            <div className="flex gap-2">
+                                <span>Survey</span>
+                                <span>•</span>
+                                <span>100 Tokens</span>
+                            </div>
+                        </button>
+                        <button
+                            onClick={() => setCaptchaOpen(true)}
+                            className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
+                            <div className="flex gap-2">
+                                <span>Captcha</span>
+                                <span>•</span>
+                                <span>80 Tokens</span>
+                            </div>
+                        </button>
+                        <button
+                            onClick={() => {}}
+                            className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
+                            <div className="flex gap-2">
+                                <span>Other thing</span>
+                                <span>•</span>
+                                <span>∞ Tokens</span>
+                            </div>
                         </button>
                     </div>
                     : "You can purchase this product!"
                 }
                 psaOuterHtml={
-                    <SurveyModal
-                        isOpen={surveyOpen}
-                        setIsOpen={setSurveyOpen}
-                        survey={survey}
-                        account={account}
-                        callback={surveySubmit}
-                    />
+                    <>
+                        <SurveyModal
+                            isOpen={surveyOpen}
+                            setIsOpen={setSurveyOpen}
+                            survey={survey}
+                            account={account}
+                            callback={surveySubmit}
+                        />
+                        <Captcha
+                            isOpen={captchaOpen}
+                            setIsOpen={setCaptchaOpen}
+                            text="Select all images with dogs"
+                            imgSrcs={["https://pbs.twimg.com/media/CREEBUnXAAACf3T?format=jpg&name=medium",
+                                    "https://media.istockphoto.com/photos/green-chameleon-picture-id1354454896?k=20&m=1354454896&s=612x612&w=0&h=DVcN5YvFZcmd3-EVmpQg4eDgJ4OssH79Zonwu9x8Gsk=",
+                                    "https://media.istockphoto.com/photos/shut-up-picture-id468989662?k=20&m=468989662&s=612x612&w=0&h=nbaIR4SvZS8W96GQxp6LhkUAttNQwa5d0f3rNhmdldI=",
+                                    "https://media.istockphoto.com/photos/green-chameleon-hunting-portrait-of-an-exotic-animal-macro-picture-id842206608?k=20&m=842206608&s=612x612&w=0&h=SBeBoFbYbpwmW55zTIAuQ4mUtPd1hSvrdBBx22Y7XWI=",
+                                    "https://media.istockphoto.com/photos/mexican-iguana-with-hat-and-scarf-picture-id907928160?k=20&m=907928160&s=612x612&w=0&h=MD0Kag7HzcisoGjCkMVBjon0ZGkDdkinY805IMD7tes=",
+                                    "https://media.istockphoto.com/photos/isolated-exotic-pet-green-chameleon-picture-id152990200?k=20&m=152990200&s=612x612&w=0&h=sm2uQDoY70lQsbULgamWYybpboaRXkbIzO1A_YjjrTM=",
+                                    "https://media.istockphoto.com/vectors/cute-small-green-chameleon-lizard-cartoon-animal-design-flat-vector-vector-id1207488059?k=20&m=1207488059&s=612x612&w=0&h=cGLsXcx-3BKTiszDL2kpMLxGwWBqwlDdj9mB8rMUTng=",
+                                    "https://media.istockphoto.com/photos/smiling-crested-gecko-at-blue-background-picture-id1091920292?k=20&m=1091920292&s=612x612&w=0&h=75aAhrX24aurQT6ILa92W7EsN8MHtGorwU5pc22SVMU=",
+                                    "https://media.istockphoto.com/photos/veiled-chameleon-isolated-on-white-background-picture-id842941952?k=20&m=842941952&s=612x612&w=0&h=waE2Tob8VZgLqxxChdeH7dDLdaK4liKiv4Wmy4nXtRk=",]}
+                        />
+                    </>
                 }
                 surveySubmit={surveyDone}
                 callback2={setSurveyDone}

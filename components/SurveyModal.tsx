@@ -17,7 +17,8 @@ export default function SurveyModal(props: {
 
     //helper function for setting a particular key-value pair in data object
     const setValue = (key: string, value: string) => {
-        let d = structuredClone(data);
+        let d = {};
+        Object.assign(d, data);
         d = {...d, [key]: value}; //add key-0value pair
         setData(d);
     }
