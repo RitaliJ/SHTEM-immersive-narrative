@@ -17,14 +17,19 @@ export default function Product(){
     const [account, setAccount] = useState(undefined as unknown as AccountType);
     const [addedToCart, setAddedToCart] = useState(false); //useState for opening/closing cart modal
     const [adIsOpen, setAdIsOpen] = useState(false); //useState for showing/hiding popup ad
+
     const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
     const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
-    const [surveyDone, setSurveyDone] = useState(false); //for updating account balance on survey submit
     const [outOfSurveys, setOutOfSurveys] = useState(false); //true when all surveys are done
+    const [surveyShowCode, setSurveyShowCode] = useState(false); //show survey gift code if true
+
     const [captcha, setCaptcha] = useState({} as CaptchaType); //the captcha shown in help popover
     const [captchaOpen, setCaptchaOpen] = useState(false); //useState for opening/closing captcha modal
     const [outOfCaptchas, setOutOfCaptchas] = useState(false); //true when all captchas are done
+    const [captchaShowCode, setCaptchaShowCode] = useState(false); //show survey gift code if true
+
     const [size, setSize] = useState([""]);
+
     const router = useRouter();
     const id = router.query.id;
 
@@ -36,8 +41,7 @@ export default function Product(){
                 location.href = "/login";
             } else {
                 setAccount(JSON.parse(acc));
-                chooseNextSurvey();
-                chooseNextCaptcha();
+                updateSurveyAndCaptcha();
             }
         }
         if (!product) {
@@ -50,43 +54,40 @@ export default function Product(){
         }
     });
 
-    //handle survey submit
-    const surveySubmit = () => {
-        setTimeout(() => { //get a new random survey after exit transition finishes
-            chooseNextSurvey();
-        }, 200);
-    }
+    //stop showing code when survey/captcha changes
+    useEffect(() => {
+        setSurveyShowCode(false);
+    }, [survey]);
 
-    //helper top choose the first survey not completed yet
-    const chooseNextSurvey = () => {
-        for (let i = 0; i < constants.surveys.length; i++) {
-            if (localStorage.getItem(constants.surveys[i].title) === "undefined"
-                || localStorage.getItem(constants.surveys[i].title) === null) {
-                setSurvey(constants.surveys[i]);
-                break;
-            } else if (i === constants.surveys.length - 1) { //if out of surveys, set usestate
-                setOutOfSurveys(true);
-            }
-        }
-    }
+    useEffect(() => {
+        setCaptchaShowCode(false);
+    }, [captcha]);
 
-    //handle captcha submit
-    const captchaSubmit = () => {
-        setTimeout(() => { //get a new random survey after exit transition finishes
-            chooseNextCaptcha();
-        }, 200);
-    }
-
-    //helper top choose the first captcha not completed yet
-    const chooseNextCaptcha = () => {
-        for (let i = 0; i < constants.captchas.length; i++) {
-            if (localStorage.getItem(constants.captchas[i].title) === "undefined"
-                || localStorage.getItem(constants.captchas[i].title) === null) {
-                setCaptcha(constants.captchas[i]);
-                break;
-            } else if (i === constants.captchas.length - 1) { //if out of surveys, set usestate
-                setOutOfCaptchas(true);
-            }
+    //helper to update to first incomplete survey and captcha
+    const updateSurveyAndCaptcha = () => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc !== "undefined" && acc !== null) {
+            const acc2 = JSON.parse(acc);
+            let foundSurvey = false;
+            let foundCaptcha = false;
+            constants.surveys.forEach((s: SurveyType) => {
+                if ((localStorage.getItem(s.title) === "undefined"
+                    || localStorage.getItem(s.title) === null)
+                    && !acc2.usedCodes.includes(s.code) && !foundSurvey) {
+                    setSurvey(s);
+                    foundSurvey = true;
+                }
+            });
+            constants.captchas.forEach((c: CaptchaType) => {
+                if ((localStorage.getItem(c.title) === "undefined"
+                    || localStorage.getItem(c.title) === null)
+                    && !acc2.usedCodes.includes(c.code) && !foundCaptcha) {
+                    setCaptcha(c);
+                    foundCaptcha = true;
+                }
+            });
+            if (!foundSurvey) setOutOfSurveys(true);
+            if (!foundCaptcha) setOutOfCaptchas(true);
         }
     }
 
@@ -152,16 +153,19 @@ export default function Product(){
                             isOpen={surveyOpen}
                             setIsOpen={setSurveyOpen}
                             survey={survey}
-                            callback={surveySubmit}
+                            showCode={surveyShowCode}
+                            setShowCode={setSurveyShowCode}
                         />
                         <Captcha
                             isOpen={captchaOpen}
                             setIsOpen={setCaptchaOpen}
                             captcha={captcha}
-                            callback={captchaSubmit}
+                            showCode={captchaShowCode}
+                            setShowCode={setCaptchaShowCode}
                         />
                     </>
                 }
+                callback2={updateSurveyAndCaptcha}
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">

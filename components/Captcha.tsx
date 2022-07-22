@@ -7,11 +7,11 @@ export default function Captcha(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
     captcha: CaptchaType,
-    callback: () => void,
+    showCode: boolean,
+    setShowCode: (value: boolean) => void,
 }) {
-    const {isOpen, setIsOpen, captcha, callback} = props;
+    const {isOpen, setIsOpen, captcha, showCode, setShowCode} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
-    const [showCode, setShowCode] = useState(false);
 
     useEffect(() => { //reset selected useState when a new captcha loads
         setSelected([false, false, false, false, false, false, false, false, false]);
@@ -30,18 +30,14 @@ export default function Captcha(props: {
         setShowCode(true);
     }
 
-    //handle pressing close button after viewing gift code
-    const handleClose = () => {
-        setIsOpen(false);
-        setTimeout(() => { //reset to next survey after this one closes
-            setShowCode(false);
-            callback();
-        }, 200);
-    }
-
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
-            <div className="flex flex-col gap-8 items-center bg-white container p-8 rounded-lg w-max whitespace-nowrap">
+            <div className="relative flex flex-col gap-8 items-center bg-white container p-8 rounded-lg w-max whitespace-nowrap">
+                <button
+                    onClick={() => setIsOpen(false)}
+                    className="absolute top-2 right-4 text-5xl">
+                    ×
+                </button>
                 {showCode ? (
                     <div className="flex flex-col gap-3 items-center text-lg">
                         <p>Your gift code is:</p>
@@ -49,13 +45,6 @@ export default function Captcha(props: {
                             {captcha.code}
                         </p>
                         <p>Redeem your tokens using the $ icon in the header!</p>
-                        <p>This code will disappear when you press the button below.</p>
-                        <button
-                            onClick={() => handleClose()}
-                            className="bg-red-500 text-white px-3 py-1 rounded-lg"
-                        >
-                            I have redeemed my tokens
-                        </button>
                     </div>
                 ) : (
                     <>

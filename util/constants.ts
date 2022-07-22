@@ -3,13 +3,16 @@ export {}
 //constant array of survey and proudct objects to retrieve in dynamic routes
 module.exports = {
     giftCodes: {
-        "123456": 100,
-        "yooooo": 80.5,
+        "111111": 100,
+        "222222": 200,
+        "333333": 300,
+        "444444": 400,
+        "555555": 500,
     },
     surveys: [
         {
             title: "Epic Survey",
-            code: "123456",
+            code: "111111",
             questions: [
                 {
                     label: "What is up?",
@@ -29,7 +32,7 @@ module.exports = {
         },
         {
             title: "Epic Survey 2",
-            code: "yooooo",
+            code: "222222",
             questions: [
                 {
                     label: "yo",
@@ -38,7 +41,7 @@ module.exports = {
         },
         {
             title: "Epic Survey 3",
-            code: "yooooo",
+            code: "333333",
             questions: [
                 {
                     label: "e",
@@ -49,7 +52,7 @@ module.exports = {
     captchas: [
         {
             title: "Select all images with dogs",
-            code: "123456",
+            code: "444444",
             imgSrcs: [
                 "https://pbs.twimg.com/media/CREEBUnXAAACf3T?format=jpg&name=medium",
                 "https://media.istockphoto.com/photos/green-chameleon-picture-id1354454896?k=20&m=1354454896&s=612x612&w=0&h=DVcN5YvFZcmd3-EVmpQg4eDgJ4OssH79Zonwu9x8Gsk=",
@@ -64,7 +67,7 @@ module.exports = {
         },
         {
             title: "Select all images with cats",
-            code: "yooooo",
+            code: "555555",
             imgSrcs: [
                 "https://pbs.twimg.com/media/CREEBUnXAAACf3T?format=jpg&name=medium",
                 "https://media.istockphoto.com/photos/green-chameleon-picture-id1354454896?k=20&m=1354454896&s=612x612&w=0&h=DVcN5YvFZcmd3-EVmpQg4eDgJ4OssH79Zonwu9x8Gsk=",

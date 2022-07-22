@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { AccountType, SurveyDataType, SurveyType } from "../util/types";
+import { useEffect, useState } from "react";
+import { SurveyDataType, SurveyType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 import InputGroup from "./InputGroup";
 import MultipleChoice from "./MultipleChoice";
@@ -9,11 +9,11 @@ export default function SurveyModal(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
     survey: SurveyType,
-    callback: () => void,
+    showCode: boolean,
+    setShowCode: (value: boolean) => void,
 }) {
-    const {isOpen, setIsOpen, survey, callback} = props;
+    const {isOpen, setIsOpen, survey, showCode, setShowCode} = props;
     const [data, setData] = useState({} as SurveyDataType);
-    const [showCode, setShowCode] = useState(false);
 
     //helper function for setting a particular key-value pair in data object
     const setValue = (key: string, value: string) => {
@@ -44,15 +44,6 @@ export default function SurveyModal(props: {
         }
     }
 
-    //handle pressing close button after viewing gift code
-    const handleClose = () => {
-        setIsOpen(false);
-        setTimeout(() => { //reset to next survey after this one closes
-            setShowCode(false);
-            callback();
-        }, 200);
-    }
-
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className="relative bg-white container px-8 py-6 rounded-lg w-96">
@@ -68,13 +59,6 @@ export default function SurveyModal(props: {
                             {survey.code}
                         </p>
                         <p>Redeem your tokens using the $ icon in the header!</p>
-                        <p>This code will disappear when you press the button below.</p>
-                        <button
-                            onClick={() => handleClose()}
-                            className="bg-red-500 text-white px-3 py-1 rounded-lg"
-                        >
-                            I have redeemed my tokens
-                        </button>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-3 items-center text-lg">

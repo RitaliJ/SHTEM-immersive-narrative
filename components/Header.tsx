@@ -12,8 +12,9 @@ export default function Header(props: {
     callback?: (value: boolean) => void,
     psaHtml?: ReactNode,
     psaOuterHtml?: ReactNode,
+    callback2?: () => void,
 }) {
-    const {addedToCart, callback, psaHtml, psaOuterHtml} = props;
+    const {addedToCart, callback, psaHtml, psaOuterHtml, callback2} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const [redeemOpen, setRedeemOpen] = useState(false); //useState for gift code redeem modal
@@ -92,7 +93,10 @@ export default function Header(props: {
             </span>
             <HelpPopover html={psaHtml} outerHtml={psaOuterHtml} />
             <CartModal isOpen={isOpen} setIsOpen={setIsOpen} callback={refreshAccount} />
-            <RedeemModal isOpen={redeemOpen} setIsOpen={setRedeemOpen} callback={refreshAccount} />
+            <RedeemModal isOpen={redeemOpen} setIsOpen={setRedeemOpen} callback={() => {
+                refreshAccount();
+                if (callback2) callback2();
+            }} />
         </div>
     )
 }
