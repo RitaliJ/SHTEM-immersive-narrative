@@ -25,15 +25,16 @@ export default function HelpPopover(props: {html: ReactNode, outerHtml: ReactNod
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Popover.Panel static className="absolute top-1 right-0 w-48">
-                            <div className="overflow-hidden flex flex-col bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg">
+                        <Popover.Panel static className="absolute top-1 right-0 w-max">
+                            <div className="overflow-hidden flex bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg">
+                                <div className="px-4 py-3 w-72">
+                                    {html}
+                                </div>
                                 <img
+                                    className="h-72"
                                     src="https://steamuserimages-a.akamaihd.net/ugc/942844394047374257/FBE1C6921B8A98FEDE1309EEB49C3137BC3D88EE/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
                                     alt="Shopping assistant"
                                 />
-                                <div className="px-4 py-3">
-                                    {html}
-                                </div>
                             </div>
                         </Popover.Panel>
                     </Transition>
