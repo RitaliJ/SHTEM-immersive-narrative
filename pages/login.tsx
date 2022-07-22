@@ -52,7 +52,7 @@ export default function Login() {
                     <InputGroup label="Email" callback={setEmail} />
                     <InputGroup label="First Name" callback={setFirstName} />
                     <InputGroup label="Last Name" callback={setLastName} />
-                    <InputGroup label="Phone Number" callback={setPhone} />
+                    <InputGroup label="Phone Number" value={phone} callback={setPhone} onlyNumbers maxLength={10} />
                     <div className="flex gap-1">
                         <DropdownMenu label="Birth month" callback={x => setMonth(Number(x))} options={months}/>
                         <DropdownMenu label="Birth day" callback={x => setDay(Number(x))} options={days}/>
