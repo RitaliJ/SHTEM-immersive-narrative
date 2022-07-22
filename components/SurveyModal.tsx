@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SurveyDataType, SurveyType } from "../util/types";
 import CenteredModal from "./CenteredModal";
+import GiftCodeContent from "./GiftCodeContent";
 import InputGroup from "./InputGroup";
 import MultipleChoice from "./MultipleChoice";
 
@@ -53,13 +54,7 @@ export default function SurveyModal(props: {
                     ×
                 </button>
                 {showCode ? (
-                    <div className="flex flex-col gap-3 items-center text-lg">
-                        <p>Your gift code is:</p>
-                        <p className="text-3xl font-bold">
-                            {survey.code}
-                        </p>
-                        <p>Redeem your tokens using the $ icon in the header!</p>
-                    </div>
+                    <GiftCodeContent code={survey.code} />
                 ) : (
                     <div className="flex flex-col gap-3 items-center text-lg">
                         <h1 className="text-2xl font-bold">

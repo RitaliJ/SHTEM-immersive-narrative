@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CaptchaType } from "../util/types";
 import CenteredModal from "./CenteredModal";
+import GiftCodeContent from "./GiftCodeContent";
 
 //modal for a 3x3 image select captcha
 export default function Captcha(props: {
@@ -39,13 +40,7 @@ export default function Captcha(props: {
                     ×
                 </button>
                 {showCode ? (
-                    <div className="flex flex-col gap-3 items-center text-lg">
-                        <p>Your gift code is:</p>
-                        <p className="text-3xl font-bold">
-                            {captcha.code}
-                        </p>
-                        <p>Redeem your tokens using the $ icon in the header!</p>
-                    </div>
+                    <GiftCodeContent code={captcha.code} />
                 ) : (
                     <>
                         <p className="text-2xl font-bold">
