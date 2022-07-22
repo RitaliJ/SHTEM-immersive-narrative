@@ -10,7 +10,7 @@ import SurveyModal from '../../components/SurveyModal';
 import NiceLink from '../../components/NiceLink';
 import ToggleButton from "../../components/ToggleButton";
 import Captcha from '../../components/Captcha';
-const mod = require('../../util/constants')
+const constants = require('../../util/constants')
 
 export default function Product(){
     const [product, setProduct] = useState(undefined as unknown as ProductType);
@@ -41,7 +41,7 @@ export default function Product(){
             }
         }
         if (!product) {
-            setProduct(mod.products[Number(id)]);
+            setProduct(constants.products[Number(id)]);
             // setInterval(() => { //show pop up ad after 5 seconds of inital page load
             //     if (!adIsOpen) {
             //         setAdIsOpen(true);
@@ -52,11 +52,6 @@ export default function Product(){
 
     //handle survey submit
     const surveySubmit = () => {
-        setSurveyDone(true); //update usestate so account balance refreshes in header
-        const acc = localStorage.getItem("shtemAccount");
-        if (acc !== "undefined" && acc !== null) {
-            setAccount(JSON.parse(acc));
-        }
         setTimeout(() => { //get a new random survey after exit transition finishes
             chooseNextSurvey();
         }, 200);
@@ -64,25 +59,32 @@ export default function Product(){
 
     //helper top choose the first survey not completed yet
     const chooseNextSurvey = () => {
-        for (let i = 0; i < mod.surveys.length; i++) {
-            if (localStorage.getItem(mod.surveys[i].title) === "undefined"
-                || localStorage.getItem(mod.surveys[i].title) === null) {
-                setSurvey(mod.surveys[i]);
+        for (let i = 0; i < constants.surveys.length; i++) {
+            if (localStorage.getItem(constants.surveys[i].title) === "undefined"
+                || localStorage.getItem(constants.surveys[i].title) === null) {
+                setSurvey(constants.surveys[i]);
                 break;
-            } else if (i === mod.surveys.length - 1) { //if out of surveys, set usestate
+            } else if (i === constants.surveys.length - 1) { //if out of surveys, set usestate
                 setOutOfSurveys(true);
             }
         }
     }
 
+    //handle captcha submit
+    const captchaSubmit = () => {
+        setTimeout(() => { //get a new random survey after exit transition finishes
+            chooseNextCaptcha();
+        }, 200);
+    }
+
     //helper top choose the first captcha not completed yet
     const chooseNextCaptcha = () => {
-        for (let i = 0; i < mod.captchas.length; i++) {
-            if (localStorage.getItem(mod.captchas[i].title) === "undefined"
-                || localStorage.getItem(mod.captchas[i].title) === null) {
-                setCaptcha(mod.captchas[i]);
+        for (let i = 0; i < constants.captchas.length; i++) {
+            if (localStorage.getItem(constants.captchas[i].title) === "undefined"
+                || localStorage.getItem(constants.captchas[i].title) === null) {
+                setCaptcha(constants.captchas[i]);
                 break;
-            } else if (i === mod.captchas.length - 1) { //if out of surveys, set usestate
+            } else if (i === constants.captchas.length - 1) { //if out of surveys, set usestate
                 setOutOfCaptchas(true);
             }
         }
@@ -156,11 +158,10 @@ export default function Product(){
                             isOpen={captchaOpen}
                             setIsOpen={setCaptchaOpen}
                             captcha={captcha}
+                            callback={captchaSubmit}
                         />
                     </>
                 }
-                surveySubmit={surveyDone}
-                callback2={setSurveyDone}
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">

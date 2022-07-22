@@ -27,7 +27,7 @@ export default function InputGroup(props: {
                 placeholder={optional ? "(optional)" : "type here..."}
                 className="border border-gray-400 px-2 py-1 rounded-md"
                 autoComplete="no"
-                onChange={(e) => {
+                onChange={e => {
                     if (onlyNumbers && /[a-zA-Z]/.test(e.target.value)) return;
                     if (!maxLength || (maxLength && e.target.value.length <= maxLength)) {
                         callback(e.target.value);
