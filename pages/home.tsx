@@ -4,7 +4,7 @@ import BannerAd from '../components/BannerAd';
 import Header from '../components/Header'
 import ProductPreview from '../components/ProductPreview';
 import { AccountType, ProductType } from '../util/types';
-const mod = require('../util/constants');
+const constants = require('../util/constants');
 
 //home page with product list to scroll through
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
             }
         }
         if (!products[0]) {
-            setProducts(mod.products);
+            setProducts(constants.products);
         }
     });
 

@@ -2,10 +2,17 @@ export {}
 
 //constant array of survey and proudct objects to retrieve in dynamic routes
 module.exports = {
+    giftCodes: {
+        "111111": 100,
+        "222222": 200,
+        "333333": 300,
+        "444444": 400,
+        "555555": 500,
+    },
     surveys: [
         {
             title: "Epic Survey",
-            reward: 100,
+            code: "111111",
             questions: [
                 {
                     label: "What is up?",
@@ -25,7 +32,7 @@ module.exports = {
         },
         {
             title: "Epic Survey 2",
-            reward: 150,
+            code: "222222",
             questions: [
                 {
                     label: "yo",
@@ -34,11 +41,43 @@ module.exports = {
         },
         {
             title: "Epic Survey 3",
-            reward: 500,
+            code: "333333",
             questions: [
                 {
                     label: "e",
                 },
+            ],
+        },
+    ],
+    captchas: [
+        {
+            title: "Select all images with dogs",
+            code: "444444",
+            imgSrcs: [
+                "https://pbs.twimg.com/media/CREEBUnXAAACf3T?format=jpg&name=medium",
+                "https://media.istockphoto.com/photos/green-chameleon-picture-id1354454896?k=20&m=1354454896&s=612x612&w=0&h=DVcN5YvFZcmd3-EVmpQg4eDgJ4OssH79Zonwu9x8Gsk=",
+                "https://media.istockphoto.com/photos/shut-up-picture-id468989662?k=20&m=468989662&s=612x612&w=0&h=nbaIR4SvZS8W96GQxp6LhkUAttNQwa5d0f3rNhmdldI=",
+                "https://media.istockphoto.com/photos/green-chameleon-hunting-portrait-of-an-exotic-animal-macro-picture-id842206608?k=20&m=842206608&s=612x612&w=0&h=SBeBoFbYbpwmW55zTIAuQ4mUtPd1hSvrdBBx22Y7XWI=",
+                "https://media.istockphoto.com/photos/mexican-iguana-with-hat-and-scarf-picture-id907928160?k=20&m=907928160&s=612x612&w=0&h=MD0Kag7HzcisoGjCkMVBjon0ZGkDdkinY805IMD7tes=",
+                "https://media.istockphoto.com/photos/isolated-exotic-pet-green-chameleon-picture-id152990200?k=20&m=152990200&s=612x612&w=0&h=sm2uQDoY70lQsbULgamWYybpboaRXkbIzO1A_YjjrTM=",
+                "https://media.istockphoto.com/vectors/cute-small-green-chameleon-lizard-cartoon-animal-design-flat-vector-vector-id1207488059?k=20&m=1207488059&s=612x612&w=0&h=cGLsXcx-3BKTiszDL2kpMLxGwWBqwlDdj9mB8rMUTng=",
+                "https://media.istockphoto.com/photos/smiling-crested-gecko-at-blue-background-picture-id1091920292?k=20&m=1091920292&s=612x612&w=0&h=75aAhrX24aurQT6ILa92W7EsN8MHtGorwU5pc22SVMU=",
+                "https://media.istockphoto.com/photos/veiled-chameleon-isolated-on-white-background-picture-id842941952?k=20&m=842941952&s=612x612&w=0&h=waE2Tob8VZgLqxxChdeH7dDLdaK4liKiv4Wmy4nXtRk=",
+            ],
+        },
+        {
+            title: "Select all images with cats",
+            code: "555555",
+            imgSrcs: [
+                "https://pbs.twimg.com/media/CREEBUnXAAACf3T?format=jpg&name=medium",
+                "https://media.istockphoto.com/photos/green-chameleon-picture-id1354454896?k=20&m=1354454896&s=612x612&w=0&h=DVcN5YvFZcmd3-EVmpQg4eDgJ4OssH79Zonwu9x8Gsk=",
+                "https://media.istockphoto.com/photos/shut-up-picture-id468989662?k=20&m=468989662&s=612x612&w=0&h=nbaIR4SvZS8W96GQxp6LhkUAttNQwa5d0f3rNhmdldI=",
+                "https://media.istockphoto.com/photos/green-chameleon-hunting-portrait-of-an-exotic-animal-macro-picture-id842206608?k=20&m=842206608&s=612x612&w=0&h=SBeBoFbYbpwmW55zTIAuQ4mUtPd1hSvrdBBx22Y7XWI=",
+                "https://media.istockphoto.com/photos/mexican-iguana-with-hat-and-scarf-picture-id907928160?k=20&m=907928160&s=612x612&w=0&h=MD0Kag7HzcisoGjCkMVBjon0ZGkDdkinY805IMD7tes=",
+                "https://media.istockphoto.com/photos/isolated-exotic-pet-green-chameleon-picture-id152990200?k=20&m=152990200&s=612x612&w=0&h=sm2uQDoY70lQsbULgamWYybpboaRXkbIzO1A_YjjrTM=",
+                "https://media.istockphoto.com/vectors/cute-small-green-chameleon-lizard-cartoon-animal-design-flat-vector-vector-id1207488059?k=20&m=1207488059&s=612x612&w=0&h=cGLsXcx-3BKTiszDL2kpMLxGwWBqwlDdj9mB8rMUTng=",
+                "https://media.istockphoto.com/photos/smiling-crested-gecko-at-blue-background-picture-id1091920292?k=20&m=1091920292&s=612x612&w=0&h=75aAhrX24aurQT6ILa92W7EsN8MHtGorwU5pc22SVMU=",
+                "https://media.istockphoto.com/photos/veiled-chameleon-isolated-on-white-background-picture-id842941952?k=20&m=842941952&s=612x612&w=0&h=waE2Tob8VZgLqxxChdeH7dDLdaK4liKiv4Wmy4nXtRk=",
             ],
         },
     ],

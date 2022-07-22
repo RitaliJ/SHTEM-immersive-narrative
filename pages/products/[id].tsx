@@ -1,7 +1,7 @@
 import Header from '../../components/Header';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { AccountType, ProductType, SurveyType } from '../../util/types';
+import { AccountType, CaptchaType, ProductType, SurveyType } from '../../util/types';
 import Head from 'next/head';
 import AddToCart from '../../components/AddToCart';
 import BannerAd from '../../components/BannerAd';
@@ -10,19 +10,26 @@ import SurveyModal from '../../components/SurveyModal';
 import NiceLink from '../../components/NiceLink';
 import ToggleButton from "../../components/ToggleButton";
 import Captcha from '../../components/Captcha';
-const mod = require('../../util/constants')
+const constants = require('../../util/constants')
 
 export default function Product(){
     const [product, setProduct] = useState(undefined as unknown as ProductType);
     const [account, setAccount] = useState(undefined as unknown as AccountType);
     const [addedToCart, setAddedToCart] = useState(false); //useState for opening/closing cart modal
     const [adIsOpen, setAdIsOpen] = useState(false); //useState for showing/hiding popup ad
-    const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
-    const [captchaOpen, setCaptchaOpen] = useState(false); //useState for opening/closing survey modal
+
     const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
-    const [surveyDone, setSurveyDone] = useState(false); //for updating account balance on survey submit
+    const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
     const [outOfSurveys, setOutOfSurveys] = useState(false); //true when all surveys are done
+    const [surveyShowCode, setSurveyShowCode] = useState(false); //show survey gift code if true
+
+    const [captcha, setCaptcha] = useState({} as CaptchaType); //the captcha shown in help popover
+    const [captchaOpen, setCaptchaOpen] = useState(false); //useState for opening/closing captcha modal
+    const [outOfCaptchas, setOutOfCaptchas] = useState(false); //true when all captchas are done
+    const [captchaShowCode, setCaptchaShowCode] = useState(false); //show survey gift code if true
+
     const [size, setSize] = useState([""]);
+
     const router = useRouter();
     const id = router.query.id;
 
@@ -34,11 +41,11 @@ export default function Product(){
                 location.href = "/login";
             } else {
                 setAccount(JSON.parse(acc));
-                chooseNextSurvey();
+                updateSurveyAndCaptcha();
             }
         }
         if (!product) {
-            setProduct(mod.products[Number(id)]);
+            setProduct(constants.products[Number(id)]);
             // setInterval(() => { //show pop up ad after 5 seconds of inital page load
             //     if (!adIsOpen) {
             //         setAdIsOpen(true);
@@ -47,27 +54,40 @@ export default function Product(){
         }
     });
 
-    //handle survey submit
-    const surveySubmit = () => {
-        setSurveyDone(true); //update usestate so account balance refreshes in header
+    //stop showing code when survey/captcha changes
+    useEffect(() => {
+        setSurveyShowCode(false);
+    }, [survey]);
+
+    useEffect(() => {
+        setCaptchaShowCode(false);
+    }, [captcha]);
+
+    //helper to update to first incomplete survey and captcha
+    const updateSurveyAndCaptcha = () => {
         const acc = localStorage.getItem("shtemAccount");
         if (acc !== "undefined" && acc !== null) {
-            setAccount(JSON.parse(acc));
-        }
-        setTimeout(() => { //get a new random survey after exit transition finishes
-            chooseNextSurvey();
-        }, 200);
-    }
-
-    //helper top choose the first survey not completed yet
-    const chooseNextSurvey = () => {
-        for (let i = 0; i < mod.surveys.length; i++) {
-            if (localStorage.getItem(mod.surveys[i].title) === "undefined") {
-                setSurvey(mod.surveys[i]);
-                break;
-            } else if (i === mod.surveys.length - 1) { //if out of surveys, set usestate
-                setOutOfSurveys(true);
-            }
+            const acc2 = JSON.parse(acc);
+            let foundSurvey = false;
+            let foundCaptcha = false;
+            constants.surveys.forEach((s: SurveyType) => {
+                if ((localStorage.getItem(s.title) === "undefined"
+                    || localStorage.getItem(s.title) === null)
+                    && !acc2.usedCodes.includes(s.code) && !foundSurvey) {
+                    setSurvey(s);
+                    foundSurvey = true;
+                }
+            });
+            constants.captchas.forEach((c: CaptchaType) => {
+                if ((localStorage.getItem(c.title) === "undefined"
+                    || localStorage.getItem(c.title) === null)
+                    && !acc2.usedCodes.includes(c.code) && !foundCaptcha) {
+                    setCaptcha(c);
+                    foundCaptcha = true;
+                }
+            });
+            if (!foundSurvey) setOutOfSurveys(true);
+            if (!foundCaptcha) setOutOfCaptchas(true);
         }
     }
 
@@ -106,8 +126,9 @@ export default function Product(){
                             </div>
                         </button>
                         <button
-                            onClick={() => setCaptchaOpen(true)}
-                            className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
+                            onClick={() => {if (!outOfCaptchas) setCaptchaOpen(true)}}
+                            className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap "
+                                + (outOfCaptchas ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
                             <div className="flex gap-2">
                                 <span>Captcha</span>
                                 <span>•</span>
@@ -132,27 +153,19 @@ export default function Product(){
                             isOpen={surveyOpen}
                             setIsOpen={setSurveyOpen}
                             survey={survey}
-                            account={account}
-                            callback={surveySubmit}
+                            showCode={surveyShowCode}
+                            setShowCode={setSurveyShowCode}
                         />
                         <Captcha
                             isOpen={captchaOpen}
                             setIsOpen={setCaptchaOpen}
-                            text="Select all images with dogs"
-                            imgSrcs={["https://pbs.twimg.com/media/CREEBUnXAAACf3T?format=jpg&name=medium",
-                                    "https://media.istockphoto.com/photos/green-chameleon-picture-id1354454896?k=20&m=1354454896&s=612x612&w=0&h=DVcN5YvFZcmd3-EVmpQg4eDgJ4OssH79Zonwu9x8Gsk=",
-                                    "https://media.istockphoto.com/photos/shut-up-picture-id468989662?k=20&m=468989662&s=612x612&w=0&h=nbaIR4SvZS8W96GQxp6LhkUAttNQwa5d0f3rNhmdldI=",
-                                    "https://media.istockphoto.com/photos/green-chameleon-hunting-portrait-of-an-exotic-animal-macro-picture-id842206608?k=20&m=842206608&s=612x612&w=0&h=SBeBoFbYbpwmW55zTIAuQ4mUtPd1hSvrdBBx22Y7XWI=",
-                                    "https://media.istockphoto.com/photos/mexican-iguana-with-hat-and-scarf-picture-id907928160?k=20&m=907928160&s=612x612&w=0&h=MD0Kag7HzcisoGjCkMVBjon0ZGkDdkinY805IMD7tes=",
-                                    "https://media.istockphoto.com/photos/isolated-exotic-pet-green-chameleon-picture-id152990200?k=20&m=152990200&s=612x612&w=0&h=sm2uQDoY70lQsbULgamWYybpboaRXkbIzO1A_YjjrTM=",
-                                    "https://media.istockphoto.com/vectors/cute-small-green-chameleon-lizard-cartoon-animal-design-flat-vector-vector-id1207488059?k=20&m=1207488059&s=612x612&w=0&h=cGLsXcx-3BKTiszDL2kpMLxGwWBqwlDdj9mB8rMUTng=",
-                                    "https://media.istockphoto.com/photos/smiling-crested-gecko-at-blue-background-picture-id1091920292?k=20&m=1091920292&s=612x612&w=0&h=75aAhrX24aurQT6ILa92W7EsN8MHtGorwU5pc22SVMU=",
-                                    "https://media.istockphoto.com/photos/veiled-chameleon-isolated-on-white-background-picture-id842941952?k=20&m=842941952&s=612x612&w=0&h=waE2Tob8VZgLqxxChdeH7dDLdaK4liKiv4Wmy4nXtRk=",]}
+                            captcha={captcha}
+                            showCode={captchaShowCode}
+                            setShowCode={setCaptchaShowCode}
                         />
                     </>
                 }
-                surveySubmit={surveyDone}
-                callback2={setSurveyDone}
+                callback2={updateSurveyAndCaptcha}
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">

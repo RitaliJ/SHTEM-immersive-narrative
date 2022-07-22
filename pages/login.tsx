@@ -2,7 +2,8 @@ import Head from 'next/head';
 import { useState } from 'react';
 import DropdownMenu from '../components/DropdownMenu';
 import InputGroup from '../components/InputGroup'
-import { AccountType, DOBType, ItemType, ProductType } from '../util/types';
+import { AccountType, CaptchaType, ItemType, SurveyType } from '../util/types';
+const constants = require('../util/constants')
 
 //page for creating an account; information is saved in localStorage
 export default function Login() {
@@ -18,6 +19,7 @@ export default function Login() {
     const months = Array.from(new Array(12), (x, i) => i + 1);
     const days = Array.from(new Array(31), (x, i) => i + 1);
 
+    //ensure that email is valid
     function validateEmail(email: string){
         var re = /\S+@\S+\.\S+/;
         console.log(email);
@@ -32,6 +34,9 @@ export default function Login() {
             && year !== undefined && month !== undefined && day !== undefined
             && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
+            //clear completed surveys and captchas for new account
+            constants.surveys.forEach((x: SurveyType) => localStorage.setItem(x.title, "undefined"));
+            constants.captchas.forEach((x: CaptchaType) => localStorage.setItem(x.title, "undefined"));
             location.href = "/terms";
         }
     }
@@ -69,6 +74,7 @@ export default function Login() {
                                 DOB: {year, month, day},
                                 balance: 1000,
                                 items: [undefined as unknown as ItemType],
+                                usedCodes: [],
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
                                 && year !== undefined && validateEmail(email)==true && month !== undefined && day !== undefined
