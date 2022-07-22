@@ -50,7 +50,7 @@ export default function RedeemModal(props: {
                     type="text"
                     value={value}
                     placeholder="XXXXXX"
-                    className="font-mono text-center border border-gray-400 px-4 py-3 text-2xl rounded-md w-36"
+                    className="uppercase font-mono text-center border border-gray-400 px-4 py-3 text-2xl rounded-md w-36"
                     autoComplete="no"
                     onChange={e => {
                         if (e.target.value.length <= 6) setValue(e.target.value);
