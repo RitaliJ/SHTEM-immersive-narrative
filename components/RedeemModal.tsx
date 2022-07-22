@@ -2,6 +2,7 @@ import { useState } from "react";
 import CenteredModal from "./CenteredModal";
 const constants = require('../util/constants')
 
+//modal for redeeming tokens with gift codes from surveys, captchas, etc.
 export default function RedeemModal(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
