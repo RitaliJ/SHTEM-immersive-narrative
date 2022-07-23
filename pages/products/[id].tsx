@@ -54,15 +54,6 @@ export default function Product(){
         }
     });
 
-    //stop showing code when survey/captcha changes
-    useEffect(() => {
-        setSurveyShowCode(false);
-    }, [survey]);
-
-    useEffect(() => {
-        setCaptchaShowCode(false);
-    }, [captcha]);
-
     //helper to update to first incomplete survey and captcha
     const updateSurveyAndCaptcha = () => {
         const acc = localStorage.getItem("shtemAccount");
@@ -71,19 +62,27 @@ export default function Product(){
             let foundSurvey = false;
             let foundCaptcha = false;
             constants.surveys.forEach((s: SurveyType) => {
-                if ((localStorage.getItem(s.title) === "undefined"
-                    || localStorage.getItem(s.title) === null)
-                    && !acc2.usedCodes.includes(s.code) && !foundSurvey) {
+                if (!acc2.usedCodes.includes(s.code) && !foundSurvey) {
                     setSurvey(s);
                     foundSurvey = true;
+                    if (localStorage.getItem(s.title) !== "undefined"
+                        && localStorage.getItem(s.title) !== null) {
+                        setSurveyShowCode(true);
+                    } else {
+                        setSurveyShowCode(false);
+                    }
                 }
             });
             constants.captchas.forEach((c: CaptchaType) => {
-                if ((localStorage.getItem(c.title) === "undefined"
-                    || localStorage.getItem(c.title) === null)
-                    && !acc2.usedCodes.includes(c.code) && !foundCaptcha) {
+                if (!acc2.usedCodes.includes(c.code) && !foundCaptcha) {
                     setCaptcha(c);
                     foundCaptcha = true;
+                    if (localStorage.getItem(c.title) !== "undefined"
+                        && localStorage.getItem(c.title) !== null) {
+                        setCaptchaShowCode(true);
+                    } else {
+                        setCaptchaShowCode(false);
+                    }
                 }
             });
             if (!foundSurvey) setOutOfSurveys(true);
