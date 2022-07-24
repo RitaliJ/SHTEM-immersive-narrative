@@ -75,7 +75,7 @@ export default function CartModal(props: {
                                 </p>
                             </div>
                             <p className="text-right text-lg italic">
-                                You can't afford this purchase!
+                                You can't afford this purchase! The amount in your cart exceeds your tokens!
                             </p>
                         </div>
                     ) : (
