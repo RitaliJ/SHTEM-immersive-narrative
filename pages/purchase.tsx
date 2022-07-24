@@ -9,6 +9,7 @@ import NiceLink from "../components/NiceLink";
 export default function Purchase() {
 
     const [isOpen, setIsOpen] = useState(false);
+    
 
     return (
         <>
@@ -22,6 +23,7 @@ export default function Purchase() {
                     <div className="bg-gray-900 w-full h-full flex flex-col items-center justify-center font-mono">
                         <h1 className="text-4xl text-red-600">ERROR: DATA COMPROMISED</h1>
                         <p className="text-3xl text-red-600 w-6/12 mt-8">There has been a data leak in the system. Please call XXX-XXX-XXXX for more information</p>
+                        <NiceLink href="/dataleak" text="See all the data we have collected on you." className="mb-6" />
                     </div>
                 </CenteredModal>
                 <main className="container pt-12 pb-24 flex flex-col gap-4 items-center">
