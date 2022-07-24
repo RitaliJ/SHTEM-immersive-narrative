@@ -26,7 +26,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
             <p>Address: ${address}</p>
             <h3>Items purchased</h3>
             ${items.map((i: ItemType) =>
-                `<p>${i.quantity}× ${i.product.name}</p>`   
+                `<p>${i.quantity}× ${i.product.name} (Size ${i.size})</p>`   
             ).join("")}
             <p>Total: ${total.toFixed(2)} Tokens</p>
         `,
