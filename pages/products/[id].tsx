@@ -16,7 +16,8 @@ export default function Product(){
     const [addedToCart, setAddedToCart] = useState(false); //useState for opening/closing cart modal
     const [adIsOpen, setAdIsOpen] = useState(false); //useState for showing/hiding popup ad
 
-    const [size, setSize] = useState([""]);
+    const [size, setSize] = useState("");
+    const sizes = ["XXS", "XS", "S", "M", "L", "XL", "2XL", "3XL"]; //size options
 
     const router = useRouter();
     const id = router.query.id;
@@ -40,15 +41,6 @@ export default function Product(){
             // }, 8000);
         }
     });
-
-    //helper for setting size
-    const updateSize = (name: string, on: boolean) => {
-        if (on) {
-            setSize([...size, name].filter(e => e !== ""));
-        } else {
-            setSize(size.filter(e => e !== name));
-        }
-    }
 
     return (
         <div className="h-screen flex flex-col">
@@ -87,19 +79,19 @@ export default function Product(){
                     <p className="pb-6 border-b border-slate-200 space-x-2">
                         {product && product.desc}
                     </p>
-                    <p>Choose Size</p>
-                    <a href = 'https://www.theshopforward.com/pages/poly-cotton-unisex-t-shirt-size-chart'>Size Chart</a>
-                    <div className="flex flex-wrap gap-1 justify-center">
-                        <ToggleButton label="XXS" callback={updateSize} />
-                        <ToggleButton label="XS" callback={updateSize} />
-                        <ToggleButton label="S" callback={updateSize} />
-                        <ToggleButton label="M" callback={updateSize} />
-                        <ToggleButton label="L" callback={updateSize} />
-                        <ToggleButton label="XL" callback={updateSize} />
-                        <ToggleButton label="2XL" callback={updateSize} />
-                        <ToggleButton label="3XL" callback={updateSize} />
+                    <p className="font-bold">
+                        Choose Size
+                    </p>
+                    <NiceLink
+                        href="https://www.theshopforward.com/pages/poly-cotton-unisex-t-shirt-size-chart"
+                        text="Size Chart"
+                    />
+                    <div className="flex flex-wrap gap-1">
+                        {sizes.map(s =>
+                            <ToggleButton label={s} isOn={size === s} callback={() => setSize(s)} />
+                        )}
                     </div>
-                    <AddToCart product={product} callback={setAddedToCart} />
+                    <AddToCart product={product} callback={setAddedToCart} size={size} />
                     <p className="text-sm text-slate-700">
                         Free shipping on all continental US orders.
                     </p>

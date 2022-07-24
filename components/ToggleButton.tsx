@@ -1,9 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 //component for a button that toggles on/off
-export default function ToggleButton(props: {label: string, callback: (name: string, on: boolean) => void}) {
-    const {label, callback} = props;
+export default function ToggleButton(props: {label: string, isOn?: boolean, callback: (name: string, on: boolean) => void}) {
+    const {label, isOn, callback} = props;
     const [on, setOn] = useState(false);
+
+    useEffect(() => {
+        if (isOn !== undefined) {
+            setOn(isOn);
+        }
+    }, [isOn]);
 
     return (
         <button

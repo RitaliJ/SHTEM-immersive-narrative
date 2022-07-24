@@ -37,10 +37,10 @@ export default function CartModal(props: {
     }, [account]);
 
     //function to remove item from cart
-    const removeItem = (id: number) => {
+    const removeItem = (id: number, size: string) => {
         let acc = {} as AccountType;
         Object.assign(acc, account);
-        acc.items = acc.items.filter(i => i.product.id !== id);
+        acc.items = acc.items.filter(i => !(i.product.id === id && i.size === size));
         localStorage.setItem("shtemAccount", JSON.stringify(acc));
         setAccount(acc);
         callback();
@@ -61,7 +61,7 @@ export default function CartModal(props: {
                     {account.email && account.items[0] ? (
                         account.items.map(i =>
                             <CartProduct key={i.product.id} item={i} className="h-24 text-xl"
-                                callback={() => removeItem(i.product.id)} />
+                                callback={() => removeItem(i.product.id, i.size)} />
                         )
                     ) : (
                         <p className="text-xl p-2">Your cart is empty.</p>

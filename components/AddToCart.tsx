@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ProductType } from "../util/types";
+import { ItemType, ProductType } from "../util/types";
 
 //component for quantity selection and "Add to cart" button on product pages
-export default function AddToCart(props: {product: ProductType, callback: (value: boolean) => void}) {
-    const {product, callback} = props;
+export default function AddToCart(props: {product: ProductType, size: string, callback: (value: boolean) => void}) {
+    const {product, size, callback} = props;
     const [num, setNum] = useState(1);
 
     //change num when you press the left and right buttons
@@ -19,18 +19,18 @@ export default function AddToCart(props: {product: ProductType, callback: (value
         if (!acc) return;
         let newAcc = JSON.parse(acc);
         if (newAcc.items[0] === null) { //properly handle case where items is empty
-            newAcc.items[0] = {product, quantity: num};
+            newAcc.items[0] = {product, quantity: num, size};
         } else {
             let bool = false;
             //check if this item is already in items; if so, just increase quantity
-            newAcc.items.forEach((i: {product: ProductType, quantity: number}) => {
-                if (product.id === i.product.id) {
+            newAcc.items.forEach((i: ItemType) => {
+                if (product.id === i.product.id && size === i.size) {
                     i.quantity += num;
                     bool = true;
                 }
             });
             if (!bool) { //if this is a new item, add it
-                newAcc.items.push({product, quantity: num});
+                newAcc.items.push({product, quantity: num, size});
             }
         }
         localStorage.setItem("shtemAccount", JSON.stringify(newAcc));
