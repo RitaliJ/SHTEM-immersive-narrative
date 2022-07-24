@@ -1,23 +1,35 @@
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
-import { AccountType } from "../util/types";
+import { AccountType, CaptchaType, SurveyType } from "../util/types";
 import CartModal from "./CartModal";
 import { useRouter } from 'next/router'
 import HelpPopover from "./HelpPopover";
 import RedeemModal from "./RedeemModal";
+import SurveyModal from "./SurveyModal";
+import Captcha from "./Captcha";
+const constants = require('../util/constants')
 
 //header component
 export default function Header(props: {
     addedToCart?: boolean,
     callback?: (value: boolean) => void,
     psaHtml?: ReactNode,
-    psaOuterHtml?: ReactNode,
-    callback2?: () => void,
 }) {
-    const {addedToCart, callback, psaHtml, psaOuterHtml, callback2} = props;
+    const {addedToCart, callback, psaHtml} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const [redeemOpen, setRedeemOpen] = useState(false); //useState for gift code redeem modal
+
+    const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
+    const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
+    const [outOfSurveys, setOutOfSurveys] = useState(false); //true when all surveys are done
+    const [surveyShowCode, setSurveyShowCode] = useState(false); //show survey gift code if true
+
+    const [captcha, setCaptcha] = useState({} as CaptchaType); //the captcha shown in help popover
+    const [captchaOpen, setCaptchaOpen] = useState(false); //useState for opening/closing captcha modal
+    const [outOfCaptchas, setOutOfCaptchas] = useState(false); //true when all captchas are done
+    const [captchaShowCode, setCaptchaShowCode] = useState(false); //show survey gift code if true
+    
     const router = useRouter();
 
     //get account from localStorage on page load
@@ -28,6 +40,7 @@ export default function Header(props: {
                 location.href = "/login";
             } else {
                 setAccount(JSON.parse(acc));
+                updateSurveyAndCaptcha();
             }
         }
     });
@@ -52,6 +65,42 @@ export default function Header(props: {
         const acc = localStorage.getItem("shtemAccount");
         if (acc !== "undefined" && acc !== null) {
             setAccount(JSON.parse(acc));
+        }
+    }
+
+    //helper to update to first incomplete survey and captcha
+    const updateSurveyAndCaptcha = () => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc !== "undefined" && acc !== null) {
+            const acc2 = JSON.parse(acc);
+            let foundSurvey = false;
+            let foundCaptcha = false;
+            constants.surveys.forEach((s: SurveyType) => {
+                if (!acc2.usedCodes.includes(s.code) && !foundSurvey) {
+                    setSurvey(s);
+                    foundSurvey = true;
+                    if (localStorage.getItem(s.title) !== "undefined"
+                        && localStorage.getItem(s.title) !== null) {
+                        setSurveyShowCode(true);
+                    } else {
+                        setSurveyShowCode(false);
+                    }
+                }
+            });
+            constants.captchas.forEach((c: CaptchaType) => {
+                if (!acc2.usedCodes.includes(c.code) && !foundCaptcha) {
+                    setCaptcha(c);
+                    foundCaptcha = true;
+                    if (localStorage.getItem(c.title) !== "undefined"
+                        && localStorage.getItem(c.title) !== null) {
+                        setCaptchaShowCode(true);
+                    } else {
+                        setCaptchaShowCode(false);
+                    }
+                }
+            });
+            if (!foundSurvey) setOutOfSurveys(true);
+            if (!foundCaptcha) setOutOfCaptchas(true);
         }
     }
 
@@ -91,11 +140,67 @@ export default function Header(props: {
             <span className="text-lg">
                 Logged in as {account.firstName}
             </span>
-            <HelpPopover html={psaHtml} outerHtml={psaOuterHtml} />
+            <HelpPopover
+                html={
+                    <>
+                        {psaHtml}
+                        <p className="mb-2">
+                            Need more tokens? Here are some options to get free tokens:
+                        </p>
+                        <button
+                            onClick={() => {if (!outOfSurveys) setSurveyOpen(true)}}
+                            className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap "
+                                + (outOfSurveys ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
+                            <div className="flex gap-2">
+                                <span>Survey</span>
+                                <span>•</span>
+                                <span>100 Tokens</span>
+                            </div>
+                        </button>
+                        <button
+                            onClick={() => {if (!outOfCaptchas) setCaptchaOpen(true)}}
+                            className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap "
+                                + (outOfCaptchas ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
+                            <div className="flex gap-2">
+                                <span>Captcha</span>
+                                <span>•</span>
+                                <span>80 Tokens</span>
+                            </div>
+                        </button>
+                        <button
+                            onClick={() => {}}
+                            className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
+                            <div className="flex gap-2">
+                                <span>Other thing</span>
+                                <span>•</span>
+                                <span>∞ Tokens</span>
+                            </div>
+                        </button>
+                    </>
+                }
+                outerHtml={
+                    <>
+                        <SurveyModal
+                            isOpen={surveyOpen}
+                            setIsOpen={setSurveyOpen}
+                            survey={survey}
+                            showCode={surveyShowCode}
+                            setShowCode={setSurveyShowCode}
+                        />
+                        <Captcha
+                            isOpen={captchaOpen}
+                            setIsOpen={setCaptchaOpen}
+                            captcha={captcha}
+                            showCode={captchaShowCode}
+                            setShowCode={setCaptchaShowCode}
+                        />
+                    </>
+                }
+            />
             <CartModal isOpen={isOpen} setIsOpen={setIsOpen} callback={refreshAccount} />
             <RedeemModal isOpen={redeemOpen} setIsOpen={setRedeemOpen} callback={() => {
                 refreshAccount();
-                if (callback2) callback2();
+                updateSurveyAndCaptcha();
             }} />
         </div>
     )
