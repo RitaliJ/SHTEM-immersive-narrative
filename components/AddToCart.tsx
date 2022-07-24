@@ -66,10 +66,16 @@ export default function AddToCart(props: {product: ProductType, size: string, ca
                 {product && (product.price * num).toFixed(2)} Tokens
             </span>
             <button
-                onClick={() => addToCart()}
-                className="bg-black text-white px-2 py-1 rounded-lg">
+                onClick={() => {if (size) addToCart()}}
+                className={"px-2 py-1 rounded-lg duration-150 "
+                    + (size ? "bg-black text-white" : "bg-gray-200 text-gray-400")}>
                 Add to cart
             </button>
+            {!size &&
+                <span className="text-red-500 italic pr-3">
+                    You must choose a size
+                </span>
+            }
         </div>
     )
 }

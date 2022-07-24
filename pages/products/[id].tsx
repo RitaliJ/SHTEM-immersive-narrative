@@ -88,7 +88,12 @@ export default function Product(){
                     />
                     <div className="flex flex-wrap gap-1">
                         {sizes.map(s =>
-                            <ToggleButton label={s} isOn={size === s} callback={() => setSize(s)} />
+                            <ToggleButton
+                                label={s}
+                                isOn={size === s}
+                                noToggle
+                                callback={() => setSize(s)}
+                            />
                         )}
                     </div>
                     <AddToCart product={product} callback={setAddedToCart} size={size} />
