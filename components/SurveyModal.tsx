@@ -47,7 +47,7 @@ export default function SurveyModal(props: {
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
-            <div className="relative bg-white container px-8 py-6 rounded-lg w-96">
+            <div className="relative bg-white container px-8 py-6 rounded-lg w-96 max-h-[80%] overflow-y-auto scrollbar">
                 <button
                     onClick={() => setIsOpen(false)}
                     className="absolute top-2 right-4 text-5xl">
