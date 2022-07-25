@@ -55,7 +55,7 @@ export default function Product(){
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">
-                <BannerAd imgSrc="" href="/products/0" className="w-72" />
+                <BannerAd imgSrc="https://i.pinimg.com/474x/75/31/da/7531da5dc18db7a921318bd986b55fa3--gucci-banner.jpg" href="/products/0" className="w-72" />
                 <div className="max-w-[30rem] flex-col gap-2">
                     <NiceLink href="/home" text="← Continue shopping" className="mb-6" />
                     <img
@@ -101,7 +101,7 @@ export default function Product(){
                         Free shipping on all continental US orders.
                     </p>
                 </div>
-                <BannerAd imgSrc="" href="/products/0" className="w-72" />
+                <BannerAd imgSrc="https://c8.alamy.com/comp/2F60AP1/poster-advertising-dior-secret-garden-fashion-house-with-rihanna-in-paper-magazine-from-2015-advertisement-creative-christian-dior-2010s-advert-2F60AP1.jpg" href="/products/0" className="w-72" />
             </div>
             <PopupAd isOpen={adIsOpen} setIsOpen={setAdIsOpen} />
         </div>
