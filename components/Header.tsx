@@ -8,6 +8,7 @@ import RedeemModal from "./RedeemModal";
 import SurveyModal from "./SurveyModal";
 import Captcha from "./Captcha";
 import TokenAd from "./TokenAd";
+import NewsletterModal from "./NewsletterModal";
 const constants = require('../util/constants')
 
 //header component
@@ -32,6 +33,7 @@ export default function Header(props: {
     const [captchaShowCode, setCaptchaShowCode] = useState(false); //show survey gift code if true
 
     const [tokenAdOpen, setTokenAdOpen] = useState(false); //useState for opening/closing token ad
+    const [newsLetterOpen, setNewsLetterOpen] = useState(false); //useState for opening/closing newsletter modal
     
     const router = useRouter();
 
@@ -198,6 +200,15 @@ export default function Header(props: {
                                 <span>X Tokens</span>
                             </div>
                         </button>
+                        <button
+                            onClick={() => {setNewsLetterOpen(true)}}
+                            className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
+                            <div className="flex gap-2">
+                                <span>Sign up for our newsletter</span>
+                                <span>•</span>
+                                <span>1 Token</span>
+                            </div>
+                        </button>
                     </>
                 }
                 outerHtml={
@@ -220,6 +231,11 @@ export default function Header(props: {
                             isOpen={tokenAdOpen}
                             setIsOpen={setTokenAdOpen}
                             callback={raiseBalance}
+                        />
+                        <NewsletterModal
+                            isOpen={newsLetterOpen}
+                            setIsOpen={setNewsLetterOpen}
+                            email={account.email}
                         />
                     </>
                 }
