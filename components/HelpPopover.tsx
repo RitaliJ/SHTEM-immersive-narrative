@@ -27,7 +27,7 @@ export default function HelpPopover(props: {html: ReactNode, outerHtml: ReactNod
                     >
                         <Popover.Panel static className="absolute top-1 right-0 w-max">
                             <div className="overflow-hidden flex bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg">
-                                <div className="px-4 py-3 w-72 flex flex-col gap-2 items-center">
+                                <div className="px-4 py-3 w-min min-w-[18rem] flex flex-col gap-2 items-center">
                                     {html}
                                 </div>
                                 <img
