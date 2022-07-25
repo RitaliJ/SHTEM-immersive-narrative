@@ -62,7 +62,7 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={() => {}} blur={blur}>
             <div className="flex bg-white border-2 border-gray-200 shadow-lg rounded-lg">
-                <Image
+                <img
                     className="h-72 rounded-md"
                     src="https://steamuserimages-a.akamaihd.net/ugc/942844394047374257/FBE1C6921B8A98FEDE1309EEB49C3137BC3D88EE/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
                     alt="Shopping assistant"

@@ -51,7 +51,7 @@ export default function Captcha(props: {
                             {captcha.imgSrcs && [0, 1, 2].map(i =>
                                 <div key={i} className="flex gap-6">
                                     {[0, 1, 2].map(j =>
-                                        <Image
+                                        <img
                                             key={j}
                                             onClick={() => flipAtIndex(3 * i + j)}
                                             className={"border-4 border-white ring-8 w-48 h-48 duration-150 hover:cursor-pointer "
