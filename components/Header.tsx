@@ -7,6 +7,7 @@ import HelpPopover from "./HelpPopover";
 import RedeemModal from "./RedeemModal";
 import SurveyModal from "./SurveyModal";
 import Captcha from "./Captcha";
+import TokenAd from "./TokenAd";
 const constants = require('../util/constants')
 
 //header component
@@ -29,6 +30,8 @@ export default function Header(props: {
     const [captchaOpen, setCaptchaOpen] = useState(false); //useState for opening/closing captcha modal
     const [outOfCaptchas, setOutOfCaptchas] = useState(false); //true when all captchas are done
     const [captchaShowCode, setCaptchaShowCode] = useState(false); //show survey gift code if true
+
+    const [tokenAdOpen, setTokenAdOpen] = useState(false); //useState for opening/closing token ad
     
     const router = useRouter();
 
@@ -65,6 +68,17 @@ export default function Header(props: {
         const acc = localStorage.getItem("shtemAccount");
         if (acc !== "undefined" && acc !== null) {
             setAccount(JSON.parse(acc));
+        }
+    }
+
+    //helper for increasing balance by certain amount
+    const raiseBalance = (x: number) => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc !== "undefined" && acc !== null) {
+            let acc2 = JSON.parse(acc);
+            acc2.balance += x;
+            localStorage.setItem("shtemAccount", JSON.stringify(acc2));
+            setAccount(acc2);
         }
     }
 
@@ -154,7 +168,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Survey</span>
                                 <span>•</span>
-                                <span>100 Tokens</span>
+                                <span>{survey && constants.giftCodes[survey.code]} Tokens</span>
                             </div>
                         </button>
                         <button
@@ -164,16 +178,16 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Captcha</span>
                                 <span>•</span>
-                                <span>80 Tokens</span>
+                                <span>{survey && constants.giftCodes[captcha.code]} Tokens</span>
                             </div>
                         </button>
                         <button
-                            onClick={() => {}}
+                            onClick={() => {setTokenAdOpen(true)}}
                             className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
                             <div className="flex gap-2">
-                                <span>Other thing</span>
+                                <span>Watch an ad</span>
                                 <span>•</span>
-                                <span>∞ Tokens</span>
+                                <span>X Tokens</span>
                             </div>
                         </button>
                     </>
@@ -193,6 +207,11 @@ export default function Header(props: {
                             captcha={captcha}
                             showCode={captchaShowCode}
                             setShowCode={setCaptchaShowCode}
+                        />
+                        <TokenAd
+                            isOpen={tokenAdOpen}
+                            setIsOpen={setTokenAdOpen}
+                            callback={raiseBalance}
                         />
                     </>
                 }
