@@ -72,7 +72,7 @@ export default function Login() {
                                 lastName,
                                 phone,
                                 DOB: {year, month, day},
-                                balance: 1000,
+                                balance: 100,
                                 items: [undefined as unknown as ItemType],
                                 usedCodes: [],
                                 firstVisit: true,
