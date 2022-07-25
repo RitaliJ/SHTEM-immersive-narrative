@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AccountType } from "../util/types";
 
 //page where all collected data is displayed
-export default function dataleak() {
+export default function Dataleak() {
     const [data, setData] = useState("");
     const [account, setAccount] = useState(undefined as unknown as AccountType);
 
