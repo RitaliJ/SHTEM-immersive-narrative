@@ -11,7 +11,7 @@ const constants = require('../util/constants');
 export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([undefined as unknown as ProductType]);
-    const [helpOpen, setHelpOpen] = useState(false);
+    const [helpOpen, setHelpOpen] = useState(true);
 
     //get account from localStorage and products from util/products.ts on page load
     useEffect(() => {
@@ -28,15 +28,15 @@ export default function Home() {
         }
     });
 
-    useEffect(() => {
-        if (account.firstVisit) { //if this is the first visit to /home, open help modal
-            setHelpOpen(true);
-            let acc = {} as AccountType; //set firstVisit to true localStorage account
-            Object.assign(acc, account);
-            acc.firstVisit = false;
-            localStorage.setItem("shtemAccount", JSON.stringify(acc));
-        }
-    }, [account]);
+    // useEffect(() => {
+    //     if (account.firstVisit) { //if this is the first visit to /home, open help modal
+    //         setHelpOpen(true);
+    //         let acc = {} as AccountType; //set firstVisit to true localStorage account
+    //         Object.assign(acc, account);
+    //         acc.firstVisit = false;
+    //         localStorage.setItem("shtemAccount", JSON.stringify(acc));
+    //     }
+    // }, [account]);
 
     return (
         <>
@@ -63,7 +63,7 @@ export default function Home() {
 
                 <BannerAd imgSrc="" href="/products/1" className="w-72" />
 
-                <HelpModal isOpen={helpOpen} setIsOpen={setHelpOpen} />
+                <HelpModal isOpen={helpOpen} setIsOpen={setHelpOpen} account={account} />
             </main>
         </>
     )
