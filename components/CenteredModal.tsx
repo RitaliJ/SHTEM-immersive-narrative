@@ -6,9 +6,10 @@ import {Dialog, Transition} from '@headlessui/react';
 export default function CenteredModal(props: {
     isOpen: boolean,
     setIsOpen: (isOpen: boolean) => void,
+    blur?: string,
     children: ReactNode,
 }) {
-    const {isOpen, setIsOpen, children} = props;
+    const {isOpen, setIsOpen, blur, children} = props;
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
@@ -22,7 +23,8 @@ export default function CenteredModal(props: {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <Dialog.Overlay className="fixed inset-0 bg-black/40" />
+                    <Dialog.Overlay className={"fixed inset-0 bg-black/40"
+                        + (blur ? " backdrop-blur-" + blur : "")} />
                 </Transition.Child>
 
                 <Transition.Child

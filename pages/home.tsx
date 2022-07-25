@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import BannerAd from '../components/BannerAd';
 import Header from '../components/Header'
+import HelpModal from '../components/HelpModal';
 import ProductPreview from '../components/ProductPreview';
 import { AccountType, ProductType } from '../util/types';
 const constants = require('../util/constants');
@@ -10,6 +11,7 @@ const constants = require('../util/constants');
 export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([undefined as unknown as ProductType]);
+    const [helpOpen, setHelpOpen] = useState(true);
 
     //get account from localStorage and products from util/products.ts on page load
     useEffect(() => {
@@ -51,6 +53,7 @@ export default function Home() {
 
                 <BannerAd imgSrc="" href="/products/1" className="w-72" />
 
+                <HelpModal isOpen={helpOpen} setIsOpen={setHelpOpen} />
             </main>
         </>
     )
