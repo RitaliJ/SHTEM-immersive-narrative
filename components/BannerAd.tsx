@@ -15,6 +15,5 @@ export default function BannerAd(props: {imgSrc: string, href: string, className
                 className={"bg-contain bg-repeat hover:cursor-pointer bg-gray-300 flex-none " + className}
             />
         </Link>
-        
     )
 }
