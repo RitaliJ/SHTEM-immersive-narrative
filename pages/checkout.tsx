@@ -28,6 +28,8 @@ export default function Checkout() {
                     "NJ", "NM", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
                     "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",];
 
+    const [inBudget, setInBudget] = useState(true);
+
     //get account from localStorage on page load
     useEffect(() => {
         if (!account.email) {
@@ -51,6 +53,7 @@ export default function Checkout() {
         setEmail(account.email);
         setFirstName(account.firstName);
         setLastName(account.lastName);
+        setInBudget(account.balance >= t);
     }, [account]);
 
     //handle clicking on order button
@@ -125,18 +128,20 @@ export default function Checkout() {
                             <button
                                 onClick={() => handleSubmit()}
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
-                                + (firstName && lastName && address && city && state && zip ?
+                                + (firstName && lastName && address && city && state && zip && inBudget ?
                                 "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
                             </button>
                         </Link>
                     </div>
                     <p className="italic text-red-500 text-right">
-                        {firstName && lastName && address && city && state && zip && cardNumber && securityPin
+                        {inBudget 
+                            ? (firstName && lastName && address && city && state && zip && cardNumber && securityPin
                             ? (zip.toString().length !== 5 || cardNumber.toString().length !== 16
                                 || securityPin.toString().length !== 3
                                 ? "* Invalid ZIP code, card number, or security PIN" : "")
-                            : "* Please fill all required fields"
+                            : "* Please fill all required fields")
+                            : "* Total amount exceeds account balance"
                         }
                     </p>
                 </div>

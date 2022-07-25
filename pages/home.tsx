@@ -2,14 +2,16 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import BannerAd from '../components/BannerAd';
 import Header from '../components/Header'
+import HelpModal from '../components/HelpModal';
 import ProductPreview from '../components/ProductPreview';
 import { AccountType, ProductType } from '../util/types';
-const mod = require('../util/constants');
+const constants = require('../util/constants');
 
 //home page with product list to scroll through
 export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([undefined as unknown as ProductType]);
+    const [helpOpen, setHelpOpen] = useState(false);
 
     //get account from localStorage and products from util/products.ts on page load
     useEffect(() => {
@@ -22,9 +24,19 @@ export default function Home() {
             }
         }
         if (!products[0]) {
-            setProducts(mod.products);
+            setProducts(constants.products);
         }
     });
+
+    useEffect(() => {
+        if (account.firstVisit) { //if this is the first visit to /home, open help modal
+            setHelpOpen(true);
+            let acc = {} as AccountType; //set firstVisit to true localStorage account
+            Object.assign(acc, account);
+            acc.firstVisit = false;
+            localStorage.setItem("shtemAccount", JSON.stringify(acc));
+        }
+    }, [account]);
 
     return (
         <>
@@ -51,6 +63,7 @@ export default function Home() {
 
                 <BannerAd imgSrc="" href="/products/1" className="w-72" />
 
+                <HelpModal isOpen={helpOpen} setIsOpen={setHelpOpen} account={account} />
             </main>
         </>
     )

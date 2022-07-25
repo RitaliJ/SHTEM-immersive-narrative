@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { ItemType, ProductType } from "../util/types";
+import { ItemType } from "../util/types";
 
 //component for item in shopping cart list
 export default function CartProduct(props: {item: ItemType, className?: string, callback?: () => void}) {
     const {item, className, callback} = props;
-    const {product, quantity} = item;
+    const {product, quantity, size} = item;
 
     return (
         <div className={"flex gap-4 items-center p-2 " + className}>
@@ -22,11 +22,12 @@ export default function CartProduct(props: {item: ItemType, className?: string, 
             </div>
             <span>{quantity}×</span>
             <Link href={"/products/" + product.id}>
-                <span className="grow line-clamp-1 hover:cursor-pointer">
+                <span className="line-clamp-1 hover:cursor-pointer">
                     {product.name}
                 </span>
             </Link>
-            <span className="whitespace-nowrap">
+            <span>(Size {size})</span>
+            <span className="grow text-right whitespace-nowrap">
                 {(product.price * quantity).toFixed(2)} Tokens
             </span>
         </div>
