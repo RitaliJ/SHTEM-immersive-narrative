@@ -59,7 +59,7 @@ export default function Product(){
                 <BannerAd imgSrc="https://i.pinimg.com/474x/75/31/da/7531da5dc18db7a921318bd986b55fa3--gucci-banner.jpg" href="/products/0" className="w-72" />
                 <div className="max-w-[30rem] flex-col gap-2">
                     <NiceLink href="/home" text="← Continue shopping" className="mb-6" />
-                    <Image
+                    <img
                         src={product && product.imgSrc}
                         alt={product && product.name}
                         loading="lazy"
