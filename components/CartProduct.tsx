@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ItemType } from "../util/types";
 
@@ -14,7 +15,7 @@ export default function CartProduct(props: {item: ItemType, className?: string, 
                 ×
             </button>}
             <div className="flex justify-center items-center w-24 h-full">
-                <img
+                <Image
                     src={product.imgSrc}
                     alt={product.name}
                     className="max-h-full"

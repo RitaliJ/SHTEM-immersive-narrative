@@ -19,7 +19,7 @@ export default function Survey() {
                 setAccount(JSON.parse(acc));
             }
         }
-    });
+    }, [account]);
 
     //function to add/remove an interest
     const updateInterests = (name: string, on: boolean) => {
@@ -47,7 +47,7 @@ export default function Survey() {
             <main className="container h-4/5 flex justify-center items-center">
                 <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg max-w-min mt-16">
                     <h1 className="text-2xl font-bold text-center mt-8">
-                        We'd love to make this shopping experience perfect for <em>you</em>!
+                        We{"'"}d love to make this shopping experience perfect for <em>you</em>!
                     </h1>
                     <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
                         Let us know what your interests are

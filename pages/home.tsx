@@ -12,8 +12,7 @@ export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([undefined as unknown as ProductType]);
     const [helpOpen, setHelpOpen] = useState(false);
-
-    //get account from localStorage and products from util/products.ts on page load
+    
     useEffect(() => {
         if (!account.email) {
             const acc = localStorage.getItem("shtemAccount");
@@ -22,19 +21,15 @@ export default function Home() {
             } else {
                 setAccount(JSON.parse(acc));
             }
-        }
-        if (!products[0]) {
-            setProducts(constants.products);
-        }
-    });
-
-    useEffect(() => {
-        if (account.firstVisit) { //if this is the first visit to /home, open help modal
+        } else if (account.firstVisit) { //if this is the first visit to /home, open help modal
             setHelpOpen(true);
             let acc = {} as AccountType; //set firstVisit to true localStorage account
             Object.assign(acc, account);
             acc.firstVisit = false;
             localStorage.setItem("shtemAccount", JSON.stringify(acc));
+        }
+        if (!products[0]) {
+            setProducts(constants.products);
         }
     }, [account]);
 

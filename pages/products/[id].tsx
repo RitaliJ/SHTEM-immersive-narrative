@@ -8,6 +8,7 @@ import BannerAd from '../../components/BannerAd';
 import PopupAd from '../../components/PopupAd';
 import NiceLink from '../../components/NiceLink';
 import ToggleButton from "../../components/ToggleButton";
+import Image from 'next/image';
 const constants = require('../../util/constants')
 
 export default function Product(){
@@ -40,7 +41,7 @@ export default function Product(){
             //     }
             // }, 8000);
         }
-    });
+    }, [account]);
 
     return (
         <div className="h-screen flex flex-col">
@@ -58,7 +59,7 @@ export default function Product(){
                 <BannerAd imgSrc="https://i.pinimg.com/474x/75/31/da/7531da5dc18db7a921318bd986b55fa3--gucci-banner.jpg" href="/products/0" className="w-72" />
                 <div className="max-w-[30rem] flex-col gap-2">
                     <NiceLink href="/home" text="← Continue shopping" className="mb-6" />
-                    <img
+                    <Image
                         src={product && product.imgSrc}
                         alt={product && product.name}
                         loading="lazy"
@@ -89,6 +90,7 @@ export default function Product(){
                     <div className="flex flex-wrap gap-1">
                         {sizes.map(s =>
                             <ToggleButton
+                                key={s}
                                 label={s}
                                 isOn={size === s}
                                 noToggle

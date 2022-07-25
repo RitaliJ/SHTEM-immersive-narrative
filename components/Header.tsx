@@ -48,7 +48,7 @@ export default function Header(props: {
                 updateSurveyAndCaptcha();
             }
         }
-    });
+    }, [account]);
 
     //open modal when addedToCart becomes true
     useEffect(() => {

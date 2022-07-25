@@ -30,7 +30,7 @@ export default function Checkout() {
 
     const [inBudget, setInBudget] = useState(true);
 
-    //get account from localStorage on page load
+    //set total price and account details once account is retrieved
     useEffect(() => {
         if (!account.email) {
             const acc = localStorage.getItem("shtemAccount");
@@ -39,12 +39,8 @@ export default function Checkout() {
             } else {
                 setAccount(JSON.parse(acc));
             }
+            return;
         }
-    });
-
-    //set total price and account details once account is retrieved
-    useEffect(() => {
-        if (!account.email) return;
         let t = 0;
         account.items.forEach(i =>
             t += i.product.price * i.quantity
