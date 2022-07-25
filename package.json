@@ -1,11 +1,8 @@
 {
   "name": "shtem",
   "version": "0.1.0",
-  "homepage": "https://RitaliJ.github.io/SHTEM-immersive-narrative",
   "private": true,
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -15,7 +12,6 @@
     "@headlessui/react": "^1.6.6",
     "@tailwindcss/line-clamp": "^0.4.0",
     "dotenv": "^16.0.1",
-    "gh-pages": "^4.0.0",
     "next": "12.2.2",
     "nodemailer": "^6.7.7",
     "react": "18.2.0",
