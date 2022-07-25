@@ -75,6 +75,7 @@ export default function Login() {
                                 balance: 1000,
                                 items: [undefined as unknown as ItemType],
                                 usedCodes: [],
+                                firstVisit: true,
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
                                 && year !== undefined && validateEmail(email)==true && month !== undefined && day !== undefined
