@@ -23,7 +23,7 @@ export default function CenteredModal(props: {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <Dialog.Overlay className={"fixed inset-0 bg-black/40"
+                    <Dialog.Overlay className={"fixed inset-0 bg-black/40 duration-300"
                         + (blur ? " backdrop-blur-" + blur : "")} />
                 </Transition.Child>
 
