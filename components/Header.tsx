@@ -84,6 +84,18 @@ export default function Header(props: {
         }
     }
 
+    //helper for newsletter sign up
+    const newsletterSubmit = (x: number) => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc !== "undefined" && acc !== null) {
+            let acc2 = JSON.parse(acc);
+            acc2.balance += x;
+            acc2.doneNewsletter = true;
+            localStorage.setItem("shtemAccount", JSON.stringify(acc2));
+            setAccount(acc2);
+        }
+    }
+
     //helper to update to first incomplete survey and captcha
     const updateSurveyAndCaptcha = () => {
         const acc = localStorage.getItem("shtemAccount");
@@ -201,8 +213,9 @@ export default function Header(props: {
                             </div>
                         </button>
                         <button
-                            onClick={() => {setNewsLetterOpen(true)}}
-                            className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
+                            onClick={() => {if (!account.doneNewsletter) setNewsLetterOpen(true)}}
+                            className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
+                                + (account.doneNewsletter ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
                             <div className="flex gap-2">
                                 <span>Sign up for our newsletter</span>
                                 <span>•</span>
@@ -236,7 +249,7 @@ export default function Header(props: {
                             isOpen={newsLetterOpen}
                             setIsOpen={setNewsLetterOpen}
                             email={account.email}
-                            callback={raiseBalance}
+                            callback={newsletterSubmit}
                         />
                     </>
                 }
