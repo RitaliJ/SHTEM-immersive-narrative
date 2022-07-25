@@ -6,8 +6,9 @@ export default function NewsletterModal(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
     email: string,
+    callback: (value: number) => void,
 }) {
-    const {isOpen, setIsOpen, email} = props;
+    const {isOpen, setIsOpen, email, callback} = props;
     const [value, setValue] = useState("");
 
     //prefill with email from account in localStorage
@@ -23,6 +24,12 @@ export default function NewsletterModal(props: {
         return re.test(value);
     }
 
+    //handle submit
+    const handleSubmit = () => {
+        setIsOpen(false);
+        callback(1);
+    }
+
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className="flex flex-col gap-3 items-center relative bg-white container px-8 py-6 rounded-lg w-min">
@@ -36,7 +43,7 @@ export default function NewsletterModal(props: {
                 </p>
                 <InputGroup label="Email" value={value} callback={setValue} />
                 <button
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => handleSubmit()}
                     className={"text-lg px-3 py-1 rounded-lg duration-150 "
                         + (validateEmail() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
                 >

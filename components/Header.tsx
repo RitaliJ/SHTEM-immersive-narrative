@@ -236,6 +236,7 @@ export default function Header(props: {
                             isOpen={newsLetterOpen}
                             setIsOpen={setNewsLetterOpen}
                             email={account.email}
+                            callback={raiseBalance}
                         />
                     </>
                 }
