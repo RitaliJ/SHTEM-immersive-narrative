@@ -168,7 +168,11 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Survey</span>
                                 <span>•</span>
-                                <span>{survey && constants.giftCodes[survey.code]} Tokens</span>
+                                <span>
+                                    {survey && (constants.giftCodes[survey.code] === 1
+                                        ? constants.giftCodes[survey.code] + " Token"
+                                        : constants.giftCodes[survey.code] + " Tokens")}
+                                </span>
                             </div>
                         </button>
                         <button
@@ -178,7 +182,11 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Captcha</span>
                                 <span>•</span>
-                                <span>{survey && constants.giftCodes[captcha.code]} Tokens</span>
+                                <span>
+                                    {captcha && (constants.giftCodes[captcha.code] === 1
+                                        ? constants.giftCodes[captcha.code] + " Token"
+                                        : constants.giftCodes[captcha.code] + " Tokens")}
+                                </span>
                             </div>
                         </button>
                         <button
