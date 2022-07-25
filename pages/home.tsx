@@ -44,7 +44,7 @@ export default function Home() {
             <Header psaHtml="This is your personal shopping assistant!" />
 
             <main className="flex gap-4 mt-12 mb-8 mx-4 justify-center">
-                <BannerAd imgSrc="" href="/products/0" className="w-72" />
+                <BannerAd imgSrc="https://i.pinimg.com/474x/75/31/da/7531da5dc18db7a921318bd986b55fa3--gucci-banner.jpg" href="/products/0" className="w-72" />
                 <div>
                     <h1 className="text-5xl font-bold text-center mb-12">
                         Buy our things
@@ -56,7 +56,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <BannerAd imgSrc="" href="/products/1" className="w-72" />
+                <BannerAd imgSrc="https://c8.alamy.com/comp/2F60AP1/poster-advertising-dior-secret-garden-fashion-house-with-rihanna-in-paper-magazine-from-2015-advertisement-creative-christian-dior-2010s-advert-2F60AP1.jpg" href="/products/1" className="w-72" />
 
                 <HelpModal isOpen={helpOpen} setIsOpen={setHelpOpen} account={account} />
             </main>
