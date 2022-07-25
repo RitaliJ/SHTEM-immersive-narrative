@@ -13,10 +13,10 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
     
     const pages: ReactNode[] = [
         <p>
-            Hello {account.firstName}! Thank you for signing up for our website,
+            Hello {account.firstName}! Thank you for signing up for our website;
             we’re so happy to have you join us! My name is Carty, your friendly
             personal shopping guide. I’m here to show you around our store and
-            help you with any questions that may pop up!`
+            help you with any questions that may pop up!
         </p>,
         <p>
             Welcome to the homepage of our store, which only contains the trendiest
@@ -29,6 +29,15 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
             you’re looking to buy?
             <div className="w-full">
                 <DropdownMenu label="Choose an item" callback={x => setTarget(x)} options={targetItems} />
+            </div>
+        </>,
+        <>
+            <div className="flex gap-1 flex-wrap items-center">
+                <p>That concludes my introduction. if you ever need any help, you can find me by pressing the</p>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <p>icon in the header.</p>
             </div>
         </>,
     ];
@@ -59,7 +68,7 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
                     src="https://steamuserimages-a.akamaihd.net/ugc/942844394047374257/FBE1C6921B8A98FEDE1309EEB49C3137BC3D88EE/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
                     alt="Shopping assistant"
                 />
-                <div className="px-4 py-3 w-72 flex flex-col gap-2 items-center leading-6">
+                <div className="px-4 py-3 w-72 flex flex-col gap-2 items-center text-lg">
                     {pages[page]}
                     <button
                         onClick={() => advance()}
