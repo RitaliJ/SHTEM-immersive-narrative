@@ -56,15 +56,15 @@ export default function Survey() {
                         Click to select any number of interests
                     </p>
                     <div className="flex flex-wrap gap-1 justify-center">
-                        <ToggleButton label="Balenciaga" callback={updateInterests} />
-                        <ToggleButton label="GUCCI" callback={updateInterests} />
-                        <ToggleButton label="Louis Vuitton" callback={updateInterests} />
-                        <ToggleButton label="Armani" callback={updateInterests} />
-                        <ToggleButton label="Prada" callback={updateInterests} />
-                        <ToggleButton label="Chanel" callback={updateInterests} />
-                        <ToggleButton label="Versace" callback={updateInterests} />
-                        <ToggleButton label="Cartier" callback={updateInterests} />
-                        <ToggleButton label="Hermes" callback={updateInterests} />
+                        <ToggleButton label="Balenciaga" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="GUCCI" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Louis Vuitton" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Armani" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Prada" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Chanel" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Versace" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Cartier" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Hermes" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
                     </div>
 
                     <div className="flex mt-2 justify-center">
