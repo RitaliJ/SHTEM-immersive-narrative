@@ -7,6 +7,8 @@ import HelpPopover from "./HelpPopover";
 import RedeemModal from "./RedeemModal";
 import SurveyModal from "./SurveyModal";
 import Captcha from "./Captcha";
+import TokenAd from "./TokenAd";
+import NewsletterModal from "./NewsletterModal";
 const constants = require('../util/constants')
 
 //header component
@@ -29,6 +31,9 @@ export default function Header(props: {
     const [captchaOpen, setCaptchaOpen] = useState(false); //useState for opening/closing captcha modal
     const [outOfCaptchas, setOutOfCaptchas] = useState(false); //true when all captchas are done
     const [captchaShowCode, setCaptchaShowCode] = useState(false); //show survey gift code if true
+
+    const [tokenAdOpen, setTokenAdOpen] = useState(false); //useState for opening/closing token ad
+    const [newsLetterOpen, setNewsLetterOpen] = useState(false); //useState for opening/closing newsletter modal
     
     const router = useRouter();
 
@@ -65,6 +70,29 @@ export default function Header(props: {
         const acc = localStorage.getItem("shtemAccount");
         if (acc !== "undefined" && acc !== null) {
             setAccount(JSON.parse(acc));
+        }
+    }
+
+    //helper for increasing balance by certain amount
+    const raiseBalance = (x: number) => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc !== "undefined" && acc !== null) {
+            let acc2 = JSON.parse(acc);
+            acc2.balance += x;
+            localStorage.setItem("shtemAccount", JSON.stringify(acc2));
+            setAccount(acc2);
+        }
+    }
+
+    //helper for newsletter sign up
+    const newsletterSubmit = (x: number) => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc !== "undefined" && acc !== null) {
+            let acc2 = JSON.parse(acc);
+            acc2.balance += x;
+            acc2.doneNewsletter = true;
+            localStorage.setItem("shtemAccount", JSON.stringify(acc2));
+            setAccount(acc2);
         }
     }
 
@@ -106,10 +134,10 @@ export default function Header(props: {
 
     return (
         <div className="flex items-center gap-4 sticky top-0 px-6 duration-150
-            bg-slate-200 shadow-md hover:shadow-lg bg-opacity-50 backdrop-blur-lg">
+            bg-slate-200 shadow-md hover:shadow-lg bg-opacity-60 backdrop-blur-lg">
             <Link href="/home">
                 <button className="text-xl font-bold">
-                    Legendary Site
+                    Sahara Prime
                 </button>
             </Link>
             <span className="grow"></span>
@@ -121,8 +149,8 @@ export default function Header(props: {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </button>
-            <span className="text-lg text-green-600 font-bold">
-                {account.balance && account.balance.toFixed(2)} Tokens
+            <span className="text-lg text-green-600 outline-white">
+                {account.balance && account.balance.toFixed(2)} Heartbeats
             </span>
             <button
                 onClick={() => {router.pathname !== "/checkout" && setIsOpen(true)}}
@@ -145,7 +173,7 @@ export default function Header(props: {
                     <>
                         {psaHtml}
                         <p className="mb-2">
-                            Need more tokens? Here are some options to get free tokens:
+                            Need more Heartbeats? Here are some options to get free Heartbeats:
                         </p>
                         <button
                             onClick={() => {if (!outOfSurveys) setSurveyOpen(true)}}
@@ -154,7 +182,11 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Survey</span>
                                 <span>•</span>
-                                <span>100 Tokens</span>
+                                <span>
+                                    {survey && (constants.giftCodes[survey.code] === 1
+                                        ? constants.giftCodes[survey.code] + " Heartbeats"
+                                        : constants.giftCodes[survey.code] + " Heartbeats")}
+                                </span>
                             </div>
                         </button>
                         <button
@@ -164,16 +196,30 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Captcha</span>
                                 <span>•</span>
-                                <span>80 Tokens</span>
+                                <span>
+                                    {captcha && (constants.giftCodes[captcha.code] === 1
+                                        ? constants.giftCodes[captcha.code] + " Heartbeats"
+                                        : constants.giftCodes[captcha.code] + " Heartbeats")}
+                                </span>
                             </div>
                         </button>
                         <button
-                            onClick={() => {}}
+                            onClick={() => {setTokenAdOpen(true)}}
                             className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
                             <div className="flex gap-2">
-                                <span>Other thing</span>
+                                <span>Watch an ad</span>
                                 <span>•</span>
-                                <span>∞ Tokens</span>
+                                <span>X Heartbeat</span>
+                            </div>
+                        </button>
+                        <button
+                            onClick={() => {if (!account.doneNewsletter) setNewsLetterOpen(true)}}
+                            className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
+                                + (account.doneNewsletter ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
+                            <div className="flex gap-2">
+                                <span>Sign up for our newsletter</span>
+                                <span>•</span>
+                                <span>1 Heartbeat</span>
                             </div>
                         </button>
                     </>
@@ -193,6 +239,17 @@ export default function Header(props: {
                             captcha={captcha}
                             showCode={captchaShowCode}
                             setShowCode={setCaptchaShowCode}
+                        />
+                        <TokenAd
+                            isOpen={tokenAdOpen}
+                            setIsOpen={setTokenAdOpen}
+                            callback={raiseBalance}
+                        />
+                        <NewsletterModal
+                            isOpen={newsLetterOpen}
+                            setIsOpen={setNewsLetterOpen}
+                            email={account.email}
+                            callback={newsletterSubmit}
                         />
                     </>
                 }

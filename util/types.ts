@@ -1,5 +1,5 @@
 //types for more convenient type annotations elsewhere
-export type AccountType = {email: string, firstName: string, lastName: string, phone: string, DOB: DOBType, balance: number, items: ItemType[], usedCodes: string[], firstVisit: boolean};
+export type AccountType = {email: string, firstName: string, lastName: string, phone: string, DOB: DOBType, balance: number, items: ItemType[], purchases: ItemType[], usedCodes: string[], firstVisit: boolean, doneNewsletter: boolean};
 export type ProductType ={imgSrc: string, name: string, desc: string, price: number, id: number};
 export type ItemType = {product: ProductType, quantity: number, size: string};
 export type DOBType = {year: number, month: number, day: number};

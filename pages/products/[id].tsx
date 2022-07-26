@@ -55,7 +55,7 @@ export default function Product(){
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">
-                <BannerAd imgSrc="https://i.pinimg.com/474x/75/31/da/7531da5dc18db7a921318bd986b55fa3--gucci-banner.jpg" href="/products/0" className="w-72" />
+                <BannerAd imgSrc="https://cdn.discordapp.com/attachments/996489060275208295/1001275031537602560/sub-buzz-617-1631634133-1.png" href="/products/0" className="w-72" />
                 <div className="max-w-[30rem] flex-col gap-2">
                     <NiceLink href="/home" text="← Continue shopping" className="mb-6" />
                     <img
@@ -70,10 +70,10 @@ export default function Product(){
                             {product && product.name}
                         </h1>
                         <p className="text-slate-500 whitespace-nowrap">
-                            {product && product.price} Tokens
+                            {product && product.price.toFixed(2)} Heartbeats
                         </p>
                     </div>
-                    <p className="w-full text-sm font-medium text-slate-700">
+                    <p className="w-full text-sm text-green-600 font-medium text-slate-700">
                         In stock
                     </p>
                     <p className="pb-6 border-b border-slate-200 space-x-2">
@@ -89,6 +89,7 @@ export default function Product(){
                     <div className="flex flex-wrap gap-1">
                         {sizes.map(s =>
                             <ToggleButton
+                                key={s}
                                 label={s}
                                 isOn={size === s}
                                 noToggle
@@ -97,11 +98,11 @@ export default function Product(){
                         )}
                     </div>
                     <AddToCart product={product} callback={setAddedToCart} size={size} />
-                    <p className="text-sm text-slate-700">
+                    <p className="text-sm text-gray-400/90 text-slate-700">
                         Free shipping on all continental US orders.
                     </p>
                 </div>
-                <BannerAd imgSrc="https://c8.alamy.com/comp/2F60AP1/poster-advertising-dior-secret-garden-fashion-house-with-rihanna-in-paper-magazine-from-2015-advertisement-creative-christian-dior-2010s-advert-2F60AP1.jpg" href="/products/0" className="w-72" />
+                <BannerAd imgSrc="https://cdn.discordapp.com/attachments/996489060275208295/1001271847679184906/animorph.png" href="/products/0" className="w-72" />
             </div>
             <PopupAd isOpen={adIsOpen} setIsOpen={setAdIsOpen} />
         </div>

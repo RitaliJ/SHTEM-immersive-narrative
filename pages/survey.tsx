@@ -37,7 +37,7 @@ export default function Survey() {
     }
 
     return (
-        <div className="w-screen h-screen bg-gray-300">
+        <div className="w-screen h-screen bg-blue-100">
             <Head>
                 <title>SHTEM Website | Survey</title>
                 <meta name="description" content="Survey" />
@@ -45,9 +45,9 @@ export default function Survey() {
             </Head>
         
             <main className="container h-4/5 flex justify-center items-center">
-                <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg max-w-min mt-16">
-                    <h1 className="text-2xl font-bold text-center mt-8">
-                        We'd love to make this shopping experience perfect for <em>you</em>!
+                <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg max-w-min">
+                    <h1 className="text-2xl font-bold text-center">
+                        We{"'"}d love to make this shopping experience perfect for <em>you</em>!
                     </h1>
                     <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
                         Let us know what your interests are
@@ -56,15 +56,15 @@ export default function Survey() {
                         Click to select any number of interests
                     </p>
                     <div className="flex flex-wrap gap-1 justify-center">
-                        <ToggleButton label="Balenciaga" callback={updateInterests} />
-                        <ToggleButton label="GUCCI" callback={updateInterests} />
-                        <ToggleButton label="Louis Vuitton" callback={updateInterests} />
-                        <ToggleButton label="Armani" callback={updateInterests} />
-                        <ToggleButton label="Prada" callback={updateInterests} />
-                        <ToggleButton label="Chanel" callback={updateInterests} />
-                        <ToggleButton label="Versace" callback={updateInterests} />
-                        <ToggleButton label="Cartier" callback={updateInterests} />
-                        <ToggleButton label="Hermes" callback={updateInterests} />
+                        <ToggleButton label="Balenciaga" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="GUCCI" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Louis Vuitton" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Armani" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Prada" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Chanel" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Versace" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Cartier" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Hermes" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
                     </div>
 
                     <div className="flex mt-2 justify-center">

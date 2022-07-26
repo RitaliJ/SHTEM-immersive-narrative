@@ -53,8 +53,13 @@ export default function Checkout() {
         setEmail(account.email);
         setFirstName(account.firstName);
         setLastName(account.lastName);
-        setInBudget(account.balance >= t);
+        setInBudget(account.balance > t + shipping);
     }, [account]);
+
+    //check whether you can afford new shipping selection
+    useEffect(() => {
+        setInBudget(account.balance > total + shipping);
+    }, [shipping]);
 
     //handle clicking on order button
     const handleSubmit = () => {
@@ -80,6 +85,11 @@ export default function Checkout() {
                 body: JSON.stringify(data),
             });
             let acc = account; //reset shopping cart in localStorage account info
+            if (!acc.purchases[0]) {
+                acc.purchases = acc.items;
+            } else {
+                acc.purchases = [...acc.purchases, ...acc.items];
+            }
             acc.items = [undefined as unknown as ItemType];
             acc.balance -= total; //remove spent money from balance
             localStorage.setItem("shtemAccount", JSON.stringify(acc));
@@ -121,14 +131,16 @@ export default function Checkout() {
                         <div className="grow">
                             <NiceLink href="/home" text="← Back" className="mb-6" />
                         </div>
-                        <Link href={firstName && lastName && address && city && state
+                        <Link href={firstName && lastName && address && city && state && inBudget
                             && zip.toString().length === 5 && cardNumber.toString().length === 16
                             && securityPin.toString().length === 3 ?
                             "/purchase" : "/checkout"}>
                             <button
                                 onClick={() => handleSubmit()}
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
-                                + (firstName && lastName && address && city && state && zip && inBudget ?
+                                    + (firstName && lastName && address && city && state && zip && inBudget
+                                    && zip.toString().length === 5 && cardNumber.toString().length === 16
+                                    && securityPin.toString().length === 3 ?
                                 "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
                             </button>
@@ -150,17 +162,17 @@ export default function Checkout() {
                         <CartProduct key={i.product.id} item={i} className="text-lg h-24" />
                     )}
                     <div className="flex flex-col gap-2 pt-4">
-                        <div className="flex gap-2 px-2 text-lg">
+                        <div className="flex gap-2 px-2 text-lg text-gray-400">
                             <p className="grow">Subtotal</p>
-                            <p>{total.toFixed(2)} Tokens</p>
+                            <p>{total.toFixed(2)} Heartbeats</p>
                         </div>
-                        <div className="flex gap-2 px-2 text-lg">
+                        <div className="flex gap-2 px-2 text-lg text-gray-400">
                             <p className="grow">Shipping</p>
-                            <p>{shipping.toFixed(2)} Tokens</p>
+                            <p>{shipping.toFixed(2)} Heartbeats</p>
                         </div>
                         <div className="flex gap-2 px-2 text-2xl">
                             <p className="grow">Total</p>
-                            <p>{(total + shipping).toFixed(2)} Tokens</p>
+                            <p className='text-green-600'>{(total + shipping).toFixed(2)} Heartbeats</p>
                         </div>
 
                         <h3 className="text-2xl mt-12 mb-4">
@@ -170,41 +182,41 @@ export default function Checkout() {
                             <button
                                 onClick={() => setShipping(0)}
                                 className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
-                                    + (shipping === 0 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                                    + (shipping === 0 ? "bg-blue-500 text-white" : "bg-blue-100 text-black")}
                             >
                                 Free
                             </button>
                             <button
                                 onClick={() => setShipping(5)}
                                 className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
-                                    + (shipping === 5 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                                    + (shipping === 5 ? "bg-blue-500 text-white" : "bg-blue-100 text-black")}
                             >
                                 <div className="flex gap-2">
                                     <p>Standard</p>
                                     <p>•</p>
-                                    <p>5 Tokens</p>
+                                    <p>5 heartbeats</p>
                                 </div>
                             </button>
                             <button
                                 onClick={() => setShipping(15)}
                                 className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
-                                    + (shipping === 15 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                                    + (shipping === 15 ? "bg-blue-500 text-white" : "bg-blue-100 text-black")}
                             >
                                 <div className="flex gap-2">
                                     <p>Express</p>
                                     <p>•</p>
-                                    <p>15 Tokens</p>
+                                    <p>15 heartbeats</p>
                                 </div>
                             </button>
                             <button
                                 onClick={() => setShipping(25)}
                                 className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
-                                    + (shipping === 25 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                                    + (shipping === 25 ? "bg-blue-500 text-white" : "bg-blue-100 text-black")}
                             >
                                 <div className="flex gap-2">
                                     <p>Overnight</p>
                                     <p>•</p>
-                                    <p>25 Tokens</p>
+                                    <p>25 heartbeats</p>
                                 </div>
                             </button>
                         </div>

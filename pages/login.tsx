@@ -20,17 +20,15 @@ export default function Login() {
     const days = Array.from(new Array(31), (x, i) => i + 1);
 
     //ensure that email is valid
-    function validateEmail(email: string){
+    const validateEmail = () => {
         var re = /\S+@\S+\.\S+/;
-        console.log(email);
-        console.log(re.test(email))
         return re.test(email);
     }
 
     //set localStorage and go to terms page
     const handleSubmit = (account: AccountType) => {
         console.log(month);
-        if (validateEmail(email) && firstName && lastName && phone
+        if (validateEmail() && firstName && lastName && phone
             && year !== undefined && month !== undefined && day !== undefined
             && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
@@ -42,7 +40,7 @@ export default function Login() {
     }
 
     return (
-        <div className="w-screen h-screen bg-gray-300">
+        <div className="w-screen h-screen bg-blue-100">
             <Head>
                 <title>SHTEM Website | Login</title>
                 <meta name="description" content="Login" />
@@ -74,11 +72,13 @@ export default function Login() {
                                 DOB: {year, month, day},
                                 balance: 100,
                                 items: [undefined as unknown as ItemType],
+                                purchases: [undefined as unknown as ItemType],
                                 usedCodes: [],
                                 firstVisit: true,
+                                doneNewsletter: false,
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
-                                && year !== undefined && validateEmail(email)==true && month !== undefined && day !== undefined
+                                && validateEmail() && year !== undefined && month !== undefined && day !== undefined
                                 && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)
                                 ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
                         >
@@ -92,7 +92,7 @@ export default function Login() {
                             }
                             {(email && firstName && lastName && phone
                                 && year !== undefined && month !== undefined && day !== undefined
-                                && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day) && validateEmail(email)==false) &&
+                                && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day) && !validateEmail()) &&
                                 "* Please provide a valid email address"
                             }
                         </p>

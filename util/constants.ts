@@ -8,6 +8,7 @@ module.exports = {
         "333333": 1,
         "444444": 1,
         "555555": 1,
+        "666666": 1000,
     },
     surveys: [
         {
@@ -274,7 +275,7 @@ module.exports = {
             imgSrc: 'https://i.pinimg.com/originals/51/6a/70/516a706f4c1992ee5bc15e41a189818f.jpg',
             name:'Willy Wonka in AVATAR',
             desc:'Designed by Willy Wonka and inspired by Avatar, this piece is for anyone who is incredibly quirky and wants to dress like elizabeth banks in Hunger Games.',
-            price: 4000,
+            price: 115,
             id: 11,
         },
         {
