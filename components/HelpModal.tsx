@@ -1,7 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { AccountType } from "../util/types";
 import CenteredModal from "./CenteredModal";
-import DropdownMenu from "./DropdownMenu";
 
 export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: boolean) => void, account: AccountType}) {
     const {isOpen, setIsOpen, account} = props;
