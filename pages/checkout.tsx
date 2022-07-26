@@ -85,6 +85,11 @@ export default function Checkout() {
                 body: JSON.stringify(data),
             });
             let acc = account; //reset shopping cart in localStorage account info
+            if (!acc.purchases[0]) {
+                acc.purchases = acc.items;
+            } else {
+                acc.purchases = [...acc.purchases, ...acc.items];
+            }
             acc.items = [undefined as unknown as ItemType];
             acc.balance -= total; //remove spent money from balance
             localStorage.setItem("shtemAccount", JSON.stringify(acc));

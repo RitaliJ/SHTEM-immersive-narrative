@@ -72,6 +72,7 @@ export default function Login() {
                                 DOB: {year, month, day},
                                 balance: 100,
                                 items: [undefined as unknown as ItemType],
+                                purchases: [undefined as unknown as ItemType],
                                 usedCodes: [],
                                 firstVisit: true,
                                 doneNewsletter: false,

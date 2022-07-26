@@ -5,14 +5,18 @@ import { AccountType } from "../util/types";
 //page where all collected data is displayed
 export default function Dataleak() {
     const [account, setAccount] = useState(undefined as unknown as AccountType);
+    const [interests, setInterests] = useState([""]);
 
     useEffect(() => {
         if (!account) {
-            const acc = localStorage.getItem('shtemAccount')
+            const acc = localStorage.getItem('shtemAccount');
             if (!acc) return;
             setAccount(JSON.parse(acc));
+            const int = localStorage.getItem('shtemInterests');
+            if (!int) return;
+            setInterests(JSON.parse(int));
         }
-    }, [account]);
+    }, [account, interests]);
 
     return (
         <>
@@ -44,27 +48,51 @@ export default function Dataleak() {
                             <p>Date of birth:</p>
                             <p>{account.DOB.month}/{account.DOB.day}/{account.DOB.year}</p>
                         </div>
+                        <p>Interests:</p>
+                        <div className="flex flex-col gap-1 pl-4">
+                            {interests[0] ? interests.map((x, i) =>
+                                <div key={i} className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{x}</p>
+                                </div>
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            )}
+                        </div>
                         <div className="flex gap-2">
                             <p>Account balance:</p>
                             <p>{account.balance.toFixed(2)} Tokens</p>
                         </div>
                         <p>Items purchased:</p>
                         <div className="flex flex-col gap-1 pl-4">
-                            {account.items.map((x, i) =>
+                            {account.purchases && account.purchases[0] ? account.purchases.map((x, i) =>
                                 <div key={i} className="flex gap-2">
                                     <p>•</p>
                                     <p>{x.quantity}×</p>
                                     <p>{x.product.name}</p>
                                     <p>(Size {x.size})</p>
                                 </div>
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
                             )}
                         </div>
                         <p>Gift codes used:</p>
                         <div className="flex flex-col gap-1 pl-4">
-                            {account.usedCodes.map((x, i) =>
+                            {account.usedCodes[0] ? account.usedCodes.map((x, i) =>
                                 <div key={i} className="flex gap-2">
                                     <p>•</p>
                                     <p>{x}</p>
+                                </div>
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
                                 </div>
                             )}
                         </div>
