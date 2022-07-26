@@ -12,34 +12,34 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
     const targetItems = ["Accordion Outfit", "Avocado", "Phoenix"];
     
     const pages: ReactNode[] = [
-        <p>
+        <p key={0}>
             Hello {account.firstName}! Thank you for signing up for our website;
-            we’re so happy to have you join us! My name is Carty, your friendly
-            personal shopping guide. I’m here to show you around our store and
+            we{"'"}re so happy to have you join us! My name is Carty, your friendly
+            personal shopping guide. I{"'"}m here to show you around our store and
             help you with any questions that may pop up!
         </p>,
-        <p>
+        <p key={1}>
             Welcome to the homepage of our store, which only contains the trendiest
             clothing and accessories!
         </p>,
-        <>
-            Our store is very special as we don’t take payment through physical currency,
-            but rather through our own personal currency of tokens. Luckily for you, you
-            get to start off with 100 tokens already! Is there something in particular
-            you’re looking to buy?
+        <div key={2}>
+            <p>
+                Our store is very special as we don{"'"}t take payment through physical currency,
+                but rather through our own personal currency of tokens. Luckily for you, you
+                get to start off with 100 tokens already! Is there something in particular
+                you{"'"}re looking to buy?
+            </p>
             <div className="w-full">
                 <DropdownMenu label="Choose an item" callback={x => setTarget(x)} options={targetItems} />
             </div>
-        </>,
-        <>
-            <div className="flex gap-1 flex-wrap items-center">
-                <p>That concludes my introduction. if you ever need any help, you can find me by pressing the</p>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <p>icon in the header.</p>
-            </div>
-        </>,
+        </div>,
+        <div key={3} className="flex gap-1 flex-wrap items-center">
+            <p>That concludes my introduction. if you ever need any help, you can find me by pressing the</p>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <p>icon in the header.</p>
+        </div>,
     ];
 
     //allow continue only if target product is chosen

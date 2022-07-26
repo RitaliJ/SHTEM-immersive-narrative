@@ -89,6 +89,7 @@ export default function Product(){
                     <div className="flex flex-wrap gap-1">
                         {sizes.map(s =>
                             <ToggleButton
+                                key={s}
                                 label={s}
                                 isOn={size === s}
                                 noToggle
