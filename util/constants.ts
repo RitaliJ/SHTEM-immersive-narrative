@@ -9,6 +9,7 @@ module.exports = {
         "444444": 1,
         "555555": 1,
         "666666": 1000,
+        "888888": 1
     },
     surveys: [
         {
@@ -172,6 +173,23 @@ module.exports = {
                 "https://media.istockphoto.com/photos/veiled-chameleon-isolated-on-white-background-picture-id842941952?k=20&m=842941952&s=612x612&w=0&h=waE2Tob8VZgLqxxChdeH7dDLdaK4liKiv4Wmy4nXtRk=",
             ],
         },
+
+        {
+            title: "Select the scenes that you would want as a part of your next vacation.",
+            code: "888888",
+            imgSrcs: [
+                "https://cdn.pixabay.com/photo/2016/11/14/04/00/beach-1822544_1280.jpg",
+                "https://cdn.pixabay.com/photo/2019/12/15/18/24/winter-4697776__340.jpg",
+                "https://cdn.pixabay.com/photo/2014/01/30/18/26/skyline-255116__480.jpg",
+                "https://cdn.pixabay.com/photo/2016/08/15/08/22/greece-1594689__480.jpg",
+                "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg",
+                "https://cdn.pixabay.com/photo/2016/12/31/19/16/festival-1943592__480.jpg",
+                "https://cdn.pixabay.com/photo/2013/02/26/01/10/auditorium-86197__340.jpg",
+                "https://cdn.pixabay.com/photo/2016/08/01/20/13/girl-1561989__480.jpg",
+                "https://cdn.pixabay.com/photo/2016/11/23/15/32/pedestrians-1853552__340.jpg",
+            ],
+        },
+        
         {
             title: "Select all the people that look like politicians",
             code: "555555",
@@ -186,7 +204,7 @@ module.exports = {
                 "https://media.istockphoto.com/photos/success-is-about-taking-risks-with-no-regrets-picture-id1026567008?k=20&m=1026567008&s=612x612&w=0&h=GcVTMceQlr4OsOHuNTiwareaXHxZtgLncPx_xgYCuX8=",
                 "https://media.istockphoto.com/photos/confident-african-american-female-executive-isolated-picture-id175523696?k=20&m=175523696&s=612x612&w=0&h=ZEfGi4Nxe4ikC1Mg6pErUmzC8sjstdFI7dXNTUijxPk=",
             ],
-        },
+        }
 
     ],
     products: [
