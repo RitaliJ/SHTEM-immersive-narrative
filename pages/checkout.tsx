@@ -53,8 +53,13 @@ export default function Checkout() {
         setEmail(account.email);
         setFirstName(account.firstName);
         setLastName(account.lastName);
-        setInBudget(account.balance >= t);
+        setInBudget(account.balance > t + shipping);
     }, [account]);
+
+    //check whether you can afford new shipping selection
+    useEffect(() => {
+        setInBudget(account.balance > total + shipping);
+    }, [shipping]);
 
     //handle clicking on order button
     const handleSubmit = () => {
@@ -121,14 +126,16 @@ export default function Checkout() {
                         <div className="grow">
                             <NiceLink href="/home" text="← Back" className="mb-6" />
                         </div>
-                        <Link href={firstName && lastName && address && city && state
+                        <Link href={firstName && lastName && address && city && state && inBudget
                             && zip.toString().length === 5 && cardNumber.toString().length === 16
                             && securityPin.toString().length === 3 ?
                             "/purchase" : "/checkout"}>
                             <button
                                 onClick={() => handleSubmit()}
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
-                                + (firstName && lastName && address && city && state && zip && inBudget ?
+                                    + (firstName && lastName && address && city && state && zip && inBudget
+                                    && zip.toString().length === 5 && cardNumber.toString().length === 16
+                                    && securityPin.toString().length === 3 ?
                                 "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
                             </button>
@@ -150,11 +157,11 @@ export default function Checkout() {
                         <CartProduct key={i.product.id} item={i} className="text-lg h-24" />
                     )}
                     <div className="flex flex-col gap-2 pt-4">
-                        <div className="flex gap-2 px-2 text-lg text-gray-300">
+                        <div className="flex gap-2 px-2 text-lg text-gray-400">
                             <p className="grow">Subtotal</p>
                             <p>{total.toFixed(2)} Tokens</p>
                         </div>
-                        <div className="flex gap-2 px-2 text-lg text-gray-300">
+                        <div className="flex gap-2 px-2 text-lg text-gray-400">
                             <p className="grow">Shipping</p>
                             <p>{shipping.toFixed(2)} Tokens</p>
                         </div>

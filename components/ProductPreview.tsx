@@ -7,8 +7,8 @@ export default function ProductPreview(props: {product: ProductType}) {
     
     return (
         <Link href={"/products/" + product.id}>
-            <div className="flex flex-col gap-1 w-96 bg-white-200 hover:bg-white-300 hover:cursor-pointer
-                shadow-md hover:shadow-xl duration-300 rounded-lg p-4">
+            <div className="flex flex-col gap-1 w-96 bg-white hover:border-gray-500 hover:cursor-pointer
+                shadow-md hover:shadow-xl duration-300 rounded-lg p-4 border-2">
                 <img src={product.imgSrc} alt={product.name} />
                 <div className="flex mt-1 text-lg gap-2">
                     <p className="font-bold grow line-clamp-2">

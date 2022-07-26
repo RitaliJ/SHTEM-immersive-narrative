@@ -51,7 +51,7 @@ export default function Home() {
             <main className="flex gap-4 mt-12 mb-8 mx-4 justify-center">
                 <BannerAd imgSrc="https://cdn.discordapp.com/attachments/996489060275208295/1001271760743829504/balenciaga_ad.png" href="/products/0" className="w-72" />
                 <div>
-                    <h1 className="text-5xl font-bold text-center mb-12 text-blue-200">
+                    <h1 className="text-5xl font-bold text-center mb-12 text-blue-400">
                         Buy our things
                     </h1>
                     <div className="flex justify-center gap-4 flex-wrap">

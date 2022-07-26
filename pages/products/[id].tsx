@@ -70,7 +70,7 @@ export default function Product(){
                             {product && product.name}
                         </h1>
                         <p className="text-slate-500 whitespace-nowrap">
-                            {product && product.price} Tokens
+                            {product && product.price.toFixed(2)} Tokens
                         </p>
                     </div>
                     <p className="w-full text-sm text-green-600 font-medium text-slate-700">
@@ -98,7 +98,7 @@ export default function Product(){
                         )}
                     </div>
                     <AddToCart product={product} callback={setAddedToCart} size={size} />
-                    <p className="text-sm text-gray-200 text-slate-700">
+                    <p className="text-sm text-gray-400/90 text-slate-700">
                         Free shipping on all continental US orders.
                     </p>
                 </div>

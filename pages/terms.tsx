@@ -19,7 +19,10 @@ export default function Terms() {
                     <h1 className="text-3xl font-bold text-center whitespace-nowrap px-24">
                         Terms and Conditions
                     </h1>
-                    <div onScroll={e => handleScroll(e)} className="flex flex-col gap-3 text-xs h-96 overflow-y-scroll border-2 rounded-lg px-1 py-2">
+                    <div
+                        onScroll={e => handleScroll(e)}
+                        className="scrollbar flex flex-col gap-3 text-xs h-96 overflow-y-scroll border-2 rounded-lg px-1 py-2"
+                    >
                         <p>{`Sahara Prime offers technologies and products that offer access to the latest fashion trends, enabling the growth of communities.`}</p>
                         <p>{`Please read these Terms of Use (these "Terms") carefully as they govern your use of (which includes access to) Sahara Prime's personalized products and services, including all of our websites that incorporate or link to these Terms (collectively, the "Sahara Prime Service") and any material that is made available through the Sahara Prime Service (the "Content").`}</p>
                         <p>{`Use of the Sahara Prime Service may be subject to additional terms and conditions presented by Sahara Prime, which are hereby incorporated by this reference into these Terms.`}</p>
