@@ -22,7 +22,7 @@ export default function Dataleak() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="flex flex-col gap-1 m-12 text-lg items-center font-mono">
+            <main className="flex flex-col gap-1 p-12 text-lg items-center font-mono bg-gray-900 text-red-600 w-screen h-screen">
                 <div className="w-min whitespace-nowrap">
                     <h1 className="text-2xl font-bold">
                         {account && account.firstName + "'"}s data
