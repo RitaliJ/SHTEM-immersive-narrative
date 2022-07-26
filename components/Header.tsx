@@ -134,7 +134,7 @@ export default function Header(props: {
 
     return (
         <div className="flex items-center gap-4 sticky top-0 px-6 duration-150
-            bg-slate-200 shadow-md hover:shadow-lg bg-opacity-50 backdrop-blur-lg">
+            bg-slate-200 shadow-md hover:shadow-lg bg-opacity-60 backdrop-blur-lg">
             <Link href="/home">
                 <button className="text-xl font-bold">
                     Sahara Prime
