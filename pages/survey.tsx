@@ -21,8 +21,8 @@ export default function Survey() {
         } else {
             const x2 = JSON.parse(x);
             setMillis(x2.millis);
-            setNewMillis(0);
         }
+        setNewMillis(0);
         setStart(Date.now);
         document.addEventListener("mousedown", handleClick);
         return () => {
