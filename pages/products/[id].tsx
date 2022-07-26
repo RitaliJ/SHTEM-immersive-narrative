@@ -22,6 +22,52 @@ export default function Product(){
     const router = useRouter();
     const id = router.query.id;
 
+    const [start, setStart] = useState(0);
+    const [millis, setMillis] = useState<number>(); //initial values before adding from this page
+    const [newMillis, setNewMillis] = useState<number>(); //new amount of milliseconds to add
+
+    //timer and click counter
+    useEffect(() => {
+        const x = localStorage.getItem("products/" + id);
+        if (x === null || x === "{}") { //if localstorage key doesn't exist, create it
+            localStorage.setItem("products/" + id, JSON.stringify({millis: 0, clicks: 0}));
+        } else {
+            const x2 = JSON.parse(x);
+            setMillis(x2.millis);
+            setNewMillis(0);
+        }
+        setStart(Date.now);
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
+    }, []);
+
+    //update millis roughly once per second
+    useEffect(() => {
+        if (start && millis !== undefined && newMillis !== undefined) {
+            setTimeout(() => {
+                setNewMillis(Date.now() - start);
+                const x = localStorage.getItem("products/" + id);
+                if (x !== null) {
+                    let x2 = JSON.parse(x);
+                    x2.millis = millis + newMillis;
+                    localStorage.setItem("products/" + id, JSON.stringify(x2));
+                }
+            }, 1000);
+        }
+    }, [newMillis]);
+
+    //handle click event
+    const handleClick = () => {
+        const x = localStorage.getItem("products/" + id);
+        if (x !== null) {
+            let x2 = JSON.parse(x);
+            x2.clicks += 1;
+            localStorage.setItem("products/" + id, JSON.stringify(x2));
+        }
+    }
+
     //get account info from localStorage and product info from util/products.ts
     useEffect(() => {
         if (!account) {
