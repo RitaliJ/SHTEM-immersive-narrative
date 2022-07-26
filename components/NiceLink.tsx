@@ -5,9 +5,9 @@ export default function NiceLink(props: {href: string, text: string, className?:
     const {href, text, className} = props;
 
     return (
-        <div className={className + " border-b border-white hover:border-blue-500 duration-150 w-min whitespace-nowrap"}>
+        <div className={className + " border-b border-gray hover:border-blue-500 duration-150 w-min whitespace-nowrap"}>
             <Link href={href}>
-                <a className="text-lg text-blue-500">
+                <a className="text-lg text-gray-300">
                     {text}
                 </a>
             </Link>

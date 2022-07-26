@@ -40,7 +40,7 @@ export default function Login() {
     }
 
     return (
-        <div className="w-screen h-screen bg-gray-300">
+        <div className="w-screen h-screen bg-blue-100">
             <Head>
                 <title>SHTEM Website | Login</title>
                 <meta name="description" content="Login" />
@@ -74,7 +74,7 @@ export default function Login() {
                                 items: [undefined as unknown as ItemType],
                                 usedCodes: [],
                                 firstVisit: true,
-                                doneNewsletter: false,
+                                DoneNewsletter: false,
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
                                 && validateEmail() && year !== undefined && month !== undefined && day !== undefined

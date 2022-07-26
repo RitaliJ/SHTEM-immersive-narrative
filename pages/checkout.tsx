@@ -30,7 +30,7 @@ export default function Checkout() {
 
     const [inBudget, setInBudget] = useState(true);
 
-    //set total price and account details once account is retrieved
+    //get account from localStorage on page load
     useEffect(() => {
         if (!account.email) {
             const acc = localStorage.getItem("shtemAccount");
@@ -39,8 +39,12 @@ export default function Checkout() {
             } else {
                 setAccount(JSON.parse(acc));
             }
-            return;
         }
+    });
+
+    //set total price and account details once account is retrieved
+    useEffect(() => {
+        if (!account.email) return;
         let t = 0;
         account.items.forEach(i =>
             t += i.product.price * i.quantity
@@ -146,17 +150,17 @@ export default function Checkout() {
                         <CartProduct key={i.product.id} item={i} className="text-lg h-24" />
                     )}
                     <div className="flex flex-col gap-2 pt-4">
-                        <div className="flex gap-2 px-2 text-lg">
+                        <div className="flex gap-2 px-2 text-lg text-gray-300">
                             <p className="grow">Subtotal</p>
                             <p>{total.toFixed(2)} Tokens</p>
                         </div>
-                        <div className="flex gap-2 px-2 text-lg">
+                        <div className="flex gap-2 px-2 text-lg text-gray-300">
                             <p className="grow">Shipping</p>
                             <p>{shipping.toFixed(2)} Tokens</p>
                         </div>
                         <div className="flex gap-2 px-2 text-2xl">
                             <p className="grow">Total</p>
-                            <p>{(total + shipping).toFixed(2)} Tokens</p>
+                            <p className='text-green-600'>{(total + shipping).toFixed(2)} Tokens</p>
                         </div>
 
                         <h3 className="text-2xl mt-12 mb-4">
@@ -166,14 +170,14 @@ export default function Checkout() {
                             <button
                                 onClick={() => setShipping(0)}
                                 className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
-                                    + (shipping === 0 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                                    + (shipping === 0 ? "bg-blue-500 text-white" : "bg-blue-100 text-black")}
                             >
                                 Free
                             </button>
                             <button
                                 onClick={() => setShipping(5)}
                                 className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
-                                    + (shipping === 5 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                                    + (shipping === 5 ? "bg-blue-500 text-white" : "bg-blue-100 text-black")}
                             >
                                 <div className="flex gap-2">
                                     <p>Standard</p>
@@ -184,7 +188,7 @@ export default function Checkout() {
                             <button
                                 onClick={() => setShipping(15)}
                                 className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
-                                    + (shipping === 15 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                                    + (shipping === 15 ? "bg-blue-500 text-white" : "bg-blue-100 text-black")}
                             >
                                 <div className="flex gap-2">
                                     <p>Express</p>
@@ -195,7 +199,7 @@ export default function Checkout() {
                             <button
                                 onClick={() => setShipping(25)}
                                 className={"duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-md "
-                                    + (shipping === 25 ? "bg-blue-500 text-white" : "bg-white text-black")}
+                                    + (shipping === 25 ? "bg-blue-500 text-white" : "bg-blue-100 text-black")}
                             >
                                 <div className="flex gap-2">
                                     <p>Overnight</p>

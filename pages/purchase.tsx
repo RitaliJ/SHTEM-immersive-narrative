@@ -27,7 +27,7 @@ export default function Purchase() {
                     </div>
                 </CenteredModal>
                 <main className="container pt-12 pb-24 flex flex-col gap-4 items-center">
-                 <h1 className="text-3xl">
+                 <h1 className="text-4xl">
                      Thank you for your purchase.
                  </h1>
                  <p className="text-xl">
@@ -38,7 +38,9 @@ export default function Purchase() {
                     <button onClick={() => setIsOpen(true)} className="w-5/12 duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-lg bg-green-500 hover:bg-green-700 text-white mt-8 float-left">I have received my confirmation email.</button>
                     <button onClick={() => setIsOpen(true)} className="w-5/12 duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-lg bg-red-500 hover:bg-red-700 text-white mt-8 float-right">I have not received my confirmation email.</button>
                  </div>
-                <NiceLink href="/home" text="← Back to homepage" className="mb-6" />
+                 <div className='text-blue-500'>
+                <a href ='/home'>Back to Homepage</a>
+                </div>
                 
              </main>
         </>

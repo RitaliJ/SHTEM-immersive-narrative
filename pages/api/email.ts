@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer')
 require('dotenv').config()
 
 //api route to send email to provided email address
-export default function email (req: NextApiRequest, res: NextApiResponse) {
+export default (req: NextApiRequest, res: NextApiResponse) => {
     const {email, firstName, billingFirstName, billingLastName, address, items, total} = req.body;
     const transporter = nodemailer.createTransport({
         port: 465,

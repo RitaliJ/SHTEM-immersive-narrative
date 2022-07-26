@@ -1,5 +1,4 @@
 import { Popover, Transition } from '@headlessui/react';
-import Image from 'next/image';
 import { ReactNode } from 'react';
 
 //modal for help popup
@@ -33,7 +32,7 @@ export default function HelpPopover(props: {html: ReactNode, outerHtml: ReactNod
                                 </div>
                                 <img
                                     className="h-72"
-                                    src="https://steamuserimages-a.akamaihd.net/ugc/942844394047374257/FBE1C6921B8A98FEDE1309EEB49C3137BC3D88EE/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+                                    src="https://cdn.vox-cdn.com/thumbor/aDkDyg6qmsgdI-fxAZkyXVcDMOY=/0x0:712x423/1400x1400/filters:focal(385x120:497x232):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/55531033/Screen_Shot_2017_06_30_at_3.17.00_PM.0.png"
                                     alt="Shopping assistant"
                                 />
                             </div>

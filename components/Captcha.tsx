@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { CaptchaType } from "../util/types";
 import CenteredModal from "./CenteredModal";

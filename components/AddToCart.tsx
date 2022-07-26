@@ -68,7 +68,7 @@ export default function AddToCart(props: {product: ProductType, size: string, ca
             <button
                 onClick={() => {if (size) addToCart()}}
                 className={"px-2 py-1 rounded-lg duration-150 "
-                    + (size ? "bg-black text-white" : "bg-gray-200 text-gray-400")}>
+                    + (size ? "bg-orange-500 text-white" : "bg-orange-500 text-white")}>
                 Add to cart
             </button>
             {!size &&

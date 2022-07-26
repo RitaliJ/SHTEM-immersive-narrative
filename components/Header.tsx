@@ -48,7 +48,7 @@ export default function Header(props: {
                 updateSurveyAndCaptcha();
             }
         }
-    }, [account]);
+    });
 
     //open modal when addedToCart becomes true
     useEffect(() => {
@@ -137,7 +137,7 @@ export default function Header(props: {
             bg-slate-200 shadow-md hover:shadow-lg bg-opacity-50 backdrop-blur-lg">
             <Link href="/home">
                 <button className="text-xl font-bold">
-                    Legendary Site
+                    Sahara
                 </button>
             </Link>
             <span className="grow"></span>

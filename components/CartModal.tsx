@@ -57,7 +57,7 @@ export default function CartModal(props: {
                 <h1 className="text-5xl font-bold mb-12">
                     Your cart
                 </h1>
-                <div className="flex flex-col divide-y divide-gray-300">
+                <div className="flex flex-col text-green-600 divide-y divide-gray-300">
                     {account.email && account.items[0] ? (
                         account.items.map(i =>
                             <CartProduct key={i.product.id} item={i} className="h-24 text-xl"
@@ -69,13 +69,13 @@ export default function CartModal(props: {
                     {Number(total.toFixed(2)) > account.balance ? (
                         <div className="flex flex-col gap-1 items-end pt-4 px-2">
                             <div className="flex gap-2 text-2xl">
-                                <p>Total:</p>
-                                <p className="text-red-500">
+                                <p className="text-black">Total:</p>
+                                <p className="text-green-500">
                                     {total.toFixed(2)} V Bucks
                                 </p>
                             </div>
-                            <p className="text-right text-lg italic">
-                                You can{"'"}t afford this purchase! The amount in your cart exceeds your tokens!
+                            <p className="text-right text-red-600 text-lg italic">
+                                You can't afford this purchase! The amount in your cart exceeds your tokens!
                             </p>
                         </div>
                     ) : (

@@ -41,9 +41,7 @@ export default function TokenAd(props: {
                     className="absolute top-2 right-4 text-5xl">
                     ×
                 </button>
-                <p className="text-5xl font-bold uppercase">
-                    This is an ad
-                </p>
+                <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1001281489478099025/Untitled_drawing.jpg"></img>
                 <p className="text-xl">
                     Current reward: {reward.toFixed(2)} Tokens
                 </p>
