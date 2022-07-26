@@ -137,7 +137,7 @@ export default function Header(props: {
             bg-slate-200 shadow-md hover:shadow-lg bg-opacity-50 backdrop-blur-lg">
             <Link href="/home">
                 <button className="text-xl font-bold">
-                    Sahara
+                    Sahara Prime
                 </button>
             </Link>
             <span className="grow"></span>
