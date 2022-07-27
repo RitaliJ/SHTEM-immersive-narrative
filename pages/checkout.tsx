@@ -6,6 +6,7 @@ import DropdownMenu from "../components/DropdownMenu";
 import Header from "../components/Header";
 import InputGroup from "../components/InputGroup";
 import NiceLink from "../components/NiceLink";
+import PrefillModal from "../components/PrefillModal";
 import { AccountType, ItemType } from "../util/types";
 
 export default function Checkout() {
@@ -29,6 +30,53 @@ export default function Checkout() {
                     "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",];
 
     const [inBudget, setInBudget] = useState(true);
+    const [prefillOpen, setPrefillOpen] = useState(true); //useState for prefill modal component
+
+    const [start, setStart] = useState(0);
+    const [millis, setMillis] = useState<number>(); //initial values before adding from this page
+    const [newMillis, setNewMillis] = useState<number>(); //new amount of milliseconds to add
+
+    //timer and click counter
+    useEffect(() => {
+        const x = localStorage.getItem("checkout");
+        if (x === null || x === "{}") { //if localstorage key doesn't exist, create it
+            localStorage.setItem("checkout", JSON.stringify({millis: 0, clicks: 0}));
+        } else {
+            const x2 = JSON.parse(x);
+            setMillis(x2.millis);
+        }
+        setNewMillis(0);
+        setStart(Date.now);
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
+    }, []);
+
+    //update millis roughly once per second
+    useEffect(() => {
+        if (start && millis !== undefined && newMillis !== undefined) {
+            setTimeout(() => {
+                setNewMillis(Date.now() - start);
+                const x = localStorage.getItem("checkout");
+                if (x !== null) {
+                    let x2 = JSON.parse(x);
+                    x2.millis = millis + newMillis;
+                    localStorage.setItem("checkout", JSON.stringify(x2));
+                }
+            }, 1000);
+        }
+    }, [newMillis]);
+
+    //handle click event
+    const handleClick = () => {
+        const x = localStorage.getItem("checkout");
+        if (x !== null) {
+            let x2 = JSON.parse(x);
+            x2.clicks += 1;
+            localStorage.setItem("checkout", JSON.stringify(x2));
+        }
+    }
 
     //get account from localStorage on page load
     useEffect(() => {
@@ -50,11 +98,22 @@ export default function Checkout() {
             t += i.product.price * i.quantity
         );
         setTotal(t);
+        setInBudget(account.balance > t + shipping);
+    }, [account]);
+
+    //check whether you can afford new shipping selection
+    useEffect(() => {
+        setInBudget(account.balance > total + shipping);
+    }, [shipping]);
+
+    //function to prefill fields that are already know from localstorage
+    const prefill = () => {
         setEmail(account.email);
         setFirstName(account.firstName);
         setLastName(account.lastName);
         setInBudget(account.balance > t + shipping);
     }, [account]);
+
 
     //check whether you can afford new shipping selection
     useEffect(() => {
@@ -107,7 +166,16 @@ export default function Checkout() {
             <Header psaHtml="Order things here!" />
 
             <main className="container pt-12 pb-24 flex text-lg divide-x divide-gray-300">
+                
+                <PrefillModal
+                    isOpen={prefillOpen}
+                    setIsOpen={setPrefillOpen}
+                    text="It looks like we already have your email and name. Would you like us to prefill
+                        this information for you?"
+                    callback={prefill}
+                />
                 <div className="w-2/5 flex flex-col gap-2 p-4 pr-8 h-min">
+
                     <h3 className="text-2xl mb-4">
                         Shipping address
                     </h3>
@@ -127,6 +195,7 @@ export default function Checkout() {
                         <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} />
                         <InputGroup label="Security PIN" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={3} />
                     </div>
+
                     <div className="flex items-center mt-4">
                         <div className="grow">
                             <NiceLink href="/home" text="← Back" className="mb-6" />
@@ -146,6 +215,7 @@ export default function Checkout() {
                             </button>
                         </Link>
                     </div>
+
                     <p className="italic text-red-500 text-right">
                         {inBudget 
                             ? (firstName && lastName && address && city && state && zip && cardNumber && securityPin
@@ -157,8 +227,10 @@ export default function Checkout() {
                         }
                     </p>
                 </div>
+
                 <div className="w-full flex flex-col p-4 pl-8 divide-y divide-gray-300">
-                    {account.email && account.items.map(i =>
+
+                    {account.items && account.items.map(i =>
                         <CartProduct key={i.product.id} item={i} className="text-lg h-24" />
                     )}
                     <div className="flex flex-col gap-2 pt-4">
@@ -195,6 +267,7 @@ export default function Checkout() {
                                     <p>Standard</p>
                                     <p>•</p>
                                     <p>5 heartbeats</p>
+
                                 </div>
                             </button>
                             <button
@@ -205,7 +278,9 @@ export default function Checkout() {
                                 <div className="flex gap-2">
                                     <p>Express</p>
                                     <p>•</p>
+
                                     <p>15 heartbeats</p>
+
                                 </div>
                             </button>
                             <button
@@ -216,7 +291,9 @@ export default function Checkout() {
                                 <div className="flex gap-2">
                                     <p>Overnight</p>
                                     <p>•</p>
-                                    <p>25 heartbeats</p>
+
+                                    <p>25 Heartbeats</p>
+
                                 </div>
                             </button>
                         </div>

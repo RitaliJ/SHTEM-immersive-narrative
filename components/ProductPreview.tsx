@@ -10,11 +10,13 @@ export default function ProductPreview(props: {product: ProductType}) {
             <div className="flex flex-col gap-1 w-96 bg-white hover:border-gray-500 hover:cursor-pointer
                 shadow-md hover:shadow-xl duration-300 rounded-lg p-4 border-2">
                 <img src={product.imgSrc} alt={product.name} />
-                <div className="flex mt-1 text-lg gap-2">
+                <div className="flex mt-1 text-lg gap-2 items-center">
                     <p className="font-bold grow line-clamp-2">
                         {product.name}
                     </p>
-                    <p className={"whitespace-nowrap text-green-600 text-xs"}>
+
+                    <p className={"whitespace-nowrap text-green-600 text-sm"}>
+
                         {(product.price).toFixed(2)} Heartbeats
                     </p>
                 </div>

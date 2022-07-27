@@ -7,13 +7,18 @@ export default function CenteredModal(props: {
     isOpen: boolean,
     setIsOpen: (isOpen: boolean) => void,
     blur?: string,
+    zIndex?: string,
     children: ReactNode,
 }) {
-    const {isOpen, setIsOpen, blur, children} = props;
+    const {isOpen, setIsOpen, blur, zIndex, children} = props;
 
     return (
         <Transition appear show={isOpen} as={Fragment}>
-            <Dialog open={true} onClose={() => setIsOpen(false)} className="fixed z-10 inset-0 flex items-center justify-center">
+            <Dialog
+                open={true} onClose={() => setIsOpen(false)}
+                className={"fixed inset-0 flex items-center justify-center "
+                    + (zIndex ? zIndex : "z-10")}
+            >
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
