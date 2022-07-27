@@ -53,7 +53,6 @@ export default function Purchase() {
             localStorage.setItem("purchase", JSON.stringify(x2));
         }
     }
-
     return (
         <>
             <Head>

@@ -3,6 +3,7 @@ export {}
 //constant array of survey and proudct objects to retrieve in dynamic routes
 module.exports = {
     giftCodes: {
+
         "111111": 80,
         "222222": 80,
         "333333": 80,
@@ -10,6 +11,7 @@ module.exports = {
         "555555": 80,
         "666666": 80,
         "000000": 10000,
+
     },
     surveys: [
         {

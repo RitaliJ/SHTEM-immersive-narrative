@@ -17,6 +17,7 @@ export default function NewsletterModal(props: {
     useEffect(() => {
         if (isOpen) {
             setPrefillOpen(true);
+
         }
     }, [isOpen]);
 
@@ -51,6 +52,7 @@ export default function NewsletterModal(props: {
                 >
                     Sign up
                 </button>
+
                 {!validateEmail() && !prefillOpen &&
                     <p className="text-red-500 italic">
                         * Invalid email address
@@ -63,6 +65,7 @@ export default function NewsletterModal(props: {
                         it for you?"
                     callback={() => setValue(email)}
                 />
+
             </div>
         </CenteredModal>
     )

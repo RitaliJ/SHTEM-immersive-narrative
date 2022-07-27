@@ -14,7 +14,9 @@ export default function ProductPreview(props: {product: ProductType}) {
                     <p className="font-bold grow line-clamp-2">
                         {product.name}
                     </p>
+
                     <p className={"whitespace-nowrap text-green-600 text-sm"}>
+
                         {(product.price).toFixed(2)} Heartbeats
                     </p>
                 </div>

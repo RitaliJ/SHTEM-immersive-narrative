@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AccountType, ProductType } from "../util/types";
 const constants = require('../util/constants');
 
+
 //page where all collected data is displayed
 export default function Dataleak() {
     const [account, setAccount] = useState(undefined as unknown as AccountType);
@@ -84,6 +85,7 @@ export default function Dataleak() {
                 <meta name="description" content="Shtem website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+
 
             <main className="flex flex-col gap-1 p-12 text-lg items-center font-mono bg-gray-900 text-red-600 w-screen h-max">
                 <div className="w-min whitespace-nowrap">

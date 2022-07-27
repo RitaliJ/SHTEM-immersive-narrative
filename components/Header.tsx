@@ -184,7 +184,7 @@ export default function Header(props: {
                                 <span>•</span>
                                 <span>
                                     {survey && (constants.giftCodes[survey.code] === 1
-                                        ? constants.giftCodes[survey.code] + " Heartbeat"
+                                        ? constants.giftCodes[survey.code] + " Heartbeats"
                                         : constants.giftCodes[survey.code] + " Heartbeats")}
                                 </span>
                             </div>
@@ -198,7 +198,7 @@ export default function Header(props: {
                                 <span>•</span>
                                 <span>
                                     {captcha && (constants.giftCodes[captcha.code] === 1
-                                        ? constants.giftCodes[captcha.code] + " Heartbeat"
+                                        ? constants.giftCodes[captcha.code] + " Heartbeats"
                                         : constants.giftCodes[captcha.code] + " Heartbeats")}
                                 </span>
                             </div>
@@ -209,7 +209,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Watch an ad</span>
                                 <span>•</span>
-                                <span>X Heartbeats</span>
+                                <span>X Heartbeat</span>
                             </div>
                         </button>
                         <button

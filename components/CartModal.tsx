@@ -75,7 +75,9 @@ export default function CartModal(props: {
                                 </p>
                             </div>
                             <p className="text-right text-red-600 text-lg italic">
-                                You can{"'"}t afford this purchase! The amount in your cart exceeds your balance!
+
+                                You can{"'"}t afford this purchase! The amount in your cart exceeds the heartbeats you have!
+
                             </p>
                         </div>
                     ) : (
