@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DropdownMenu from '../components/DropdownMenu';
 import InputGroup from '../components/InputGroup'
 import { AccountType, CaptchaType, ItemType, SurveyType } from '../util/types';
@@ -18,6 +18,52 @@ export default function Login() {
     const years = Array.from(new Array(100), (x, i) => 2022 - i); //for choosing date of birth
     const months = Array.from(new Array(12), (x, i) => i + 1);
     const days = Array.from(new Array(31), (x, i) => i + 1);
+
+    const [start, setStart] = useState(0);
+    const [millis, setMillis] = useState<number>(); //initial values before adding from this page
+    const [newMillis, setNewMillis] = useState<number>(); //new amount of milliseconds to add
+
+    //timer and click counter
+    useEffect(() => {
+        const x = localStorage.getItem("login");
+        if (x === null || x === "{}") { //if localstorage key doesn't exist, create it
+            localStorage.setItem("login", JSON.stringify({millis: 0, clicks: 0}));
+        } else {
+            const x2 = JSON.parse(x);
+            setMillis(x2.millis);
+        }
+        setNewMillis(0);
+        setStart(Date.now);
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
+    }, []);
+
+    //update millis roughly once per second
+    useEffect(() => {
+        if (start && millis !== undefined && newMillis !== undefined) {
+            setTimeout(() => {
+                setNewMillis(Date.now() - start);
+                const x = localStorage.getItem("login");
+                if (x !== null) {
+                    let x2 = JSON.parse(x);
+                    x2.millis = millis + newMillis;
+                    localStorage.setItem("login", JSON.stringify(x2));
+                }
+            }, 1000);
+        }
+    }, [newMillis]);
+
+    //handle click event
+    const handleClick = () => {
+        const x = localStorage.getItem("login");
+        if (x !== null) {
+            let x2 = JSON.parse(x);
+            x2.clicks += 1;
+            localStorage.setItem("login", JSON.stringify(x2));
+        }
+    }
 
     //ensure that email is valid
     const validateEmail = () => {

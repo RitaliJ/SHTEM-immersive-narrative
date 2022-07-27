@@ -53,7 +53,7 @@ export default function Captcha(props: {
                                         <img
                                             key={j}
                                             onClick={() => flipAtIndex(3 * i + j)}
-                                            className={"border-4 border-white ring-8 w-48 h-48 duration-150 hover:cursor-pointer "
+                                            className={"border-4 border-white ring-8 w-[16vh] h-[16vh] duration-150 hover:cursor-pointer "
                                                 + (selected[3 * i + j] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
                                             src={captcha.imgSrcs[3 * i + j]}
                                             alt={i.toString()}
