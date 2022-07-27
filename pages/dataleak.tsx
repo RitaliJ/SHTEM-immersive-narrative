@@ -8,7 +8,21 @@ export default function Dataleak() {
     const [account, setAccount] = useState(undefined as unknown as AccountType);
     const [interests, setInterests] = useState([""]);
     const [vacationCaptcha, setVacationCaptcha] = useState([false]);
-    
+
+    function updateUserVacationCaptchaLabels(selections: boolean [], referenceList: string []){
+        let labels = [];
+        for(var i = 0; i < selections.length; i++){
+            if(selections[i]){
+                labels[i] = referenceList[i]
+            }
+        }
+        return labels;
+
+    };
+
+   // constants.vacationCaptchaLabels
+
+
     type Keys = {
         login: {millis: number, clicks: number},
         terms: {millis: number, clicks: number},
@@ -71,7 +85,7 @@ export default function Dataleak() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="flex flex-col gap-1 p-12 text-lg items-center font-mono bg-gray-900 text-red-600 w-screen h-screen">
+            <main className="flex flex-col gap-1 p-12 text-lg items-center font-mono bg-gray-900 text-red-600 w-screen h-max">
                 <div className="w-min whitespace-nowrap">
                     <h1 className="text-2xl font-bold">
                         {account && account.firstName + "'"}s data
@@ -96,6 +110,22 @@ export default function Dataleak() {
                         <p>Interests:</p>
                         <div className="flex flex-col gap-1 pl-6">
                             {interests[0] ? interests.map((x, i) =>
+                                <div key={i} className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{x}</p>
+                                </div>
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            )
+                            }
+                        </div>
+                        <p>Your Values and Desires:</p>
+                        <div className="flex flex-col gap-1 pl-6">
+                            {
+                            vacationCaptcha ? updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels).map((x, i) =>
                                 <div key={i} className="flex gap-2">
                                     <p>•</p>
                                     <p>{x}</p>
