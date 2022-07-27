@@ -159,8 +159,14 @@ export default function Checkout() {
             <Header psaHtml="Order things here!" />
 
             <main className="container pt-12 pb-24 flex text-lg divide-x divide-gray-300">
-                <PrefillModal isOpen={prefillOpen} setIsOpen={setPrefillOpen} callback={prefill} />
-
+                
+                <PrefillModal
+                    isOpen={prefillOpen}
+                    setIsOpen={setPrefillOpen}
+                    text="It looks like we already have your email and name. Would you like us to prefill
+                        this information for you?"
+                    callback={prefill}
+                />
                 <div className="w-2/5 flex flex-col gap-2 p-4 pr-8 h-min">
 
                     <h3 className="text-2xl mb-4">
