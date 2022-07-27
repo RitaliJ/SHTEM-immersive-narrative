@@ -78,7 +78,7 @@ export default function Login() {
             && year !== undefined && month !== undefined && day !== undefined
             && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
-            //clear completed surveys and captchas for new account
+            //clear other localStorage information for new account
             constants.surveys.forEach((x: SurveyType) => localStorage.setItem(x.title, "undefined"));
             constants.captchas.forEach((x: CaptchaType) => localStorage.setItem(x.title, "undefined"));
             location.href = "/terms";

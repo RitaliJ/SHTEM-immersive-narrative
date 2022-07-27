@@ -61,8 +61,8 @@ export default function Dataleak() {
             const gen = localStorage.getItem('shtemInfo4');
             if (gen)  setgender(JSON.parse(gen));
             
-            const vacationCaptchaSelections = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
-            if (vacationCaptchaSelections) setVacationCaptcha(JSON.parse(vacationCaptchaSelections));
+            const vacation = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
+            if (vacation && vacation !== "undefined") setVacationCaptcha(JSON.parse(vacation));
 
             let tempData = {} as Keys;
 
@@ -108,7 +108,8 @@ export default function Dataleak() {
 
         }
     }, []);
-    function indicator() {
+
+    const indicator = () => {
         if((extro1[0] == "what's free time? I'm always working." || extro1[0] == "Chill at home") && (extro2[0] == "I like to work independently")) {
             const indicator = "It seems that you are an introvert"
             return indicator;
@@ -120,12 +121,12 @@ export default function Dataleak() {
             return indicator;
         }
         
-    }  
-
-
-
-   
+    }
     
+    const formatPhone = (str: string) => {
+        return `(${str.substring(0, 3)})${str.substring(3, 6)}-${str.substring(6)}`;
+    }
+
     return (
         <>
             <Head>
@@ -150,7 +151,7 @@ export default function Dataleak() {
                         </div>
                         <div className="flex gap-2">
                             <p>Phone number:</p>
-                            <p>{account.phone}</p>
+                            <p>{formatPhone(account.phone)}</p>
                         </div>
                         <div className="flex gap-2">
                             <p>Date of birth:</p>
