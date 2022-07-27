@@ -4,20 +4,23 @@ import InputGroup from "../components/InputGroup";
 import ToggleButton from "../components/ToggleButton";
 import { AccountType } from "../util/types";
 
-//page for collecting additional information about the user
-export default function Survey() {
-    const [account, setAccount] = useState<AccountType>();
-    const [interests, setInterests] = useState([""]);//array of interest names
 
+
+
+
+//page for collecting additional information about the user
+export default function moreInfo() {
+    const [account, setAccount] = useState<AccountType>();
+    const [info1, setinfo1] = useState([""]);//array of interest names
     const [start, setStart] = useState(0);
     const [millis, setMillis] = useState<number>(); //initial values before adding from this page
     const [newMillis, setNewMillis] = useState<number>(); //new amount of milliseconds to add
 
     //timer and click counter
     useEffect(() => {
-        const x = localStorage.getItem("survey");
+        const x = localStorage.getItem("extrovert1");
         if (x === null || x === "{}") { //if localstorage key doesn't exist, create it
-            localStorage.setItem("survey", JSON.stringify({millis: 0, clicks: 0}));
+            localStorage.setItem("extrovert1", JSON.stringify({millis: 0, clicks: 0}));
         } else {
             const x2 = JSON.parse(x);
             setMillis(x2.millis);
@@ -35,11 +38,11 @@ export default function Survey() {
         if (start && millis !== undefined && newMillis !== undefined) {
             setTimeout(() => {
                 setNewMillis(Date.now() - start);
-                const x = localStorage.getItem("survey");
+                const x = localStorage.getItem("extrovert1");
                 if (x !== null) {
                     let x2 = JSON.parse(x);
                     x2.millis = millis + newMillis;
-                    localStorage.setItem("survey", JSON.stringify(x2));
+                    localStorage.setItem("extrovert1", JSON.stringify(x2));
                 }
             }, 1000);
         }
@@ -47,11 +50,11 @@ export default function Survey() {
 
     //handle click event
     const handleClick = () => {
-        const x = localStorage.getItem("survey");
+        const x = localStorage.getItem("extrovert1");
         if (x !== null) {
             let x2 = JSON.parse(x);
             x2.clicks += 1;
-            localStorage.setItem("survey", JSON.stringify(x2));
+            localStorage.setItem("extrovert1", JSON.stringify(x2));
         }
     }
 
@@ -70,16 +73,16 @@ export default function Survey() {
     //function to add/remove an interest
     const updateInterests = (name: string, on: boolean) => {
         if (on) {
-            setInterests([...interests, name].filter(e => e !== ""));
+            setinfo1([...info1, name].filter(e => e !== ""));
         } else {
-            setInterests(interests.filter(e => e !== name));
+            setinfo1(info1.filter(e => e !== name));
         }
     }
 
     //set localStorage and go to index
     const handleSubmit = () => {
-        localStorage.setItem("shtemInterests", JSON.stringify(interests));
-        location.href = "/moreinfo1";
+        localStorage.setItem("shtemInfo1", JSON.stringify(info1));
+        location.href = "/moreinfo2";
     }
 
     return (
@@ -93,24 +96,20 @@ export default function Survey() {
             <main className="container h-4/5 flex justify-center items-center">
                 <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg max-w-min">
                     <h1 className="text-2xl font-bold text-center">
-                        We{"'"}d love to make this shopping experience perfect for <em>you</em>!
+                        We would love to get some more information about you so that we can provide a more pleasurable user experience!
                     </h1>
                     <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
-                        Let us know what your interests are
+                        You have a free day. What do you do on this day?
                     </h1>
                     <p className="italic text-center">
-                        Click to select any number of interests
+                        One answer only. 
                     </p>
                     <div className="flex flex-wrap gap-1 justify-center">
-                        <ToggleButton label="Balenciaga" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="GUCCI" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Louis Vuitton" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Armani" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Prada" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Chanel" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Versace" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Cartier" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Hermes" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="spend time outside with friends" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="go meet with other family members" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Chill at home" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="what's free time? I'm always working." callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="Go out on a date" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
                     </div>
 
                     <div className="flex mt-2 justify-center">

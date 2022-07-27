@@ -111,14 +111,7 @@ export default function Checkout() {
         setEmail(account.email);
         setFirstName(account.firstName);
         setLastName(account.lastName);
-        setInBudget(account.balance > t + shipping);
-    }, [account]);
-
-
-    //check whether you can afford new shipping selection
-    useEffect(() => {
-        setInBudget(account.balance > total + shipping);
-    }, [shipping]);
+    }
 
     //handle clicking on order button
     const handleSubmit = () => {
@@ -266,8 +259,7 @@ export default function Checkout() {
                                 <div className="flex gap-2">
                                     <p>Standard</p>
                                     <p>•</p>
-                                    <p>5 heartbeats</p>
-
+                                    <p>5 Heartbeats</p>
                                 </div>
                             </button>
                             <button
@@ -278,9 +270,7 @@ export default function Checkout() {
                                 <div className="flex gap-2">
                                     <p>Express</p>
                                     <p>•</p>
-
-                                    <p>15 heartbeats</p>
-
+                                    <p>15 Heartbeats</p>
                                 </div>
                             </button>
                             <button
@@ -291,9 +281,7 @@ export default function Checkout() {
                                 <div className="flex gap-2">
                                     <p>Overnight</p>
                                     <p>•</p>
-
                                     <p>25 Heartbeats</p>
-
                                 </div>
                             </button>
                         </div>
