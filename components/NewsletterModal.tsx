@@ -53,7 +53,7 @@ export default function NewsletterModal(props: {
                 </button>
                 {!validateEmail() && !prefillOpen &&
                     <p className="text-red-500 italic">
-                        Invalid email address
+                        * Invalid email address
                     </p>
                 }
                 <PrefillModal
