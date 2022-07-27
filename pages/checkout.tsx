@@ -210,15 +210,15 @@ export default function Checkout() {
                     <div className="flex flex-col gap-2 pt-4">
                         <div className="flex gap-2 px-2 text-lg text-gray-400">
                             <p className="grow">Subtotal</p>
-                            <p>{total.toFixed(2)} Tokens</p>
+                            <p>{total.toFixed(2)} Heartbeats</p>
                         </div>
                         <div className="flex gap-2 px-2 text-lg text-gray-400">
                             <p className="grow">Shipping</p>
-                            <p>{shipping.toFixed(2)} Tokens</p>
+                            <p>{shipping.toFixed(2)} Heartbeats</p>
                         </div>
                         <div className="flex gap-2 px-2 text-2xl">
                             <p className="grow">Total</p>
-                            <p className='text-green-600'>{(total + shipping).toFixed(2)} Tokens</p>
+                            <p className='text-green-600'>{(total + shipping).toFixed(2)} Heartbeats</p>
                         </div>
 
                         <h3 className="text-2xl mt-12 mb-4">
@@ -240,7 +240,7 @@ export default function Checkout() {
                                 <div className="flex gap-2">
                                     <p>Standard</p>
                                     <p>•</p>
-                                    <p>5 Tokens</p>
+                                    <p>5 Heartbeats</p>
                                 </div>
                             </button>
                             <button
@@ -251,7 +251,7 @@ export default function Checkout() {
                                 <div className="flex gap-2">
                                     <p>Express</p>
                                     <p>•</p>
-                                    <p>15 Tokens</p>
+                                    <p>15 Heartbeats</p>
                                 </div>
                             </button>
                             <button
@@ -262,7 +262,7 @@ export default function Checkout() {
                                 <div className="flex gap-2">
                                     <p>Overnight</p>
                                     <p>•</p>
-                                    <p>25 Tokens</p>
+                                    <p>25 Heartbeats</p>
                                 </div>
                             </button>
                         </div>

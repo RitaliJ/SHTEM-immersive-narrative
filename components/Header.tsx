@@ -150,7 +150,7 @@ export default function Header(props: {
                 </svg>
             </button>
             <span className="text-lg text-green-600 outline-white">
-                {account.balance && account.balance.toFixed(2)} Tokens
+                {account.balance && account.balance.toFixed(2)} Heartbeats
             </span>
             <button
                 onClick={() => {router.pathname !== "/checkout" && setIsOpen(true)}}
@@ -173,7 +173,7 @@ export default function Header(props: {
                     <>
                         {psaHtml}
                         <p className="mb-2">
-                            Need more tokens? Here are some options to get free tokens:
+                            Need more Heartbeats? Here are some options to get free Heartbeats:
                         </p>
                         <button
                             onClick={() => {if (!outOfSurveys) setSurveyOpen(true)}}
@@ -184,8 +184,8 @@ export default function Header(props: {
                                 <span>•</span>
                                 <span>
                                     {survey && (constants.giftCodes[survey.code] === 1
-                                        ? constants.giftCodes[survey.code] + " Token"
-                                        : constants.giftCodes[survey.code] + " Tokens")}
+                                        ? constants.giftCodes[survey.code] + " Heartbeat"
+                                        : constants.giftCodes[survey.code] + " Heartbeats")}
                                 </span>
                             </div>
                         </button>
@@ -198,8 +198,8 @@ export default function Header(props: {
                                 <span>•</span>
                                 <span>
                                     {captcha && (constants.giftCodes[captcha.code] === 1
-                                        ? constants.giftCodes[captcha.code] + " Token"
-                                        : constants.giftCodes[captcha.code] + " Tokens")}
+                                        ? constants.giftCodes[captcha.code] + " Heartbeat"
+                                        : constants.giftCodes[captcha.code] + " Heartbeats")}
                                 </span>
                             </div>
                         </button>
@@ -209,7 +209,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Watch an ad</span>
                                 <span>•</span>
-                                <span>X Tokens</span>
+                                <span>X Heartbeats</span>
                             </div>
                         </button>
                         <button
@@ -219,7 +219,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Sign up for our newsletter</span>
                                 <span>•</span>
-                                <span>1 Token</span>
+                                <span>1 Heartbeat</span>
                             </div>
                         </button>
                     </>

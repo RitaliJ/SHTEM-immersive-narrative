@@ -44,7 +44,7 @@ export default function RedeemModal(props: {
                     ×
                 </button>
                 <p className="text-2xl font-bold">
-                    Redeem tokens
+                    Redeem Heartbeats
                 </p>
                 <input
                     type="text"

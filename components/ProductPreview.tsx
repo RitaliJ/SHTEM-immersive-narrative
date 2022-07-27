@@ -15,7 +15,7 @@ export default function ProductPreview(props: {product: ProductType}) {
                         {product.name}
                     </p>
                     <p className={"whitespace-nowrap text-green-600 text-xs"}>
-                        {(product.price).toFixed(2)} Tokens
+                        {(product.price).toFixed(2)} Heartbeats
                     </p>
                 </div>
                 <p className="line-clamp-5 text-gray-500">

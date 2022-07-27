@@ -105,7 +105,7 @@ export default function Dataleak() {
                         </div>
                         <div className="flex gap-2">
                             <p>Account balance:</p>
-                            <p>{account.balance.toFixed(2)} Tokens</p>
+                            <p>{account.balance.toFixed(2)} Heartbeats</p>
                         </div>
                         <p>Items purchased:</p>
                         <div className="flex flex-col gap-1 pl-6">

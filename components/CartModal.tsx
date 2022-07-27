@@ -71,11 +71,11 @@ export default function CartModal(props: {
                             <div className="flex gap-2 text-2xl">
                                 <p className="text-black">Total:</p>
                                 <p className="text-green-500">
-                                    {total.toFixed(2)} V Bucks
+                                    {total.toFixed(2)} Heartbeats
                                 </p>
                             </div>
                             <p className="text-right text-red-600 text-lg italic">
-                                You can{"'"}t afford this purchase! The amount in your cart exceeds your tokens!
+                                You can{"'"}t afford this purchase! The amount in your cart exceeds your balance!
                             </p>
                         </div>
                     ) : (
@@ -83,7 +83,7 @@ export default function CartModal(props: {
                             <div className="flex gap-2 text-2xl">
                                 <p>Total:</p>
                                 <p className="text-green-600">
-                                    {total.toFixed(2)} Tokens
+                                    {total.toFixed(2)} Heartbeats
                                 </p>
                             </div>
                             {account.email && account.items[0] ? (
