@@ -9,8 +9,8 @@ export default function PrefillModal(props: {
     const {isOpen, setIsOpen, text, callback} = props;
 
     return (
-        <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
-            <div className="flex flex-col gap-4 items-center relative bg-white container px-8 py-6 rounded-lg w-96">
+        <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen} zIndex="z-20">
+            <div className="z-40 flex flex-col gap-4 items-center relative bg-white container px-8 py-6 rounded-lg w-96">
                 <p className="text-xl">
                     {text}
                 </p>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CenteredModal from "./CenteredModal";
 import InputGroup from "./InputGroup";
+import PrefillModal from "./PrefillModal";
 
 export default function NewsletterModal(props: {
     isOpen: boolean,
@@ -9,12 +10,13 @@ export default function NewsletterModal(props: {
     callback: (value: number) => void,
 }) {
     const {isOpen, setIsOpen, email, callback} = props;
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState(""); //useState for value of input element
+    const [prefillOpen, setPrefillOpen] = useState(false); //useState for prefill modal component
 
-    //prefill with email from account in localStorage
+    //when modal is openend, open prefill modal on top of this one
     useEffect(() => {
-        if (isOpen && !value) {
-            setValue(email);
+        if (isOpen) {
+            setPrefillOpen(true);
         }
     }, [isOpen]);
 
@@ -54,6 +56,13 @@ export default function NewsletterModal(props: {
                         Invalid email address
                     </p>
                 }
+                <PrefillModal
+                    isOpen={prefillOpen}
+                    setIsOpen={setPrefillOpen}
+                    text="It looks like we already have your email. Would you like us to prefill
+                        it for you?"
+                    callback={() => setValue(email)}
+                />
             </div>
         </CenteredModal>
     )
