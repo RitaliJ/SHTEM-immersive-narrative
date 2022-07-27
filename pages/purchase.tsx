@@ -3,14 +3,16 @@ import { useEffect, useState } from "react";
 import CenteredModal from "../components/CenteredModal";
 import Header from "../components/Header";
 import NiceLink from "../components/NiceLink";
+import InputGroup from '../components/InputGroup'
+
 
 //confirmation page after purchasing products
 export default function Purchase() {
     const [isOpen, setIsOpen] = useState(false);
-
     const [start, setStart] = useState(0);
     const [millis, setMillis] = useState<number>(); //initial values before adding from this page
     const [newMillis, setNewMillis] = useState<number>(); //new amount of milliseconds to add
+    const [code, setCode] = useState("");
 
     //timer and click counter
     useEffect(() => {
@@ -53,6 +55,14 @@ export default function Purchase() {
             localStorage.setItem("purchase", JSON.stringify(x2));
         }
     }
+    function checkCode(){
+        if (code == "1111") {
+            location.href = "/dataleak";
+        } else {
+            return "Incorrect Code. Please Try Again";
+        }
+
+    }
     return (
         <>
             <Head>
@@ -82,12 +92,15 @@ export default function Purchase() {
                 <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
                     <div className="bg-gray-900 w-full h-full flex flex-col items-center justify-center font-mono">
                         <h1 className="text-4xl text-red-600">
-                            ERROR: DATA COMPROMISED
+                            WARNING! YOU HAVE BEEN HACKED
                         </h1>
                         <p className="text-3xl text-red-600 w-6/12 mt-8">
-                            There has been a data leak in the system. Please call XXX-XXX-XXXX for more information
+                           Your data has been taken by hacker group THE NEW GENERATION Call XXX-XXX-XXXX to get access to the data the TNGers collected.
                         </p>
-                        <NiceLink href="/dataleak" text="See all the data we have collected on you." className="mb-6" />
+                        <div className= "text-2xl text-red-600 font-bold text-center justify-center">
+                            <InputGroup label="Code" callback={setCode} />
+                            <button onClick={() =>checkCode()}>Submit</button>
+                            </div>
                     </div>
                 </CenteredModal>
             </main>

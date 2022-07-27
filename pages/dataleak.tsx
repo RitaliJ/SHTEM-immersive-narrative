@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { AccountType, ProductType } from "../util/types";
 const constants = require('../util/constants');
-import InputGroup from '../components/InputGroup'
+
 
 //page where all collected data is displayed
 export default function Dataleak() {
@@ -13,7 +13,7 @@ export default function Dataleak() {
     const [race, setrace] = useState([""]);
     const [gender,setgender] = useState([""]);
     const [vacationCaptcha, setVacationCaptcha] = useState([false]);
-    const [code, setCode] = useState("");
+    
 
     function updateUserVacationCaptchaLabels(selections: boolean [], referenceList: string []){
         let labels = [];
@@ -121,14 +121,7 @@ export default function Dataleak() {
         }
         
     }  
-    function checkCode(){
-        if (code == "1111") {
-            location.href = "/terms";
-        } else {
-            return "Incorrect Code. Please Try Again";
-        }
 
-    }
 
 
    
@@ -378,10 +371,7 @@ export default function Dataleak() {
                                     <p>{p.millis}ms, {p.clicks === 1 ? "1 click" : p.clicks + " clicks"}</p>
                                 </div>
                             )}
-                            <div className= "text-2xl font-bold text-center justify-center">
-                            <InputGroup label="Code" callback={setCode} />
-                            <button onClick={() =>checkCode()}>Submit</button>
-                            </div>
+  
                         </div>}
                     </>}
                 </div>
