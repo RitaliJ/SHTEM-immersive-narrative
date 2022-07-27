@@ -5,19 +5,18 @@ import ToggleButton from "../components/ToggleButton";
 import { AccountType } from "../util/types";
 
 //page for collecting additional information about the user
-export default function Survey() {
+export default function moreInfo() {
     const [account, setAccount] = useState<AccountType>();
-    const [interests, setInterests] = useState([""]);//array of interest names
-
+    const [info2, setinfo2] = useState([""]);//array of interest names
     const [start, setStart] = useState(0);
     const [millis, setMillis] = useState<number>(); //initial values before adding from this page
     const [newMillis, setNewMillis] = useState<number>(); //new amount of milliseconds to add
 
     //timer and click counter
     useEffect(() => {
-        const x = localStorage.getItem("survey");
+        const x = localStorage.getItem("extrovert2");
         if (x === null || x === "{}") { //if localstorage key doesn't exist, create it
-            localStorage.setItem("survey", JSON.stringify({millis: 0, clicks: 0}));
+            localStorage.setItem("extrovert2", JSON.stringify({millis: 0, clicks: 0}));
         } else {
             const x2 = JSON.parse(x);
             setMillis(x2.millis);
@@ -35,11 +34,11 @@ export default function Survey() {
         if (start && millis !== undefined && newMillis !== undefined) {
             setTimeout(() => {
                 setNewMillis(Date.now() - start);
-                const x = localStorage.getItem("survey");
+                const x = localStorage.getItem("extrovert2");
                 if (x !== null) {
                     let x2 = JSON.parse(x);
                     x2.millis = millis + newMillis;
-                    localStorage.setItem("survey", JSON.stringify(x2));
+                    localStorage.setItem("extrovert2", JSON.stringify(x2));
                 }
             }, 1000);
         }
@@ -47,11 +46,11 @@ export default function Survey() {
 
     //handle click event
     const handleClick = () => {
-        const x = localStorage.getItem("survey");
+        const x = localStorage.getItem("extrovert2");
         if (x !== null) {
             let x2 = JSON.parse(x);
             x2.clicks += 1;
-            localStorage.setItem("survey", JSON.stringify(x2));
+            localStorage.setItem("extrovert2", JSON.stringify(x2));
         }
     }
 
@@ -70,16 +69,16 @@ export default function Survey() {
     //function to add/remove an interest
     const updateInterests = (name: string, on: boolean) => {
         if (on) {
-            setInterests([...interests, name].filter(e => e !== ""));
+            setinfo2([...info2, name].filter(e => e !== ""));
         } else {
-            setInterests(interests.filter(e => e !== name));
+            setinfo2(info2.filter(e => e !== name));
         }
     }
 
     //set localStorage and go to index
     const handleSubmit = () => {
-        localStorage.setItem("shtemInterests", JSON.stringify(interests));
-        location.href = "/moreinfo1";
+        localStorage.setItem("shtemInfo2", JSON.stringify(info2));
+        location.href = "/moreinfo3";
     }
 
     return (
@@ -93,24 +92,19 @@ export default function Survey() {
             <main className="container h-4/5 flex justify-center items-center">
                 <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg max-w-min">
                     <h1 className="text-2xl font-bold text-center">
-                        We{"'"}d love to make this shopping experience perfect for <em>you</em>!
+                        We would love to get some more information about you so that we can provide a more pleasurable user experience!
                     </h1>
                     <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
-                        Let us know what your interests are
+                        You have a project in school. Your teacher has given you an option to either work in a large group, small group or by youself? Which one do you decide upon?
                     </h1>
                     <p className="italic text-center">
-                        Click to select any number of interests
+                        One answer only. 
                     </p>
                     <div className="flex flex-wrap gap-1 justify-center">
-                        <ToggleButton label="Balenciaga" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="GUCCI" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Louis Vuitton" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Armani" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Prada" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Chanel" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Versace" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Cartier" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
-                        <ToggleButton label="Hermes" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label=" I like to work in a large group fosho" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="I like to work in a small group" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+                        <ToggleButton label="I like to work independently" callback={updateInterests} offBg="bg-amber-100 hover:bg-amber-200" />
+
                     </div>
 
                     <div className="flex mt-2 justify-center">
