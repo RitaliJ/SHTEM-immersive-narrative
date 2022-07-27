@@ -7,6 +7,7 @@ const constants = require('../util/constants');
 export default function Dataleak() {
     const [account, setAccount] = useState(undefined as unknown as AccountType);
     const [interests, setInterests] = useState([""]);
+    const [vacationCaptcha, setVacationCaptcha] = useState([false]);
     
     type Keys = {
         login: {millis: number, clicks: number},
@@ -27,6 +28,9 @@ export default function Dataleak() {
 
             const int = localStorage.getItem('shtemInterests');
             if (int) setInterests(JSON.parse(int));
+            
+            const vacationCaptchaSelections = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
+            if (vacationCaptchaSelections) setVacationCaptcha(JSON.parse(vacationCaptchaSelections));
 
             let tempData = {} as Keys;
 
@@ -58,7 +62,7 @@ export default function Dataleak() {
             setData(tempData);
         }
     }, []);
-
+    
     return (
         <>
             <Head>
@@ -101,7 +105,8 @@ export default function Dataleak() {
                                     <p>•</p>
                                     <p>None</p>
                                 </div>
-                            )}
+                            )
+                            }
                         </div>
                         <div className="flex gap-2">
                             <p>Account balance:</p>
