@@ -9,14 +9,12 @@ export default function TokenAd(props: {
     const {isOpen, setIsOpen, callback} = props;
     const [reward, setReward] = useState(0);
     const [running, setRunning] = useState(false);
-    const [startTime, setStartTime] = useState(0);
-    const tokensPerMinute = 1;
+    const [heartrate, setHeartrate] = useState(70);
 
     //start running timer on modal open
     useEffect(() => {
         if (isOpen) {
             setReward(0);
-            setStartTime(Date.now());
             setRunning(true);
         } else {
             setRunning(false);
@@ -28,22 +26,38 @@ export default function TokenAd(props: {
     useEffect(() => {
         if (running) {
             setTimeout(() => {
-                setReward(tokensPerMinute * (Date.now() - startTime) / 60000);
-            }, 100);
+                setReward(reward + 1);
+            }, 60000 / heartrate);
         }
     }, [running, reward]);
+
+    //update heartrate roughly once every 2 seconds
+    useEffect(() => {
+        setTimeout(() => {
+            let h = heartrate;
+            h += Math.floor(Math.random() * 11);
+            h -= 4; //slightly increase heartrate over time on average
+            if (h > 120) h === heartrate ? h = 119 : h = 120;
+            if (h < 50) h === heartrate ? h = 51 : h = 50;
+            setHeartrate(h);
+        }, 1000 + Math.floor(Math.random() * 2001));
+    }, [heartrate]);
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className="relative flex flex-col gap-2 p-4 items-center bg-white w-min whitespace-nowrap rounded-lg oveflow-hidden">
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="absolute top-2 right-4 text-5xl">
+                    className="absolute top-2 right-4 text-5xl"
+                >
                     ×
                 </button>
                 <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1001281489478099025/Untitled_drawing.jpg"></img>
                 <p className="text-xl">
-                    Current reward: {reward.toFixed(2)} Heartbeats
+                    Heartrate: {heartrate} BPM
+                </p>
+                <p className="text-xl">
+                    Current reward: {reward} Heartbeats
                 </p>
                 <p className="italic">
                     You can close this popup at any time to receive your Heartbeats
