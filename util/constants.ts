@@ -24,16 +24,16 @@ module.exports = {
                     label: "Name the worst last name you could imagine.",
                 },
                 {
-                    label: "Name a celebrity you would not want to watch a movie with. ",
+                    label: "Name the family member that you would bring with you on a trip to disneyland. ",
                 },
                 {
-                    label:"Name the worst member in One Direction.",
+                    label:"Name a superpower that you would not want to have.",
                 },
                 {
                     label:"Name something that tastes exponentially worse on a plane.",
                 },
                 {
-                    label:"Name something rich people do on a boat.",
+                    label:"Name the first thing you would do when you wake up.",
                 },
                 {
                     label:"Name a sport that the US is not the best at. ",
@@ -46,7 +46,7 @@ module.exports = {
                     label:"Name the tv show that people would most likely want to be in.",
                 },
                 {
-                    label:"Name a superpower that you would not want to have.",
+                    label:"Provide the average amount of screen time that you had the last week.",
                 },
                 {
                     label:"Name a song other than the national anthem that represents the USA.",
