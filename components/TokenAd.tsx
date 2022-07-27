@@ -53,9 +53,12 @@ export default function TokenAd(props: {
                     ×
                 </button>
                 <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1001281489478099025/Untitled_drawing.jpg"></img>
-                <p className="text-xl">
-                    Heartrate: {heartrate} BPM
-                </p>
+                <div className="flex gap-1 text-2xl">
+                    <p>Heartrate:</p>
+                    <p className="font-bold">
+                        {heartrate} BPM
+                    </p>
+                </div>
                 <p className="text-xl">
                     Current reward: {reward} Heartbeats
                 </p>
