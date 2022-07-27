@@ -6,6 +6,7 @@ import { AccountType } from "../util/types";
 export default function Dataleak() {
     const [account, setAccount] = useState(undefined as unknown as AccountType);
     const [interests, setInterests] = useState([""]);
+    const [vacationCaptcha, setVacationCaptcha] = useState([false]);
 
     useEffect(() => {
         if (!account) {
@@ -15,8 +16,11 @@ export default function Dataleak() {
             const int = localStorage.getItem('shtemInterests');
             if (!int) return;
             setInterests(JSON.parse(int));
+            const vacationCaptchaSelections = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
+            if (!vacationCaptchaSelections) return;
+            setVacationCaptcha(JSON.parse(vacationCaptchaSelections))
         }
-    }, [account, interests]);
+    }, [account, interests, vacationCaptcha]);
 
     return (
         <>
@@ -60,7 +64,8 @@ export default function Dataleak() {
                                     <p>•</p>
                                     <p>None</p>
                                 </div>
-                            )}
+                            )
+                            }
                         </div>
                         <div className="flex gap-2">
                             <p>Account balance:</p>
