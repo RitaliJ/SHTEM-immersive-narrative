@@ -99,7 +99,6 @@ export default function Checkout() {
         );
         setTotal(t);
         setInBudget(account.balance > t + shipping);
-        prefill();
     }, [account]);
 
     //check whether you can afford new shipping selection
@@ -217,8 +216,8 @@ export default function Checkout() {
                 </div>
 
                 <div className="w-full flex flex-col p-4 pl-8 divide-y divide-gray-300">
-                    
-                    {account.email && account.items.map(i =>
+
+                    {account.items && account.items.map(i =>
                         <CartProduct key={i.product.id} item={i} className="text-lg h-24" />
                     )}
                     <div className="flex flex-col gap-2 pt-4">
