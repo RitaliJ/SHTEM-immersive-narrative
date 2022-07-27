@@ -95,8 +95,10 @@ export default function Purchase() {
                             WARNING! YOU HAVE BEEN HACKED
                         </h1>
                         <p className="text-3xl text-red-600 w-6/12 mt-8">
-                           Your data has been taken by hacker group THE NEW GENERATION Call XXX-XXX-XXXX to get access to the data the TNGers collected.
+                           Your data has been taken by hacker group THE NEW GENERATION. 
                         </p>
+                        <br></br>
+                        <p className="text-3xl text-red-600 w-6/12 mt-8">Call XXX-XXX-XXXX to get access to the data the TNGers collected.</p>
                         <div className= "text-2xl text-red-600 font-bold text-center justify-center">
                             <InputGroup label="Code" callback={setCode} />
                             <button onClick={() =>checkCode()}>Submit</button>

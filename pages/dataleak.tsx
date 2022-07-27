@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { AccountType, ProductType } from "../util/types";
+import OurResearch from "./TNG";
 const constants = require('../util/constants');
 
 
@@ -121,6 +122,10 @@ export default function Dataleak() {
         }
         
     }  
+
+    function OurResearch() {
+        location.href = "/TNG";
+    }
 
 
 
@@ -371,7 +376,9 @@ export default function Dataleak() {
                                     <p>{p.millis}ms, {p.clicks === 1 ? "1 click" : p.clicks + " clicks"}</p>
                                 </div>
                             )}
-  
+                            <div className="text-2xl font-bold text-center">
+                            <button onClick={() =>OurResearch()}>Learn More About The New Generation Here</button>
+                            </div>
                         </div>}
                     </>}
                 </div>
@@ -379,4 +386,10 @@ export default function Dataleak() {
         </>
     )
 }
+
+
+
+
+
+
 
