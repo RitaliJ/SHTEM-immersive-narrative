@@ -136,7 +136,7 @@ export default function Dataleak() {
             <Head>
                 <title>SHTEM Website</title>
                 <meta name="description" content="Shtem website" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
             </Head>
 
             <main className="flex flex-col gap-1 p-12 text-sm items-center font-mono bg-gray-900 text-red-600 w-screen h-max">

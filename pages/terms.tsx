@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 //terms and conditions page
 export default function Terms() {
@@ -60,6 +61,11 @@ export default function Terms() {
 
     return (
         <div className="w-screen h-screen bg-blue-100">
+            <Head>
+                <title>SHTEM Website | Terms</title>
+                <meta name="description" content="Survey" />
+                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
+            </Head>
             <main className="container w-min h-4/5 flex justify-center items-center">
                 <div className="bg-white p-6 rounded-lg flex flex-col gap-3 items-center mt-24">
                     <h1 className="text-3xl font-bold text-center whitespace-nowrap px-24">

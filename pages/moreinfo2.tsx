@@ -86,7 +86,7 @@ export default function moreInfo() {
             <Head>
                 <title>SHTEM Website | Survey</title>
                 <meta name="description" content="Survey" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
             </Head>
         
             <main className="container h-4/5 flex justify-center items-center">
