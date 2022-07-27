@@ -153,7 +153,7 @@ export default function Checkout() {
             <Head>
                 <title>SHTEM Website | Checkout</title>
                 <meta name="description" content="Cart" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
             </Head>
             
             <Header psaHtml="Order things here!" />

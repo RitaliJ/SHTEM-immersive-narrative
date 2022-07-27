@@ -49,7 +49,7 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
             <div className="flex bg-white border-2 border-gray-200 shadow-lg rounded-lg">
                 <img
                     className="h-72 rounded-md"
-                    src="https://cdn.vox-cdn.com/thumbor/aDkDyg6qmsgdI-fxAZkyXVcDMOY=/0x0:712x423/1400x1400/filters:focal(385x120:497x232):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/55531033/Screen_Shot_2017_06_30_at_3.17.00_PM.0.png"
+                    src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Pickle.jpg"
                     alt="Shopping assistant"
                 />
                 <div className="px-4 py-3 w-72 flex flex-col gap-2 items-center text-lg">

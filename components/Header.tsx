@@ -140,6 +140,7 @@ export default function Header(props: {
                     Sahara Prime
                 </button>
             </Link>
+            <img src= "https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png"  width = "50" height = "100" alt = "logo"></img>
             <span className="grow"></span>
             <button
                 onClick={() => setRedeemOpen(true)}

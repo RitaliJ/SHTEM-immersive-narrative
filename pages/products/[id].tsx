@@ -92,6 +92,8 @@ export default function Product(){
         <div className="h-screen flex flex-col">
             <Head>
                 <title>{"SHTEM | " + (product && product.name)}</title>
+                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
+
             </Head>
             
             <Header

@@ -36,7 +36,7 @@ export default function HelpPopover(props: {html: ReactNode, outerHtml: ReactNod
                                 </div>
                                 <img
                                     className="h-72"
-                                    src="https://cdn.vox-cdn.com/thumbor/aDkDyg6qmsgdI-fxAZkyXVcDMOY=/0x0:712x423/1400x1400/filters:focal(385x120:497x232):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/55531033/Screen_Shot_2017_06_30_at_3.17.00_PM.0.png"
+                                    src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Pickle.jpg"
                                     alt="Shopping assistant"
                                 />
                             </div>
