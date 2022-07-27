@@ -6,6 +6,7 @@ import DropdownMenu from "../components/DropdownMenu";
 import Header from "../components/Header";
 import InputGroup from "../components/InputGroup";
 import NiceLink from "../components/NiceLink";
+import PrefillModal from "../components/PrefillModal";
 import { AccountType, ItemType } from "../util/types";
 
 export default function Checkout() {
@@ -29,6 +30,7 @@ export default function Checkout() {
                     "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",];
 
     const [inBudget, setInBudget] = useState(true);
+    const [prefillOpen, setPrefillOpen] = useState(true); //useState for prefill modal component
 
     const [start, setStart] = useState(0);
     const [millis, setMillis] = useState<number>(); //initial values before adding from this page
@@ -96,16 +98,21 @@ export default function Checkout() {
             t += i.product.price * i.quantity
         );
         setTotal(t);
-        setEmail(account.email);
-        setFirstName(account.firstName);
-        setLastName(account.lastName);
         setInBudget(account.balance > t + shipping);
+        prefill();
     }, [account]);
 
     //check whether you can afford new shipping selection
     useEffect(() => {
         setInBudget(account.balance > total + shipping);
     }, [shipping]);
+
+    //function to prefill fields that are already know from localstorage
+    const prefill = () => {
+        setEmail(account.email);
+        setFirstName(account.firstName);
+        setLastName(account.lastName);
+    }
 
     //handle clicking on order button
     const handleSubmit = () => {
@@ -153,7 +160,10 @@ export default function Checkout() {
             <Header psaHtml="Order things here!" />
 
             <main className="container pt-12 pb-24 flex text-lg divide-x divide-gray-300">
+                <PrefillModal isOpen={prefillOpen} setIsOpen={setPrefillOpen} callback={prefill} />
+
                 <div className="w-2/5 flex flex-col gap-2 p-4 pr-8 h-min">
+
                     <h3 className="text-2xl mb-4">
                         Shipping address
                     </h3>
@@ -173,6 +183,7 @@ export default function Checkout() {
                         <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} />
                         <InputGroup label="Security PIN" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={3} />
                     </div>
+
                     <div className="flex items-center mt-4">
                         <div className="grow">
                             <NiceLink href="/home" text="← Back" className="mb-6" />
@@ -192,6 +203,7 @@ export default function Checkout() {
                             </button>
                         </Link>
                     </div>
+
                     <p className="italic text-red-500 text-right">
                         {inBudget 
                             ? (firstName && lastName && address && city && state && zip && cardNumber && securityPin
@@ -203,7 +215,9 @@ export default function Checkout() {
                         }
                     </p>
                 </div>
+
                 <div className="w-full flex flex-col p-4 pl-8 divide-y divide-gray-300">
+                    
                     {account.email && account.items.map(i =>
                         <CartProduct key={i.product.id} item={i} className="text-lg h-24" />
                     )}
