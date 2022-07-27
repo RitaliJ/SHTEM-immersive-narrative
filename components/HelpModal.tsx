@@ -22,10 +22,10 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
         </p>,
         <p key={3}>
             Our store is very special as we don{"'"}t take payment through physical currency,
-            but rather through our own personal currency of tokens.
+            but rather through our own personal currency of Heartbeats.
         </p>,
         <p key={4}>
-            Luckily for you, you get to start off with 100 tokens already! Have a look around
+            Luckily for you, you get to start off with 100 Heartbeats already! Have a look around
             the store and see what interests you.
         </p>,
         <div key={5} className="flex gap-1 flex-wrap items-center">

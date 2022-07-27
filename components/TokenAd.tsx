@@ -43,10 +43,10 @@ export default function TokenAd(props: {
                 </button>
                 <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1001281489478099025/Untitled_drawing.jpg"></img>
                 <p className="text-xl">
-                    Current reward: {reward.toFixed(2)} Tokens
+                    Current reward: {reward.toFixed(2)} Heartbeats
                 </p>
                 <p className="italic">
-                    You can close this popup at any time to receive your tokens
+                    You can close this popup at any time to receive your Heartbeats
                 </p>
             </div>
         </CenteredModal>
