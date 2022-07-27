@@ -102,8 +102,25 @@ export default function Dataleak() {
             tempData.products = products;
 
             setData(tempData);
+                   
+
         }
     }, []);
+    function indicator() {
+        if((extro1[0] == "what's free time? I'm always working." || extro1[0] == "Chill at home") && (extro2[0] == "I like to work independently")) {
+            const indicator = "It seems that you are an introvert"
+            return indicator;
+        } else if ((extro2[0] == " I like to work in a large group fosho") && (extro1[0] == "spend time outside with friends")) {
+            const indicator = "It seems as if you are an extrovert"
+            return indicator;
+        } else {
+            const indicator = "It seems as if you are in ambivert"
+            return indicator;
+        }
+        
+    }  
+
+   
     
     return (
         <>
@@ -156,6 +173,7 @@ export default function Dataleak() {
                                 <div key={i} className="flex gap-2">
                                     <p>•</p>
                                     <p>{x}</p>
+                                    
                                 </div>
                             ) : (
                                 <div className="flex gap-2">
@@ -176,6 +194,13 @@ export default function Dataleak() {
                                 </div>
                             )
                             }
+
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{indicator()}</p>
+                                </div>
+ 
+
                         </div>
                         <p>Your race and gender</p>
                         <div className="flex flex-col gap-1 pl-6">
