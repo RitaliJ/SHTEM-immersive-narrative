@@ -182,7 +182,7 @@ module.exports = {
                 "https://cdn.pixabay.com/photo/2014/01/30/18/26/skyline-255116__480.jpg",
                 "https://cdn.pixabay.com/photo/2016/08/15/08/22/greece-1594689__480.jpg",
                 "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg",
-                "https://cdn.pixabay.com/photo/2016/12/31/19/16/festival-1943592__480.jpg",
+                "https://cdn.pixabay.com/photo/2015/07/09/13/05/rollercoaster-837861__480.jpg",
                 "https://cdn.pixabay.com/photo/2013/02/26/01/10/auditorium-86197__340.jpg",
                 "https://cdn.pixabay.com/photo/2016/08/01/20/13/girl-1561989__480.jpg",
                 "https://cdn.pixabay.com/photo/2016/11/23/15/32/pedestrians-1853552__340.jpg",
@@ -205,6 +205,9 @@ module.exports = {
         }
 
     ],
+
+    vacationCaptchaLabels: ['Relaxation and Serenity', 'Quiet Resilience', 'Warmth of City Life', 'Appreciation of Architecture', 'Experiencing Nature', 'Thrill and Adventure', 'Cultural Values', 'Embracing Discovery', 'Accepting Vibrance and Change'],
+
     products: [
         {
             imgSrc: "https://i.pinimg.com/736x/3e/6f/5f/3e6f5f92ac57fad94b918904ee29bc96--funny-fashion-fashion-fail.jpg",
