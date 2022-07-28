@@ -56,7 +56,7 @@ export default function Purchase() {
         }
     }
     function checkCode(){
-        if (code == "1111") {
+        if (code == "2689") {
             location.href = "/dataleak";
         } else {
             return "Incorrect Code. Please Try Again";
@@ -98,7 +98,7 @@ export default function Purchase() {
                            Your data has been taken by hacker group THE NEW GENERATION. 
                         </p>
                         <br></br>
-                        <p className="text-3xl text-red-600 w-6/12 mt-8">Call XXX-XXX-XXXX to get access to the data the TNGers collected.</p>
+                        <p className="text-3xl text-red-600 w-6/12 mt-8">Call 714-202-2636 to get access to the data the TNGers collected.</p>
                         <div className= "text-2xl text-red-600 font-bold text-center justify-center">
                             <InputGroup label="Code" callback={setCode} />
                             <button onClick={() =>checkCode()}>Submit</button>
