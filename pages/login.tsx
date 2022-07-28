@@ -78,7 +78,7 @@ export default function Login() {
             && year !== undefined && month !== undefined && day !== undefined
             && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
-            //clear completed surveys and captchas for new account
+            //clear other localStorage information for new account
             constants.surveys.forEach((x: SurveyType) => localStorage.setItem(x.title, "undefined"));
             constants.captchas.forEach((x: CaptchaType) => localStorage.setItem(x.title, "undefined"));
             location.href = "/terms";
@@ -93,7 +93,7 @@ export default function Login() {
                 <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
             </Head>
         
-            <main className="container h-4/5 flex justify-center items-center">
+            <main className="container h-full flex justify-center items-center">
                 <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg">
                     <h1 className="text-3xl font-bold text-center">
                         Create a new account
