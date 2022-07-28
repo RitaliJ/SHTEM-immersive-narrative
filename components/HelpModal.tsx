@@ -48,8 +48,8 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
         <CenteredModal isOpen={isOpen} setIsOpen={() => {}} blur={blur}>
             <div className="flex bg-white border-2 border-gray-200 shadow-lg rounded-lg">
                 <img
-                    className="h-72 rounded-md"
-                    src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Pickle.jpg"
+                    className="h-48 rounded-md"
+                    src="cart.jpg"
                     alt="Shopping assistant"
                 />
                 <div className="px-4 py-3 w-72 flex flex-col gap-2 items-center text-lg">
