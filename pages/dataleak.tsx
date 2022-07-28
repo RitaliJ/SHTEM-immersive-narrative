@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AccountType, ProductType } from "../util/types";
 import OurResearch from "./TNG";
 import { formatMs } from "../util/heplers";
+import Link from "next/link";
 const constants = require('../util/constants');
 
 //page where all collected data is displayed
@@ -95,10 +96,6 @@ export default function Dataleak() {
         } else {
             return "It seems as if you are in ambivert";
         } 
-    }
-
-    function OurResearch() {
-        location.href = "/TNG";
     }
     
     const formatPhone = (str: string) => {
@@ -249,9 +246,6 @@ export default function Dataleak() {
                                     <p>{formatMs(p.millis)}; {p.clicks === 1 ? "1 click" : p.clicks + " clicks"}</p>
                                 </div>
                             )}
-                            <div className="text-2xl font-bold text-center">
-                                <button onClick={() =>OurResearch()}>Learn More About The New Generation Here</button>
-                            </div>
                         </div>}
 
                         <p className="font-bold underline mt-4">
@@ -301,6 +295,13 @@ export default function Dataleak() {
                                     </div>
                                 )
                             }
+                        </div>
+                        <div className="flex justify-center">
+                            <Link href="/TNG">
+                                <button className="bg-red-600 text-gray-900 px-3 py-1 rounded-lg text-xl font-bold text-center mt-4">
+                                    Learn more about The New Generation here
+                                </button>
+                            </Link>
                         </div>
                     </>}
                 </div>
