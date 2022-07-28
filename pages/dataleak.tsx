@@ -292,25 +292,35 @@ export default function Dataleak() {
                         <p>Your pronouns: {gender}</p>
                         <p>Indications About You:</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            {vacationCaptcha &&
+                            {vacationCaptcha && updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels)[0] ? (
                                 updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels).map((x, i) =>
                                     <div key={i} className="flex gap-2">
                                         <p>•</p>
                                         <p>{x}</p>
                                     </div>
                                 )
-                            }
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            )}
                         </div>
                         <p>The Political Issues You Care For The Most:</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            {poliCaptcha &&
+                            {poliCaptcha && updateUserVacationCaptchaLabels(poliCaptcha, constants. politicalIssueCaptchaLabels)[0] ? (
                                 updateUserVacationCaptchaLabels(poliCaptcha, constants. politicalIssueCaptchaLabels).map((x, i) =>
                                     <div key={i} className="flex gap-2">
                                         <p>•</p>
                                         <p>{x}</p>
                                     </div>
                                 )
-                            }
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            )}
                         </div>
                         <div className="flex justify-center">
                             <Link href="/TNG">
