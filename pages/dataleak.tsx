@@ -15,6 +15,7 @@ export default function Dataleak() {
     const [race, setrace] = useState([""]);
     const [gender, setgender] = useState("");
     const [vacationCaptcha, setVacationCaptcha] = useState([false]);
+    const [poliCaptcha, setPoliCaptcha] = useState([false]);
     
     const updateUserVacationCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
         let labels = [];
@@ -56,6 +57,9 @@ export default function Dataleak() {
             
             const vacation = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
             if (vacation && vacation !== "undefined") setVacationCaptcha(JSON.parse(vacation));
+
+            const issues = localStorage.getItem("Select the political issues that matter the most to you.");
+            if (issues && issues !== "undefined") setPoliCaptcha(JSON.parse(issues));
 
             let tempData = {} as Keys;
 
@@ -286,9 +290,21 @@ export default function Dataleak() {
                             }
                         </div>
                         <p>Your pronouns: {gender}</p>
+                        <p>Indications About You:</p>
                         <div className="flex flex-col gap-1 pl-6">
                             {vacationCaptcha &&
                                 updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels).map((x, i) =>
+                                    <div key={i} className="flex gap-2">
+                                        <p>•</p>
+                                        <p>{x}</p>
+                                    </div>
+                                )
+                            }
+                        </div>
+                        <p>The Political Issues You Care For The Most:</p>
+                        <div className="flex flex-col gap-1 pl-6">
+                            {poliCaptcha &&
+                                updateUserVacationCaptchaLabels(poliCaptcha, constants. politicalIssueCaptchaLabels).map((x, i) =>
                                     <div key={i} className="flex gap-2">
                                         <p>•</p>
                                         <p>{x}</p>
