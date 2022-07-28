@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { AccountType, ProductType } from "../util/types";
+import { formatMs } from "../util/heplers";
 const constants = require('../util/constants');
 
 //page where all collected data is displayed
@@ -186,7 +187,7 @@ export default function Dataleak() {
                                     <p className="grow pr-4">
                                         Login page:
                                     </p>
-                                    <p>{data.login.millis}ms, {data.login.clicks === 1 ? "1 click" : data.login.clicks + " clicks"}</p>
+                                    <p>{formatMs(data.login.millis)}; {data.login.clicks === 1 ? "1 click" : data.login.clicks + " clicks"}</p>
                                 </div>
                             }
                             {data.terms &&
@@ -195,7 +196,7 @@ export default function Dataleak() {
                                     <p className="grow pr-4">
                                         Terms and conditions page:
                                     </p>
-                                    <p>{data.terms.millis}ms, {data.terms.clicks === 1 ? "1 click" : data.terms.clicks + " clicks"}</p>
+                                    <p>{formatMs(data.terms.millis)}; {data.terms.clicks === 1 ? "1 click" : data.terms.clicks + " clicks"}</p>
                                 </div>
                             }
                             {data.survey &&
@@ -204,7 +205,7 @@ export default function Dataleak() {
                                     <p className="grow pr-4">
                                         Survey page:
                                     </p>
-                                    <p>{data.survey.millis}ms, {data.survey.clicks === 1 ? "1 click" : data.survey.clicks + " clicks"}</p>
+                                    <p>{formatMs(data.survey.millis)}; {data.survey.clicks === 1 ? "1 click" : data.survey.clicks + " clicks"}</p>
                                 </div>
                             }
                             {data.home &&
@@ -213,7 +214,7 @@ export default function Dataleak() {
                                     <p className="grow pr-4">
                                         Home page:
                                     </p>
-                                    <p>{data.home.millis}ms, {data.home.clicks === 1 ? "1 click" : data.home.clicks + " clicks"}</p>
+                                    <p>{formatMs(data.home.millis)}; {data.home.clicks === 1 ? "1 click" : data.home.clicks + " clicks"}</p>
                                 </div>
                             }
                             {data.checkout &&
@@ -222,7 +223,7 @@ export default function Dataleak() {
                                     <p className="grow pr-4">
                                         Checkout page:
                                     </p>
-                                    <p>{data.checkout.millis}ms, {data.checkout.clicks === 1 ? "1 click" : data.checkout.clicks + " clicks"}</p>
+                                    <p>{formatMs(data.checkout.millis)}; {data.checkout.clicks === 1 ? "1 click" : data.checkout.clicks + " clicks"}</p>
                                 </div>
                             }
                             {data.purchase &&
@@ -231,7 +232,7 @@ export default function Dataleak() {
                                     <p className="grow pr-4">
                                         Purchase confirmation page:
                                     </p>
-                                    <p>{data.purchase.millis}ms, {data.purchase.clicks === 1 ? "1 click" : data.purchase.clicks + " clicks"}</p>
+                                    <p>{formatMs(data.purchase.millis)}; {data.purchase.clicks === 1 ? "1 click" : data.purchase.clicks + " clicks"}</p>
                                 </div>
                             }
                             {data.products.map((p, i) =>
@@ -240,7 +241,7 @@ export default function Dataleak() {
                                     <p className="grow pr-4">
                                         {'"' + constants.products[i].name + '"'} product page:
                                     </p>
-                                    <p>{p.millis}ms, {p.clicks === 1 ? "1 click" : p.clicks + " clicks"}</p>
+                                    <p>{formatMs(p.millis)}; {p.clicks === 1 ? "1 click" : p.clicks + " clicks"}</p>
                                 </div>
                             )}
                         </div>}
