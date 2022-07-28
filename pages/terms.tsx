@@ -66,7 +66,7 @@ export default function Terms() {
                 <meta name="description" content="Survey" />
                 <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
             </Head>
-            <main className="container w-min h-4/5 flex justify-center items-center">
+            <main className="container w-min h-full flex justify-center items-center">
                 <div className="bg-white p-6 rounded-lg flex flex-col gap-3 items-center mt-24">
                     <h1 className="text-3xl font-bold text-center whitespace-nowrap px-24">
                         Terms and Conditions
