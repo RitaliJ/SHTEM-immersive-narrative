@@ -8,7 +8,8 @@ import { AccountType } from "../util/types";
 export default function Survey() {
     const [account, setAccount] = useState<AccountType>();
     const [page, setPage] = useState(0);
-
+    const [canContinue, setCanContinue] = useState(false);
+    
     const [interests, setInterests] = useState([""]); //which interest options are selected
     const [freeDay, setFreeDay] = useState(""); //which free day option is selected
     const [groupWork, setGroupWork] = useState(""); //which group work option is selected
@@ -143,13 +144,13 @@ export default function Survey() {
     const pages: ReactNode[] = [
         <>
             <h1 className="text-2xl font-bold text-center">
-                We{"'"}d love to make this shopping experience perfect for <em>you</em>!
+                We would love to make this shopping experience perfect for <em>you</em>!
             </h1>
-            <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
+            <h1 className="text-xl font-bold text-center mt-4">
                 Let us know what your interests are
             </h1>
             <p className="italic text-center">
-                Click to select any number of interests
+                Click to select any number of options
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
                 {interestOptions.map((x, i) =>
@@ -166,11 +167,11 @@ export default function Survey() {
             <h1 className="text-2xl font-bold text-center">
                 We would love to get some more information about you so that we can provide a more pleasurable user experience!
             </h1>
-            <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
+            <h1 className="text-xl font-bold text-center mt-4">
                 You have a free day. What do you do on this day?
             </h1>
             <p className="italic text-center">
-                One answer only. 
+                One answer only
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
                 {freeDayOptions.map((x, i) =>
@@ -189,11 +190,11 @@ export default function Survey() {
             <h1 className="text-2xl font-bold text-center">
                 We would love to get some more information about you so that we can provide a more pleasurable user experience!
             </h1>
-            <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
+            <h1 className="text-xl font-bold text-center mt-4">
                 You have a project in school. Your teacher has given you an option to either work in a large group, small group or by youself? Which one do you decide upon?
             </h1>
             <p className="italic text-center">
-                One answer only. 
+                One answer only
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
                 {groupWorkOptions.map((x, i) =>
@@ -212,9 +213,12 @@ export default function Survey() {
             <h1 className="text-2xl font-bold text-center">
                 We would love to get some more information about you so that we can provide a more pleasurable user experience!
             </h1>
-            <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
+            <h1 className="text-xl font-bold text-center mt-4">
                 In order to curate a feed that is personally designed for you, we have to know: what is your ethnicity?
             </h1>
+            <p className="italic text-center">
+                Click to select any number of options
+            </p>
             <div className="flex flex-wrap gap-1 justify-center">
                 {raceOptions.map((x, i) =>
                     <ToggleButton
@@ -230,9 +234,12 @@ export default function Survey() {
             <h1 className="text-2xl font-bold text-center">
                 We would love to get some more information about you so that we can provide a more pleasurable user experience!
             </h1>
-            <h1 className="text-xl font-bold text-center whitespace-nowrap mt-4">
+            <h1 className="text-xl font-bold text-center mt-4">
                 To finalize your feed, we also need to know: what are your preferred pronouns?
             </h1>
+            <p className="italic text-center">
+                One answer only
+            </p>
             <div className="flex flex-wrap gap-1 justify-center">
                 {pronounOptions.map((x, i) =>
                     <ToggleButton
@@ -251,21 +258,36 @@ export default function Survey() {
     //function to go to next page
     const advance = () => {
         if (page === pages.length - 1) {
-            handleSubmit();
+            localStorage.setItem("shtemInterests", JSON.stringify(interests));
+            localStorage.setItem("shtemInfo1", JSON.stringify(freeDay));
+            localStorage.setItem("shtemInfo2", JSON.stringify(groupWork));
+            localStorage.setItem("shtemInfo3", JSON.stringify(races));
+            localStorage.setItem("shtemInfo4", JSON.stringify(pronoun));
+            location.href = "/home";
         } else {
             setPage(page + 1);
+            setCanContinue(false);
         }
     }
 
-    //set localStorage and go to index
-    const handleSubmit = () => {
-        localStorage.setItem("shtemInterests", JSON.stringify(interests));
-        localStorage.setItem("shtemInfo1", JSON.stringify(freeDay));
-        localStorage.setItem("shtemInfo2", JSON.stringify(groupWork));
-        localStorage.setItem("shtemInfo3", JSON.stringify(races));
-        localStorage.setItem("shtemInfo4", JSON.stringify(pronoun));
-        location.href = "/home";
-    }
+    //allow user to continue if selection is valid
+    useEffect(() => {
+        if (page === 0 && interests[0]) {
+            setCanContinue(true);
+        }
+        if (page === 1 && freeDay) {
+            setCanContinue(true);
+        }
+        if (page === 2 && groupWork) {
+            setCanContinue(true);
+        }
+        if (page === 3 && races[0]) {
+            setCanContinue(true);
+        }
+        if (page === 4 && pronoun) {
+            setCanContinue(true);
+        }
+    }, [interests, freeDay, groupWork, races, pronoun]);
 
     return (
         <div className="w-screen h-screen bg-blue-100">
@@ -276,15 +298,22 @@ export default function Survey() {
             </Head>
         
             <main className="container h-4/5 flex justify-center items-center">
-                <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg max-w-min">
+                <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 items-center text-lg w-min min-w-[30rem]">
                     {pages[page]}
-                    <div className="flex mt-2 justify-center">
-                        <button
-                            onClick={() => advance()}
-                            className="bg-blue-500 rounded-lg px-3 pt-1 pb-1.5 text-white" >
-                            {page === pages.length - 1 ? "Submit" : "Next"}
-                        </button>
-                    </div>
+                    <button
+                        onClick={() => {if (canContinue) advance()}}
+                        className={"rounded-lg px-3 py-1 w-min whitespace-nowrap "
+                            + (canContinue ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")} >
+                        {page === pages.length - 1 ? "Submit" : "Next"}
+                    </button>
+                    {!canContinue &&
+                        <p className="italic text-red-500">
+                            {(page === 0 || page === 3)
+                                ? "You must make at least one selection"
+                                : "You must choose an option"
+                            }
+                        </p>
+                    }
                 </div>
             </main>
         </div>
