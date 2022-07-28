@@ -60,7 +60,7 @@ export default function Terms() {
 
     return (
         <div className="w-screen h-screen bg-blue-100">
-            <main className="container w-min h-4/5 flex justify-center items-center">
+            <main className="container w-min h-full flex justify-center items-center">
                 <div className="bg-white p-6 rounded-lg flex flex-col gap-3 items-center mt-24">
                     <h1 className="text-3xl font-bold text-center whitespace-nowrap px-24">
                         Terms and Conditions

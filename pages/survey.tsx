@@ -297,7 +297,7 @@ export default function Survey() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
         
-            <main className="container h-4/5 flex justify-center items-center">
+            <main className="container h-full flex justify-center items-center">
                 <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 items-center text-lg w-min min-w-[30rem]">
                     {pages[page]}
                     <button
