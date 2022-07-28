@@ -38,7 +38,7 @@ export default function OurResearch() {
                             be insufferable. Your privacy is being taken away by these computers.
                         </p>
                         <p>
-                            What makes matters worse is that your personal computers aren't the only things
+                            What makes matters worse is that your personal computers aren{"'"}t the only things
                             that know who you are. The data being collected about you is being sold. Sold to
                             companies who will do anything to promote their brand and find the perfect audience.
                             Ever search for a product on Amazon and then find an ad for that exact product on
@@ -48,13 +48,13 @@ export default function OurResearch() {
                             revenue. They sell you.
                         </p>
                         <p>
-                            And aren't you wondering why such companies would want information about who you
+                            And aren{"'"}t you wondering why such companies would want information about who you
                             would bring to disneyland from your family? These corporations have algorithms that
                             can create inferences about you based on this data collected. These inferences
                             indicate your moods and lead to the company having something called a behavioral
                             surplus. Behavioral surplus, coined by Harvard Professor Shoshana Zuboff, is the
                             surplus of data collected far exceeding the amount required to improve products and
-                            services. This additional data is used to train models that predict users’ behavior
+                            services. This additional data is used to train models that predict users{"'"} behavior
                             and represent their wants, values, interests, and more. With this behavioral surplus,
                             you are the perfect victim for these corporations to release their advertisements,
                             waiting for you to bite. And whether or not you bite is also stored as data and is
@@ -102,7 +102,7 @@ export default function OurResearch() {
                             spending less time on homework or having a social life. Thus, either their
                             grades drop, or they rush to finish their homework at the last possible second,
                             evoking feelings of stress. On top of that, lack of focus and attentiveness can
-                            have a terrible impact on a student's learning ability.
+                            have a terrible impact on a student{"'"}s learning ability.
                         </p>
                     </section>
                     <section className="flex flex-col gap-4">
