@@ -15,6 +15,7 @@ export default function SurveyModal(props: {
 }) {
     const {isOpen, setIsOpen, survey, showCode, setShowCode} = props;
     const [data, setData] = useState({} as SurveyDataType);
+    const [page, setPage] = useState(0);
 
     //helper function for setting a particular key-value pair in data object
     const setValue = (key: string, value: string) => {
@@ -24,11 +25,11 @@ export default function SurveyModal(props: {
         setData(d);
     }
 
-    //function for checking if all questions have a response
+    //function for checking if all questions on this page have a response
     const checkValid = () => {
         let bool = true;
         if (!survey.questions) return false;
-        survey.questions.forEach(q => {
+        survey.questions[page].forEach(q => {
             if (!(q.label in data && data[q.label])) {
                 bool = false;
                 return;
@@ -40,8 +41,12 @@ export default function SurveyModal(props: {
     //add data to localStorage and show gift code
     const handleSubmit = () => {
         if (checkValid()) {
-            localStorage.setItem(survey.title, JSON.stringify(data));
-            setShowCode(true);
+            if (page === survey.questions.length - 1) {
+                localStorage.setItem(survey.title, JSON.stringify(data));
+                setShowCode(true);
+            } else {
+                setPage(page + 1);
+            }
         }
     }
 
@@ -61,7 +66,7 @@ export default function SurveyModal(props: {
                             {survey.title}
                         </h1>
                         <>
-                            {survey.questions && survey.questions.map((q, i) => {
+                            {survey.questions && survey.questions[page].map((q, i) => {
                                 if ("options" in q) { //multiple choice
                                     return (
                                         <MultipleChoice
@@ -88,7 +93,7 @@ export default function SurveyModal(props: {
                             onClick={() => handleSubmit()}
                             className={"px-4 py-2 whitespace-nowrap w-min rounded-lg "
                                 + (checkValid() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
-                            Submit
+                            {survey.questions && page === survey.questions.length - 1 ? "Submit" : "Next"}
                         </button>
                         <p className="italic text-red-500">
                             {!checkValid() &&

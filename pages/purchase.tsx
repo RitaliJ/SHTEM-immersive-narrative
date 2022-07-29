@@ -56,7 +56,7 @@ export default function Purchase() {
         }
     }
     function checkCode(){
-        if (code == "1111") {
+        if (code == "2689") {
             location.href = "/dataleak";
         } else {
             return "Incorrect Code. Please Try Again";
@@ -66,8 +66,8 @@ export default function Purchase() {
     return (
         <>
             <Head>
-                <title>SHTEM Website | Checkout</title>
-                <meta name="description" content="Cart" />
+                <title>SHTEM Website | Purchase</title>
+                <meta name="description" content="Purchase" />
                 <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
             </Head>
 
@@ -80,29 +80,37 @@ export default function Purchase() {
                 <p className="text-xl">
                     You should receive a confirmation email shortly.
                 </p>
-                <div>
-                    <button onClick={() => setIsOpen(true)} className="w-5/12 duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-lg bg-green-500 hover:bg-green-700 text-white mt-8 float-left">
+                <div className="flex gap-4 justify-center mt-8">
+                    <button onClick={() => setIsOpen(true)} className="w-5/12 duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-lg bg-green-500 hover:bg-green-700 text-white">
                         I have received my confirmation email.
                     </button>
-                    <button onClick={() => setIsOpen(true)} className="w-5/12 duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-lg bg-red-500 hover:bg-red-700 text-white mt-8 float-right">
+                    <button onClick={() => setIsOpen(true)} className="w-5/12 duration-150 px-4 py-2 rounded-lg border border-gray-400 shadow-lg bg-red-500 hover:bg-red-700 text-white">
                         I have not received my confirmation email.
                     </button>
                 </div>
                 <NiceLink href="/home" text="Back to homepage" />
                 <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
-                    <div className="bg-gray-900 w-full h-full flex flex-col items-center justify-center font-mono">
-                        <h1 className="text-4xl text-red-600">
-                            WARNING! YOU HAVE BEEN HACKED
-                        </h1>
-                        <p className="text-3xl text-red-600 w-6/12 mt-8">
-                           Your data has been taken by hacker group THE NEW GENERATION. 
-                        </p>
-                        <br></br>
-                        <p className="text-3xl text-red-600 w-6/12 mt-8">Call XXX-XXX-XXXX to get access to the data the TNGers collected.</p>
-                        <div className= "text-2xl text-red-600 font-bold text-center justify-center">
-                            <InputGroup label="Code" callback={setCode} />
-                            <button onClick={() =>checkCode()}>Submit</button>
+                    <div className="bg-gray-900 w-full h-full flex justify-center items-center font-mono">
+                        <div className="w-1/2 h-full flex flex-col gap-8 justify-center items-center">
+                            <h1 className="text-4xl text-red-600">
+                                WARNING! YOU HAVE BEEN HACKED
+                            </h1>
+                            <p className="text-3xl text-red-600">
+                            Your data has been taken by hacker group THE NEW GENERATION. 
+                            </p>
+                            <p className="text-3xl text-red-600">
+                                Call 714-202-2636 to get access to the data the TNGers collected.
+                            </p>
+                            <div className="text-2xl text-red-600 flex flex-col gap-4">
+                                <InputGroup label="Code" callback={setCode} />
+                                <button
+                                    className="bg-red-600 text-gray-900 px-3 py-1 rounded-lg"
+                                    onClick={() => checkCode()}
+                                >
+                                    Submit
+                                </button>
                             </div>
+                        </div>
                     </div>
                 </CenteredModal>
             </main>

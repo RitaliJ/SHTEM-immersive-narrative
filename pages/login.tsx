@@ -116,7 +116,7 @@ export default function Login() {
                                 lastName,
                                 phone,
                                 DOB: {year, month, day},
-                                balance: 100,
+                                balance: 500,
                                 items: [undefined as unknown as ItemType],
                                 purchases: [undefined as unknown as ItemType],
                                 usedCodes: [],
