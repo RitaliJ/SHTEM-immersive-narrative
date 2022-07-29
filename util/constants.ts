@@ -23,10 +23,11 @@ module.exports = {
                         options: [
                             "Flying",
                             "Invisibility",
-                            "Laser eyes",
                             "Mind reading",
                         ],
                     },
+                ],
+                [
                     {
                         label: "Name the family member that you would bring with you on a trip to disneyland.",
                         options: [
@@ -36,52 +37,76 @@ module.exports = {
                             "Wine aunt",
                         ],
                     },
+                ],
+                [
                     {
-                        label: "Name something that tastes exponentially worse on a plane.",
+                        label: "Name the first thing you order on a plane.",
                         options: [
                             "Chips",
-                            "Water",
+                            "Chocolate",
                             "Alcohol",
-                            "Sandwiches",
+                            "Ham sandwiches",
                         ],
                     },
+                ],
+                [
                     {
-                        label: "Name the first thing you would do when you wake up.",
+                        label: "Name the first thing you do when you wake up.",
                         options: [
-                            "Brush teeth",
+                            "Eat a bowl of cereal",
                             "Go back to sleep",
                             "Check notifications",
-                            "Smile",
+                            "Turn on your coffee machine",
                         ],
+                    },
+                ],
+                [
+                    {
+                        label: "What would be your ideal Saturday afternoon?",
+                        options: [
+                            "Standing overnight in a huge line for concert tickets but when you get to the front, they are sold out",
+                            "Renewing your license at the DMV",
+                            "Getting a cavity filled",
+                            "Missing your flight",
+                        ],
+                    },
+                ],
+                [
+                    {
+                        label: "Name your favorite travel destination.",
                     },
                     {
-                        label: "Name a sport that the US is not the best at.",
+                        label: "When was the last time you went there?",
                         options: [
-                            "Soccer",
-                            "Curling",
-                            "Lacrosse",
+                            "0-3 months ago",
+                            "4-6 months ago",
+                            "7-12 months ago",
+                            "2-4 years ago",
+                            "5-9 years ago",
+                            "10+ years ago",
                         ],
                     },
+                ],
+                [
                     {
                         label: "Name a US president that would be the worst at video games.",
                         options: [
                             "Abraham Lincoln",
                             "Millard Fillmore",
                             "Barack Obama",
+                            "Donald Trump",
                             "Ulysses S. Grant",
                         ],
                     },
+                ],
+                [
                     {
                         label: "Name the TV show that people would most likely want to be in.",
-                        options: [
-                            "The Vampire Diaries",
-                            "Hannah Montana",
-                            "Smallville",
-                            "The Walking Dead",
-                        ],
                     },
+                ],
+                [
                     {
-                        label: "Provide the average amount of screen time that you had the last week.",
+                        label: "What was your average daily amount of screen time last week?",
                         options: [
                             "1-3 hours",
                             "4-6 hours",
@@ -90,8 +115,10 @@ module.exports = {
                             "11+ hours",
                         ],
                     },
+                ],
+                [
                     {
-                        label: "Name a song other than the national anthem that represents the USA.",
+                        label: "Name your favorite song other than the national anthem that represents the USA.",
                         options: [
                             "Take Me Home, Country Roads",
                             "Party in the U.S.A.",
