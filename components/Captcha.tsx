@@ -10,9 +10,11 @@ export default function Captcha(props: {
     captcha: CaptchaType,
     showCode: boolean,
     setShowCode: (value: boolean) => void,
+    
 }) {
     const {isOpen, setIsOpen, captcha, showCode, setShowCode} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
+    const [submit, setSubmit] = useState(false);
 
     useEffect(() => { //reset selected useState when a new captcha loads
         setSelected([false, false, false, false, false, false, false, false, false]);
@@ -25,17 +27,31 @@ export default function Captcha(props: {
         setSelected(s);
     }
 
+
     //add data to localStorage and show gift code
     const handleSubmit = () => {
-        localStorage.setItem(captcha.title, JSON.stringify(selected));
-        setShowCode(true);
-    }
+        localStorage.setItem(captcha.title, JSON.stringify(selected)); 
+        setSubmit(true)}
+
+        
+    const answer = () => {
+        if (submit) {
+            if (captcha.hver) {
+                setShowCode(false);
+                var x = "Sorry! It appears you are not human enough to have the heartbeats. Please try again."
+                return(x)
+                } else {
+                    setShowCode(true);
+                    var x = "You are human enough to pass this!"
+                    return x}
+
+     } }
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className="relative flex flex-col gap-8 items-center bg-white container p-8 rounded-lg w-max whitespace-nowrap">
                 <button
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => { setIsOpen(false); setSubmit(false);}}
                     className="absolute top-2 right-4 text-5xl">
                     ×
                 </button>
@@ -67,6 +83,7 @@ export default function Captcha(props: {
                             className="px-4 py-2 whitespace-nowrap w-min rounded-lg bg-blue-500 text-white text-xl">
                             Submit
                         </button>
+                        <div>{answer()}</div>
                     </>
                 )}
             </div>
