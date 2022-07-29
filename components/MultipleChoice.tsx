@@ -21,7 +21,7 @@ export default function MultipleChoice(props: {
                 <div key={i} className="flex gap-3 items-center">
                     <button
                         onClick={() => callback(o)}
-                        className={"duration-300 w-6 h-6 border-4 border-white ring-2 ring-black rounded-full "
+                        className={"flex-none duration-300 w-6 h-6 border-4 border-white ring-2 ring-black rounded-full "
                         + (selection === o ? "bg-blue-500" : "bg-white")}
                     />
                     {o}
