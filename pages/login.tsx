@@ -122,6 +122,7 @@ export default function Login() {
                                 usedCodes: [],
                                 firstVisit: true,
                                 doneNewsletter: false,
+                                watchedAd: false,
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
                                 && validateEmail() && year !== undefined && month !== undefined && day !== undefined

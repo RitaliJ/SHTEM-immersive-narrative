@@ -9,6 +9,7 @@ import SurveyModal from "./SurveyModal";
 import Captcha from "./Captcha";
 import TokenAd from "./TokenAd";
 import NewsletterModal from "./NewsletterModal";
+import VideoAd from "./VideoAd";
 const constants = require('../util/constants')
 
 //header component
@@ -32,6 +33,7 @@ export default function Header(props: {
     const [outOfCaptchas, setOutOfCaptchas] = useState(false); //true when all captchas are done
     const [captchaShowCode, setCaptchaShowCode] = useState(false); //show survey gift code if true
 
+    const [watchAdOpen, setWatchAdOpen] = useState(false); //useState for "watch an ad" modal
     const [tokenAdOpen, setTokenAdOpen] = useState(false); //useState for opening/closing token ad
     const [newsLetterOpen, setNewsLetterOpen] = useState(false); //useState for opening/closing newsletter modal
     
@@ -208,9 +210,19 @@ export default function Header(props: {
                             onClick={() => {setTokenAdOpen(true)}}
                             className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
                             <div className="flex gap-2">
-                                <span>Watch an ad</span>
+                                <span>Stare at a logo</span>
                                 <span>•</span>
                                 <span>X Heartbeat</span>
+                            </div>
+                        </button>
+                        <button
+                            onClick={() => {if (!account.watchedAd) setWatchAdOpen(true)}}
+                            className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
+                                + (account.watchedAd ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
+                            <div className="flex gap-2">
+                                <span>Watch an ad</span>
+                                <span>•</span>
+                                <span>80 Heartbeat</span>
                             </div>
                         </button>
                         <button
@@ -220,7 +232,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Sign up for our newsletter</span>
                                 <span>•</span>
-                                <span>1 Heartbeat</span>
+                                <span>80 Heartbeat</span>
                             </div>
                         </button>
                     </>
@@ -245,6 +257,10 @@ export default function Header(props: {
                             isOpen={tokenAdOpen}
                             setIsOpen={setTokenAdOpen}
                             callback={raiseBalance}
+                        />
+                        <VideoAd
+                            isOpen={watchAdOpen}
+                            setIsOpen={setWatchAdOpen}
                         />
                         <NewsletterModal
                             isOpen={newsLetterOpen}
