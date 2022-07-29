@@ -153,9 +153,9 @@ export default function Survey() {
                 Click to select any number of options
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
-                {interestOptions.map((x, i) =>
+                {interestOptions.map(x =>
                     <ToggleButton
-                        key={i}
+                        key={x}
                         label={x}
                         callback={updateInterests}
                         offBg="bg-amber-100 hover:bg-amber-200"
@@ -174,9 +174,9 @@ export default function Survey() {
                 One answer only
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
-                {freeDayOptions.map((x, i) =>
+                {freeDayOptions.map(x =>
                     <ToggleButton
-                        key={i}
+                        key={x}
                         noToggle
                         isOn={freeDay === x}
                         label={x}
@@ -197,9 +197,9 @@ export default function Survey() {
                 One answer only
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
-                {groupWorkOptions.map((x, i) =>
+                {groupWorkOptions.map(x =>
                     <ToggleButton
-                        key={i}
+                        key={x}
                         noToggle
                         isOn={groupWork === x}
                         label={x}
@@ -220,9 +220,9 @@ export default function Survey() {
                 Click to select any number of options
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
-                {raceOptions.map((x, i) =>
+                {raceOptions.map(x =>
                     <ToggleButton
-                        key={i}
+                        key={x}
                         label={x}
                         callback={updateRaces}
                         offBg="bg-amber-100 hover:bg-amber-200"
@@ -241,9 +241,9 @@ export default function Survey() {
                 One answer only
             </p>
             <div className="flex flex-wrap gap-1 justify-center">
-                {pronounOptions.map((x, i) =>
+                {pronounOptions.map(x =>
                     <ToggleButton
-                        key={i}
+                        key={x}
                         noToggle
                         isOn={pronoun === x}
                         label={x}
@@ -272,8 +272,9 @@ export default function Survey() {
 
     //allow user to continue if selection is valid
     useEffect(() => {
-        if (page === 0 && interests[0]) {
-            setCanContinue(true);
+        if (page === 0) {
+            if (interests[0]) setCanContinue(true);
+            else setCanContinue(false);
         }
         if (page === 1 && freeDay) {
             setCanContinue(true);
@@ -281,8 +282,9 @@ export default function Survey() {
         if (page === 2 && groupWork) {
             setCanContinue(true);
         }
-        if (page === 3 && races[0]) {
-            setCanContinue(true);
+        if (page === 3) {
+            if (races[0]) setCanContinue(true);
+            else setCanContinue(false);
         }
         if (page === 4 && pronoun) {
             setCanContinue(true);
