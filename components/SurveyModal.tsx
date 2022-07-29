@@ -29,8 +29,8 @@ export default function SurveyModal(props: {
     const checkValid = () => {
         let bool = true;
         if (!survey.questions) return false;
-        survey.questions[page].forEach(q => {
-            if (!(q.label in data && data[q.label])) {
+        survey.questions[page].forEach((q, i) => {
+            if (!(q.label in data && data[q.label]) && !(q.conditional && data[survey.questions[page][i - 1].label] !== "Yes")) {
                 bool = false;
                 return;
             }
@@ -65,33 +65,33 @@ export default function SurveyModal(props: {
                         <h1 className="text-2xl font-bold">
                             {survey.title}
                         </h1>
-                        <>
-                            {survey.questions && survey.questions[page].map((q, i) => {
-                                if ("options" in q) { //multiple choice
-                                    return (
-                                        <MultipleChoice
-                                            key={i}
-                                            label={q.label}
-                                            selection={data[q.label]}
-                                            callback={(x) => setValue(q.label, x)}
-                                            options={q.options}
-                                        />
-                                    )
-                                } else { //short answer
-                                    return (
-                                        <InputGroup
-                                            key={i}
-                                            label={q.label}
-                                            value={data[q.label] ?? ""}
-                                            callback={(x) => setValue(q.label, x)}
-                                        />
-                                    )
-                                }
-                            })}
-                        </>
+                        {survey.questions && survey.questions[page].map((q, i) => {
+                            if (q.conditional && data[survey.questions[page][i - 1].label] !== "Yes") {
+                                return;
+                            } else if ("options" in q) { //multiple choice
+                                return (
+                                    <MultipleChoice
+                                        key={q.label}
+                                        label={q.label}
+                                        selection={data[q.label]}
+                                        callback={(x) => setValue(q.label, x)}
+                                        options={q.options}
+                                    />
+                                )
+                            } else { //short answer
+                                return (
+                                    <InputGroup
+                                        key={q.label}
+                                        label={q.label}
+                                        value={data[q.label] ?? ""}
+                                        callback={(x) => setValue(q.label, x)}
+                                    />
+                                )
+                            }
+                        })}
                         <button
                             onClick={() => handleSubmit()}
-                            className={"px-4 py-2 whitespace-nowrap w-min rounded-lg "
+                            className={"px-4 py-2 whitespace-nowrap w-min rounded-lg duration-150 "
                                 + (checkValid() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
                             {survey.questions && page === survey.questions.length - 1 ? "Submit" : "Next"}
                         </button>

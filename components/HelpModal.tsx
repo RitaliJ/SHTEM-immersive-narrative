@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ReactNode, useState } from "react";
 import { AccountType } from "../util/types";
 import CenteredModal from "./CenteredModal";
@@ -25,15 +26,23 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
             but rather through our own personal currency of Heartbeats.
         </p>,
         <p key={4}>
-            Luckily for you, you get to start off with 100 Heartbeats already! Have a look around
-            the store and see what interests you.
+            Luckily for you, you get to start off with 500 Heartbeats already! Look around the store,
+            pick an item that interests you, and purchase it!
         </p>,
-        <div key={5} className="flex gap-1 flex-wrap items-center">
-            <p>That concludes my introduction. if you ever need any help, you can find me by pressing the</p>
+        <div key={5} className="flex gap-x-1 flex-wrap items-center h-min">
+            {"That concludes my introduction. if you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>
+                <p key={i}>
+                    {w}
+                </p>
+            )}
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p>icon in the header.</p>
+            {"icon in the header.".split(" ").map((w, i) =>
+                <p key={i}>
+                    {w}
+                </p>
+            )}
         </div>,
     ];
 
@@ -47,11 +56,15 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={() => {}} blur={blur}>
             <div className="flex bg-white border-2 border-gray-200 shadow-lg rounded-lg">
-                <img
-                    className="h-72 rounded-md"
-                    src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Pickle.jpg"
-                    alt="Shopping assistant"
-                />
+                <div>
+                    <Image
+                        width="192"
+                        height="192"
+                        className="rounded-md"
+                        src="/cart.jpg"
+                        alt="Shopping assistant"
+                    />
+                </div>
                 <div className="px-4 py-3 w-72 flex flex-col gap-2 items-center text-lg">
                     {pages[page]}
                     <button
