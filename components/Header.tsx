@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ReactNode, useEffect, useState } from "react";
 import { AccountType, CaptchaType, SurveyType } from "../util/types";
 import CartModal from "./CartModal";
@@ -135,15 +136,25 @@ export default function Header(props: {
     }
 
     return (
-        <div className="flex items-center gap-4 sticky top-0 px-6 duration-150
+        <div className="flex items-center sticky top-0 px-2 duration-150
             bg-slate-200 shadow-md hover:shadow-lg bg-opacity-60 backdrop-blur-lg">
             <Link href="/home">
-                <button className="text-xl font-bold">
-                    Sahara Prime
+                <button className="flex gap-2 items-center">
+                    <Image
+                        width="48"
+                        height="48"
+                        src="/logo.png"
+                        alt="logo"
+                    />
+                    <p className="text-3xl font-bold">
+                        Sahara Prime
+                    </p>
                 </button>
             </Link>
-            <img src= "https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png"  width = "50" height = "100" alt = "logo"></img>
-            <span className="grow"></span>
+            <span className="grow" />
+            <span className="text-lg text-green-600 outline-white px-3">
+                {account.balance && account.balance.toFixed(2)} Heartbeats
+            </span>
             <button
                 onClick={() => setRedeemOpen(true)}
                 className="flex items-center hover:bg-gray-200 duration-150 p-2 rounded-lg"
@@ -152,9 +163,6 @@ export default function Header(props: {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </button>
-            <span className="text-lg text-green-600 outline-white">
-                {account.balance && account.balance.toFixed(2)} Heartbeats
-            </span>
             <button
                 onClick={() => {router.pathname !== "/checkout" && setIsOpen(true)}}
                 className="flex items-center hover:bg-gray-200 duration-150 p-2 rounded-lg"
@@ -168,9 +176,6 @@ export default function Header(props: {
                     </p>
                 }
             </button>
-            <span className="text-lg">
-                Logged in as {account.firstName}
-            </span>
             <HelpPopover
                 html={
                     <>
@@ -271,6 +276,9 @@ export default function Header(props: {
                     </>
                 }
             />
+            <span className="text-lg px-3">
+                Logged in as {account.firstName}
+            </span>
             <CartModal isOpen={isOpen} setIsOpen={setIsOpen} callback={refreshAccount} />
             <RedeemModal isOpen={redeemOpen} setIsOpen={setRedeemOpen} callback={() => {
                 refreshAccount();
