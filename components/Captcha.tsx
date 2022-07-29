@@ -10,7 +10,6 @@ export default function Captcha(props: {
     captcha: CaptchaType,
     showCode: boolean,
     setShowCode: (value: boolean) => void,
-    
 }) {
     const {isOpen, setIsOpen, captcha, showCode, setShowCode} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
@@ -27,25 +26,23 @@ export default function Captcha(props: {
         setSelected(s);
     }
 
-
     //add data to localStorage and show gift code
     const handleSubmit = () => {
         localStorage.setItem(captcha.title, JSON.stringify(selected)); 
-        setSubmit(true)}
-
+        setSubmit(true)
+    }
         
     const answer = () => {
         if (submit) {
             if (captcha.hver) {
                 setShowCode(false);
-                var x = "Sorry! It appears you are not human enough to have the heartbeats. Please try again.";
-                return(x)
-                } else {
-                    setShowCode(true);
-                    var x = "You are human enough to pass this!";
-                    return x}
-
-     } }
+                return "Sorry! It appears you are not human enough. Please try again.";
+            } else {
+                setShowCode(true);
+                return "You are human enough to pass this!";
+            }
+        }
+    }
 
 
     return (
