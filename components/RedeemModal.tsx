@@ -50,19 +50,19 @@ export default function RedeemModal(props: {
                 <input
                     type="text"
                     value={value}
-                    placeholder="XXXXXX"
+                    placeholder="XXXX"
                     className="uppercase font-mono text-center border border-gray-400 px-4 py-3 text-2xl rounded-md w-36"
                     autoComplete="no"
                     onChange={e => {
-                        if (e.target.value.length <= 6) setValue(e.target.value);
+                        if (e.target.value.length <= 4) setValue(e.target.value);
                         setShowErr1(false);
                         setShowErr2(false);
                     }}
                 />
                 <button
-                    onClick={() => {if (value.length === 6) handleRedeem()}}
+                    onClick={() => {if (value.length === 4) handleRedeem()}}
                     className={"px-3 py-1 rounded-lg duration-150 text-lg "
-                        + (value.length === 6 ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
+                        + (value.length === 4 ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
                 >
                     Redeem
                 </button>
