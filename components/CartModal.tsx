@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AccountType } from "../util/types";
+import BankruptModal from "./BankruptModal";
 import CartProduct from "./CartProduct";
 import CenteredModal from "./CenteredModal";
 
@@ -13,6 +14,7 @@ export default function CartModal(props: {
     const {isOpen, setIsOpen, callback} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [total, setTotal] = useState(0);
+    const [bankruptOpen, setBankruptOpen] = useState(false);
 
     //refresh account every time modal opens
     useEffect(() => {
@@ -34,6 +36,11 @@ export default function CartModal(props: {
             }
         };
         setTotal(t);
+        if (isOpen && t > account.balance) {
+            setTimeout(() => {
+                setBankruptOpen(true);
+            }, 1000);
+        }
     }, [account]);
 
     //function to remove item from cart
@@ -60,24 +67,30 @@ export default function CartModal(props: {
                 <div className="flex flex-col text-green-600 divide-y divide-gray-300">
                     {account.email && account.items[0] ? (
                         account.items.map(i =>
-                            <CartProduct key={i.product.id} item={i} className="h-24 text-xl"
-                                callback={() => removeItem(i.product.id, i.size)} />
+                            <CartProduct
+                                key={i.product.id}
+                                item={i}
+                                className="h-24 text-xl"
+                                callback={() => removeItem(i.product.id, i.size)}
+                            />
                         )
                     ) : (
-                        <p className="text-xl p-2">Your cart is empty.</p>
+                        <p className="text-xl p-2">
+                            Your cart is empty.
+                        </p>
                     )}
                     {Number(total.toFixed(2)) > account.balance ? (
                         <div className="flex flex-col gap-1 items-end pt-4 px-2">
                             <div className="flex gap-2 text-2xl">
-                                <p className="text-black">Total:</p>
+                                <p className="text-black">
+                                    Total:
+                                </p>
                                 <p className="text-green-500">
                                     {total.toFixed(2)} Heartbeats
                                 </p>
                             </div>
                             <p className="text-right text-red-600 text-lg italic">
-
                                 You can{"'"}t afford this purchase! The amount in your cart exceeds the heartbeats you have!
-
                             </p>
                         </div>
                     ) : (
@@ -102,6 +115,7 @@ export default function CartModal(props: {
                         </div>
                     )}
                 </div>
+                <BankruptModal isOpen={bankruptOpen} setIsOpen={setBankruptOpen} />
             </div>
         </CenteredModal>
     )
