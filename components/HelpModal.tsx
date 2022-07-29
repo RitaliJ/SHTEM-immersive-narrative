@@ -26,8 +26,8 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
             but rather through our own personal currency of Heartbeats.
         </p>,
         <p key={4}>
-            Luckily for you, you get to start off with 100 Heartbeats already! Have a look around
-            the store and see what interests you.
+            Luckily for you, you get to start off with 500 Heartbeats already! Look around the store,
+            pick an item that interests you, and purchase it!
         </p>,
         <div key={5} className="flex gap-x-1 flex-wrap items-center h-min">
             {"That concludes my introduction. if you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>

@@ -181,7 +181,7 @@ export default function Header(props: {
                     <>
                         {psaHtml}
                         <p className="mb-2">
-                            Need more Heartbeats? Here are some options to get free Heartbeats:
+                            Can{"'"}t afford something? Here are some options to get free Heartbeats:
                         </p>
                         <button
                             onClick={() => {if (!outOfSurveys) setSurveyOpen(true)}}
