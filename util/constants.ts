@@ -18,39 +18,85 @@ module.exports = {
             questions: [
                 [
                     {
-                        label: "Name the worst last name you could imagine.",
+                        label: "Which superpower would you not want to have?",
+                        options: [
+                            "Flying",
+                            "Invisibility",
+                            "Laser eyes",
+                            "Mind reading",
+                        ],
                     },
                     {
                         label: "Name the family member that you would bring with you on a trip to disneyland.",
-                    },
-                    {
-                        label: "Name a superpower that you would not want to have.",
+                        options: [
+                            "None",
+                            "Sibling",
+                            "Family dog",
+                            "Wine aunt",
+                        ],
                     },
                     {
                         label: "Name something that tastes exponentially worse on a plane.",
+                        options: [
+                            "Chips",
+                            "Water",
+                            "Alcohol",
+                            "Sandwiches",
+                        ],
                     },
                     {
                         label: "Name the first thing you would do when you wake up.",
+                        options: [
+                            "Brush teeth",
+                            "Go back to sleep",
+                            "Check notifications",
+                            "Smile",
+                        ],
                     },
                     {
                         label: "Name a sport that the US is not the best at.",
+                        options: [
+                            "Soccer",
+                            "Curling",
+                            "Lacrosse",
+                        ],
                     },
                     {
                         label: "Name a US president that would be the worst at video games.",
+                        options: [
+                            "Abraham Lincoln",
+                            "Millard Fillmore",
+                            "Barack Obama",
+                            "Ulysses S. Grant",
+                        ],
                     },
                     {
-                        label: "Name the tv show that people would most likely want to be in.",
+                        label: "Name the TV show that people would most likely want to be in.",
+                        options: [
+                            "The Vampire Diaries",
+                            "Hannah Montana",
+                            "Smallville",
+                            "The Walking Dead",
+                        ],
                     },
                     {
                         label: "Provide the average amount of screen time that you had the last week.",
+                        options: [
+                            "1-3 hours",
+                            "4-6 hours",
+                            "7-9 hours",
+                            "9-11 hours",
+                            "11+ hours",
+                        ],
                     },
                     {
                         label: "Name a song other than the national anthem that represents the USA.",
-                    },
-                ],
-                [
-                    {
-                        label: "heeheeheehaw",
+                        options: [
+                            "Take Me Home, Country Roads",
+                            "Party in the U.S.A.",
+                            "National anthem (Fergie veresion)",
+                            "This Land is Your Land",
+                        ],
                     },
                 ],
             ],
