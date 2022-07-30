@@ -132,10 +132,12 @@ export default function Header(props: {
                         setCaptchaShowCode(false);
                     }
                 }
-            });
+            }
+        );
             if (!foundSurvey) setOutOfSurveys(true);
             if (!foundCaptcha) setOutOfCaptchas(true);
         }
+
 
         
     }

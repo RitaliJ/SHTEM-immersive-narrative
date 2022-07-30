@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ReactNode, useState } from "react";
 import { AccountType } from "../util/types";
 import CenteredModal from "./CenteredModal";
+import DropdownMenu from '../components/DropdownMenu';
 
 export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: boolean) => void, account: AccountType}) {
     const {isOpen, setIsOpen, account} = props;
@@ -25,10 +26,12 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
             Our store is very special as we don{"'"}t take payment through physical currency,
             but rather through our own personal currency of Heartbeats.
         </p>,
-        <p key={4}>
-            Luckily for you, you get to start off with 500 Heartbeats already! Look around the store,
-            pick an item that interests you, and purchase it!
-        </p>,
+        <div key = {4}>
+        <p>
+            Luckily for you, you get to start off with 500 Heartbeats already! Pick an item you are looking for. 
+        </p>
+        
+        </div>,
         <div key={5} className="flex gap-x-1 flex-wrap items-center h-min">
             {"That concludes my introduction. if you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>
                 <p key={i}>
