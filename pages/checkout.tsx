@@ -92,7 +92,7 @@ export default function Checkout() {
 
     //set total price and account details once account is retrieved
     useEffect(() => {
-        if (!account.email) return;
+        if (!account.email || !account.items[0]) return;
         let t = 0;
         account.items.forEach(i =>
             t += i.product.price * i.quantity
@@ -202,7 +202,7 @@ export default function Checkout() {
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
                                     + (firstName && lastName && address && city && state && zip && inBudget
                                     && zip.toString().length === 5 && cardNumber.toString().length === 16
-                                    && securityPin.toString().length === 3 ?
+                                    && securityPin.toString().length === 3 && account.email && account.items[0] ?
                                 "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
                             </button>
@@ -210,20 +210,22 @@ export default function Checkout() {
                     </div>
 
                     <p className="italic text-red-500 text-right">
-                        {inBudget 
-                            ? (firstName && lastName && address && city && state && zip && cardNumber && securityPin
-                            ? (zip.toString().length !== 5 || cardNumber.toString().length !== 16
-                                || securityPin.toString().length !== 3
-                                ? "* Invalid ZIP code, card number, or security PIN" : "")
-                            : "* Please fill all required fields")
-                            : "* Total amount exceeds account balance"
+                        {!account.email || !account.items[0]
+                            ? "Your cart is empty!"
+                            : inBudget 
+                                ? (firstName && lastName && address && city && state && zip && cardNumber && securityPin
+                                ? (zip.toString().length !== 5 || cardNumber.toString().length !== 16
+                                    || securityPin.toString().length !== 3
+                                    ? "* Invalid ZIP code, card number, or security PIN" : "")
+                                : "* Please fill all required fields")
+                                : "Total amount exceeds account balance"
                         }
                     </p>
                 </div>
 
                 <div className="w-full flex flex-col p-4 pl-8 divide-y divide-gray-300">
 
-                    {account.items && account.items.map(i =>
+                    {account.items && account.items[0] && account.items.map(i =>
                         <CartProduct key={i.product.id} item={i} className="text-lg h-24" />
                     )}
                     <div className="flex flex-col gap-2 pt-4">

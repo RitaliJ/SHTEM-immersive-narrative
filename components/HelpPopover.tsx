@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Popover, Transition } from '@headlessui/react';
 import { ReactNode, useState } from 'react';
 
@@ -30,15 +31,19 @@ export default function HelpPopover(props: {html: ReactNode, outerHtml: ReactNod
                         leaveTo="opacity-0"
                     >
                         <Popover.Panel static className="absolute top-1 right-0 w-max">
-                            <div className="overflow-hidden flex bg-slate-100 border-2 border-slate-200 shadow-lg rounded-lg">
+                            <div className="overflow-hidden flex bg-white border-2 border-slate-200 shadow-lg rounded-lg">
                                 <div className="px-4 py-3 w-min min-w-[18rem] flex flex-col gap-2 items-center">
                                     {html}
                                 </div>
-                                <img
-                                    className="h-72"
-                                    src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Pickle.jpg"
-                                    alt="Shopping assistant"
-                                />
+                                <div>
+                                    <Image
+                                        width="192"
+                                        height="192"
+                                        className="rounded-md"
+                                        src="/cart.jpg"
+                                        alt="Shopping assistant"
+                                    />
+                                </div>
                             </div>
                         </Popover.Panel>
                     </Transition>

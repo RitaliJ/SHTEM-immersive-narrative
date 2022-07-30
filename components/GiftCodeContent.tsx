@@ -1,5 +1,8 @@
+import { useState } from "react";
+
 export default function GiftCodeContent(props: {code: string}) {
     const {code} = props;
+    const [copied, setCopied] = useState(false);
 
     return (
         <div className="flex flex-col gap-3 items-center text-lg">
@@ -7,6 +10,13 @@ export default function GiftCodeContent(props: {code: string}) {
             <p className="text-3xl font-bold">
                 {code}
             </p>
+            <button
+                onClick={() => {navigator.clipboard.writeText(code); setCopied(true)}}
+                className={"px-3 py-1 rounded-lg text-lg duration-150 "
+                    + (copied ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}
+            >
+                {copied ? "Copied!" : "Copy to clipboard"}
+            </button>
             <div className="flex gap-1 flex-wrap items-center">
                 <p>Redeem your heartbeats using the</p>
 

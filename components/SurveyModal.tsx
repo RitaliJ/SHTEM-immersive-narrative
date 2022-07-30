@@ -15,6 +15,7 @@ export default function SurveyModal(props: {
 }) {
     const {isOpen, setIsOpen, survey, showCode, setShowCode} = props;
     const [data, setData] = useState({} as SurveyDataType);
+    const [page, setPage] = useState(0);
 
     //helper function for setting a particular key-value pair in data object
     const setValue = (key: string, value: string) => {
@@ -24,12 +25,12 @@ export default function SurveyModal(props: {
         setData(d);
     }
 
-    //function for checking if all questions have a response
+    //function for checking if all questions on this page have a response
     const checkValid = () => {
         let bool = true;
         if (!survey.questions) return false;
-        survey.questions.forEach(q => {
-            if (!(q.label in data && data[q.label])) {
+        survey.questions[page].forEach((q, i) => {
+            if (!(q.label in data && data[q.label]) && !(q.conditional && data[survey.questions[page][i - 1].label] !== "Yes")) {
                 bool = false;
                 return;
             }
@@ -40,8 +41,12 @@ export default function SurveyModal(props: {
     //add data to localStorage and show gift code
     const handleSubmit = () => {
         if (checkValid()) {
-            localStorage.setItem(survey.title, JSON.stringify(data));
-            setShowCode(true);
+            if (page === survey.questions.length - 1) {
+                localStorage.setItem(survey.title, JSON.stringify(data));
+                setShowCode(true);
+            } else {
+                setPage(page + 1);
+            }
         }
     }
 
@@ -60,35 +65,35 @@ export default function SurveyModal(props: {
                         <h1 className="text-2xl font-bold">
                             {survey.title}
                         </h1>
-                        <>
-                            {survey.questions && survey.questions.map((q, i) => {
-                                if ("options" in q) { //multiple choice
-                                    return (
-                                        <MultipleChoice
-                                            key={i}
-                                            label={q.label}
-                                            selection={data[q.label]}
-                                            callback={(x) => setValue(q.label, x)}
-                                            options={q.options}
-                                        />
-                                    )
-                                } else { //short answer
-                                    return (
-                                        <InputGroup
-                                            key={i}
-                                            label={q.label}
-                                            value={data[q.label] ?? ""}
-                                            callback={(x) => setValue(q.label, x)}
-                                        />
-                                    )
-                                }
-                            })}
-                        </>
+                        {survey.questions && survey.questions[page].map((q, i) => {
+                            if (q.conditional && data[survey.questions[page][i - 1].label] !== "Yes") {
+                                return;
+                            } else if ("options" in q) { //multiple choice
+                                return (
+                                    <MultipleChoice
+                                        key={q.label}
+                                        label={q.label}
+                                        selection={data[q.label]}
+                                        callback={(x) => setValue(q.label, x)}
+                                        options={q.options}
+                                    />
+                                )
+                            } else { //short answer
+                                return (
+                                    <InputGroup
+                                        key={q.label}
+                                        label={q.label}
+                                        value={data[q.label] ?? ""}
+                                        callback={(x) => setValue(q.label, x)}
+                                    />
+                                )
+                            }
+                        })}
                         <button
                             onClick={() => handleSubmit()}
-                            className={"px-4 py-2 whitespace-nowrap w-min rounded-lg "
+                            className={"px-4 py-2 whitespace-nowrap w-min rounded-lg duration-150 "
                                 + (checkValid() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
-                            Submit
+                            {survey.questions && page === survey.questions.length - 1 ? "Submit" : "Next"}
                         </button>
                         <p className="italic text-red-500">
                             {!checkValid() &&
