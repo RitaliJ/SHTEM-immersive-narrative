@@ -81,14 +81,9 @@ export default function Captcha(props: {
                             className="px-4 py-2 whitespace-nowrap w-min rounded-lg bg-blue-500 text-white text-xl">
                             Submit
                         </button>
-                        <div>{answer()}</div>
-                        <button
-                           
-                            className="px-4 py-2 whitespace-nowrap w-min rounded-lg bg-blue-500 text-white text-xl">
-                            Submit
-                        </button>
-                        
-                        
+                        <p className="text-red-500 italic text-lg">
+                            {answer()}
+                        </p>
                     </>
                 )}
             </div>
