@@ -8,3 +8,4 @@ export type ShortAnswerType = {label: string, conditional?: boolean}; //types fo
 export type MultipleChoiceType = {label: string, options: string[], conditional?: boolean};
 export type SurveyDataType = {[key: string]: string}; //for indexing survey data with strings
 export type CaptchaType = {title: string, code: string, imgSrcs: string[], hver: boolean};
+
