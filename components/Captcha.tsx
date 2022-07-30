@@ -44,7 +44,6 @@ export default function Captcha(props: {
         }
     }
 
-
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className="relative flex flex-col gap-8 items-center bg-white container p-8 rounded-lg w-max whitespace-nowrap">
