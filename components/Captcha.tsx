@@ -1,7 +1,9 @@
+// import { constants } from "buffer";
 import { useEffect, useState } from "react";
 import { CaptchaType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 import GiftCodeContent from "./GiftCodeContent";
+const constants = require('../util/constants');
 
 //modal for a 3x3 image select captcha
 export default function Captcha(props: {
@@ -13,10 +15,11 @@ export default function Captcha(props: {
 }) {
     const {isOpen, setIsOpen, captcha, showCode, setShowCode} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
+    const [captchaC, setCaptcha] = useState(captcha)
 
     useEffect(() => { //reset selected useState when a new captcha loads
         setSelected([false, false, false, false, false, false, false, false, false]);
-    }, [captcha]);
+    }, [captchaC]);
 
     //flip selection state at index i
     const flipAtIndex = (i: number) => {
@@ -27,9 +30,28 @@ export default function Captcha(props: {
 
     //add data to localStorage and show gift code
     const handleSubmit = () => {
-        localStorage.setItem(captcha.title, JSON.stringify(selected));
-        setShowCode(true);
+        localStorage.setItem(captchaC.title, JSON.stringify(selected));
+        if(captchaC.humanityCaptcha){
+            console.log('Wrong!');
+
+            const acc = localStorage.getItem("shtemAccount");
+            if (acc !== "undefined" && acc !== null) {
+                const acc2 = JSON.parse(acc);
+                let foundCaptcha = false;
+                constants.captchas.forEach((c: CaptchaType) => {
+                    if (!acc2.usedCodes.includes(c.code) && !foundCaptcha && c.humanityCaptcha) {
+                        setCaptcha(c);
+                        foundCaptcha = true;
+                    }
+                });
+                if (!foundCaptcha)  setShowCode(true);
+            }
+            
+        }else{
+            setShowCode(true);
+        }
     }
+    
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -40,14 +62,14 @@ export default function Captcha(props: {
                     ×
                 </button>
                 {showCode ? (
-                    <GiftCodeContent code={captcha.code} />
+                    <GiftCodeContent code={captchaC.code} />
                 ) : (
                     <>
                         <p className="text-2xl font-bold">
-                            {captcha.title}
+                            {captchaC.title}
                         </p>
                         <div className="flex flex-col gap-6">
-                            {captcha.imgSrcs && [0, 1, 2].map(i =>
+                            {captchaC.imgSrcs && [0, 1, 2].map(i =>
                                 <div key={i} className="flex gap-6">
                                     {[0, 1, 2].map(j =>
                                         <img
@@ -55,7 +77,7 @@ export default function Captcha(props: {
                                             onClick={() => flipAtIndex(3 * i + j)}
                                             className={"border-4 border-white ring-8 w-[16vh] h-[16vh] duration-150 hover:cursor-pointer "
                                                 + (selected[3 * i + j] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
-                                            src={captcha.imgSrcs[3 * i + j]}
+                                            src={captchaC.imgSrcs[3 * i + j]}
                                             alt={i.toString()}
                                         />
                                     )}
