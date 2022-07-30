@@ -70,18 +70,17 @@ export default function TokenAd(props: {
                             You can close this popup at any time to receive your Heartbeats
                         </p>
                     </> : <>
-                        <p>To ensure that you are staring at the logo, we need to access your camera.</p>
+                        <p className="text-2xl font-bold">
+                            Authorize camera
+                        </p>
+                        <p className="text-lg">
+                            To ensure that you are staring at the logo, we need to access your camera.
+                        </p>
                         <button
                             onClick={() => setCameraAllowed(true)}
-                            className="bg-white text-blue-600"
+                            className="bg-green-600 text-white rounded-lg px-24 py-3"
                         >
                             Allow
-                        </button>
-                        <button
-                            onClick={() => setIsOpen(false)}
-                            className="bg-white text-blue-600"
-                        >
-                            Do Not Allow
                         </button>
                     </>
                 }
