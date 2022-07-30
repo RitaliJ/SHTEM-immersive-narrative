@@ -4,10 +4,14 @@ import { AccountType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 import DropdownMenu from '../components/DropdownMenu';
 
+
 export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: boolean) => void, account: AccountType}) {
     const {isOpen, setIsOpen, account} = props;
     const [page, setPage] = useState(0);
     const [blur, setBlur] = useState("lg");
+    const [items, setItems] = useState("Mummy");
+    const ItemsAvailable = ["White Shirt", "Mummy"]
+    
     
     const pages: ReactNode[] = [
         <p key={0}>
@@ -28,8 +32,10 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
         </p>,
         <div key = {4}>
         <p>
-            Luckily for you, you get to start off with 500 Heartbeats already! Pick an item you are looking for. 
+            Luckily for you, you get to start off with 500 Heartbeats already! Pick an item you are looking for.
         </p>
+        <DropdownMenu label="Items" callback={x => setItems("WhiteShirt")} options={ItemsAvailable}/> 
+
         
         </div>,
         <div key={5} className="flex gap-x-1 flex-wrap items-center h-min">

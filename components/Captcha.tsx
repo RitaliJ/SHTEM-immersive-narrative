@@ -38,14 +38,15 @@ export default function Captcha(props: {
         if (submit) {
             if (captcha.hver) {
                 setShowCode(false);
-                var x = "Sorry! It appears you are not human enough to have the heartbeats. Please try again."
+                var x = "Sorry! It appears you are not human enough to have the heartbeats. Please try again.";
                 return(x)
                 } else {
                     setShowCode(true);
-                    var x = "You are human enough to pass this!"
+                    var x = "You are human enough to pass this!";
                     return x}
 
      } }
+
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -84,6 +85,13 @@ export default function Captcha(props: {
                             Submit
                         </button>
                         <div>{answer()}</div>
+                        <button
+                           
+                            className="px-4 py-2 whitespace-nowrap w-min rounded-lg bg-blue-500 text-white text-xl">
+                            Submit
+                        </button>
+                        
+                        
                     </>
                 )}
             </div>

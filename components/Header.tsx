@@ -56,6 +56,7 @@ export default function Header(props: {
         }
     });
 
+
     //open modal when addedToCart becomes true
     useEffect(() => {
         if (addedToCart) {
@@ -131,6 +132,7 @@ export default function Header(props: {
                     } else {
                         setCaptchaShowCode(false);
                     }
+
                 }
             }
         );
