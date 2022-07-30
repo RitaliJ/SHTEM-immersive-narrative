@@ -98,4 +98,4 @@ export default function Captcha(props: {
         </CenteredModal>
     )
 }
-Footer
+// Footer
