@@ -37,7 +37,6 @@ const constants = require('../util/constants')
 
 
 
-
     //flip selection state at index i
     const flipAtIndex = (i: number) => {
         let s = selected.slice();
@@ -111,6 +110,7 @@ const constants = require('../util/constants')
                         </button>
                         
                         <div className="text-lg text-red-800 italic">{answer()}</div>
+                        
 
                     </>
                 )}
