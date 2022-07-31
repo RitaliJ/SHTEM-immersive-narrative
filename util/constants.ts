@@ -124,7 +124,7 @@ module.exports = {
                         options: [
                             "Take Me Home, Country Roads",
                             "Party in the U.S.A.",
-                            "National anthem (Fergie veresion)",
+                            "National anthem (Fergie version)",
                             "This Land is Your Land",
                         ],
                     },
