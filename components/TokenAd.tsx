@@ -10,12 +10,14 @@ export default function TokenAd(props: {
     const [reward, setReward] = useState(0);
     const [running, setRunning] = useState(false);
     const [heartrate, setHeartrate] = useState(70);
+    const [cameraAllowed, setCameraAllowed] = useState(false);
 
     //start running timer on modal open
     useEffect(() => {
         if (isOpen) {
             setReward(0);
             setRunning(true);
+            setCameraAllowed(false);
         } else {
             setRunning(false);
             callback(reward);
@@ -52,19 +54,36 @@ export default function TokenAd(props: {
                 >
                     ×
                 </button>
-                <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1001981254520029215/proposed_ad_stare.jpg"></img>
-                <div className="flex gap-1 text-2xl">
-                    <p>Heartrate:</p>
-                    <p className="font-bold">
-                        {heartrate} BPM
-                    </p>
-                </div>
-                <p className="text-xl">
-                    Current reward: {reward} Heartbeats
-                </p>
-                <p className="italic">
-                    You can close this popup at any time to receive your Heartbeats
-                </p>
+                {cameraAllowed ?
+                    <>
+                        <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1001981254520029215/proposed_ad_stare.jpg"></img>
+                        <div className="flex gap-1 text-2xl">
+                            <p>Heartrate:</p>
+                            <p className="font-bold">
+                                {heartrate} BPM
+                            </p>
+                        </div>
+                        <p className="text-xl">
+                            Current reward: {reward} Heartbeats
+                        </p>
+                        <p className="italic">
+                            You can close this popup at any time to receive your Heartbeats
+                        </p>
+                    </> : <>
+                        <p className="text-2xl font-bold">
+                            Authorize camera
+                        </p>
+                        <p className="text-lg">
+                            To ensure that you are staring at the logo, we need to access your camera.
+                        </p>
+                        <button
+                            onClick={() => setCameraAllowed(true)}
+                            className="bg-green-600 text-white rounded-lg px-24 py-3"
+                        >
+                            Allow
+                        </button>
+                    </>
+                }
             </div>
         </CenteredModal>
     )

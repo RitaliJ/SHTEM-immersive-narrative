@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { CaptchaType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 import GiftCodeContent from "./GiftCodeContent";
-
 const constants = require('../util/constants')
 
 
@@ -14,6 +13,7 @@ const constants = require('../util/constants')
         showCode: boolean,
         setShowCode: (value: boolean) => void
     }) {
+
     const {isOpen, setIsOpen, captcha, showCode, setShowCode} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
     const [submit, setSubmit] = useState(false);
@@ -27,14 +27,12 @@ const constants = require('../util/constants')
     }, [captcha]);
 
 
-
     //flip selection state at index i
     const flipAtIndex = (i: number) => {
         let s = selected.slice();
         s[i] = !s[i];
         setSelected(s);
     }
-
 
     //add data to localStorage and show gift code
     const handleSubmit = () => {
@@ -59,7 +57,6 @@ const constants = require('../util/constants')
             
          } 
     }
-
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -97,9 +94,10 @@ const constants = require('../util/constants')
                             className="px-4 py-2 whitespace-nowrap w-min rounded-lg bg-blue-500 text-white text-xl">
                             Submit
                         </button>
-                        <div className="text-lg text-red-800">{answer()}</div>
+
+                        <div className="text-lg text-red-800 italic">{answer()}</div>
                         
-                        
+
                     </>
                 )}
             </div>

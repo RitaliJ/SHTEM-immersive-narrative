@@ -12,8 +12,6 @@ import TokenAd from "./TokenAd";
 import NewsletterModal from "./NewsletterModal";
 import VideoAd from "./VideoAd";
 const constants = require('../util/constants')
-import CenteredModal from "./CenteredModal";
-
 
 //header component
 export default function Header(props: {
@@ -25,7 +23,6 @@ export default function Header(props: {
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const [redeemOpen, setRedeemOpen] = useState(false); //useState for gift code redeem modal
-    const [CameraModalOpen, setCameraModalOpen] = useState(false);
 
     const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
     const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
@@ -55,7 +52,6 @@ export default function Header(props: {
             }
         }
     });
-
 
     //open modal when addedToCart becomes true
     useEffect(() => {
@@ -132,40 +128,12 @@ export default function Header(props: {
                     } else {
                         setCaptchaShowCode(false);
                     }
-
                 }
-            }
-        );
+            });
             if (!foundSurvey) setOutOfSurveys(true);
             if (!foundCaptcha) setOutOfCaptchas(true);
         }
-
-
-        
     }
- 
-            <CenteredModal isOpen={CameraModalOpen} setIsOpen= {setCameraModalOpen} zIndex="z-20">
-                <div className="flex bg-white border-2 border-gray-200 shadow-lg rounded-lg">
-                    <button
-                        onClick={() => {setCameraModalOpen(false)}}
-                        className="absolute top-2 right-4 text-5xl">
-                        ×
-                    </button>
-                    <p>In order to complete this task, we need to access you camera in order to insure that you are indeed staring at the logo.</p>
-                    <button 
-                    onClick={() => setTokenAdOpen(true)}
-                    className="bg-blue-600 text-white px-5 py-2 rounded-sm text-xl  top-10 right-4">
-                        
-                        
-                                Accept cameras
-                            </button>
-                            <button className="bg-white text-blue-600 px-5 py-2 rounded-sm text-xl  top-10 right-10">
-                                Do not Accept Cameras
-                            </button>
-    
-    
-                </div>
-            </CenteredModal>
 
     return (
         <div className="flex items-center sticky top-0 px-2 duration-150
@@ -208,24 +176,6 @@ export default function Header(props: {
                     </p>
                 }
             </button>
-            <CenteredModal isOpen={CameraModalOpen} setIsOpen={setCameraModalOpen}>
-            <div className="relative flex flex-col gap-8 items-center bg-white container p-8 rounded-lg w-max whitespace-nowrap">
-                <button
-                    onClick={() => { setCameraModalOpen(false)}}
-                    className="absolute top-2 right-4 text-5xl">
-                    ×
-                </button>
-                <br></br>
-                <p>In order to insure that you are staring at the logo, we need to access your camera.</p>
-                <button onClick={() => { setCameraModalOpen(false); setTokenAdOpen(true);}}
-                className = "bg-white text-blue-600">Allow</button>
-                <button onClick={() => {setCameraModalOpen(false);}}
-                className = 'bg-white text-blue-600'>Do Not Allow</button>
-
-             
-                
-            </div>
-        </CenteredModal>
             <HelpPopover
                 html={
                     <>
@@ -262,7 +212,7 @@ export default function Header(props: {
                             </div>
                         </button>
                         <button
-                            onClick={() => setCameraModalOpen(true)}
+                            onClick={() => setTokenAdOpen(true)}
                             className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
                             <div className="flex gap-2">
                                 <span>Stare at a logo</span>
@@ -330,10 +280,11 @@ export default function Header(props: {
                 Logged in as {account.firstName}
             </span>
             <CartModal isOpen={isOpen} setIsOpen={setIsOpen} callback={refreshAccount} />
-            <RedeemModal isOpen={redeemOpen} setIsOpen={setRedeemOpen} callback={() => {
-                refreshAccount();
-                updateSurveyAndCaptcha();
-            }} />
+            <RedeemModal
+                isOpen={redeemOpen}
+                setIsOpen={setRedeemOpen}
+                callback={() => {refreshAccount(); updateSurveyAndCaptcha()}}
+            />
         </div>
     )
 }

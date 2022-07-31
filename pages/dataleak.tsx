@@ -16,6 +16,8 @@ export default function Dataleak() {
     const [gender, setgender] = useState("");
     const [vacationCaptcha, setVacationCaptcha] = useState([false]);
     const [poliCaptcha, setPoliCaptcha] = useState([false]);
+    const [famfeud, setfamfeud] = useState([""]);
+    const [starbucks, setstarbucks] = useState([""]);
     
     const updateUserVacationCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
         let labels = [];
@@ -54,7 +56,11 @@ export default function Dataleak() {
             if (eth) setrace(JSON.parse(eth));
             const gen = localStorage.getItem('shtemInfo4');
             if (gen)  setgender(JSON.parse(gen));
-            
+            const familyfeud = localStorage.getItem("Family Feud");
+            if (familyfeud) setfamfeud(JSON.parse(familyfeud));
+            const bucks = localStorage.getItem("What Starbucks drink are you?");
+            if (bucks) setstarbucks(JSON.parse(bucks));
+
             const vacation = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
             if (vacation && vacation !== "undefined") setVacationCaptcha(JSON.parse(vacation));
 
@@ -259,6 +265,37 @@ export default function Dataleak() {
                         <div className="flex flex-col gap-1 pl-6">
                             {interests[0] ? (
                                 interests.map((x, i) =>
+                                    <div key={i} className="flex gap-2">
+                                        <p>•</p>
+                                        <p>{x}</p>
+                                    </div>
+                                )
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            )}
+                        </div>
+                        <p>Survey Answers:</p>
+                        <div className="flex flex-col gap-1 pl-6">
+                            {famfeud[0] ? (
+                                famfeud.map((x, i) =>
+                                    <div key={i} className="flex gap-2">
+                                        <p>•</p>
+                                        <p>{x}</p>
+                                    </div>
+                                )
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            )}
+                        </div>
+                        <div className="flex flex-col gap-1 pl-6">
+                            {starbucks[0] ? (
+                                starbucks.map((x, i) =>
                                     <div key={i} className="flex gap-2">
                                         <p>•</p>
                                         <p>{x}</p>
