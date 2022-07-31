@@ -16,8 +16,8 @@ export default function Dataleak() {
     const [gender, setgender] = useState("");
     const [vacationCaptcha, setVacationCaptcha] = useState([false]);
     const [poliCaptcha, setPoliCaptcha] = useState([false]);
-    const [famfeud, setfamfeud] = useState([""]);
-    const [starbucks, setstarbucks] = useState([""]);
+    const [famfeud, setfamfeud] = useState({} as {[key: string]: string});
+    const [starbucks, setstarbucks] = useState({} as {[key: string]: string});
     
     const updateUserVacationCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
         let labels = [];
@@ -44,53 +44,47 @@ export default function Dataleak() {
     useEffect(() => {
         if (!account) {
             const acc = localStorage.getItem('shtemAccount');
-            if (acc) setAccount(JSON.parse(acc));
+            if (acc && acc !== "undefined") setAccount(JSON.parse(acc));
 
             const int = localStorage.getItem('shtemInterests');
-            if (int) setInterests(JSON.parse(int));
+            if (int && int !== "undefined") setInterests(JSON.parse(int));
             const inf = localStorage.getItem('shtemInfo1');
-            if (inf) setextro1(JSON.parse(inf));
+            if (inf && inf !== "undefined") setextro1(JSON.parse(inf));
             const ex = localStorage.getItem('shtemInfo2');
-            if (ex) setextro2(JSON.parse(ex));
+            if (ex && ex !== "undefined") setextro2(JSON.parse(ex));
             const eth = localStorage.getItem('shtemInfo3');
-            if (eth) setrace(JSON.parse(eth));
+            if (eth && eth !== "undefined") setrace(JSON.parse(eth));
             const gen = localStorage.getItem('shtemInfo4');
-            if (gen)  setgender(JSON.parse(gen));
+            if (gen && gen !== "undefined") setgender(JSON.parse(gen));
             const familyfeud = localStorage.getItem("Family Feud");
-            if (familyfeud) setfamfeud(JSON.parse(familyfeud));
+            if (familyfeud && familyfeud !== "undefined") setfamfeud(JSON.parse(familyfeud));
             const bucks = localStorage.getItem("What Starbucks drink are you?");
-            if (bucks) setstarbucks(JSON.parse(bucks));
+            if (bucks && bucks !== "undefined") setstarbucks(JSON.parse(bucks));
 
             const vacation = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
             if (vacation && vacation !== "undefined") setVacationCaptcha(JSON.parse(vacation));
-
             const issues = localStorage.getItem("Select the political issues that matter the most to you.");
             if (issues && issues !== "undefined") setPoliCaptcha(JSON.parse(issues));
 
             let tempData = {} as Keys;
 
             const login = localStorage.getItem('login');
-            if (login) tempData.login = JSON.parse(login);
-
+            if (login && login !== "undefined") tempData.login = JSON.parse(login);
             const terms = localStorage.getItem('terms');
-            if (terms) tempData.terms = JSON.parse(terms);
-
+            if (terms && terms !== "undefined") tempData.terms = JSON.parse(terms)
             const survey = localStorage.getItem('survey');
-            if (survey) tempData.survey = JSON.parse(survey);
-
+            if (survey && survey !== "undefined") tempData.survey = JSON.parse(survey);
             const home = localStorage.getItem('home');
-            if (home) tempData.home = JSON.parse(home);
-
+            if (home && home !== "undefined") tempData.home = JSON.parse(home);
             const checkout = localStorage.getItem('checkout');
-            if (checkout) tempData.checkout = JSON.parse(checkout);
-
+            if (checkout && checkout !== "undefined") tempData.checkout = JSON.parse(checkout);
             const purchase = localStorage.getItem('purchase');
-            if (purchase) tempData.purchase = JSON.parse(purchase);
+            if (purchase && purchase !== "undefined") tempData.purchase = JSON.parse(purchase);
 
             let products: {millis: number, clicks: number}[] = [];
             constants.products.forEach((p: ProductType) => {
                 const prod = localStorage.getItem("products/" + p.id);
-                if (prod) products.push(JSON.parse(prod));
+                if (prod && prod !== "undefined") products.push(JSON.parse(prod));
             });
             tempData.products = products;
 
@@ -279,28 +273,25 @@ export default function Dataleak() {
                         </div>
                         <p>Survey Answers:</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            {famfeud[0] ? (
-                                famfeud.map((x, i) =>
-                                    <div key={i} className="flex gap-2">
-                                        <p>•</p>
-                                        <p>{x}</p>
-                                    </div>
-                                )
-                            ) : (
-                                <div className="flex gap-2">
-                                    <p>•</p>
-                                    <p>None</p>
-                                </div>
-                            )}
-                        </div>
-                        <div className="flex flex-col gap-1 pl-6">
-                            {starbucks[0] ? (
-                                starbucks.map((x, i) =>
-                                    <div key={i} className="flex gap-2">
-                                        <p>•</p>
-                                        <p>{x}</p>
-                                    </div>
-                                )
+                            {Object.keys(famfeud) || Object.keys(starbucks) ? (
+                                <>
+                                    {Object.keys(famfeud) &&
+                                        Object.keys(famfeud).map((q, i) =>
+                                            <div key={i} className="flex gap-2 truncate">
+                                                <p>•</p>
+                                                <p>{famfeud[q]}</p>
+                                            </div>
+                                        )
+                                    }
+                                    {Object.keys(starbucks) &&
+                                        Object.keys(starbucks).map((q, i) =>
+                                            <div key={i} className="flex gap-2 truncate">
+                                                <p>•</p>
+                                                <p>{starbucks[q]}</p>
+                                            </div>
+                                        )
+                                    }
+                                </>
                             ) : (
                                 <div className="flex gap-2">
                                     <p>•</p>

@@ -35,9 +35,6 @@ const constants = require('../util/constants')
         }
     }, [selected]);
 
-
-
-
     //flip selection state at index i
     const flipAtIndex = (i: number) => {
         let s = selected.slice();
