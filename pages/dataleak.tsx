@@ -16,8 +16,8 @@ export default function Dataleak() {
     const [gender, setgender] = useState("");
     const [vacationCaptcha, setVacationCaptcha] = useState([false]);
     const [poliCaptcha, setPoliCaptcha] = useState([false]);
-    const [famfeud, setfamfeud] = useState([""]);
-    const [starbucks, setstarbucks] = useState([""]);
+    const [famfeud, setfamfeud] = useState({} as {[key: string]: string});
+    const [starbucks, setstarbucks] = useState({} as {[key: string]: string});
     
     const updateUserVacationCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
         let labels = [];
@@ -273,28 +273,25 @@ export default function Dataleak() {
                         </div>
                         <p>Survey Answers:</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            {famfeud[0] ? (
-                                famfeud.map((x, i) =>
-                                    <div key={i} className="flex gap-2">
-                                        <p>•</p>
-                                        <p>{x}</p>
-                                    </div>
-                                )
-                            ) : (
-                                <div className="flex gap-2">
-                                    <p>•</p>
-                                    <p>None</p>
-                                </div>
-                            )}
-                        </div>
-                        <div className="flex flex-col gap-1 pl-6">
-                            {starbucks[0] ? (
-                                starbucks.map((x, i) =>
-                                    <div key={i} className="flex gap-2">
-                                        <p>•</p>
-                                        <p>{x}</p>
-                                    </div>
-                                )
+                            {Object.keys(famfeud) || Object.keys(starbucks) ? (
+                                <>
+                                    {Object.keys(famfeud) &&
+                                        Object.keys(famfeud).map((q, i) =>
+                                            <div key={i} className="flex gap-2 truncate">
+                                                <p>•</p>
+                                                <p>{famfeud[q]}</p>
+                                            </div>
+                                        )
+                                    }
+                                    {Object.keys(starbucks) &&
+                                        Object.keys(starbucks).map((q, i) =>
+                                            <div key={i} className="flex gap-2 truncate">
+                                                <p>•</p>
+                                                <p>{starbucks[q]}</p>
+                                            </div>
+                                        )
+                                    }
+                                </>
                             ) : (
                                 <div className="flex gap-2">
                                     <p>•</p>
