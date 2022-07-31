@@ -1,3 +1,4 @@
+
 export {}
 
 //constant array of survey and proudct objects to retrieve in dynamic routes
@@ -11,6 +12,7 @@ module.exports = {
         "1430": 80,
         "6350": 80,
         "0000": 10000,
+        "9999": 80
     },
     surveys: [
         {

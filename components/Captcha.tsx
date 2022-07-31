@@ -2,22 +2,30 @@ import { useEffect, useState } from "react";
 import { CaptchaType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 import GiftCodeContent from "./GiftCodeContent";
+const constants = require('../util/constants')
 
-//modal for a 3x3 image select captcha
-export default function Captcha(props: {
-    isOpen: boolean,
-    setIsOpen: (value: boolean) => void,
-    captcha: CaptchaType,
-    showCode: boolean,
-    setShowCode: (value: boolean) => void,
-}) {
+
+    //modal for a 3x3 image select captcha
+    export default function Captcha(props: {
+        isOpen: boolean,
+        setIsOpen: (value: boolean) => void,
+        captcha: CaptchaType,
+        showCode: boolean,
+        setShowCode: (value: boolean) => void
+    }) {
+
     const {isOpen, setIsOpen, captcha, showCode, setShowCode} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
     const [submit, setSubmit] = useState(false);
+    const [hverSubmitCounter, setCounter] = useState(0);
+    
 
     useEffect(() => { //reset selected useState when a new captcha loads
         setSelected([false, false, false, false, false, false, false, false, false]);
+        setCounter(0);
+        setShowCode(false);
     }, [captcha]);
+
 
     //flip selection state at index i
     const flipAtIndex = (i: number) => {
@@ -29,19 +37,25 @@ export default function Captcha(props: {
     //add data to localStorage and show gift code
     const handleSubmit = () => {
         localStorage.setItem(captcha.title, JSON.stringify(selected)); 
+        setCounter(hverSubmitCounter+1)
         setSubmit(true)
     }
+
         
     const answer = () => {
         if (submit) {
-            if (captcha.hver) {
-                setShowCode(false);
-                return "Sorry! It appears you are not human enough. Please try again.";
+
+            if (captcha.hver && hverSubmitCounter<6) {
+                var x = "Sorry! It appears you are not human enough to have heartbeats. Please try again.";
+                return(x)
             } else {
                 setShowCode(true);
-                return "You are human enough to pass this!";
+                var x = "You are human enough to pass this!";
+                
+                return (x)
             }
-        }
+            
+         } 
     }
 
     return (
@@ -80,9 +94,10 @@ export default function Captcha(props: {
                             className="px-4 py-2 whitespace-nowrap w-min rounded-lg bg-blue-500 text-white text-xl">
                             Submit
                         </button>
-                        <p className="text-red-500 italic text-lg">
-                            {answer()}
-                        </p>
+
+                        <div className="text-lg text-red-800 italic">{answer()}</div>
+                        
+
                     </>
                 )}
             </div>
