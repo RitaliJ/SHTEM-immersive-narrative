@@ -18,6 +18,7 @@ const constants = require('../util/constants')
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
     const [submit, setSubmit] = useState(false);
     const [hverSubmitCounter, setCounter] = useState(0);
+    const [canSubmit, setCanSubmit] = useState(false);
     
 
     useEffect(() => { //reset selected useState when a new captcha loads
@@ -25,6 +26,15 @@ const constants = require('../util/constants')
         setCounter(0);
         setShowCode(false);
     }, [captcha]);
+
+    useEffect(() => { //reset selected useState when a new captcha loads
+        if(selected.filter(Boolean).length >= 3){
+            setCanSubmit(true);
+        }else{
+            setCanSubmit(false);
+        }
+    }, [selected]);
+
 
 
     //flip selection state at index i
@@ -43,6 +53,9 @@ const constants = require('../util/constants')
 
         
     const answer = () => {
+        if(!canSubmit){
+            return "Please select 3 or more choices."
+        }
         if (submit) {
 
             if (captcha.hver && hverSubmitCounter<6) {
@@ -90,11 +103,12 @@ const constants = require('../util/constants')
                             )}
                         </div>
                         <button
-                            onClick={() => handleSubmit()}
-                            className="px-4 py-2 whitespace-nowrap w-min rounded-lg bg-blue-500 text-white text-xl">
+                            onClick={() => {if (canSubmit) handleSubmit()}}
+                            className={"px-4 py-2 whitespace-nowrap w-min rounded-lg text-xl" +
+                            (canSubmit ? " bg-blue-500 text-white" : " bg-gray-200 text-gray-400")} >
                             Submit
                         </button>
-
+                        
                         <div className="text-lg text-red-800 italic">{answer()}</div>
                         
 
