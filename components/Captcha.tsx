@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { CaptchaType } from "../util/types";
 import CenteredModal from "./CenteredModal";
 import GiftCodeContent from "./GiftCodeContent";
-
 const constants = require('../util/constants')
 
 
@@ -14,10 +13,12 @@ const constants = require('../util/constants')
         showCode: boolean,
         setShowCode: (value: boolean) => void
     }) {
+
     const {isOpen, setIsOpen, captcha, showCode, setShowCode} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
     const [submit, setSubmit] = useState(false);
     const [hverSubmitCounter, setCounter] = useState(0);
+    const [canSubmit, setCanSubmit] = useState(false);
     
 
     useEffect(() => { //reset selected useState when a new captcha loads
@@ -25,6 +26,15 @@ const constants = require('../util/constants')
         setCounter(0);
         setShowCode(false);
     }, [captcha]);
+
+    useEffect(() => { //reset selected useState when a new captcha loads
+        if(selected.filter(Boolean).length >= 3){
+            setCanSubmit(true);
+        }else{
+            setCanSubmit(false);
+        }
+    }, [selected]);
+
 
 
 
@@ -35,7 +45,6 @@ const constants = require('../util/constants')
         setSelected(s);
     }
 
-
     //add data to localStorage and show gift code
     const handleSubmit = () => {
         localStorage.setItem(captcha.title, JSON.stringify(selected)); 
@@ -45,6 +54,9 @@ const constants = require('../util/constants')
 
         
     const answer = () => {
+        if(!canSubmit){
+            return "Please select 3 or more choices."
+        }
         if (submit) {
 
             if (captcha.hver && hverSubmitCounter<6) {
@@ -59,7 +71,6 @@ const constants = require('../util/constants')
             
          } 
     }
-
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -93,13 +104,14 @@ const constants = require('../util/constants')
                             )}
                         </div>
                         <button
-                            onClick={() => handleSubmit()}
-                            className="px-4 py-2 whitespace-nowrap w-min rounded-lg bg-blue-500 text-white text-xl">
+                            onClick={() => {if (canSubmit) handleSubmit()}}
+                            className={"px-4 py-2 whitespace-nowrap w-min rounded-lg text-xl" +
+                            (canSubmit ? " bg-blue-500 text-white" : " bg-gray-200 text-gray-400")} >
                             Submit
                         </button>
-                        <div className="text-lg text-red-800">{answer()}</div>
                         
-                        
+                        <div className="text-lg text-red-800 italic">{answer()}</div>
+
                     </>
                 )}
             </div>
