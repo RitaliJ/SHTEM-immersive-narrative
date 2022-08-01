@@ -29,6 +29,17 @@ export default function NewsletterModal(props: {
 
     //handle submit
     const handleSubmit = () => {
+        const data = {
+            email,
+        };
+        fetch("/api/newsletter", { //send email request to api route
+            method: "POST",
+            headers: {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
         setIsOpen(false);
         callback(1);
     }
