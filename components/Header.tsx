@@ -18,8 +18,10 @@ export default function Header(props: {
     addedToCart?: boolean,
     callback?: (value: boolean) => void,
     psaHtml?: ReactNode,
+    updateTarget?: boolean,
+    resetTargetBool?: () => void,
 }) {
-    const {addedToCart, callback, psaHtml} = props;
+    const {addedToCart, callback, psaHtml, updateTarget, resetTargetBool} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const [redeemOpen, setRedeemOpen] = useState(false); //useState for gift code redeem modal
@@ -67,6 +69,14 @@ export default function Header(props: {
             callback(false);
         }
     }, [isOpen]);
+
+    //update account object when prop becomes true
+    useEffect(() => {
+        if (updateTarget && resetTargetBool) {
+            refreshAccount();
+            resetTargetBool();
+        }
+    }, [updateTarget]);
 
     //helper to refresh account
     const refreshAccount = () => {
@@ -119,7 +129,8 @@ export default function Header(props: {
                 }
             });
             constants.captchas.forEach((c: CaptchaType) => {
-                if (!acc2.usedCodes.includes(c.code) && !foundCaptcha) {
+                if (!acc2.usedCodes.includes(c.code) && !foundCaptcha &&
+                    !(localStorage.getItem(c.title) !== "undefined" && c.hver)) {
                     setCaptcha(c);
                     foundCaptcha = true;
                     if (localStorage.getItem(c.title) !== "undefined"
@@ -152,7 +163,10 @@ export default function Header(props: {
                 </button>
             </Link>
             <span className="grow" />
-            <span className="text-lg text-green-600 outline-white px-3">
+            <span className="text-lg px-3">
+                Target item: {account.target ?? "None"}
+            </span>
+            <span className="text-lg text-green-600 px-3">
                 {account.balance && account.balance.toFixed(2)} Heartbeats
             </span>
             <button
@@ -191,9 +205,9 @@ export default function Header(props: {
                                 <span>Survey</span>
                                 <span>•</span>
                                 <span>
-                                    {survey && (constants.giftCodes[survey.code] === 1
-                                        ? constants.giftCodes[survey.code] + " Heartbeats"
-                                        : constants.giftCodes[survey.code] + " Heartbeats")}
+                                    {survey &&
+                                        (constants.giftCodes[survey.code] ?? "0") + " Heartbeats"
+                                    }
                                 </span>
                             </div>
                         </button>
@@ -205,9 +219,9 @@ export default function Header(props: {
                                 <span>Captcha</span>
                                 <span>•</span>
                                 <span>
-                                    {captcha && (constants.giftCodes[captcha.code] === 1
-                                        ? constants.giftCodes[captcha.code] + " Heartbeats"
-                                        : constants.giftCodes[captcha.code] + " Heartbeats")}
+                                    {captcha &&
+                                        (constants.giftCodes[captcha.code] ?? "0") + " Heartbeats"
+                                    }
                                 </span>
                             </div>
                         </button>
@@ -217,7 +231,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Stare at a logo</span>
                                 <span>•</span>
-                                <span>X Heartbeat</span>
+                                <span>X Heartbeats</span>
                             </div>
                         </button>
                         <button
@@ -227,7 +241,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Watch an ad</span>
                                 <span>•</span>
-                                <span>80 Heartbeat</span>
+                                <span>80 Heartbeats</span>
                             </div>
                         </button>
                         <button
@@ -237,7 +251,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Sign up for our newsletter</span>
                                 <span>•</span>
-                                <span>80 Heartbeat</span>
+                                <span>80 Heartbeats</span>
                             </div>
                         </button>
                     </>
@@ -257,6 +271,7 @@ export default function Header(props: {
                             captcha={captcha}
                             showCode={captchaShowCode}
                             setShowCode={setCaptchaShowCode}
+                            newCaptcha={updateSurveyAndCaptcha}
                         />
                         <TokenAd
                             isOpen={tokenAdOpen}

@@ -9,22 +9,21 @@ import GiftCodeContent from "./GiftCodeContent";
         setIsOpen: (value: boolean) => void,
         captcha: CaptchaType,
         showCode: boolean,
-        setShowCode: (value: boolean) => void
+        setShowCode: (value: boolean) => void,
+        newCaptcha: () => void,
     }) {
 
-    const {isOpen, setIsOpen, captcha, showCode, setShowCode} = props;
+    const {isOpen, setIsOpen, captcha, showCode, setShowCode, newCaptcha} = props;
     const [selected, setSelected] = useState([false, false, false, false, false, false, false, false, false]);
-    const [submit, setSubmit] = useState(false);
-    const [hverSubmitCounter, setCounter] = useState(0);
     const [canSubmit, setCanSubmit] = useState(false);
     const [verified, setVerified] = useState(false);
     const [buttonOn, setButtonOn] = useState(false); //"I am human" button
-    const [verTries, setVerTries] = useState(0);
+    const [submit, setSubmit] = useState(false);
 
     useEffect(() => { //reset selected useState when a new captcha loads
         setSelected([false, false, false, false, false, false, false, false, false]);
-        setCounter(0);
         setShowCode(false);
+        setSubmit(false);
     }, [captcha]);
 
     useEffect(() => { //reset selected useState when a new captcha loads
@@ -44,48 +43,31 @@ import GiftCodeContent from "./GiftCodeContent";
 
     //add data to localStorage and show gift code
     const handleSubmit = () => {
+        if (!captcha.hver) {
+            setShowCode(true);
+            setVerified(false);
+        }
+        if (captcha.hver && submit) {
+            newCaptcha();
+        }
         localStorage.setItem(captcha.title, JSON.stringify(selected));
-        setCounter(hverSubmitCounter+1)
-        setSubmit(true)
-    }
-
-    const answer = () => {
-        if (!canSubmit) {
-            return "Please select at least one option."
-        }
-        if (submit) {
-            if (captcha.hver && hverSubmitCounter < 6) {
-                return "Sorry! It appears you are not human enough to have heartbeats. Please try again.";
-            } else { 
-                setShowCode(true);
-                return "You are human enough to pass this!";
-            }
-        } 
-    }
-
-    const validate = () => {
-        if (verTries < 3) {
-            setVerTries(verTries + 1);
-            setButtonOn(false);
-        } else {
-            setVerified(true);
-        }
+        setSubmit(true);
     }
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className="relative flex flex-col gap-8 items-center bg-white container p-8 rounded-lg w-max whitespace-nowrap">
                 <button
-                    onClick={() => { setIsOpen(false); setSubmit(false);}}
+                    onClick={() => setIsOpen(false)}
                     className="absolute top-2 right-4 text-5xl">
                     ×
                 </button>
-                {verified ? <>
+                {verified || submit ? <>
                     {showCode ? (
                         <GiftCodeContent code={captcha.code} />
                     ) : (
                         <>
-                            <p className="text-2xl font-bold">
+                            <p className="text-2xl font-bold mt-4">
                                 {captcha.title}
                             </p>
                             <div className="flex flex-col gap-6">
@@ -105,18 +87,28 @@ import GiftCodeContent from "./GiftCodeContent";
                                 )}
                             </div>
                             <button
-                                onClick={() => {if (canSubmit) handleSubmit()}}
-                                className={"px-4 py-2 whitespace-nowrap w-min rounded-lg text-xl" +
-                                (canSubmit ? " bg-blue-500 text-white" : " bg-gray-200 text-gray-400")} >
-                                Submit
+                                onClick={() => {
+                                    if (canSubmit) handleSubmit();
+                                }}
+                                className={"px-4 py-2 whitespace-nowrap w-min rounded-lg text-xl duration-150 "
+                                    + (canSubmit ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
+                            >
+                                {captcha.hver && submit ? "Try again" : "Submit"}
                             </button>
-                            <p className="text-lg text-red-500 italic">
-                                {answer()}
-                            </p>
+                            {!canSubmit &&
+                                <p className="text-red-500 italic text-lg">
+                                    You must select at least one option
+                                </p>
+                            }
+                            {captcha.hver && submit &&
+                                <p className="text-red-500 italic text-lg">
+                                    It appears you are not human! Please try again.
+                                </p>
+                            }
                         </>
                     )}
                 </> : <>
-                    <p className="text-xl px-8">
+                    <p className="text-xl px-8 mt-4">
                         We need to verify that you are human.
                     </p>
                     <div className="flex gap-4 items-center">
@@ -130,16 +122,12 @@ import GiftCodeContent from "./GiftCodeContent";
                         </p>
                     </div>
                     <button
-                        onClick={() => validate()}
-                        className="bg-blue-500 text-white text-lg px-3 py-1 rounded-lg"
+                        onClick={() => {if (buttonOn) {setVerified(true); setButtonOn(false)}}}
+                        className={"text-lg px-3 py-1 rounded-lg duration-150 "
+                            + (buttonOn ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
                     >
                         Continue
                     </button>
-                    {!verified && verTries > 0 &&
-                        <p className="text-red-500 italic text-lg">
-                            It appears you aren't human! Please try again.
-                        </p>
-                    }
                 </>}
             </div>
         </CenteredModal>

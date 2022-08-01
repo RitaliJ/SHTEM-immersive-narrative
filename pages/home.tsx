@@ -12,7 +12,7 @@ export default function Home() {
     const [account, setAccount] = useState({} as AccountType);
     const [products, setProducts] = useState([undefined as unknown as ProductType]);
     const [helpOpen, setHelpOpen] = useState(false);
-
+    const [updateTarget, setUpdateTarget] = useState(false); //update target item when this becomes true
     const [start, setStart] = useState(0);
     const [millis, setMillis] = useState<number>(); //initial values before adding from this page
     const [newMillis, setNewMillis] = useState<number>(); //new amount of milliseconds to add
@@ -92,7 +92,11 @@ export default function Home() {
                 <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
             </Head>
             
-            <Header psaHtml="This is your personal shopping assistant!" />
+            <Header
+                psaHtml="This is your personal shopping assistant!"
+                updateTarget={updateTarget}
+                resetTargetBool={() => setUpdateTarget(false)}
+            />
 
             <main className="flex gap-4 mt-12 mb-8 mx-4 justify-center">
                 <BannerAd imgSrc="https://cdn.discordapp.com/attachments/996489060275208295/1001271760743829504/balenciaga_ad.png" href="/products/0" className="w-72" />
@@ -108,7 +112,7 @@ export default function Home() {
                 </div>
 
                 <BannerAd imgSrc="https://cdn.discordapp.com/attachments/996489060275208295/1001271725171945582/water_advertisement.png" href="/products/1" className="w-72" />
-                <HelpModal isOpen={helpOpen} setIsOpen={setHelpOpen} account={account} />
+                <HelpModal isOpen={helpOpen} setIsOpen={setHelpOpen} account={account} callback={() => setUpdateTarget(true)} />
             </main>
         </>
     )

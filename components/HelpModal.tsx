@@ -5,12 +5,17 @@ import CenteredModal from "./CenteredModal";
 import DropdownMenu from '../components/DropdownMenu';
 
 
-export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: boolean) => void, account: AccountType}) {
-    const {isOpen, setIsOpen, account} = props;
+export default function HelpModal(props: {
+    isOpen: boolean,
+    setIsOpen: (value: boolean) => void,
+    account: AccountType,
+    callback: () => void,
+}) {
+    const {isOpen, setIsOpen, account, callback} = props;
     const [page, setPage] = useState(0);
     const [blur, setBlur] = useState("lg");
-    const [items, setItems] = useState("Mummy");
-    const ItemsAvailable = ["White Shirt", "Mummy"]
+    const [item, setItem] = useState("");
+    const itemsAvailable = ["White Shirt", "Mummy", "Gold Man"]
     
     
     const pages: ReactNode[] = [
@@ -31,15 +36,16 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
             but rather through our own personal currency of Heartbeats.
         </p>,
         <div key = {4}>
-        <p>
-            Luckily for you, you get to start off with 500 Heartbeats already! Pick an item you are looking for.
-        </p>
-        <DropdownMenu label="Items" callback={x => setItems("WhiteShirt")} options={ItemsAvailable}/> 
-
-        
+            <p>
+                Luckily for you, you get to start off with 500 Heartbeats already! Pick an item you are looking for.
+            </p>
+            <DropdownMenu label="Items" callback={setItem} options={itemsAvailable} /> 
         </div>,
-        <div key={5} className="flex gap-x-1 flex-wrap items-center h-min">
-            {"That concludes my introduction. if you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>
+        <p key={5}>
+            Great choice! Now search the store for "{item}" and purchase it!
+        </p>,
+        <div key={6} className="flex gap-x-1 flex-wrap items-center h-min">
+            {"If you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>
                 <p key={i}>
                     {w}
                 </p>
@@ -58,8 +64,18 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
     //function for advancing to next page and handling any other effects
     const advance = () => {
         if (page === 1) setBlur("");
-        if (page === pages.length - 1) setIsOpen(false);
-        else setPage(page + 1);
+        if (page === pages.length - 1) {
+            const acc = localStorage.getItem("shtemAccount"); //set target attribute of account object
+            if (acc) {
+                let acc2 = JSON.parse(acc);
+                acc2.target = item;
+                localStorage.setItem("shtemAccount", JSON.stringify(acc2));
+            }
+            callback();
+            setIsOpen(false);
+        } else {
+            setPage(page + 1);
+        }
     }
 
     return (
@@ -77,11 +93,17 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
                 <div className="px-4 py-3 w-72 flex flex-col gap-2 items-center text-lg">
                     {pages[page]}
                     <button
-                        onClick={() => advance()}
-                        className="px-3 py-1 text-lg rounded-lg mt-2 shadow-lg duration-150 bg-blue-500 text-white"
+                        onClick={() => {if (!(page === 4 && !item)) advance()}}
+                        className={"px-3 py-1 text-lg rounded-lg mt-2 shadow-lg duration-150 "
+                            + (page === 4 && !item ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}
                     >
                         {page === pages.length - 1 ? "Finish intro" : "Next"}
                     </button>
+                    {page === 4 && !item &&
+                        <p className="text-red-500 italic text-center">
+                            You must choose a product to continue
+                        </p>
+                    }
                 </div>
             </div>
         </CenteredModal>

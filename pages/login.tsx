@@ -123,6 +123,7 @@ export default function Login() {
                                 firstVisit: true,
                                 doneNewsletter: false,
                                 watchedAd: false,
+                                target: "",
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
                                 && validateEmail() && year !== undefined && month !== undefined && day !== undefined
