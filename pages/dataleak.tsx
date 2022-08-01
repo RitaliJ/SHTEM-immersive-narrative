@@ -151,8 +151,8 @@ export default function Dataleak() {
             return "Social Media Addicted";
         }
         else if (famfeud["Name the first thing you do when you wake up"] == "Turn on your coffee machine"){
-        return "Associated with Caffeine Addiction"; 
-    }
+            return "Associated with Caffeine Addiction"; 
+        }
     }
     const saturday = () => {
         if (famfeud["What would be your ideal Saturday afternoon?"] == "Standing overnight in a huge line for concert tickets but when you get to the front, they are sold out") {
@@ -162,29 +162,28 @@ export default function Dataleak() {
         } else if (famfeud["What would be your ideal Saturday afternoon?"] == "Getting a cavity filled") {
             return "health-conscious";
         } else if (famfeud["What would be your ideal Saturday afternoon?"] == "Missing your flight") {
-        return "Either huge on traveling, or needs to travel a lot";
+            return "Either huge on traveling, or needs to travel a lot";
+        }
     }
-}
     const destination = () => {
         const x = (famfeud["Name your favorite travel destination."]);
         return ("Is a target for vacation ads to " + x);
     }
     const presGame = () => {
-{
-    const x = (famfeud["Name a US president that would be the worst at video games."]);
-    if (x == "Abraham Lincoln") {
-        return ("Likely to have minimal knowledge on US presidents");
-    } else if (x == "Barack Obama") {
-        return ("Likely to be critical of Obama Administration");
-    } else if (x == "Donald Trump") {
-        return ("Likely to be critical of Trump Administration");
-    } else if (x == "Millard Fillmore") {
-        return ("Likely to know too much of US history");
+        const x = (famfeud["Name a US president that would be the worst at video games."]);
+        if (x == "Abraham Lincoln") {
+            return ("Likely to have minimal knowledge on US presidents");
+        } else if (x == "Barack Obama") {
+            return ("Likely to be critical of Obama Administration");
+        } else if (x == "Donald Trump") {
+            return ("Likely to be critical of Trump Administration");
+        } else if (x == "Millard Fillmore") {
+            return ("Likely to know too much of US history");
+        }
+        else if (x == "Ulysses S. Grant") {
+            return ("Likely to have an interest in US history");
+        }
     }
-    else if (x == "Ulysses S. Grant") {
-        return ("Likely to have an interest in US history");
-    }
-}    }
     const screenTime = () => {
         const x = (famfeud["What was your average daily amount of screen time last week?"]);
         if (x == "1-3 hours") {
