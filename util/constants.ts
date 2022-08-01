@@ -310,7 +310,7 @@ module.exports = {
         {
             imgSrc: "https://i.pinimg.com/736x/3e/6f/5f/3e6f5f92ac57fad94b918904ee29bc96--funny-fashion-fashion-fail.jpg",
             name: "Accordion Outfit",
-            desc: "An outfit for those that love music and symmetry, because the outfit is symmertric and the pants look like accordions.",
+            desc: "An outfit for those that love music and symmetry, because the outfit is symmetric and the pants look like accordions.",
             price: 799.99,
             id: 0,
         },
