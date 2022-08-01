@@ -119,7 +119,8 @@ export default function Header(props: {
                 }
             });
             constants.captchas.forEach((c: CaptchaType) => {
-                if (!acc2.usedCodes.includes(c.code) && !foundCaptcha) {
+                if (!acc2.usedCodes.includes(c.code) && !foundCaptcha &&
+                    !(localStorage.getItem(c.title) !== "undefined" && c.hver)) {
                     setCaptcha(c);
                     foundCaptcha = true;
                     if (localStorage.getItem(c.title) !== "undefined"
@@ -257,6 +258,7 @@ export default function Header(props: {
                             captcha={captcha}
                             showCode={captchaShowCode}
                             setShowCode={setCaptchaShowCode}
+                            newCaptcha={updateSurveyAndCaptcha}
                         />
                         <TokenAd
                             isOpen={tokenAdOpen}
