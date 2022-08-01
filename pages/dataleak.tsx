@@ -4,6 +4,7 @@ import { AccountType, ProductType } from "../util/types";
 import OurResearch from "./TNG";
 import { formatMs } from "../util/heplers";
 import Link from "next/link";
+import { X509Certificate } from "crypto";
 const constants = require('../util/constants');
 
 //page where all collected data is displayed
@@ -114,7 +115,7 @@ export default function Dataleak() {
             return "Likely to be anxious or people pleaser";
         }
     }
-    const Disneyland = () => {
+    const disneyland = () => {
         if (famfeud["Name the family member that you would bring with you on a trip to disneyland."] == "None") {
             return "A probable lone wolf or perhaps is embarrassed by their family.";
         } else if (famfeud["Name the family member that you would bring with you on a trip to disneyland."] == "Sibling") {
@@ -125,7 +126,7 @@ export default function Dataleak() {
             return "Perhaps sees aunt as more of a parental role or figure and even feels more comfortable with them.";
         }
     } 
-    const Plane = () => {
+    const plane = () => {
         if (famfeud["Name the first thing you order on a plane."] == "Chips") {
             return "Has a tendency for salty food.";
         }
@@ -139,7 +140,7 @@ export default function Dataleak() {
             return "Likely not vegan";
         }
     }
-    const WakeUp = () => {
+    const wakeUp = () => {
         if (famfeud["Name the first thing you do when you wake up."] == "Eat a bowl of cereal") {
             return "Would be a good target for cereal ads";
         }
@@ -153,7 +154,7 @@ export default function Dataleak() {
         return "Associated with Caffeine Addiction"; 
     }
     }
-    const Saturday = () => {
+    const saturday = () => {
         if (famfeud["What would be your ideal Saturday afternoon?"] == "Standing overnight in a huge line for concert tickets but when you get to the front, they are sold out") {
             return "dedicated and has a love for music";
         } else if (famfeud["What would be your ideal Saturday afternoon?"] == "Renewing your license at the DMV") {
@@ -164,45 +165,45 @@ export default function Dataleak() {
         return "Either huge on traveling, or needs to travel a lot";
     }
 }
-    const Destination = () => {
+    const destination = () => {
         const x = (famfeud["Name your favorite travel destination."]);
         return ("Is a target for vacation ads to " + x);
     }
-    const PresGame = () => {
+    const presGame = () => {
 {
-    const US = (famfeud["Name a US president that would be the worst at video games."]);
-    if (US == "Abraham Lincoln") {
+    const x = (famfeud["Name a US president that would be the worst at video games."]);
+    if (x == "Abraham Lincoln") {
         return ("Likely to have minimal knowledge on US presidents");
-    } else if (US == "Barack Obama") {
+    } else if (x == "Barack Obama") {
         return ("Likely to be critical of Obama Administration");
-    } else if (US == "Donald Trump") {
+    } else if (x == "Donald Trump") {
         return ("Likely to be critical of Trump Administration");
-    } else if (US == "Millard Fillmore") {
+    } else if (x == "Millard Fillmore") {
         return ("Likely to know too much of US history");
     }
-    else if (US == "Ulysses S. Grant") {
+    else if (x == "Ulysses S. Grant") {
         return ("Likely to have an interest in US history");
     }
 }    }
-    const ScreenTime = () => {
-        const Screen = (famfeud["What was your average daily amount of screen time last week?"]);
-        if (Screen == "1-3 hours") {
+    const screenTime = () => {
+        const x = (famfeud["What was your average daily amount of screen time last week?"]);
+        if (x == "1-3 hours") {
             return ("Doesn't use phone much")
-        } else if (Screen == "4-6 hours" || Screen == "7-9 hours") {
+        } else if (x == "4-6 hours" || x == "7-9 hours") {
             return ("Uses phone on a daily basis, but not addicted")
-        } else if (Screen == "9-11 hours"|| Screen == "11+ hours") {
+        } else if (x == "9-11 hours"|| x == "11+ hours") {
             return ("Is addicted to their phone")
         }
     }
-    const Anthem = () => {
-        const Anthem = (famfeud["Name your favorite song other than the national anthem that represents the USA."]);
-        if (Anthem == "Take Me Home, Country Roads") {
+    const anthem = () => {
+        const x = (famfeud["Name your favorite song other than the national anthem that represents the USA."]);
+        if (x == "Take Me Home, Country Roads") {
             return ("A country music fan")
-        } else if (Anthem == "Party in the U.S.A.") {
+        } else if (x == "Party in the U.S.A.") {
             return ("Likely enjoys pop music and Miley Cyrus")
-        } else if (Anthem == "National anthem (Fergie version)") {
+        } else if (x == "National anthem (Fergie version)") {
             return ("Likely keeps up with trends and memes online")
-        } else if (Anthem == "This Land is Your Land") {
+        } else if (x == "This Land is Your Land") {
             return ("A more refined, traditional person")
         }
     }
@@ -376,17 +377,44 @@ export default function Dataleak() {
                                 </div>
                             )}
                         </div>
-                        <p>Inferences We Made About You</p>
+                        <p>Inferences We Made About You:</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            <p>- {flying()}</p>
-                            <p>- {Disneyland()}</p>
-                            <p>- {Plane()}</p>
-                            <p>- {WakeUp()}</p>
-                            <p>- {Saturday()}</p>
-                            <p>- {Destination()}</p>
-                            <p>- {PresGame()}</p>
-                            <p>- {ScreenTime()}</p>
-                            <p>- {Anthem()}</p>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{flying()}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{disneyland()}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{plane()}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{wakeUp()}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{saturday()}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{destination()}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{presGame()}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{screenTime()}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p>•</p>
+                                <p>{anthem()}</p>
+                            </div>
                         </div>
                         <p>Are you an extrovert or introvert?</p>
                         <div className="flex flex-col gap-1 pl-6">
