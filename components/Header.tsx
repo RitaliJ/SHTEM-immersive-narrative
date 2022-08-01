@@ -192,9 +192,9 @@ export default function Header(props: {
                                 <span>Survey</span>
                                 <span>•</span>
                                 <span>
-                                    {survey && (constants.giftCodes[survey.code] === 1
-                                        ? constants.giftCodes[survey.code] + " Heartbeats"
-                                        : constants.giftCodes[survey.code] + " Heartbeats")}
+                                    {survey &&
+                                        (constants.giftCodes[survey.code] ?? "0") + " Heartbeats"
+                                    }
                                 </span>
                             </div>
                         </button>
@@ -206,9 +206,9 @@ export default function Header(props: {
                                 <span>Captcha</span>
                                 <span>•</span>
                                 <span>
-                                    {captcha && (constants.giftCodes[captcha.code] === 1
-                                        ? constants.giftCodes[captcha.code] + " Heartbeats"
-                                        : constants.giftCodes[captcha.code] + " Heartbeats")}
+                                    {captcha &&
+                                        (constants.giftCodes[captcha.code] ?? "0") + " Heartbeats"
+                                    }
                                 </span>
                             </div>
                         </button>
