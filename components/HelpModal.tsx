@@ -9,8 +9,8 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
     const {isOpen, setIsOpen, account} = props;
     const [page, setPage] = useState(0);
     const [blur, setBlur] = useState("lg");
-    const [items, setItems] = useState("Mummy");
-    const ItemsAvailable = ["White Shirt", "Mummy"]
+    const [item, setItem] = useState("Mummy");
+    const itemsAvailable = ["White Shirt", "Mummy", "Gold Man"]
     
     
     const pages: ReactNode[] = [
@@ -31,15 +31,16 @@ export default function HelpModal(props: {isOpen: boolean, setIsOpen: (value: bo
             but rather through our own personal currency of Heartbeats.
         </p>,
         <div key = {4}>
-        <p>
-            Luckily for you, you get to start off with 500 Heartbeats already! Pick an item you are looking for.
-        </p>
-        <DropdownMenu label="Items" callback={x => setItems("WhiteShirt")} options={ItemsAvailable}/> 
-
-        
+            <p>
+                Luckily for you, you get to start off with 500 Heartbeats already! Pick an item you are looking for.
+            </p>
+            <DropdownMenu label="Items" callback={setItem} options={itemsAvailable} /> 
         </div>,
-        <div key={5} className="flex gap-x-1 flex-wrap items-center h-min">
-            {"That concludes my introduction. if you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>
+        <p key={5}>
+            Great choice! Now search the store for "{item}" and purchase it!
+        </p>,
+        <div key={6} className="flex gap-x-1 flex-wrap items-center h-min">
+            {"If you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>
                 <p key={i}>
                     {w}
                 </p>
