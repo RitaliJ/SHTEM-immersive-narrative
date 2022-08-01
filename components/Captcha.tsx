@@ -49,24 +49,18 @@ const constants = require('../util/constants')
         setSubmit(true)
     }
 
-        
     const answer = () => {
-        if(!canSubmit){
+        if (!canSubmit) {
             return "Please select 3 or more choices."
         }
         if (submit) {
-
             if (captcha.hver && hverSubmitCounter<6) {
-                var x = "Sorry! It appears you are not human enough to have heartbeats. Please try again.";
-                return(x)
+                return "Sorry! It appears you are not human enough to have heartbeats. Please try again.";
             } else { 
                 setShowCode(true);
-                var x = "You are human enough to pass this!";
-                
-                return (x)
+                return "You are human enough to pass this!";
             }
-            
-         } 
+        } 
     }
 
     return (
@@ -115,4 +109,3 @@ const constants = require('../util/constants')
         </CenteredModal>
     )
 }
-// Footer
