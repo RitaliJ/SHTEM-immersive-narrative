@@ -11,24 +11,21 @@ export default function OurResearch() {
             </Head>
         
             <main className="flex flex-col w-full h-full overflow-y-auto bg-white-200">
-                <img
-                    className="float-center w-50 h- 50 justify-center items-center"
-                    src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif"
-                />
+                <div className ="float-center w-50 h-50 justify-center items-center">
+                    <img src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
+                </div>
                 <h1 className="text-blue-600 text-2xl">
                     Welcome...
                 </h1>
                 <p>{`You've just been through a simulated shopping experience. From the 10 minutes you spent browsing through our website, we can accurately predict your future behavior. You are probably wondering: How is that possible? Well, the seemingly “fun” questions in our surveys and “random” data collected without your knowledge were meticulously crafted to build your online user profile. This profile contains crucial personal information from your location to which politician you are most likely to vote for. Though we won’t use it to harm you, many companies use your profile to profit off of you by selling your data. What you didn’t realize is that while you get to use this website seemingly for free, you were paying with heartbeats, the limited amount of time you have in your life. The clock is always ticking. Do you really want to lose that time while being made into a product? To discover what/ how your data is collected, who’s selling it, and who’s benefiting, keep reading!`}</p>
-                <img
-                    className="w-15 h-15"
-                    src="https://neoreach.com/wp-content/uploads/2019/10/source.gif"
-                />
+                <div className ="w-50 h-50">
+                    <img src="https://neoreach.com/wp-content/uploads/2019/10/source.gif" />
+                </div>
                 <h1>Surveillance Capitalism:</h1>
                 <p>{`To learn why and how your personal data is being collected, you need to understand what surveillance capitalism is. Surveillance capitalism is the economic system based on surveilling largely unaware users of social media apps and websites, collecting their data, and selling that information for a profit. It is a movement founded on predictive algorithms, mathematical calculations of human behavior. Surveillance capitalists “sell certainty to business customers who would like to know with certainty what we do. Targeted adverts, yes, but also businesses want to know whether to sell us a mortgage, insurance, what to charge us, do we drive safely? They want to know the maximum they can extract from us in an exchange. They want to know how we will behave in order to know how to best intervene in our behavior.”`}</p>
-                <img
-                    className="w-50 h-50"
-                    src="https://image.shutterstock.com/image-illustration/digital-city-big-brother-electronic-600w-662065279.jpg"
-                />
+                <div className ="w-50 h-50">
+                    <img src="https://image.shutterstock.com/image-illustration/digital-city-big-brother-electronic-600w-662065279.jpg" />
+                </div>
                 <h2>So what exactly are these companies exactly collecting?</h2>
                 <p>The amount of data collected tells a story: the story of you.  A prime example is Sahara Prime. In just twenty minutes, it knows your address, your name, what type of person you are, your interests, and so much more.
     Depending on the nature of the website or app, the platform might be collecting any or even all of the following protected private information: First and last name, gender, date of birth/ age, location: IP address,  mailing address, email address, phone numbers, payment details: Credit card information…</p>
