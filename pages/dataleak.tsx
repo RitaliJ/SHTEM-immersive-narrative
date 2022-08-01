@@ -17,6 +17,7 @@ export default function Dataleak() {
     const [vacationCaptcha, setVacationCaptcha] = useState([false]);
     const [poliCaptcha, setPoliCaptcha] = useState([false]);
     const [famfeud, setfamfeud] = useState({} as {[key: string]: string});
+    const [shoeCaptcha, setShoeCaptcha] = useState([false]);
     const [starbucks, setstarbucks] = useState({} as {[key: string]: string});
     
     const updateUserVacationCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
@@ -65,6 +66,8 @@ export default function Dataleak() {
             if (vacation && vacation !== "undefined") setVacationCaptcha(JSON.parse(vacation));
             const issues = localStorage.getItem("Select the political issues that matter the most to you.");
             if (issues && issues !== "undefined") setPoliCaptcha(JSON.parse(issues));
+            const shoe = localStorage.getItem("Select the type of shoe that you would find most appealing");
+            if (shoe && shoe != "undefined") setShoeCaptcha(JSON.parse(shoe));
 
             let tempData = {} as Keys;
 
@@ -406,8 +409,8 @@ export default function Dataleak() {
                         <p>Your pronouns: {gender}</p>
                         <p>Indications About You:</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            {vacationCaptcha && updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels)[0] ? (
-                                updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels).map((x, i) =>
+                            {vacationCaptcha && updateUserVacationCaptchaLabels(vacationCaptcha, constants. vacationCaptchaLabels)[0] ? (
+                                updateUserVacationCaptchaLabels(vacationCaptcha, constants. vacationCaptchaLabels).map((x, i) =>
                                     <div key={i} className="flex gap-2">
                                         <p>•</p>
                                         <p>{x}</p>
@@ -424,6 +427,22 @@ export default function Dataleak() {
                         <div className="flex flex-col gap-1 pl-6">
                             {poliCaptcha && updateUserVacationCaptchaLabels(poliCaptcha, constants. politicalIssueCaptchaLabels)[0] ? (
                                 updateUserVacationCaptchaLabels(poliCaptcha, constants. politicalIssueCaptchaLabels).map((x, i) =>
+                                    <div key={i} className="flex gap-2">
+                                        <p>•</p>
+                                        <p>{x}</p>
+                                    </div>
+                                )
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            )}
+                        </div>
+                        <p>Your Shoe Selection Indicates that you:</p>
+                        <div className="flex flex-col gap-1 pl-6">
+                            {poliCaptcha && updateUserVacationCaptchaLabels(shoeCaptcha, constants. shoeCaptchaLabels)[0] ? (
+                                updateUserVacationCaptchaLabels(shoeCaptcha, constants. shoeCaptchaLabels).map((x, i) =>
                                     <div key={i} className="flex gap-2">
                                         <p>•</p>
                                         <p>{x}</p>

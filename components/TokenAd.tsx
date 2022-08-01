@@ -56,7 +56,7 @@ export default function TokenAd(props: {
                 </button>
                 {cameraAllowed ?
                     <>
-                        <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1003189849320325160/DoggyDesigner.png"></img>
+                        <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1003691578558267524/B0D3893A-CEC3-4463-A2C6-38531F18C1B4.png"></img>
                         <div className="flex gap-1 text-2xl">
                             <p>Heartrate:</p>
                             <p className="font-bold">
@@ -73,9 +73,8 @@ export default function TokenAd(props: {
                         <p className="text-2xl font-bold">
                             Authorize camera
                         </p>
-                        <p className="text-lg">
-                            To ensure that you are staring at the logo, we need to access your camera.
-                        </p>
+                        <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1003694136941084832/BA6EE846-2205-4343-AA9A-8DFDBED21E0A.jpg"></img>
+
                         <button
                             onClick={() => setCameraAllowed(true)}
                             className="bg-green-600 text-white rounded-lg px-24 py-3"

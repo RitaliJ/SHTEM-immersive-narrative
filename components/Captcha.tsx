@@ -44,7 +44,7 @@ const constants = require('../util/constants')
 
     //add data to localStorage and show gift code
     const handleSubmit = () => {
-        localStorage.setItem(captcha.title, JSON.stringify(selected)); 
+        localStorage.setItem(captcha.title, JSON.stringify(selected));
         setCounter(hverSubmitCounter+1)
         setSubmit(true)
     }
@@ -59,7 +59,7 @@ const constants = require('../util/constants')
             if (captcha.hver && hverSubmitCounter<6) {
                 var x = "Sorry! It appears you are not human enough to have heartbeats. Please try again.";
                 return(x)
-            } else {
+            } else { 
                 setShowCode(true);
                 var x = "You are human enough to pass this!";
                 
