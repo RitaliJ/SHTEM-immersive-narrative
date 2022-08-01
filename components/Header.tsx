@@ -228,7 +228,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Watch an ad</span>
                                 <span>•</span>
-                                <span>80 Heartbeat</span>
+                                <span>80 Heartbeats</span>
                             </div>
                         </button>
                         <button
@@ -238,7 +238,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Sign up for our newsletter</span>
                                 <span>•</span>
-                                <span>80 Heartbeat</span>
+                                <span>80 Heartbeats</span>
                             </div>
                         </button>
                     </>
