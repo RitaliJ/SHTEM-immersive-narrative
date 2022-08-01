@@ -51,7 +51,7 @@ import GiftCodeContent from "./GiftCodeContent";
 
     const answer = () => {
         if (!canSubmit) {
-            return "Please select 3 or more choices."
+            return "Please select at least one option."
         }
         if (submit) {
             if (captcha.hver && hverSubmitCounter < 6) {
