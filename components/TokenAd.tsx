@@ -56,7 +56,7 @@ export default function TokenAd(props: {
                 </button>
                 {cameraAllowed ?
                     <>
-                        <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1001981254520029215/proposed_ad_stare.jpg"></img>
+                        <img src = "https://cdn.discordapp.com/attachments/996489060275208295/1003189849320325160/DoggyDesigner.png"></img>
                         <div className="flex gap-1 text-2xl">
                             <p>Heartrate:</p>
                             <p className="font-bold">

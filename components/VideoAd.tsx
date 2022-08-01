@@ -17,7 +17,7 @@ export default function VideoAd(props: {
                 </button>
                 <div className="pointer-events-none">
                     <YouTube
-                        videoId="NmE1veP251g" 
+                        videoId="u0jV5l7CNh8" 
                         opts={{
                             height: "360",
                             width: "640",
@@ -27,7 +27,7 @@ export default function VideoAd(props: {
                                 disablekb: 1,
                                 fs: 0,
                                 loop: 1,
-                                playlist: "NmE1veP251g",
+                                playlist: "u0jV5l7CNh8",
                             },
                         }}
                     />
