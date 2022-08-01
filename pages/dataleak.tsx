@@ -373,36 +373,8 @@ export default function Dataleak() {
                                 </div>
                             )}
                         </div>
-                        <p>Survey Answers:</p>
+                        <p>Inferences We Made About You</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            {Object.keys(famfeud) || Object.keys(starbucks) ? (
-                                <>
-                                    {Object.keys(famfeud) &&
-                                        Object.keys(famfeud).map((q, i) =>
-                                            <div key={i} className="flex gap-2 truncate">
-                                                <p>•</p>
-                                                <p>{famfeud[q]}</p>                       
-                                            </div>
-                                        )
-                                    }
-                                    {Object.keys(starbucks) &&
-                                        Object.keys(starbucks).map((q, i) =>
-                                            <div key={i} className="flex gap-2 truncate">
-                                                <p>•</p>
-                                                <p>{starbucks[q]}</p>
-                                            </div>
-                                        )
-                                    }
-                                </>
-                            ) : (
-                                <div className="flex gap-2">
-                                    <p>•</p>
-                                    <p>None</p>
-                                </div>
-                            )}
-                        </div>
-                        <div className="flex flex-col gap-1 pl-6">
-                            <p>Inferences We Made About You</p>
                             <p>- {flying()}</p>
                             <p>- {Disneyland()}</p>
                             <p>- {Plane()}</p>
