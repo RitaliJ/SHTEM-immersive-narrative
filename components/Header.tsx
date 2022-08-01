@@ -231,7 +231,7 @@ export default function Header(props: {
                             <div className="flex gap-2">
                                 <span>Stare at a logo</span>
                                 <span>•</span>
-                                <span>X Heartbeat</span>
+                                <span>X Heartbeats</span>
                             </div>
                         </button>
                         <button
