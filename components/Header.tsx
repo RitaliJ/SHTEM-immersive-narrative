@@ -18,8 +18,10 @@ export default function Header(props: {
     addedToCart?: boolean,
     callback?: (value: boolean) => void,
     psaHtml?: ReactNode,
+    updateTarget?: boolean,
+    resetTargetBool?: () => void,
 }) {
-    const {addedToCart, callback, psaHtml} = props;
+    const {addedToCart, callback, psaHtml, updateTarget, resetTargetBool} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const [redeemOpen, setRedeemOpen] = useState(false); //useState for gift code redeem modal
@@ -67,6 +69,14 @@ export default function Header(props: {
             callback(false);
         }
     }, [isOpen]);
+
+    //update account object when prop becomes true
+    useEffect(() => {
+        if (updateTarget && resetTargetBool) {
+            refreshAccount();
+            resetTargetBool();
+        }
+    }, [updateTarget]);
 
     //helper to refresh account
     const refreshAccount = () => {
@@ -153,7 +163,10 @@ export default function Header(props: {
                 </button>
             </Link>
             <span className="grow" />
-            <span className="text-lg text-green-600 outline-white px-3">
+            <span className="text-lg px-3">
+                Target item: {account.target ?? "None"}
+            </span>
+            <span className="text-lg text-green-600 px-3">
                 {account.balance && account.balance.toFixed(2)} Heartbeats
             </span>
             <button
