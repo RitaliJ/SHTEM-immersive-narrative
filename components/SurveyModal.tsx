@@ -16,6 +16,7 @@ export default function SurveyModal(props: {
     const {isOpen, setIsOpen, survey, showCode, setShowCode} = props;
     const [data, setData] = useState({} as SurveyDataType);
     const [page, setPage] = useState(0);
+    const [started, setStarted] = useState(false);
 
     //helper function for setting a particular key-value pair in data object
     const setValue = (key: string, value: string) => {
@@ -45,6 +46,7 @@ export default function SurveyModal(props: {
                 localStorage.setItem(survey.title, JSON.stringify(data));
                 setShowCode(true);
                 setPage(0);
+                setStarted(false);
             } else {
                 setPage(page + 1);
             }
@@ -59,49 +61,63 @@ export default function SurveyModal(props: {
                     className="absolute top-2 right-4 text-5xl">
                     ×
                 </button>
-                {showCode ? (
-                    <GiftCodeContent code={survey.code} />
-                ) : (
-                    <div className="flex flex-col gap-3 items-center text-lg">
-                        <h1 className="text-2xl font-bold">
-                            {survey.title}
-                        </h1>
-                        {survey.questions && survey.questions[page].map((q, i) => {
-                            if (q.conditional && data[survey.questions[page][i - 1].label] !== "Yes") {
-                                return;
-                            } else if ("options" in q) { //multiple choice
-                                return (
-                                    <MultipleChoice
-                                        key={q.label}
-                                        label={q.label}
-                                        selection={data[q.label]}
-                                        callback={(x) => setValue(q.label, x)}
-                                        options={q.options}
-                                    />
-                                )
-                            } else { //short answer
-                                return (
-                                    <InputGroup
-                                        key={q.label}
-                                        label={q.label}
-                                        value={data[q.label] ?? ""}
-                                        callback={(x) => setValue(q.label, x)}
-                                    />
-                                )
-                            }
-                        })}
-                        <button
-                            onClick={() => handleSubmit()}
-                            className={"px-4 py-2 whitespace-nowrap w-min rounded-lg duration-150 "
-                                + (checkValid() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
-                            {survey.questions && page === survey.questions.length - 1 ? "Submit" : "Next"}
-                        </button>
-                        <p className="italic text-red-500">
-                            {!checkValid() &&
-                                "* Please fill all required fields"
-                            }
+                {!started && !showCode ? (
+                    <div className="flex flex-col gap-2 items-center">
+                        <p className="text-xl pr-6">
+                            To earn more heartbeats, please fill out this survey from one of our partners.
                         </p>
+                        <button
+                            onClick={() => setStarted(true)}
+                            className="bg-blue-500 text-white px-3 py-1 text-xl rounded-lg"
+                        >
+                            Start
+                        </button>
                     </div>
+                ) : (
+                    showCode ? (
+                        <GiftCodeContent code={survey.code} />
+                    ) : (
+                        <div className="flex flex-col gap-3 items-center text-lg">
+                            <h1 className="text-2xl font-bold">
+                                {survey.title}
+                            </h1>
+                            {survey.questions && survey.questions[page].map((q, i) => {
+                                if (q.conditional && data[survey.questions[page][i - 1].label] !== "Yes") {
+                                    return;
+                                } else if ("options" in q) { //multiple choice
+                                    return (
+                                        <MultipleChoice
+                                            key={q.label}
+                                            label={q.label}
+                                            selection={data[q.label]}
+                                            callback={(x) => setValue(q.label, x)}
+                                            options={q.options}
+                                        />
+                                    )
+                                } else { //short answer
+                                    return (
+                                        <InputGroup
+                                            key={q.label}
+                                            label={q.label}
+                                            value={data[q.label] ?? ""}
+                                            callback={(x) => setValue(q.label, x)}
+                                        />
+                                    )
+                                }
+                            })}
+                            <button
+                                onClick={() => handleSubmit()}
+                                className={"px-4 py-2 whitespace-nowrap w-min rounded-lg duration-150 "
+                                    + (checkValid() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}>
+                                {survey.questions && page === survey.questions.length - 1 ? "Submit" : "Next"}
+                            </button>
+                            <p className="italic text-red-500">
+                                {!checkValid() &&
+                                    "* Please fill all required fields"
+                                }
+                            </p>
+                        </div>
+                    )
                 )}
             </div>
         </CenteredModal>
