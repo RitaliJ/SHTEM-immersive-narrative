@@ -44,6 +44,7 @@ export default function SurveyModal(props: {
             if (page === survey.questions.length - 1) {
                 localStorage.setItem(survey.title, JSON.stringify(data));
                 setShowCode(true);
+                setPage(0);
             } else {
                 setPage(page + 1);
             }
