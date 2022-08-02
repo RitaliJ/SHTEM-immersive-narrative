@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ReactNode, useState } from "react";
 
 //page explaining TNG and such
-export default function OurResearch() {
+export default function TNG() {
     const [page, setPage] = useState(0);
 
     const pages: ReactNode[] = [
