@@ -4,7 +4,7 @@ require('dotenv').config()
 
 //api route to send newsletter email
 export default function(req: NextApiRequest, res: NextApiResponse) {
-    const {email} = req.body;
+    const {email, firstName} = req.body;
     const transporter = nodemailer.createTransport({
         port: 465,
         host: "smtp.gmail.com",
@@ -17,7 +17,7 @@ export default function(req: NextApiRequest, res: NextApiResponse) {
     const mailData = {
         from: "shtembytesize@gmail.com",
         to: email,
-        subject: "Newsletter",
+        subject: `Welcome, ${firstName}`,
         html: `
             <!DOCTYPE html>
             <!-- Set the language of your main document. This helps screenreaders use the proper language profile, pronunciation, and accent. -->
@@ -130,7 +130,7 @@ export default function(req: NextApiRequest, res: NextApiResponse) {
                         <!-- The h1 is the main heading of the document and should come first. -->
                         <!-- We can override the default styles inline. -->
                         <h1 style="color: #000000; font-size: 32px; font-weight: 800; line-height: 32px; margin: 24px 0; text-align: center;">
-                            Welcome! 
+                            Welcome, ${firstName}!
                         </h1>
                     </header>
             
@@ -166,7 +166,7 @@ export default function(req: NextApiRequest, res: NextApiResponse) {
                         <center>
                             <div style="margin: 48px 0;">
                                 
-                            <a class="button" href="https://shtem.herokuapp.com/"
+                            <a class="button" href="https://shtem.herokuapp.com/home"
                             style="background-color:#11701e;border-radius:4px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:18px;font-weight:bold;line-height:60px;text-align:center;text-decoration:none;width:300px;-webkit-text-size-adjust:none;">SHOP NOW</a>
                             </div>
                         </center>
