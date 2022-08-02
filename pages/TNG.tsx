@@ -77,10 +77,10 @@ export default function OurResearch() {
                     intervene in our behavior.”`}
                 </p>
                 <div className="flex justify-center">
-                    <img className="h-96" src="https://image.shutterstock.com/image-illustration/digital-city-big-brother-electronic-600w-662065279.jpg" />
+                    <img className="h-96" src="https://openeducationalberta.ca/digitalcitizenship/wp-content/uploads/sites/165/2021/07/Big-Brother-min-1024x569.jpg" />
                 </div>
                 <h2 className="text-blue-500 text-xl">
-                    So what exactly are these companies exactly collecting?
+                    So what exactly are these companies collecting?
                 </h2>
                 <p>
                     {`The amount of data collected tells a story: the story of you. A prime example is
