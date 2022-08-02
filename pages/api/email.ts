@@ -5,7 +5,7 @@ require('dotenv').config()
 
 //api route to send email to provided email address
 export default function(req: NextApiRequest, res: NextApiResponse) {
-    const {email, firstName, billingFirstName, billingLastName, address, items, total} = req.body;
+    const {email, firstName, billingFirstName, billingLastName, address, items, total, shipping} = req.body;
     const transporter = nodemailer.createTransport({
         port: 465,
         host: "smtp.gmail.com",
@@ -35,7 +35,8 @@ export default function(req: NextApiRequest, res: NextApiResponse) {
                     </div>
                     <hr>
                 `).join("")}
-                <p>Total: ${total.toFixed(2)} Tokens</p>
+                <p>Shipping: ${shipping.toFixed(2)} Heartbeats</p>
+                <p>Total: ${(total + shipping).toFixed(2)} Heartbeats</p>
             </div>
         `,
     };
