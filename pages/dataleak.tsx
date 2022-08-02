@@ -1,12 +1,9 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { AccountType, ProductType } from "../util/types";
-import OurResearch from "./TNG";
 import { formatMs } from "../util/heplers";
-import Link from "next/link";
-import { X509Certificate } from "crypto";
-const constants = require('../util/constants');
 import InputGroup from "../components/InputGroup";
+const constants = require('../util/constants');
 
 //page where all collected data is displayed
 export default function Dataleak() {
