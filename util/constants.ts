@@ -22,6 +22,7 @@ module.exports = {
         {
             title: "Family Feud",
             code: "2356",
+            startText: "To earn more heartbeats, please fill out this survey from one of our partners.",
             questions: [
                 [
                     {
@@ -138,6 +139,7 @@ module.exports = {
         {
             title: "What Starbucks drink are you?",
             code: "1664",
+            startText: "Ever wanted to know the perfect Starbucks order that aligns with you? Now you can! Take this simple survey to figure out what drink resonates the most with your soul!",
             finalText: "Congrats, you are a candy cane frappe grande non blended with extra candy cane, no whipped cream, with caramel drizzle and peppermint topping!",
             questions: [
                 [

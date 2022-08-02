@@ -75,7 +75,7 @@ export default function SurveyModal(props: {
                 {!started && !showCode ? (
                     <div className="flex flex-col gap-2 items-center">
                         <p className="text-xl pr-6">
-                            To earn more heartbeats, please fill out this survey from one of our partners.
+                            {survey.startText}
                         </p>
                         <button
                             onClick={() => setStarted(true)}
