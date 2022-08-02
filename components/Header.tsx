@@ -229,7 +229,7 @@ export default function Header(props: {
                             onClick={() => setTokenAdOpen(true)}
                             className="bg-blue-500 text-white text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap">
                             <div className="flex gap-2">
-                                <span>Stare at a logo</span>
+                                <span>Stare at an ad</span>
                                 <span>•</span>
                                 <span>X Heartbeats</span>
                             </div>
@@ -239,7 +239,7 @@ export default function Header(props: {
                             className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
                                 + (account.watchedAd ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
                             <div className="flex gap-2">
-                                <span>Watch an ad</span>
+                                <span>Watch a video ad</span>
                                 <span>•</span>
                                 <span>80 Heartbeats</span>
                             </div>

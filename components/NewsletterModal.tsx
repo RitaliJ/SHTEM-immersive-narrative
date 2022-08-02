@@ -29,19 +29,24 @@ export default function NewsletterModal(props: {
 
     //handle submit
     const handleSubmit = () => {
-        const data = {
-            email,
-        };
-        fetch("/api/newsletter", { //send email request to api route
-            method: "POST",
-            headers: {
-                "Accept": "application/json, text/plain, */*",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-        setIsOpen(false);
-        callback(1);
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc) {
+            const acc2 = JSON.parse(acc);
+            const data = {
+                email,
+                firstName: acc2.firstName,
+            };
+            fetch("/api/newsletter", { //send email request to api route
+                method: "POST",
+                headers: {
+                    "Accept": "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            setIsOpen(false);
+            callback(1);
+        }
     }
 
     return (

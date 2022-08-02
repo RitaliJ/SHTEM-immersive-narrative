@@ -8,6 +8,25 @@ import { useState } from "react";
 //page explaining TNG and such
 export default function OurResearch() {
 
+    const sendEmail = (resist: boolean) => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc) {
+            const acc2 = JSON.parse(acc);
+            const data = {
+                email: acc2.email,
+                resist,
+            };
+            fetch("/api/credits", { //send email request to api route
+                method: "POST",
+                headers: {
+                    "Accept": "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        }
+    }
+
     return (
         <>
             <Head>
@@ -190,7 +209,7 @@ export default function OurResearch() {
                     at the last possible second, evoking feelings of stress. On top of that, a lack of
                     focus and attentiveness can have a `}
                     <i className="text-orange-500">
-                        terrible impact on a student's learning ability.
+                        {`terrible impact on a student's learning ability.`}
                     </i>
                 </p>
                 <div className="flex justify-center">
@@ -220,14 +239,19 @@ export default function OurResearch() {
                     <img className="h-96" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
                 </div>
                 <div className="flex gap-2 justify-center">
-                    <Link href="/idk">
-                        <button className="bg-green-600 text-white px-5 py-2 rounded-lg text-xl">
+                    <Link href="/resistance">
+                        <button
+                            onClick={() => sendEmail(true)}
+                            className="bg-green-600 text-white px-5 py-2 rounded-lg text-xl"
+                        >
                             Join The Resistance
                         </button>
                     </Link>
                     <Link href="/cookies">
-                        <button 
-                        className="bg-red-500 text-white px-5 py-2 rounded-lg text-xl">
+                        <button
+                            onClick={() => sendEmail(false)}
+                            className="bg-red-500 text-white px-5 py-2 rounded-lg text-xl"
+                        >
                             Continue Shopping
                         </button>
                     </Link>

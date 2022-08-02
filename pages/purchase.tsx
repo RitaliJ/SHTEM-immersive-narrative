@@ -2,9 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import CenteredModal from "../components/CenteredModal";
 import Header from "../components/Header";
-import NiceLink from "../components/NiceLink";
 import InputGroup from '../components/InputGroup'
-
 
 //confirmation page after purchasing products
 export default function Purchase() {
@@ -88,7 +86,6 @@ export default function Purchase() {
                         I have not received my confirmation email.
                     </button>
                 </div>
-                <NiceLink href="/home" text="Back to homepage" />
                 <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
                     <div className="bg-gray-900 w-full h-full flex justify-center items-center font-mono">
                         <div className="w-1/2 h-full flex flex-col gap-8 justify-center items-center">
