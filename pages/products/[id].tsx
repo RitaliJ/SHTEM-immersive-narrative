@@ -99,7 +99,8 @@ export default function Product(){
             <Header
                 addedToCart={addedToCart}
                 callback={setAddedToCart}
-                psaHtml="This is a test"
+                psaHtml={account && `This is your personal shopping assistant.
+                    Find the "${account.target}" item and purchase it!`}
             />
 
             <div className="grow flex gap-8 my-8 mx-4 justify-center">

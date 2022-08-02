@@ -61,9 +61,13 @@ export default function CartModal(props: {
                     className="absolute top-2 right-4 text-5xl">
                     ×
                 </button>
-                <h1 className="text-5xl font-bold mb-12">
+                <h1 className="text-5xl font-bold mb-6">
                     Your cart
                 </h1>
+                <p className="italic text-lg mb-8">
+                    If you accidentally added something you don{"'"}t want, press the red × icon to the left
+                    of that product to remove it!
+                </p>
                 <div className="flex flex-col text-green-600 divide-y divide-gray-300">
                     {account.email && account.items[0] ? (
                         account.items.map(i =>

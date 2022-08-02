@@ -98,7 +98,8 @@ export default function Home() {
             </Head>
             
             <Header
-                psaHtml="This is your personal shopping assistant!"
+                psaHtml={account && `This is your personal shopping assistant.
+                Find the "${account.target}" item and purchase it!`}
                 updateTarget={updateTarget}
                 resetTargetBool={() => setUpdateTarget(false)}
             />
