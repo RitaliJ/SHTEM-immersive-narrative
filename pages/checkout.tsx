@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CartProduct from "../components/CartProduct";
+import Checkbox from "../components/Checkbox";
 import DropdownMenu from "../components/DropdownMenu";
 import Header from "../components/Header";
 import InputGroup from "../components/InputGroup";
@@ -22,7 +23,7 @@ export default function Checkout() {
     const [zip, setZip] = useState("");
     const [shipping, setShipping] = useState(5); //shipping cost
     // const [cardNumber, setCardNumber] = useState("");
-    const [securityPin, setSecurityPin] = useState("");
+    // const [securityPin, setSecurityPin] = useState("");
     const states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", //states for dropdown menu
                     "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
                     "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH",
@@ -31,6 +32,7 @@ export default function Checkout() {
 
     const [inBudget, setInBudget] = useState(true);
     const [prefillOpen, setPrefillOpen] = useState(true); //useState for prefill modal component
+    const [confirm, setConfirm] = useState(false);
 
     const [start, setStart] = useState(0);
     const [millis, setMillis] = useState<number>(); //initial values before adding from this page
@@ -115,9 +117,8 @@ export default function Checkout() {
 
     //handle clicking on order button
     const handleSubmit = () => {
-        if (firstName && lastName && address && city && state
-            && zip.toString().length === 5
-            && securityPin.toString().length === 4) {
+        if (firstName && lastName && address && city && state && confirm && inBudget
+            && zip.toString().length === 5) {
             const data = {
                 email,
                 firstName: account.firstName,
@@ -184,28 +185,21 @@ export default function Checkout() {
                         <DropdownMenu label="State" callback={setState} options={states} />
                         <InputGroup label="ZIP Code" value={zip} callback={setZip} onlyNumbers maxLength={5} />
                     </div>
-                    <div className="flex gap-2">
-                        {/* <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} /> */}
-                        <p className="text-sm font-semibold">I affirm that I am exchanging heartbeats for this purchase. Enter birthyear YYYY as pin to confirm. </p>
-                    </div>
-                    <div className="flex gap-2">
-                        <InputGroup label="Confirmation PIN" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={4} />
-                    </div>
+                    {/* <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} /> */}
+                    <Checkbox text="I affirm that I am exchanging heartbeats for this purchase." on={confirm} setOn={setConfirm} />
 
                     <div className="flex items-center mt-4">
                         <div className="grow">
                             <NiceLink href="/home" text="← Back" className="mb-6" />
                         </div>
-                        <Link href={firstName && lastName && address && city && state && inBudget
-                            && zip.toString().length === 5
-                            && securityPin.toString().length === 4 ?
+                        <Link href={firstName && lastName && address && city && state && inBudget && confirm
+                            && zip.toString().length === 5 ?
                             "/purchase" : "/checkout"}>
                             <button
                                 onClick={() => handleSubmit()}
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
-                                    + (firstName && lastName && address && city && state && zip && inBudget
-                                    && zip.toString().length === 5
-                                    && securityPin.toString().length ===4 && account.email && account.items[0] ?
+                                    + (firstName && lastName && address && city && state && zip && inBudget && confirm
+                                    && zip.toString().length === 5 && account.email && account.items[0] ?
                                 "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
                             </button>
@@ -216,11 +210,13 @@ export default function Checkout() {
                         {!account.email || !account.items[0]
                             ? "Your cart is empty!"
                             : inBudget 
-                                ? (firstName && lastName && address && city && state && zip && securityPin
-                                ? (zip.toString().length !== 5
-                                    || securityPin.toString().length !== 4
-                                    ? "* Invalid ZIP code or confirmation PIN" : "")
-                                : "* Please fill all required fields")
+                                ? (firstName && lastName && address && city && state && zip
+                                    ? (zip.toString().length !== 5
+                                        ? "* Invalid ZIP code or confirmation PIN"
+                                        : confirm
+                                            ? ""
+                                            : "You must confirm your purchase")
+                                    : "* Please fill all required fields")
                                 : "Total amount exceeds account balance"
                         }
                     </p>
