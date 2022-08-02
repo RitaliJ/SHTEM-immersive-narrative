@@ -40,13 +40,12 @@ export default function Dataleak() {
     };
     const [data, setData] = useState<Keys>();
 
-    function checkCode(){
+    function checkCode() {
         if (code == "2896") {
             location.href = "/TNG";
         } else {
             return "Incorrect Code. Please Try Again";
         }
-
     }
 
     //load time and click data from localStorage
@@ -157,7 +156,7 @@ export default function Dataleak() {
         else if (famfeud["Name the first thing you do when you wake up."] == "Check notifications") {
             return "Social Media Addicted";
         }
-        else if (famfeud["Name the first thing you do when you wake up"] == "Turn on your coffee machine"){
+        else if (famfeud["Name the first thing you do when you wake up"] == "Turn on your coffee machine") {
             return "Associated with Caffeine Addiction"; 
         }
     }
@@ -186,8 +185,7 @@ export default function Dataleak() {
             return ("Likely to be critical of Trump Administration");
         } else if (x == "Millard Fillmore") {
             return ("Likely to know too much of US history");
-        }
-        else if (x == "Ulysses S. Grant") {
+        } else if (x == "Ulysses S. Grant") {
             return ("Likely to have an interest in US history");
         }
     }
@@ -489,10 +487,8 @@ export default function Dataleak() {
                                 </div>
                             )}
                         </div>
-                        <p className="text-3xl text-red-600">
-                                Call 714-202-2636 to get access to the data the TNGers collected.
-                            </p>
-                            <div className="text-2xl text-red-600 flex flex-col gap-4">
+                        <div className="flex justify-center">
+                            <div className="text-xl text-red-600 flex flex-col gap-4 mt-12 mb-12 w-min whitespace-nowrap">
                                 <InputGroup label="Code" callback={setCode} />
                                 <button
                                     className="bg-red-600 text-gray-900 px-3 py-1 rounded-lg"
@@ -501,6 +497,7 @@ export default function Dataleak() {
                                     Submit
                                 </button>
                             </div>
+                        </div>
                     </>}
                 </div>
 
