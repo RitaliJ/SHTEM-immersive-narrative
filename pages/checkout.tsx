@@ -128,6 +128,7 @@ export default function Checkout() {
                 address2,
                 items: account.items,
                 total,
+                shipping,
             };
             fetch("/api/email", { //send email request to api route
                 method: "POST",
