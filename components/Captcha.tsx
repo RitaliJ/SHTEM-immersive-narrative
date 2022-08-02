@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CaptchaType } from "../util/types";
 import CenteredModal from "./CenteredModal";
+import Checkbox from "./Checkbox";
 import GiftCodeContent from "./GiftCodeContent";
 
     //modal for a 3x3 image select captcha
@@ -111,16 +112,7 @@ import GiftCodeContent from "./GiftCodeContent";
                     <p className="text-xl px-8 mt-4">
                         We need to verify that you are human.
                     </p>
-                    <div className="flex gap-4 items-center">
-                        <button
-                            onClick={() => setButtonOn(!buttonOn)}
-                            className={"w-8 h-8 ring-2 ring-black border-4 border-white duration-150 "
-                                + (buttonOn ? "bg-blue-500" : "bg-white")}
-                        />
-                        <p className="text-lg font-bold">
-                            I am human
-                        </p>
-                    </div>
+                    <Checkbox text="I am human" on={buttonOn} setOn={setButtonOn} />
                     <button
                         onClick={() => {if (buttonOn) {setVerified(true); setButtonOn(false)}}}
                         className={"text-lg px-3 py-1 rounded-lg duration-150 "
