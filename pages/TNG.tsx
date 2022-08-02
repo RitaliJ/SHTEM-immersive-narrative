@@ -256,7 +256,6 @@ export default function OurResearch() {
                         </button>
                     </Link>
                 </div>
-
             </main>
         </>
     )
