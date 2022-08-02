@@ -6,6 +6,7 @@ import { formatMs } from "../util/heplers";
 import Link from "next/link";
 import { X509Certificate } from "crypto";
 const constants = require('../util/constants');
+import InputGroup from "../components/InputGroup";
 
 //page where all collected data is displayed
 export default function Dataleak() {

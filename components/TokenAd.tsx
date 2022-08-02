@@ -75,7 +75,7 @@ export default function TokenAd(props: {
                     <img className="max-h-[60vh]" src="https://cdn.discordapp.com/attachments/996489060275208295/1003819606948982834/BC55E1E6-BFF1-4EDC-8E7D-B34EA424C092.png" />
                     <button
                         onClick={() => setCameraAllowed(true)}
-                        className="bg-green-600 text-white rounded-lg px-24 py-3"
+                        className="bg-blue-600 text-white rounded-lg px-24 py-3"
                     >
                         Allow
                     </button>

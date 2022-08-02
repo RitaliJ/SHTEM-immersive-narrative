@@ -146,9 +146,9 @@ module.exports = {
                             "No",
                         ],
                     },
-                    {
+                 ],[ {
                         label: "Please describe that smell.",
-                        conditional: true,
+                        
                     },
                 ],
                 [
@@ -160,6 +160,7 @@ module.exports = {
                     {
                         label: "What were you most afraid of as a child?",
                     },
+                ],[
                     {
                         label: "Are you still afraid of that thing now?",
                         options: [
@@ -176,10 +177,12 @@ module.exports = {
                             "No",
                         ],
                     },
+                ],[
                     {
                         label: "Please describe it.",
-                        conditional: true,
+                       
                     },
+                ],[
                     {
                         label: "Are your dreams more often pleasant, terrifying or neutral?",
                         options: [
@@ -199,7 +202,7 @@ module.exports = {
                     {
                         label: "What’s one piece of advice you would give your 10 year old self?",
                     },
-                ]
+                ],
             ],
         },
     ],
