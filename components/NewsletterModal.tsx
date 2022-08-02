@@ -3,6 +3,7 @@ import CenteredModal from "./CenteredModal";
 import InputGroup from "./InputGroup";
 import PrefillModal from "./PrefillModal";
 
+//modal for signing up for newsletter
 export default function NewsletterModal(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
@@ -17,7 +18,6 @@ export default function NewsletterModal(props: {
     useEffect(() => {
         if (isOpen) {
             setPrefillOpen(true);
-
         }
     }, [isOpen]);
 
@@ -45,7 +45,7 @@ export default function NewsletterModal(props: {
                 body: JSON.stringify(data),
             });
             setIsOpen(false);
-            callback(1);
+            callback(80);
         }
     }
 
@@ -68,7 +68,6 @@ export default function NewsletterModal(props: {
                 >
                     Sign up
                 </button>
-
                 {!validateEmail() && !prefillOpen &&
                     <p className="text-red-500 italic">
                         * Invalid email address
@@ -81,7 +80,6 @@ export default function NewsletterModal(props: {
                         it for you?"
                     callback={() => setValue(email)}
                 />
-
             </div>
         </CenteredModal>
     )
