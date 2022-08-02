@@ -4,15 +4,15 @@ import Link from "next/link";
 //page explaining TNG and such
 export default function OurResearch() {
 
-    const sendEmail = () => {
+    const sendEmail = (resist: boolean) => {
         const acc = localStorage.getItem("shtemAccount");
         if (acc) {
             const acc2 = JSON.parse(acc);
             const data = {
                 email: acc2.email,
-                firstName: acc2.firstName,
+                resist,
             };
-            fetch("/api/resistance", { //send email request to api route
+            fetch("/api/credits", { //send email request to api route
                 method: "POST",
                 headers: {
                     "Accept": "application/json, text/plain, */*",
@@ -237,14 +237,17 @@ export default function OurResearch() {
                 <div className="flex gap-2 justify-center">
                     <Link href="/resistance">
                         <button
-                            onClick={() => sendEmail()}
+                            onClick={() => sendEmail(true)}
                             className="bg-green-600 text-white px-5 py-2 rounded-lg text-xl"
                         >
                             Join The Resistance
                         </button>
                     </Link>
                     <Link href="/home">
-                        <button className="bg-red-500 text-white px-5 py-2 rounded-lg text-xl">
+                        <button
+                            onClick={() => sendEmail(false)}
+                            className="bg-red-500 text-white px-5 py-2 rounded-lg text-xl"
+                        >
                             Continue Shopping
                         </button>
                     </Link>
