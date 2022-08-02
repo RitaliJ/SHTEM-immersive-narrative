@@ -459,22 +459,6 @@ export default function Dataleak() {
                             }
                         </div>
                         <p>Your pronouns: {gender}</p>
-                        <p>Indications About You:</p>
-                        <div className="flex flex-col gap-1 pl-6">
-                            {vacationCaptcha && updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels)[0] ? (
-                                updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels).map((x, i) =>
-                                    <div key={i} className="flex gap-2">
-                                        <p>•</p>
-                                        <p>{x}</p>
-                                    </div>
-                                )
-                            ) : (
-                                <div className="flex gap-2">
-                                    <p>•</p>
-                                    <p>None</p>
-                                </div>
-                            )}
-                        </div>
                         <p>The political issues you care for the most:</p>
                         <div className="flex flex-col gap-1 pl-6">
                             {poliCaptcha && updateUserVacationCaptchaLabels(poliCaptcha, constants.politicalIssueCaptchaLabels)[0] ? (
@@ -491,24 +475,10 @@ export default function Dataleak() {
                                 </div>
                             )}
                         </div>
-                        <p>Your shoe selection suggests that you:</p>
-                        <div className="flex flex-col gap-1 pl-6">
-                            {shoeCaptcha && updateUserVacationCaptchaLabels(shoeCaptcha, constants.shoeCaptchaLabels)[0] ? (
-                                updateUserVacationCaptchaLabels(shoeCaptcha, constants.shoeCaptchaLabels).map((x, i) =>
-                                    <div key={i} className="flex gap-2">
-                                        <p>•</p>
-                                        <p>{x}</p>
-                                    </div>
-                                )
-                            ) : (
-                                <div className="flex gap-2">
-                                    <p>•</p>
-                                    <p>N/A</p>
-                                </div>
-                            )}
-                        </div>
+
                         <div className="flex justify-center">
                             <div className="text-xl text-red-600 flex flex-col gap-4 mt-12 mb-12 w-min whitespace-nowrap">
+                                <p>Enter code given by Kibble for next phase.</p>
                                 <InputGroup label="Code" callback={setCode} />
                                 <button
                                     className="bg-red-600 text-gray-900 px-3 py-1 rounded-lg"
