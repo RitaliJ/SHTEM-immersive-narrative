@@ -15,7 +15,7 @@ export default function HelpModal(props: {
     const [page, setPage] = useState(0);
     const [blur, setBlur] = useState("lg");
     const [item, setItem] = useState("");
-    const itemsAvailable = ["White Shirt", "Mummy", "Gold Man"]
+    const itemsAvailable = ["White Shirt", "Focus", "Gold Man"]
     
     
     const pages: ReactNode[] = [
@@ -33,11 +33,11 @@ export default function HelpModal(props: {
         </p>,
         <p key={3}>
             Our store is very special as we don{"'"}t take payment through physical currency,
-            but rather through our own personal currency of Heartbeats.
+            but rather through our own personal currency of Heartbeats. Luckily for you, you get to start off with 500 Heartbeats already!
         </p>,
         <div key = {4}>
             <p>
-                Luckily for you, you get to start off with 500 Heartbeats already! Pick an item you are looking for.
+                Based on our initial survey, our algorithm thinks these products will bring you the most joy. Pick one item.
             </p>
             <DropdownMenu label="Items" callback={setItem} options={itemsAvailable} /> 
         </div>,
