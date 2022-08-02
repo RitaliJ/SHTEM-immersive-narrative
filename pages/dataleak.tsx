@@ -13,11 +13,11 @@ export default function Dataleak() {
     const [extro2, setextro2] = useState("");
     const [race, setrace] = useState([""]);
     const [gender, setgender] = useState("");
-    const [vacationCaptcha, setVacationCaptcha] = useState([false]);
+    // const [vacationCaptcha, setVacationCaptcha] = useState([false]);
     const [poliCaptcha, setPoliCaptcha] = useState([false]);
     const [famfeud, setfamfeud] = useState({} as {[key: string]: string});
-    const [shoeCaptcha, setShoeCaptcha] = useState([false]);
-    const [starbucks, setstarbucks] = useState({} as {[key: string]: string});
+    // const [shoeCaptcha, setShoeCaptcha] = useState([false]);
+    // const [starbucks, setstarbucks] = useState({} as {[key: string]: string});
     const [code, setCode] = useState("");
     const updateUserVacationCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
         let labels = [];
@@ -66,15 +66,15 @@ export default function Dataleak() {
             if (gen && gen !== "undefined") setgender(JSON.parse(gen));
             const familyfeud = localStorage.getItem("Family Feud");
             if (familyfeud && familyfeud !== "undefined") setfamfeud(JSON.parse(familyfeud));
-            const bucks = localStorage.getItem("What Starbucks drink are you?");
-            if (bucks && bucks !== "undefined") setstarbucks(JSON.parse(bucks));
+            // const bucks = localStorage.getItem("What Starbucks drink are you?");
+            // if (bucks && bucks !== "undefined") setstarbucks(JSON.parse(bucks));
 
-            const vacation = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
-            if (vacation && vacation !== "undefined") setVacationCaptcha(JSON.parse(vacation));
+            // const vacation = localStorage.getItem('Select the scenes that you would want as a part of your next vacation.');
+            // if (vacation && vacation !== "undefined") setVacationCaptcha(JSON.parse(vacation));
             const issues = localStorage.getItem("Select the political issues that matter the most to you.");
             if (issues && issues !== "undefined") setPoliCaptcha(JSON.parse(issues));
-            const shoe = localStorage.getItem("Select the type of shoe that you would find most appealing");
-            if (shoe && shoe != "undefined") setShoeCaptcha(JSON.parse(shoe));
+            // const shoe = localStorage.getItem("Select the type of shoe that you would find most appealing");
+            // if (shoe && shoe != "undefined") setShoeCaptcha(JSON.parse(shoe));
 
             let tempData = {} as Keys;
 
@@ -490,7 +490,6 @@ export default function Dataleak() {
                         </div>
                     </>}
                 </div>
-
             </main>
         </div>
     )
