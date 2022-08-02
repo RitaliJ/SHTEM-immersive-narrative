@@ -6,10 +6,9 @@ import YouTube from "react-youtube";
 export default function VideoAd(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
+    id: string,
 }) {
-    const {isOpen, setIsOpen} = props;
-    
-
+    const {isOpen, setIsOpen, id} = props;
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -21,7 +20,7 @@ export default function VideoAd(props: {
                 </button>
                 <div className="pointer-events-none">
                     <YouTube
-                        videoId="1WN4SrqZm50"
+                        videoId={id}
                         opts={{
                             height: "360",
                             width: "640",
@@ -31,7 +30,7 @@ export default function VideoAd(props: {
                                 disablekb: 1,
                                 fs: 0,
                                 loop: 1,
-                                playlist: "1WN4SrqZm50",
+                                playlist: id,
                             },
                         }}
                     />

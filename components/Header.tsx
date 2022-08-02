@@ -11,7 +11,6 @@ import Captcha from "./Captcha";
 import TokenAd from "./TokenAd";
 import NewsletterModal from "./NewsletterModal";
 import VideoAd from "./VideoAd";
-import VideoAd2 from "./VideoAd2"; 
 const constants = require('../util/constants')
 
 //header component
@@ -251,9 +250,9 @@ export default function Header(props: {
                             className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
                                 + (account.watchedAd ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
                             <div className="flex gap-2">
-                                <span>Watch a 2nd video ad</span>
+                                <span>Watch another video ad</span>
                                 <span>•</span>
-                                <span>60 Heartbeats</span>
+                                <span>80 Heartbeats</span>
                             </div>
                         </button>
                         <button
@@ -293,16 +292,18 @@ export default function Header(props: {
                         <VideoAd
                             isOpen={watchAdOpen}
                             setIsOpen={setWatchAdOpen}
+                            id="1WN4SrqZm50"
+                        />
+                        <VideoAd 
+                            isOpen= {watchAd2Open}
+                            setIsOpen={setWatchAd2Open}
+                            id="EdmesCSJbC4"
                         />
                         <NewsletterModal
                             isOpen={newsLetterOpen}
                             setIsOpen={setNewsLetterOpen}
                             email={account.email}
                             callback={newsletterSubmit}
-                        />
-                        <VideoAd2 
-                            isOpen= {watchAd2Open}
-                            setIsOpen={setWatchAd2Open}
                         />
                     </>
                 }
