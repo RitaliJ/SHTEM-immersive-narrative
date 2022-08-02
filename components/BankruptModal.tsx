@@ -17,7 +17,7 @@ export default function BankruptModal(props: {isOpen: boolean, setIsOpen: (value
                         width="192"
                         height="192"
                         className="rounded-md"
-                        src="/cart.jpg"
+                        src="https://cdn.discordapp.com/attachments/996489060275208295/1003812563009671198/IMG_5586.png"
                         alt="Shopping assistant"
                     />
                 </div>

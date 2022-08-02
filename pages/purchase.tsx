@@ -56,7 +56,7 @@ export default function Purchase() {
         }
     }
     function checkCode(){
-        if (code == "2896") {
+        if (code == "5367") {
             location.href = "/dataleak";
         } else {
             return "Incorrect Code. Please Try Again";

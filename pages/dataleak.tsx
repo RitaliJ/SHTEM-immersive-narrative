@@ -20,7 +20,7 @@ export default function Dataleak() {
     const [famfeud, setfamfeud] = useState({} as {[key: string]: string});
     const [shoeCaptcha, setShoeCaptcha] = useState([false]);
     const [starbucks, setstarbucks] = useState({} as {[key: string]: string});
-    
+    const [code, setCode] = useState("");
     const updateUserVacationCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
         let labels = [];
         for (var i = 0; i < selections.length; i++) {
@@ -41,6 +41,15 @@ export default function Dataleak() {
         products: {millis: number, clicks: number}[],
     };
     const [data, setData] = useState<Keys>();
+
+    function checkCode(){
+        if (code == "2896") {
+            location.href = "/TNG";
+        } else {
+            return "Incorrect Code. Please Try Again";
+        }
+
+    }
 
     //load time and click data from localStorage
     useEffect(() => {
@@ -482,15 +491,21 @@ export default function Dataleak() {
                                 </div>
                             )}
                         </div>
-                        <div className="flex justify-center">
-                            <Link href="/TNG">
-                                <button className="bg-red-600 text-gray-900 px-3 py-1 rounded-lg text-xl font-bold text-center mt-4">
-                                    Learn more about The New Generation here
+                        <p className="text-3xl text-red-600">
+                                Call 714-202-2636 to get access to the data the TNGers collected.
+                            </p>
+                            <div className="text-2xl text-red-600 flex flex-col gap-4">
+                                <InputGroup label="Code" callback={setCode} />
+                                <button
+                                    className="bg-red-600 text-gray-900 px-3 py-1 rounded-lg"
+                                    onClick={() => checkCode()}
+                                >
+                                    Submit
                                 </button>
-                            </Link>
-                        </div>
+                            </div>
                     </>}
                 </div>
+
             </main>
         </div>
     )
