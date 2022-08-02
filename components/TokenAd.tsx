@@ -11,6 +11,7 @@ export default function TokenAd(props: {
     const [running, setRunning] = useState(false);
     const [heartrate, setHeartrate] = useState(70);
     const [cameraAllowed, setCameraAllowed] = useState(false);
+    const [nextCamera, setnextCamera] = useState(false);
 
     //start running timer on modal open
     useEffect(() => {
@@ -22,6 +23,7 @@ export default function TokenAd(props: {
             callback(reward);
         }
     }, [isOpen]);
+
 
     //once start time is set, begin incrementing reward
     useEffect(() => {
@@ -68,16 +70,26 @@ export default function TokenAd(props: {
                         You can close this popup at any time to receive your Heartbeats
                     </p>
                 </> : <>
-                    <p className="text-2xl font-bold px-12 whitespace-nowrap">
-                        Authorize camera
-                    </p>
-                    <img className="max-h-[60vh]" src="https://cdn.discordapp.com/attachments/996489060275208295/1003819606948982834/BC55E1E6-BFF1-4EDC-8E7D-B34EA424C092.png" />
+                {nextCamera ? <>
+                    <p className="pr-4">
+                    Allow us to use the camera.
+                </p>
+                <button
+                    onClick={() => setCameraAllowed(true)}
+                    className="bg-blue-600 text-white px-3 py-1 text-xl rounded-lg"
+                >
+                    Allow Camera Access.
+                </button>
+                </> : <>
+                <img className="max-h-[60vh]" src="https://cdn.discordapp.com/attachments/996489060275208295/1003819606948982834/BC55E1E6-BFF1-4EDC-8E7D-B34EA424C092.png" />
                     <button
-                        onClick={() => {setCameraAllowed(true); setRunning(true)}}
+                        onClick={() => setnextCamera(true)}
                         className="bg-blue-600 text-white rounded-lg px-24 py-3"
                     >
-                        Allow
+                        Next
                     </button>
+                    </>}
+
                 </>}
             </div>
         </CenteredModal>
