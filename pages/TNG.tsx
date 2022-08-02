@@ -40,7 +40,7 @@ export default function OurResearch() {
                     <img className="h-50 w-50" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
                 </div>
                 <h1 className="text-blue-600 text-2xl ">
-                    Welcome...
+                    Welcome Back...
                 </h1>
                 <p>
                     {`You've just been through a simulated shopping experience. From the 10 minutes you spent
@@ -80,7 +80,7 @@ export default function OurResearch() {
                     <img className="h-96" src="https://image.shutterstock.com/image-illustration/digital-city-big-brother-electronic-600w-662065279.jpg" />
                 </div>
                 <h2 className="text-blue-500 text-xl">
-                    So what exactly are these companies exactly collecting?
+                    So what exactly are these companies collecting?
                 </h2>
                 <p>
                     {`The amount of data collected tells a story: the story of you. A prime example is
