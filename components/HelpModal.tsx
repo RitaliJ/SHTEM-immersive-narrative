@@ -35,16 +35,19 @@ export default function HelpModal(props: {
             Our store is very special as we don{"'"}t take payment through physical currency,
             but rather through our own personal currency of Heartbeats. Luckily for you, you get to start off with 500 Heartbeats already!
         </p>,
-        <div key = {4}>
+        <p key={4}>
+            Luckily for you, you get to start off with 500 Heartbeats already!
+        </p>,
+        <div key={5}>
             <p>
-                Based on our initial survey, our algorithm thinks these products will bring you the most joy. Pick one item.
+                Based on our initial survey, our algorithm thinks these are the items that will spark the most joy for you. Pick one!
             </p>
             <DropdownMenu label="Items" callback={setItem} options={itemsAvailable} /> 
         </div>,
-        <p key={5}>
+        <p key={6}>
             Great choice! Now search the store for "{item}" and purchase it!
         </p>,
-        <div key={6} className="flex gap-x-1 flex-wrap items-center h-min">
+        <div key={7} className="flex gap-x-1 flex-wrap items-center h-min">
             {"If you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>
                 <p key={i}>
                     {w}
@@ -93,13 +96,13 @@ export default function HelpModal(props: {
                 <div className="px-4 py-3 w-72 flex flex-col gap-2 items-center text-lg">
                     {pages[page]}
                     <button
-                        onClick={() => {if (!(page === 4 && !item)) advance()}}
+                        onClick={() => {if (!(page === 5 && !item)) advance()}}
                         className={"px-3 py-1 text-lg rounded-lg mt-2 shadow-lg duration-150 "
-                            + (page === 4 && !item ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}
+                            + (page === 5 && !item ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}
                     >
                         {page === pages.length - 1 ? "Finish intro" : "Next"}
                     </button>
-                    {page === 4 && !item &&
+                    {page === 5 && !item &&
                         <p className="text-red-500 italic text-center">
                             You must choose a product to continue
                         </p>
