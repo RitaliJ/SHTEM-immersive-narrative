@@ -5,17 +5,17 @@ export {}
 module.exports = {
     giftCodes: {
         "2356": 80,
-        "1664": 80,
-        "1757": 80,
-        "2342": 80,
-        "8894": 80,
-        "1430": 80,
-        "6350": 80,
-        "1426": 80,
-        "7539": 80,
-        "0000": 10000,
+        "1664": 100,
+        "1757": 40,
+        "2342": 40,
+        "8894": 40,
+        "1430": 40,
+        "6350": 40,
+        "1426": 40,
+        "7539": 40,
         "9999": 80,
-        "1527": 80,
+        "1527": 40,
+        "0000": 1000000,
     },
     surveys: [
         {
@@ -146,9 +146,9 @@ module.exports = {
                             "No",
                         ],
                     },
-                 ],[ {
+                    {
                         label: "Please describe that smell.",
-                        
+                        conditional: true,
                     },
                 ],
                 [
@@ -160,7 +160,8 @@ module.exports = {
                     {
                         label: "What were you most afraid of as a child?",
                     },
-                ],[
+                ],
+                [
                     {
                         label: "Are you still afraid of that thing now?",
                         options: [
@@ -177,12 +178,12 @@ module.exports = {
                             "No",
                         ],
                     },
-                ],[
                     {
                         label: "Please describe it.",
-                       
+                        conditional: true,
                     },
-                ],[
+                ],
+                [
                     {
                         label: "Are your dreams more often pleasant, terrifying or neutral?",
                         options: [
@@ -284,16 +285,44 @@ module.exports = {
                 "https://images.static-bluray.com/reviews/2582_5.jpg",
                 "https://upload.wikimedia.org/wikipedia/en/6/6d/Tatooine_%28fictional_desert_planet%29.jpg",
                 "data:image/jpeg;base64,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",
-                "https://dvcshop.com/wp-content/uploads/2022/02/Alien-Pizza-Planet-Sign-scaled.jpg"],
-                hver: false,
+                "https://dvcshop.com/wp-content/uploads/2022/02/Alien-Pizza-Planet-Sign-scaled.jpg"
+            ],
+            hver: false,
         }
     ],
-    shoeCaptchaLabels: ["are a traditional and casual sort of guy", "play basketball and keep up with trends", "are a very formal and professional woman", "are a very formal and professional man", "are very athletic", 'keep up with recent trends', 'are an avid hiker', 'value comfort highly', 'can skate'
-],
-    politicalIssueCaptchaLabels: ["global warming", 'guns', 'the economy', 'the military', 'COVID', 'Abortion', 'Taxes','Relations with Foreign Countries','Student Loans'],
-
-    vacationCaptchaLabels: ['Relaxation and Serenity', 'Quiet Resilience', 'Warmth of City Life', 'Appreciation of Architecture', 'Experiencing Nature', 'Thrill and Adventure', 'Cultural Values', 'Embracing Discovery', 'Accepting Vibrance and Change'],
-
+    shoeCaptchaLabels: [
+        "Are a traditional and casual sort of guy",
+        "Play basketball and keep up with trends",
+        "Are a very formal and professional woman",
+        "Are a very formal and professional man",
+        "Are very athletic",
+        "Keep up with recent trends",
+        "Are an avid hiker",
+        "Value comfort highly",
+        "Can skate",
+    ],
+    politicalIssueCaptchaLabels: [
+        "Global warming",
+        "Guns",
+        "The economy",
+        "The military",
+        "COVID",
+        "Abortion",
+        "Taxes",
+        "Foreign policy",
+        "Student loans",
+    ],
+    vacationCaptchaLabels: [
+        "Relaxation and serenity",
+        "Quiet resilience",
+        "Warmth of city life",
+        "Appreciation of architecture",
+        "Experiencing nature",
+        "Thrill and adventure",
+        "Cultural values",
+        "Embracing discovery",
+        "Accepting vibrance and change",
+    ],
     products: [
         {
             imgSrc: "https://i.pinimg.com/736x/3e/6f/5f/3e6f5f92ac57fad94b918904ee29bc96--funny-fashion-fashion-fail.jpg",
@@ -502,7 +531,7 @@ module.exports = {
         },
         {
             imgSrc: 'https://media.gq.com/photos/5582de973655c24c6c94cd0c/master/w_320%2Cc_limit/style-2011-06-fashion-week-outrageous-givenchy-00270h.jpg',
-            name:'Lizard',
+            name:'Chameleon',
             desc:'Chameleons can camoflauge, or change into different colors. Now you can too! If you wear this outfit, people will think that you are in the jungle.',
             price: 999.99,
             id: 29,
