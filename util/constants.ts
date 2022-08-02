@@ -137,7 +137,8 @@ module.exports = {
         },
         {
             title: "What Starbucks drink are you?",
-            code: '1664',
+            code: "1664",
+            finalText: "Congrats, you are a candy cane frappe grande non blended with extra candy cane, no whipped cream, with caramel drizzle and peppermint topping!",
             questions: [
                 [
                     {

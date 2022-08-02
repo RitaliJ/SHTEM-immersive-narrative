@@ -17,6 +17,7 @@ export default function SurveyModal(props: {
     const [data, setData] = useState({} as SurveyDataType);
     const [page, setPage] = useState(0);
     const [started, setStarted] = useState(false);
+    const [showFinal, setShowFinal] = useState(false); //show final text
 
     //helper function for setting a particular key-value pair in data object
     const setValue = (key: string, value: string) => {
@@ -42,11 +43,21 @@ export default function SurveyModal(props: {
     //add data to localStorage and show gift code
     const handleSubmit = () => {
         if (checkValid()) {
-            if (page === survey.questions.length - 1) {
+            if (survey.finalText && showFinal) {
                 localStorage.setItem(survey.title, JSON.stringify(data));
                 setShowCode(true);
                 setPage(0);
                 setStarted(false);
+            }
+            if (page === survey.questions.length - 1) {
+                if (survey.finalText) {
+                    setShowFinal(true);
+                } else {
+                    localStorage.setItem(survey.title, JSON.stringify(data));
+                    setShowCode(true);
+                    setPage(0);
+                    setStarted(false);
+                }
             } else {
                 setPage(page + 1);
             }
@@ -81,7 +92,11 @@ export default function SurveyModal(props: {
                             <h1 className="text-2xl font-bold">
                                 {survey.title}
                             </h1>
-                            {survey.questions && survey.questions[page].map((q, i) => {
+                            {showFinal && survey.finalText ? (
+                                <p>
+                                    {survey.finalText}
+                                </p>
+                            ) : survey.questions && survey.questions[page].map((q, i) => {
                                 if (q.conditional && data[survey.questions[page][i - 1].label] !== "Yes") {
                                     return;
                                 } else if ("options" in q) { //multiple choice
