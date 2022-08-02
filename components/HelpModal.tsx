@@ -33,7 +33,7 @@ export default function HelpModal(props: {
         </p>,
         <p key={3}>
             Our store is very special as we don{"'"}t take payment through physical currency,
-            but rather through our own personal currency of Heartbeats. Luckily for you, you get to start off with 500 Heartbeats already!
+            but rather through our own personal currency of Heartbeats.
         </p>,
         <p key={4}>
             Luckily for you, you get to start off with 500 Heartbeats already!
