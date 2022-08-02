@@ -124,6 +124,7 @@ export default function Login() {
                                 doneNewsletter: false,
                                 watchedAd: false,
                                 target: "",
+                                showCookies: false,
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
                                 && validateEmail() && year !== undefined && month !== undefined && day !== undefined

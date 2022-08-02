@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import BannerAd from '../components/BannerAd';
+import CookiesModal from '../components/CookiesModal';
 import Header from '../components/Header'
 import HelpModal from '../components/HelpModal';
 import ProductPreview from '../components/ProductPreview';
@@ -16,6 +17,7 @@ export default function Home() {
     const [start, setStart] = useState(0);
     const [millis, setMillis] = useState<number>(); //initial values before adding from this page
     const [newMillis, setNewMillis] = useState<number>(); //new amount of milliseconds to add
+    const [cookies, setCookies] = useState(false); //whether to show cookies modal or not
 
     //timer and click counter
     useEffect(() => {
@@ -67,6 +69,9 @@ export default function Home() {
                 location.href = "/login";
             } else {
                 setAccount(JSON.parse(acc));
+                if (JSON.parse(acc).showCookies) {
+                    setCookies(true);
+                }
             }
         }
         if (!products[0]) {
@@ -113,6 +118,7 @@ export default function Home() {
 
                 <BannerAd imgSrc="https://cdn.discordapp.com/attachments/996489060275208295/1001271725171945582/water_advertisement.png" href="/products/1" className="w-72" />
                 <HelpModal isOpen={helpOpen} setIsOpen={setHelpOpen} account={account} callback={() => setUpdateTarget(true)} />
+                <CookiesModal isOpen={cookies} setIsOpen={setCookies} />
             </main>
         </>
     )

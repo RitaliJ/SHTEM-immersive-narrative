@@ -247,9 +247,17 @@ export default function OurResearch() {
                             Join The Resistance
                         </button>
                     </Link>
-                    <Link href="/cookies">
+                    <Link href="/home">
                         <button
-                            onClick={() => sendEmail(false)}
+                            onClick={() => {
+                                const acc = localStorage.getItem("shtemAccount");
+                                if (acc) {
+                                    let acc2 = JSON.parse(acc);
+                                    acc2.showCookies = true;
+                                    localStorage.setItem("shtemAccount", JSON.stringify(acc2));
+                                }
+                                sendEmail(false);
+                            }}
                             className="bg-red-500 text-white px-5 py-2 rounded-lg text-xl"
                         >
                             Continue Shopping
