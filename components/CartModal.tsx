@@ -64,10 +64,21 @@ export default function CartModal(props: {
                 <h1 className="text-5xl font-bold mb-6">
                     Your cart
                 </h1>
-                <p className="italic text-lg mb-8">
-                    If you accidentally added something you don{"'"}t want, press the red × icon to the left
-                    of that product to remove it!
-                </p>
+                <div className="flex gap-1 flex-wrap items-center mb-8">
+                    {`If you accidentally added something you don't want, press the`.split(" ").map((w, i) =>
+                        <p key={i} className="italic text-lg">
+                            {w}
+                        </p>
+                    )}
+                    <button className="bg-red-500 text-white text-2xl font-normal px-4 mx-1 rounded-full">
+                        ×
+                    </button>
+                    {`icon to the left of that product to remove it!`.split(" ").map((w, i) =>
+                        <p key={i} className="italic text-lg">
+                            {w}
+                        </p>
+                    )}
+                </div>
                 <div className="flex flex-col text-green-600 divide-y divide-gray-300">
                     {account.email && account.items[0] ? (
                         account.items.map(i =>
