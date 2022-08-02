@@ -45,7 +45,7 @@ export default function HelpModal(props: {
             <DropdownMenu label="Items" callback={setItem} options={itemsAvailable} /> 
         </div>,
         <p key={6}>
-            Great choice! Now search the store for "{item}" and purchase it!
+            Great choice! Now search the store for {'"' + item + '"'} and purchase it!
         </p>,
         <div key={7} className="flex gap-x-1 flex-wrap items-center h-min">
             {"If you ever need any help, you can find me by pressing the".split(" ").map((w, i) =>

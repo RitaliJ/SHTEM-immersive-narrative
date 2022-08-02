@@ -186,7 +186,7 @@ export default function OurResearch() {
                     at the last possible second, evoking feelings of stress. On top of that, a lack of
                     focus and attentiveness can have a `}
                     <i className="text-orange-500">
-                        terrible impact on a student's learning ability.
+                        {`terrible impact on a student's learning ability.`}
                     </i>
                 </p>
                 <div className="flex justify-center">
