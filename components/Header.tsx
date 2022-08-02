@@ -250,7 +250,7 @@ export default function Header(props: {
                             className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
                                 + (account.watchedAd ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
                             <div className="flex gap-2">
-                                <span>Phil's Toy Store video ad</span>
+                                <span>Phil{"'"}s Toy Store video ad</span>
                                 <span>•</span>
                                 <span>80 Heartbeats</span>
                             </div>
