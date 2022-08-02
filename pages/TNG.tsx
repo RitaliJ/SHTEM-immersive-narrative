@@ -55,7 +55,7 @@ export default function TNG() {
             </div>
         </div>,
         <div key={2}>
-            <h2 className="text-blue-500 text-xl">
+            <h2 className="text-blue-500 text-2xl mt-24">
                 So what exactly are these companies collecting?
             </h2>
             <p>
@@ -121,7 +121,7 @@ export default function TNG() {
             </div>
         </div>,
         <div key={3}>
-            <h1 className="text-blue-600 text-2xl">
+            <h1 className="text-blue-600 text-2xl mt-24">
                 Attention Economy
             </h1>
             <p>
@@ -160,7 +160,7 @@ export default function TNG() {
             </div>
         </div>,
         <div key={4}>
-            <h1 className="text-red-600 text-2xl">
+            <h1 className="text-red-600 text-2xl mt-24">
                 The harmful effects of attention economy and algorithms:
             </h1>
             <p>
@@ -197,7 +197,7 @@ export default function TNG() {
             </div>
         </div>,
         <div key={5}>
-            <h1 className="text-green-600 text-2xl">
+            <h1 className="text-green-600 text-2xl mt-24">
                 What can you do about it?
             </h1>
             <p>
