@@ -4,6 +4,25 @@ import Link from "next/link";
 //page explaining TNG and such
 export default function OurResearch() {
 
+    const sendEmail = () => {
+        const acc = localStorage.getItem("shtemAccount");
+        if (acc) {
+            const acc2 = JSON.parse(acc);
+            const data = {
+                email: acc2.email,
+                firstName: acc2.firstName,
+            };
+            fetch("/api/resistance", { //send email request to api route
+                method: "POST",
+                headers: {
+                    "Accept": "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+        }
+    }
+
     return (
         <>
             <Head>
@@ -216,8 +235,11 @@ export default function OurResearch() {
                     <img className="h-96" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
                 </div>
                 <div className="flex gap-2 justify-center">
-                    <Link href="/idk">
-                        <button className="bg-green-600 text-white px-5 py-2 rounded-lg text-xl">
+                    <Link href="/resistance">
+                        <button
+                            onClick={() => sendEmail()}
+                            className="bg-green-600 text-white px-5 py-2 rounded-lg text-xl"
+                        >
                             Join The Resistance
                         </button>
                     </Link>
