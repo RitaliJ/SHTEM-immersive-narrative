@@ -28,14 +28,14 @@ export default function OurResearch() {
     }
 
     return (
-        <>
+        <div className="px-8">
             <Head>
                 <title>SHTEM Website | TNG</title>
                 <meta name="description" content="TNG" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
         
-            <main className="container flex flex-col gap-3 w-full h-full overflow-y-auto bg-white text-left text-lg ms-1">
+            <main className="container flex flex-col gap-3 mb-24 w-full h-full overflow-y-auto bg-white text-left text-lg">
                 <div className="flex justify-center">
                     <img className="h-50 w-50" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
                 </div>
@@ -265,6 +265,6 @@ export default function OurResearch() {
                     </Link>
                 </div>
             </main>
-        </>
+        </div>
     )
 }
