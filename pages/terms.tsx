@@ -54,7 +54,7 @@ export default function Terms() {
 
     //set read to true if user has scrolled to the bottom of element
     const handleScroll = (e: React.UIEvent<HTMLParagraphElement, UIEvent>) => {
-        if (!read && e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+        if (!read && e.currentTarget.scrollHeight - e.currentTarget.scrollTop < e.currentTarget.clientHeight + 20) {
             setRead(true);
         }
     }
