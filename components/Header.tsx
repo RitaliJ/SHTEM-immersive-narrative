@@ -196,7 +196,7 @@ export default function Header(props: {
                     <>
                         {psaHtml}
                         <p className="mb-2">
-                            Can{"'"}t afford something? Here are some options to get free Heartbeats:
+                            Can{"'"}t afford {account.target}? Here are some options to get free Heartbeats:
                         </p>
                         <button
                             onClick={() => {if (!outOfSurveys) setSurveyOpen(true)}}
@@ -240,7 +240,7 @@ export default function Header(props: {
                             className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
                                 + (account.watchedAd ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
                             <div className="flex gap-2">
-                                <span>Watch a video ad</span>
+                                <span>Watch an ad from one of our sponsors</span>
                                 <span>•</span>
                                 <span>80 Heartbeats</span>
                             </div>
@@ -250,9 +250,9 @@ export default function Header(props: {
                             className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
                                 + (account.watchedAd ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
                             <div className="flex gap-2">
-                                <span>Watch another video ad</span>
+                                <span>Watch an ad about toys</span>
                                 <span>•</span>
-                                <span>80 Heartbeats</span>
+                                <span>60 Heartbeats</span>
                             </div>
                         </button>
                         <button

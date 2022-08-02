@@ -52,7 +52,7 @@ module.exports = {
                             "Chips",
                             "Chocolate",
                             "Alcohol",
-                            "Ham sandwiches",
+                            "A ham sandwiches",
                         ],
                     },
                 ],
