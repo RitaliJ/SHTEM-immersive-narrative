@@ -1,5 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
+import CenteredModal from "../components/CenteredModal";
+import { useState } from "react";
+
+
 
 //page explaining TNG and such
 export default function OurResearch() {
@@ -16,7 +20,7 @@ export default function OurResearch() {
                 <div className="flex justify-center">
                     <img className="h-50 w-50" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
                 </div>
-                <h1 className="text-blue-600 text-2xl">
+                <h1 className="text-blue-600 text-2xl ">
                     Welcome...
                 </h1>
                 <p>
@@ -221,12 +225,14 @@ export default function OurResearch() {
                             Join The Resistance
                         </button>
                     </Link>
-                    <Link href="/home">
-                        <button className="bg-red-500 text-white px-5 py-2 rounded-lg text-xl">
+                    <Link href="/cookies">
+                        <button 
+                        className="bg-red-500 text-white px-5 py-2 rounded-lg text-xl">
                             Continue Shopping
                         </button>
                     </Link>
                 </div>
+
             </main>
         </>
     )
