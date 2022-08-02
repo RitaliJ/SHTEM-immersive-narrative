@@ -11,6 +11,7 @@ import Captcha from "./Captcha";
 import TokenAd from "./TokenAd";
 import NewsletterModal from "./NewsletterModal";
 import VideoAd from "./VideoAd";
+import VideoAd2 from "./VideoAd2"; 
 const constants = require('../util/constants')
 
 //header component
@@ -37,6 +38,7 @@ export default function Header(props: {
     const [captchaShowCode, setCaptchaShowCode] = useState(false); //show survey gift code if true
 
     const [watchAdOpen, setWatchAdOpen] = useState(false); //useState for "watch an ad" modal
+    const [watchAd2Open, setWatchAd2Open] = useState(false);
     const [tokenAdOpen, setTokenAdOpen] = useState(false); //useState for opening/closing token ad
     const [newsLetterOpen, setNewsLetterOpen] = useState(false); //useState for opening/closing newsletter modal
     
@@ -245,6 +247,16 @@ export default function Header(props: {
                             </div>
                         </button>
                         <button
+                            onClick={() => {if (!account.watchedAd) setWatchAd2Open(true)}}
+                            className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
+                                + (account.watchedAd ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
+                            <div className="flex gap-2">
+                                <span>Watch a 2nd video ad</span>
+                                <span>•</span>
+                                <span>60 Heartbeats</span>
+                            </div>
+                        </button>
+                        <button
                             onClick={() => {if (!account.doneNewsletter) setNewsLetterOpen(true)}}
                             className={"text-lg rounded-lg px-3 py-1 w-min whitespace-nowrap duration-150 "
                                 + (account.doneNewsletter ? "bg-gray-200 text-gray-400" : "bg-blue-500 text-white")}>
@@ -287,6 +299,10 @@ export default function Header(props: {
                             setIsOpen={setNewsLetterOpen}
                             email={account.email}
                             callback={newsletterSubmit}
+                        />
+                        <VideoAd2 
+                            isOpen= {watchAd2Open}
+                            setIsOpen={setWatchAd2Open}
                         />
                     </>
                 }

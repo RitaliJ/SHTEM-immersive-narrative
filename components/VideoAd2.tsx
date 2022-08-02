@@ -1,7 +1,7 @@
 import CenteredModal from "./CenteredModal";
 import YouTube from "react-youtube";
 
-export default function VideoAd(props: {
+export default function VideoAd2(props: {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void,
 }) {
