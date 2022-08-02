@@ -196,7 +196,7 @@ export default function OurResearch() {
                     addicted, the less focus and attention they will pay to particular things. They
                     will be `}
                     <b className="text-red-400">
-                        less productive and lazy
+                        more productive and lazy
                     </b>.
                     {" Studies show that those addicted to social media perform "}
                     <b className="text-purple-400">
@@ -238,7 +238,7 @@ export default function OurResearch() {
                 <div className="flex justify-center">
                     <img className="h-96" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
                 </div>
-                <div className="flex gap-2 justify-center">
+                <div className="flex gap-2 justify-center mb-10">
                     <Link href="/resistance">
                         <button
                             onClick={() => sendEmail(true)}
@@ -258,7 +258,7 @@ export default function OurResearch() {
                                 }
                                 sendEmail(false);
                             }}
-                            className="bg-red-500 text-white px-5 py-2 rounded-lg text-xl"
+                            className="bg-red-500 text-white px-5 py-2 pb-rounded-lg text-xl"
                         >
                             Continue Shopping
                         </button>
