@@ -20,15 +20,23 @@ export default function(req: NextApiRequest, res: NextApiResponse) {
         to: email,
         subject: "Purchase confirmation",
         html: `
-            <h2>Thank you for your purchase, ${firstName}</h2>
-            <h3>Billing information</h3>
-            <p>Name: ${billingFirstName} ${billingLastName}</p>
-            <p>Address: ${address}</p>
-            <h3>Items purchased</h3>
-            ${items.map((i: ItemType) =>
-                `<p>${i.quantity}× ${i.product.name} (Size ${i.size})</p>`   
-            ).join("")}
-            <p>Total: ${total.toFixed(2)} Tokens</p>
+            <div>
+                <h2>Thank you for your purchase, ${firstName}!</h2>
+                <h3>Billing information</h3>
+                <p>Name: ${billingFirstName} ${billingLastName}</p>
+                <p>Address: ${address}</p>
+                <h3>Items purchased</h3>
+                <hr>
+                ${items.map((i: ItemType) => `
+                    <div style="display: flex">
+                        <p style="margin: 0 10px 0 0">${i.quantity}×</p>
+                        <p style="margin: 0 10px 0 0">${i.product.name}</p>
+                        <p style="margin: 0">(Size ${i.size})</p>
+                    </div>
+                    <hr>
+                `).join("")}
+                <p>Total: ${total.toFixed(2)} Tokens</p>
+            </div>
         `,
     };
     transporter.sendMail(mailData);
