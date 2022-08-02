@@ -21,7 +21,7 @@ export default function Checkout() {
     const [state, setState] = useState("");
     const [zip, setZip] = useState("");
     const [shipping, setShipping] = useState(5); //shipping cost
-    const [cardNumber, setCardNumber] = useState("");
+    // const [cardNumber, setCardNumber] = useState("");
     const [securityPin, setSecurityPin] = useState("");
     const states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", //states for dropdown menu
                     "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
@@ -116,8 +116,8 @@ export default function Checkout() {
     //handle clicking on order button
     const handleSubmit = () => {
         if (firstName && lastName && address && city && state
-            && zip.toString().length === 5 && cardNumber.toString().length === 16
-            && securityPin.toString().length === 3) {
+            && zip.toString().length === 5
+            && securityPin.toString().length === 4) {
             const data = {
                 email,
                 firstName: account.firstName,
@@ -185,8 +185,11 @@ export default function Checkout() {
                         <InputGroup label="ZIP Code" value={zip} callback={setZip} onlyNumbers maxLength={5} />
                     </div>
                     <div className="flex gap-2">
-                        <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} />
-                        <InputGroup label="Security PIN" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={3} />
+                        {/* <InputGroup label="Card Number" value={cardNumber} callback={setCardNumber} onlyNumbers maxLength={16} /> */}
+                        <p className="text-sm font-semibold">I affirm that I am exchanging heartbeats for this purchase. Enter birthyear YYYY as pin to confirm. </p>
+                    </div>
+                    <div className="flex gap-2">
+                        <InputGroup label="Confirmation PIN" value={securityPin} callback={setSecurityPin} onlyNumbers maxLength={4} />
                     </div>
 
                     <div className="flex items-center mt-4">
@@ -194,15 +197,15 @@ export default function Checkout() {
                             <NiceLink href="/home" text="← Back" className="mb-6" />
                         </div>
                         <Link href={firstName && lastName && address && city && state && inBudget
-                            && zip.toString().length === 5 && cardNumber.toString().length === 16
-                            && securityPin.toString().length === 3 ?
+                            && zip.toString().length === 5
+                            && securityPin.toString().length === 4 ?
                             "/purchase" : "/checkout"}>
                             <button
                                 onClick={() => handleSubmit()}
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
                                     + (firstName && lastName && address && city && state && zip && inBudget
-                                    && zip.toString().length === 5 && cardNumber.toString().length === 16
-                                    && securityPin.toString().length === 3 && account.email && account.items[0] ?
+                                    && zip.toString().length === 5
+                                    && securityPin.toString().length ===4 && account.email && account.items[0] ?
                                 "bg-green-600 text-white" : "bg-gray-200 text-gray-400")}>
                                 Place order
                             </button>
@@ -213,10 +216,10 @@ export default function Checkout() {
                         {!account.email || !account.items[0]
                             ? "Your cart is empty!"
                             : inBudget 
-                                ? (firstName && lastName && address && city && state && zip && cardNumber && securityPin
-                                ? (zip.toString().length !== 5 || cardNumber.toString().length !== 16
-                                    || securityPin.toString().length !== 3
-                                    ? "* Invalid ZIP code, card number, or security PIN" : "")
+                                ? (firstName && lastName && address && city && state && zip && securityPin
+                                ? (zip.toString().length !== 5
+                                    || securityPin.toString().length !== 4
+                                    ? "* Invalid ZIP code or confirmation PIN" : "")
                                 : "* Please fill all required fields")
                                 : "Total amount exceeds account balance"
                         }
