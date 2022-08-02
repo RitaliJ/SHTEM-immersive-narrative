@@ -105,7 +105,7 @@ export default function Dataleak() {
     const indicator = () => {
         if ((extro1 === "What's free time? I'm always working." || extro1 === "Chill at home") && (extro2 === "I like to work independently")) {
             return "It seems that you are an introvert";
-        } else if ((extro2 === " I like to work in a large group fosho") && (extro1 === "Spend time outside with friends")) {
+        } else if ((extro2 === "I like to work in a large group fosho") && (extro1 === "Spend time outside with friends")) {
             return "It seems as if you are an extrovert";
         } else {
             return "It seems as if you are in ambivert";
@@ -114,7 +114,7 @@ export default function Dataleak() {
 
     const flying = () => {
         if (famfeud["Which superpower would you not want to have?"] == "Flying") {
-            return"Scared of Heights";
+            return "Scared of Heights";
         } else if (famfeud["Which superpower would you not want to have?"] == "Invisibility") {
             return "Likely to have a desire for validation or fear of being overlooked";
         } else if (famfeud["Which superpower would you not want to have?"] == "Mind reading") {
@@ -135,45 +135,40 @@ export default function Dataleak() {
     const plane = () => {
         if (famfeud["Name the first thing you order on a plane."] == "Chips") {
             return "Has a tendency for salty food.";
-        }
-        else if (famfeud["Name the first thing you order on a plane."] == "Chocolate") {
+        } else if (famfeud["Name the first thing you order on a plane."] == "Chocolate") {
             return "Likely has a sweet tooth";
-        }
-        else if (famfeud["Name the first thing you order on a plane."] == "Alcohol") {
+        } else if (famfeud["Name the first thing you order on a plane."] == "Alcohol") {
             return "Likely an alcoholic of some sort, or likes such beverages";
-        }
-        else if (famfeud["Name the first thing you order on a plane."] == "Ham sandwiches") {
+        } else if (famfeud["Name the first thing you order on a plane."] == "Ham sandwiches") {
             return "Likely not vegan";
         }
     }
     const wakeUp = () => {
         if (famfeud["Name the first thing you do when you wake up."] == "Eat a bowl of cereal") {
             return "Would be a good target for cereal ads";
-        }
-        else if (famfeud["Name the first thing you do when you wake up."] == "Go back to sleep") {
+        } else if (famfeud["Name the first thing you do when you wake up."] == "Go back to sleep") {
             return "Perhaps a little more relaxed or could be sleep-deprived";
-        }
-        else if (famfeud["Name the first thing you do when you wake up."] == "Check notifications") {
+        } else if (famfeud["Name the first thing you do when you wake up."] == "Check notifications") {
             return "Social Media Addicted";
-        }
-        else if (famfeud["Name the first thing you do when you wake up"] == "Turn on your coffee machine") {
+        } else if (famfeud["Name the first thing you do when you wake up"] == "Turn on your coffee machine") {
             return "Associated with Caffeine Addiction"; 
         }
     }
     const saturday = () => {
         if (famfeud["What would be your ideal Saturday afternoon?"] == "Standing overnight in a huge line for concert tickets but when you get to the front, they are sold out") {
-            return "dedicated and has a love for music";
+            return "Dedicated and has a love for music";
         } else if (famfeud["What would be your ideal Saturday afternoon?"] == "Renewing your license at the DMV") {
-            return "sees Saturdays as days that could be of much use";
+            return "Sees Saturdays as days that could be of much use";
         } else if (famfeud["What would be your ideal Saturday afternoon?"] == "Getting a cavity filled") {
-            return "health-conscious";
+            return "Health-conscious";
         } else if (famfeud["What would be your ideal Saturday afternoon?"] == "Missing your flight") {
             return "Either huge on traveling, or needs to travel a lot";
         }
     }
     const destination = () => {
         const x = (famfeud["Name your favorite travel destination."]);
-        return ("Is a target for vacation ads to " + x);
+        if (x) return ("Is a target for vacation ads to " + x);
+        else return "";
     }
     const presGame = () => {
         const x = (famfeud["Name a US president that would be the worst at video games."]);
@@ -383,42 +378,67 @@ export default function Dataleak() {
                         </div>
                         <p>Inferences We Made About You:</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{flying()}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{disneyland()}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{plane()}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{wakeUp()}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{saturday()}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{destination()}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{presGame()}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{screenTime()}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p>•</p>
-                                <p>{anthem()}</p>
-                            </div>
+                            {flying() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{flying()}</p>
+                                </div>
+                            }
+                            {disneyland() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{disneyland()}</p>
+                                </div>
+                            }
+                            {plane() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{plane()}</p>
+                                </div>
+                            }
+                            {wakeUp() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{wakeUp()}</p>
+                                </div>
+                            }
+                            {saturday() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{saturday()}</p>
+                                </div>
+                            }
+                            {destination() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{destination()}</p>
+                                </div>
+                            }
+                            {presGame() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{presGame()}</p>
+                                </div>
+                            }
+                            {screenTime() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{screenTime()}</p>
+                                </div>
+                            }
+                            {anthem() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{anthem()}</p>
+                                </div>
+                            }
+                            {!flying() && !disneyland() && !plane() && !wakeUp() && !saturday() &&
+                                !destination() && !presGame() && !screenTime() && !anthem() &&
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            }
                         </div>
                         <p>Are you an extrovert or introvert?</p>
                         <div className="flex flex-col gap-1 pl-6">
@@ -439,10 +459,10 @@ export default function Dataleak() {
                             }
                         </div>
                         <p>Your pronouns: {gender}</p>
-                        <p>The Political Issues You Care For The Most:</p>
+                        <p>Indications About You:</p>
                         <div className="flex flex-col gap-1 pl-6">
-                            {poliCaptcha && updateUserVacationCaptchaLabels(poliCaptcha, constants. politicalIssueCaptchaLabels)[0] ? (
-                                updateUserVacationCaptchaLabels(poliCaptcha, constants. politicalIssueCaptchaLabels).map((x, i) =>
+                            {vacationCaptcha && updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels)[0] ? (
+                                updateUserVacationCaptchaLabels(vacationCaptcha, constants.vacationCaptchaLabels).map((x, i) =>
                                     <div key={i} className="flex gap-2">
                                         <p>•</p>
                                         <p>{x}</p>
@@ -455,7 +475,38 @@ export default function Dataleak() {
                                 </div>
                             )}
                         </div>
-                        <p className="text-3xl text-red-600">Enter Code Below</p>
+                        <p>The political issues you care for the most:</p>
+                        <div className="flex flex-col gap-1 pl-6">
+                            {poliCaptcha && updateUserVacationCaptchaLabels(poliCaptcha, constants.politicalIssueCaptchaLabels)[0] ? (
+                                updateUserVacationCaptchaLabels(poliCaptcha, constants.politicalIssueCaptchaLabels).map((x, i) =>
+                                    <div key={i} className="flex gap-2">
+                                        <p>•</p>
+                                        <p>{x}</p>
+                                    </div>
+                                )
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>None</p>
+                                </div>
+                            )}
+                        </div>
+                        <p>Your shoe selection suggests that you:</p>
+                        <div className="flex flex-col gap-1 pl-6">
+                            {shoeCaptcha && updateUserVacationCaptchaLabels(shoeCaptcha, constants.shoeCaptchaLabels)[0] ? (
+                                updateUserVacationCaptchaLabels(shoeCaptcha, constants.shoeCaptchaLabels).map((x, i) =>
+                                    <div key={i} className="flex gap-2">
+                                        <p>•</p>
+                                        <p>{x}</p>
+                                    </div>
+                                )
+                            ) : (
+                                <div className="flex gap-2">
+                                    <p>•</p>
+                                    <p>N/A</p>
+                                </div>
+                            )}
+                        </div>
                         <div className="flex justify-center">
                             <div className="text-xl text-red-600 flex flex-col gap-4 mt-12 mb-12 w-min whitespace-nowrap">
                                 <InputGroup label="Code" callback={setCode} />
