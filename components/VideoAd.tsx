@@ -1,3 +1,5 @@
+
+
 import CenteredModal from "./CenteredModal";
 import YouTube from "react-youtube";
 import { useState } from "react";
@@ -9,7 +11,7 @@ export default function VideoAd(props: {
 }) {
     const {isOpen, setIsOpen} = props;
     const [watchAdOpen, setWatchAdOpen] = useState(false);
- 
+
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -21,7 +23,7 @@ export default function VideoAd(props: {
                 </button>
                 <div className="pointer-events-none">
                     <YouTube
-                        videoId="u0jV5l7CNh8"
+                        videoId="1WN4SrqZm50"
                         opts={{
                             height: "360",
                             width: "640",
@@ -29,15 +31,17 @@ export default function VideoAd(props: {
                                 autoplay: 1,
                                 controls: 0,
                                 disablekb: 1,
-                                fs: 0,
+                                fs: 1,
                                 loop: 0,
-                                playlist: "u0jV5l7CNh8",
+                                playlist: "1WN4SrqZm50",
                             },
                         }}
                     />
                 </div>
-                <button className = 'bg-blue-600 text-white' onClick={() => setWatchAdOpen(true)}>Click here to watch the next ad.</button>
+                <button className = 'bg-blue-600 text-white rounded-lg px-24 py-3' onClick={() => setWatchAdOpen(true)}>Click here to watch the next ad.</button>
                 <VideoAd2 isOpen={watchAdOpen} setIsOpen={setWatchAdOpen}/>
+                
+                
             </div>
         </CenteredModal>
     )
