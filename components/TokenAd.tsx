@@ -16,7 +16,6 @@ export default function TokenAd(props: {
     useEffect(() => {
         if (isOpen) {
             setReward(0);
-            setRunning(true);
             setCameraAllowed(false);
         } else {
             setRunning(false);
@@ -74,7 +73,7 @@ export default function TokenAd(props: {
                     </p>
                     <img className="max-h-[60vh]" src="https://cdn.discordapp.com/attachments/996489060275208295/1003819606948982834/BC55E1E6-BFF1-4EDC-8E7D-B34EA424C092.png" />
                     <button
-                        onClick={() => setCameraAllowed(true)}
+                        onClick={() => {setCameraAllowed(true); setRunning(true)}}
                         className="bg-blue-600 text-white rounded-lg px-24 py-3"
                     >
                         Allow
