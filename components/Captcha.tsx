@@ -71,22 +71,28 @@ import GiftCodeContent from "./GiftCodeContent";
                             <p className="text-2xl font-bold mt-4">
                                 {captcha.title}
                             </p>
-                            <div className="flex flex-col gap-6">
-                                {captcha.imgSrcs && [0, 1, 2].map(i =>
-                                    <div key={i} className="flex gap-6">
-                                        {[0, 1, 2].map(j =>
-                                            <img
-                                                key={j}
-                                                onClick={() => flipAtIndex(3 * i + j)}
-                                                className={"border-4 border-white ring-8 w-[16vh] h-[16vh] duration-150 hover:cursor-pointer "
-                                                    + (selected[3 * i + j] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
-                                                src={captcha.imgSrcs[3 * i + j]}
-                                                alt={i.toString()}
-                                            />
-                                        )}
-                                    </div>
-                                )}
-                            </div>
+                            {captcha.hver && submit ? (
+                                <p className="text-red-500 italic text-lg">
+                                    {captcha.hver}
+                                </p>
+                            ) : (
+                                <div className="flex flex-col gap-6">
+                                    {captcha.imgSrcs && [0, 1, 2].map(i =>
+                                        <div key={i} className="flex gap-6">
+                                            {[0, 1, 2].map(j =>
+                                                <img
+                                                    key={j}
+                                                    onClick={() => flipAtIndex(3 * i + j)}
+                                                    className={"object-cover border-4 border-white ring-8 w-[16vh] h-[16vh] duration-150 hover:cursor-pointer "
+                                                        + (selected[3 * i + j] ? "ring-blue-500 hover:ring-blue-400" : "ring-gray-200 hover:ring-gray-300")}
+                                                    src={captcha.imgSrcs[3 * i + j]}
+                                                    alt={i.toString()}
+                                                />
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                             <button
                                 onClick={() => {
                                     if (canSubmit) handleSubmit();
@@ -99,11 +105,6 @@ import GiftCodeContent from "./GiftCodeContent";
                             {!canSubmit &&
                                 <p className="text-red-500 italic text-lg">
                                     You must select at least one option
-                                </p>
-                            }
-                            {captcha.hver && submit &&
-                                <p className="text-red-500 italic text-lg">
-                                    It appears you are not human! Please try again.
                                 </p>
                             }
                         </>
