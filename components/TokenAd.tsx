@@ -11,13 +11,14 @@ export default function TokenAd(props: {
     const [running, setRunning] = useState(false);
     const [heartrate, setHeartrate] = useState(70);
     const [cameraAllowed, setCameraAllowed] = useState(false);
-    const [nextCamera, setnextCamera] = useState(false);
+    const [nextCamera, setNextCamera] = useState(false);
 
     //start running timer on modal open
     useEffect(() => {
         if (isOpen) {
             setReward(0);
             setCameraAllowed(false);
+            setNextCamera(false);
         } else {
             setRunning(false);
             callback(reward);
@@ -48,7 +49,8 @@ export default function TokenAd(props: {
 
     return (
         <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
-            <div className="relative flex flex-col gap-2 p-4 items-center bg-white w-min rounded-lg whitespace-nowrap oveflow-hidden">
+            <div className={"relative flex flex-col gap-2 p-4 items-center bg-white w-min rounded-lg whitespace-nowrap oveflow-hidden "
+                    + (cameraAllowed ? "w-min" : "w-72")}>
                 <button
                     onClick={() => setIsOpen(false)}
                     className="absolute top-2 right-4 text-5xl"
@@ -56,7 +58,9 @@ export default function TokenAd(props: {
                     ×
                 </button>
                 {cameraAllowed ? <>
-                    <img className="max-h-[60vh]" src="https://cdn.discordapp.com/attachments/996489060275208295/1003691578558267524/B0D3893A-CEC3-4463-A2C6-38531F18C1B4.png" />
+                    <div className="mx-8">
+                        <img className="max-h-[60vh]" src="https://cdn.discordapp.com/attachments/996489060275208295/1003691578558267524/B0D3893A-CEC3-4463-A2C6-38531F18C1B4.png" />
+                    </div>
                     <div className="flex gap-1 text-2xl">
                         <p>Heartrate:</p>
                         <p className="font-bold">
@@ -70,26 +74,29 @@ export default function TokenAd(props: {
                         You can close this popup at any time to receive your Heartbeats
                     </p>
                 </> : <>
-                {nextCamera ? <>
-                    <p className="pr-4">
-                    Allow us to use the camera.
-                </p>
-                <button
-                    onClick={() => setCameraAllowed(true)}
-                    className="bg-blue-600 text-white px-3 py-1 text-xl rounded-lg"
-                >
-                    Allow Camera Access.
-                </button>
-                </> : <>
-                <img className="max-h-[60vh]" src="https://cdn.discordapp.com/attachments/996489060275208295/1003819606948982834/BC55E1E6-BFF1-4EDC-8E7D-B34EA424C092.png" />
-                    <button
-                        onClick={() => {setnextCamera(true); setRunning(true);}}
-                        className="bg-blue-600 text-white rounded-lg px-24 py-3"
-                    >
-                        Next
-                    </button>
+                    {nextCamera ? <>
+                        <p className="text-xl break-words whitespace-normal pt-8 pb-4 text-center">
+                            Now turn on your camera to start earning!
+                        </p>
+                        <button
+                            onClick={() => setCameraAllowed(true)}
+                            className="bg-blue-500 text-white px-3 py-1 text-xl rounded-lg"
+                        >
+                            Allow Camera Access
+                        </button>
+                    </> : <>
+                        <p className="text-xl break-words whitespace-normal pt-8 pb-4 text-center">
+                            Get in a comfy position and make sure your face is right in front of the camera.
+                            You need to stare directly at the ad; try not to blink! The more heartbeats you
+                            give, the more heartbeats you will receive. What an easy way to get heartbeats!
+                        </p>
+                        <button
+                            onClick={() => {setNextCamera(true); setRunning(true);}}
+                            className="bg-blue-500 text-white rounded-lg px-12 py-3"
+                        >
+                            Next
+                        </button>
                     </>}
-
                 </>}
             </div>
         </CenteredModal>
