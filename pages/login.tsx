@@ -74,9 +74,9 @@ export default function Login() {
     //set localStorage and go to terms page
     const handleSubmit = (account: AccountType) => {
         console.log(month);
-        if (validateEmail() && firstName && lastName && phone
+        if (validateEmail() && firstName && lastName && phone.length === 10
             && year !== undefined && month !== undefined && day !== undefined
-            && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)) {
+            && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day) && phone.length === 10) {
             localStorage.setItem("shtemAccount", JSON.stringify(account));
             //clear other localStorage information for new account
             constants.surveys.forEach((x: SurveyType) => localStorage.setItem(x.title, "undefined"));
@@ -126,7 +126,7 @@ export default function Login() {
                                 target: "",
                                 showCookies: false,
                             })}
-                            className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone
+                            className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone.length === 10
                                 && validateEmail() && year !== undefined && month !== undefined && day !== undefined
                                 && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)
                                 ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-400")}
@@ -141,8 +141,12 @@ export default function Login() {
                             }
                             {(email && firstName && lastName && phone
                                 && year !== undefined && month !== undefined && day !== undefined
-                                && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day) && !validateEmail()) &&
-                                "* Please provide a valid email address"
+                                && !Number.isNaN(year) && !Number.isNaN(month) && !Number.isNaN(day)
+                                && (!validateEmail() || phone.length !== 10)) && (
+                                    !validateEmail()
+                                        ? "* Please provide a valid email address"
+                                        : "* Phone number must be 10 digits"
+                                )
                             }
                         </p>
                     </div>
