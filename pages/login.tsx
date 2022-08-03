@@ -101,6 +101,10 @@ export default function Login() {
                     <h1 className="text-3xl font-bold text-center">
                         Create a new account
                     </h1>
+                    <p className="italic">
+                        Please put your real email address, as otherwise some components of this experience
+                        will not work correctly.
+                    </p>
                     <InputGroup label="Email" callback={setEmail} />
                     <InputGroup label="First Name" callback={setFirstName} />
                     <InputGroup label="Last Name" callback={setLastName} />
