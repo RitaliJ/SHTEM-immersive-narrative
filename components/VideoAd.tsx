@@ -1,5 +1,3 @@
-
-
 import CenteredModal from "./CenteredModal";
 import YouTube from "react-youtube";
 
@@ -31,6 +29,7 @@ export default function VideoAd(props: {
                                 fs: 0,
                                 loop: 1,
                                 playlist: id,
+                                cc_load_policy: 1,
                             },
                         }}
                     />
