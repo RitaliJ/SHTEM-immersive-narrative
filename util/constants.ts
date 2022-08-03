@@ -1,4 +1,3 @@
-
 export {}
 
 //constant array of survey and proudct objects to retrieve in dynamic routes
