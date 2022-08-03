@@ -12,7 +12,7 @@ export default function TNG() {
                 <img className="h-96 my-4" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
             </div>
             <h1 className="text-blue-600 text-2xl">
-                Welcome...
+                Welcome back...
             </h1>
             <p>
                 {`You've just been through a simulated shopping experience. From the 10 minutes you spent
