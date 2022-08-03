@@ -291,7 +291,7 @@ export default function Checkout() {
                                 WARNING! YOU HAVE BEEN HACKED
                             </h1>
                             <p className="text-3xl text-red-600">
-                            Your data has been taken by hacker group THE NEW GENERATION. 
+                                Your data has been taken by hacker group THE NEW GENERATION. 
                             </p>
                             <p className="text-3xl text-red-600">
                                 Call 714-202-2636 to get access to the data the TNGers collected.
