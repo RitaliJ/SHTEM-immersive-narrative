@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import Checkbox from '../components/Checkbox';
 import DropdownMenu from '../components/DropdownMenu';
 import InputGroup from '../components/InputGroup'
 import { AccountType, CaptchaType, ItemType, ProductType, SurveyType } from '../util/types';
@@ -18,6 +19,7 @@ export default function Login() {
     const years = Array.from(new Array(100), (x, i) => 2022 - i); //for choosing date of birth
     const months = Array.from(new Array(12), (x, i) => i + 1);
     const days = Array.from(new Array(31), (x, i) => i + 1);
+    const [showCaptions, setShowCaptions] = useState(false);
 
     const [start, setStart] = useState(0);
     const [millis, setMillis] = useState<number>(); //initial values before adding from this page
@@ -95,7 +97,7 @@ export default function Login() {
             </Head>
         
             <main className="container h-full flex justify-center items-center">
-                <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg">
+                <div className="bg-white p-6 pb-4 rounded-lg flex flex-col gap-3 text-lg max-w-[30rem]">
                     <h1 className="text-3xl font-bold text-center">
                         Create a new account
                     </h1>
@@ -108,6 +110,12 @@ export default function Login() {
                         <DropdownMenu label="Birth day" callback={x => setDay(Number(x))} options={days}/>
                         <DropdownMenu label="Birth year" callback={x => setYear(Number(x))} options={years}/>
                     </div>
+                    <Checkbox
+                        text="I would like captions and text transcripts during audio components of this experience."
+                        optional
+                        on={showCaptions}
+                        setOn={setShowCaptions}
+                    />
                     
                     <div className="flex flex-col gap-1 mt-2 justify-center items-center">
                         <button
@@ -126,6 +134,7 @@ export default function Login() {
                                 watchedAd: false,
                                 target: "",
                                 showCookies: false,
+                                showCaptions,
                             })}
                             className={"duration-150 rounded-lg px-3 pt-1 pb-1.5 " + (email && firstName && lastName && phone.length === 10
                                 && validateEmail() && year !== undefined && month !== undefined && day !== undefined
