@@ -453,10 +453,8 @@ export default function Dataleak() {
                         </div>
                         <p>Your pronouns: {gender}</p>
                         <p>The political issues you care for the most:</p>
-
                         <div className="flex flex-col gap-1 pl-6">
-                            {
-                            poliCaptcha ? updateCaptchaLabels(poliCaptcha, constants.politicalIssueCaptchaLabels).map((x, i) =>
+                            {poliCaptcha.includes(true) ? updateCaptchaLabels(poliCaptcha, constants.politicalIssueCaptchaLabels).map((x, i) =>
                                 <div key={i} className="flex gap-2">
                                     <p>•</p>
                                     <p>{x}</p>
@@ -466,8 +464,7 @@ export default function Dataleak() {
                                     <p>•</p>
                                     <p>None</p>
                                 </div>
-                            )
-                            }
+                            )}
                         </div>
 
                         <div className="flex justify-center">
