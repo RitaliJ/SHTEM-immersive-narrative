@@ -17,7 +17,6 @@ export default function HelpModal(props: {
     const [item, setItem] = useState("");
     const itemsAvailable = ["White Shirt", "Focus", "Gold Man"]
     
-    
     const pages: ReactNode[] = [
         <p key={0}>
             Hello {account.firstName}! Thank you for signing up for our website;
