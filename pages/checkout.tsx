@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CartProduct from "../components/CartProduct";
+import CenteredModal from "../components/CenteredModal";
 import Checkbox from "../components/Checkbox";
 import DropdownMenu from "../components/DropdownMenu";
 import Header from "../components/Header";
@@ -22,6 +23,8 @@ export default function Checkout() {
     const [state, setState] = useState("");
     const [zip, setZip] = useState("");
     const [shipping, setShipping] = useState(5); //shipping cost
+    const [isOpen, setIsOpen] = useState(false);
+    const [code, setCode] = useState("");
     // const [cardNumber, setCardNumber] = useState("");
     // const [securityPin, setSecurityPin] = useState("");
     const states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", //states for dropdown menu
@@ -150,6 +153,15 @@ export default function Checkout() {
         }
     }
 
+    function checkCode(){
+        if (code == "5367") {
+            location.href = "/dataleak";
+        } else {
+            return "Incorrect Code. Please Try Again";
+        }
+
+    }
+
     return (
         <>
             <Head>
@@ -195,9 +207,9 @@ export default function Checkout() {
                         </div>
                         <Link href={firstName && lastName && address && city && state && inBudget && confirm
                             && zip.toString().length === 5 ?
-                            "/purchase" : "/checkout"}>
+                            "/checkout" : "/checkout"}>
                             <button
-                                onClick={() => handleSubmit()}
+                                onClick={() => setIsOpen(true)}
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
                                     + (firstName && lastName && address && city && state && zip && inBudget && confirm
                                     && zip.toString().length === 5 && account.email && account.items[0] ?
@@ -289,6 +301,31 @@ export default function Checkout() {
                         </div>
                     </div>
                 </div>
+
+                <CenteredModal isOpen={isOpen} setIsOpen={setIsOpen}>
+                    <div className="bg-gray-900 w-full h-full flex justify-center items-center font-mono">
+                        <div className="w-1/2 h-full flex flex-col gap-8 justify-center items-center">
+                            <h1 className="text-4xl text-red-600">
+                                WARNING! YOU HAVE BEEN HACKED
+                            </h1>
+                            <p className="text-3xl text-red-600">
+                            Your data has been taken by hacker group THE NEW GENERATION. 
+                            </p>
+                            <p className="text-3xl text-red-600">
+                                Call 714-202-2636 to get access to the data the TNGers collected.
+                            </p>
+                            <div className="text-2xl text-red-600 flex flex-col gap-4">
+                                <InputGroup label="Code" callback={setCode} />
+                                <button
+                                    className="bg-red-600 text-gray-900 px-3 py-1 rounded-lg"
+                                    onClick={() => checkCode()}
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </CenteredModal>
             </main>
         </>
     )
