@@ -19,7 +19,7 @@ export default function Dataleak() {
     // const [shoeCaptcha, setShoeCaptcha] = useState([false]);
     // const [starbucks, setstarbucks] = useState({} as {[key: string]: string});
     const [code, setCode] = useState("");
-    const updateUserVacationCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
+    const updateCaptchaLabels = (selections: boolean[], referenceList: string[]) => {
         let labels = [];
         for (var i = 0; i < selections.length; i++) {
             if (selections[i]) {
@@ -128,8 +128,8 @@ export default function Dataleak() {
             return "Has close bond with sibling";
         } else if (famfeud["Name the family member that you would bring with you on a trip to disneyland."] == "Family dog") {
             return "Thinks of their dog as part of their family";
-        } else if (famfeud["Name the family member that you would bring with you on a trip to disneyland."] == "Wine aunt") {
-            return "Perhaps sees aunt as more of a parental role or figure and even feels more comfortable with them.";
+        } else if (famfeud["Name the family member that you would bring with you on a trip to disneyland."] == "Favorite Grandparent") {
+            return "Likely has or had a close bond with at least one grandparent";
         }
     } 
     const plane = () => {
@@ -460,20 +460,21 @@ export default function Dataleak() {
                         </div>
                         <p>Your pronouns: {gender}</p>
                         <p>The political issues you care for the most:</p>
+
                         <div className="flex flex-col gap-1 pl-6">
-                            {poliCaptcha && updateUserVacationCaptchaLabels(poliCaptcha, constants.politicalIssueCaptchaLabels)[0] ? (
-                                updateUserVacationCaptchaLabels(poliCaptcha, constants.politicalIssueCaptchaLabels).map((x, i) =>
-                                    <div key={i} className="flex gap-2">
-                                        <p>•</p>
-                                        <p>{x}</p>
-                                    </div>
-                                )
+                            {
+                            poliCaptcha ? updateCaptchaLabels(poliCaptcha, constants.politicalIssueCaptchaLabels).map((x, i) =>
+                                <div key={i} className="flex gap-2">
+                                    <p>•</p>
+                                    <p>{x}</p>
+                                </div>
                             ) : (
                                 <div className="flex gap-2">
                                     <p>•</p>
                                     <p>None</p>
                                 </div>
-                            )}
+                            )
+                            }
                         </div>
 
                         <div className="flex justify-center">
