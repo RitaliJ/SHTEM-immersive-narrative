@@ -21,10 +21,11 @@ export default function Header(props: {
     updateTarget?: boolean,
     resetTargetBool?: () => void,
 }) {
-    const {addedToCart, callback, psaHtml, updateTarget, resetTargetBool} = props;
+    const {addedToCart, callback, updateTarget, resetTargetBool} = props;
     const [account, setAccount] = useState({} as AccountType);
     const [isOpen, setIsOpen] = useState(false); //useState for cart modal opening/closing
     const [redeemOpen, setRedeemOpen] = useState(false); //useState for gift code redeem modal
+    const [psaHtml, setPsaHtml] = useState<ReactNode>();
 
     const [survey, setSurvey] = useState({} as SurveyType); //the survey shown in help popover
     const [surveyOpen, setSurveyOpen] = useState(false); //useState for opening/closing survey modal
@@ -78,6 +79,12 @@ export default function Header(props: {
             resetTargetBool();
         }
     }, [updateTarget]);
+
+    useEffect(() => {
+        if (props.psaHtml) {
+            setPsaHtml(props.psaHtml);
+        }
+    }, [props.psaHtml]);
 
     //helper to refresh account
     const refreshAccount = () => {
