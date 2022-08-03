@@ -187,11 +187,15 @@ export default function Dataleak() {
     const screenTime = () => {
         const x = (famfeud["What was your average daily amount of screen time last week?"]);
         if (x == "1-3 hours") {
-            return ("Doesn't use phone much")
-        } else if (x == "4-6 hours" || x == "7-9 hours") {
-            return ("Uses phone on a daily basis, but not addicted")
-        } else if (x == "9-11 hours"|| x == "11+ hours") {
-            return ("Is addicted to their phone")
+            return ("Spends 15 - 46 full days on their phone in a year")
+        } else if (x == "4-6 hours" )  {
+            return ("Spends 61 - 91 full days on their phone in a year")
+        }else if (x == "7-9 hours") {
+            return("Spends 106 - 137 full days on their phone in a year")
+        } else if (x == "9-11 hours" ) {
+            return ("Spends 137 - 167 full days on their phone a year")
+        } else if (x == "11+ hours") {
+            return("spends almost 50% of their year on their phone")
         }
     }
     const anthem = () => {
