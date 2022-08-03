@@ -74,7 +74,7 @@ export default function Survey() {
     //timer and click counter
     useEffect(() => {
         const x = localStorage.getItem("survey");
-        if (x === null || x === "{}") { //if localstorage key doesn't exist, create it
+        if (x === null || x === "{}" || x === "undefined") { //if localstorage key doesn't exist, create it
             localStorage.setItem("survey", JSON.stringify({millis: 0, clicks: 0}));
         } else {
             const x2 = JSON.parse(x);
@@ -94,7 +94,7 @@ export default function Survey() {
             setTimeout(() => {
                 setNewMillis(Date.now() - start);
                 const x = localStorage.getItem("survey");
-                if (x !== null) {
+                if (x !== null && x !== "undefined") {
                     let x2 = JSON.parse(x);
                     x2.millis = millis + newMillis;
                     localStorage.setItem("survey", JSON.stringify(x2));
@@ -106,7 +106,7 @@ export default function Survey() {
     //handle click event
     const handleClick = () => {
         const x = localStorage.getItem("survey");
-        if (x !== null) {
+        if (x !== null && x !== "undefined") {
             let x2 = JSON.parse(x);
             x2.clicks += 1;
             localStorage.setItem("survey", JSON.stringify(x2));

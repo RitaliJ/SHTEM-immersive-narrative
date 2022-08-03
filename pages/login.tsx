@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import DropdownMenu from '../components/DropdownMenu';
 import InputGroup from '../components/InputGroup'
-import { AccountType, CaptchaType, ItemType, SurveyType } from '../util/types';
+import { AccountType, CaptchaType, ItemType, ProductType, SurveyType } from '../util/types';
 const constants = require('../util/constants')
 
 //page for creating an account; information is saved in localStorage
@@ -25,13 +25,8 @@ export default function Login() {
 
     //timer and click counter
     useEffect(() => {
-        const x = localStorage.getItem("login");
-        if (x === null || x === "{}") { //if localstorage key doesn't exist, create it
-            localStorage.setItem("login", JSON.stringify({millis: 0, clicks: 0}));
-        } else {
-            const x2 = JSON.parse(x);
-            setMillis(x2.millis);
-        }
+        localStorage.setItem("login", JSON.stringify({millis: 0, clicks: 0}));
+        setMillis(0);
         setNewMillis(0);
         setStart(Date.now);
         document.addEventListener("mousedown", handleClick);
@@ -46,7 +41,7 @@ export default function Login() {
             setTimeout(() => {
                 setNewMillis(Date.now() - start);
                 const x = localStorage.getItem("login");
-                if (x !== null) {
+                if (x !== null && x !== "undefined") {
                     let x2 = JSON.parse(x);
                     x2.millis = millis + newMillis;
                     localStorage.setItem("login", JSON.stringify(x2));
@@ -58,7 +53,7 @@ export default function Login() {
     //handle click event
     const handleClick = () => {
         const x = localStorage.getItem("login");
-        if (x !== null) {
+        if (x !== null && x !== "undefined") {
             let x2 = JSON.parse(x);
             x2.clicks += 1;
             localStorage.setItem("login", JSON.stringify(x2));
@@ -81,6 +76,12 @@ export default function Login() {
             //clear other localStorage information for new account
             constants.surveys.forEach((x: SurveyType) => localStorage.setItem(x.title, "undefined"));
             constants.captchas.forEach((x: CaptchaType) => localStorage.setItem(x.title, "undefined"));
+            localStorage.setItem("terms", "undefined");
+            localStorage.setItem("survey", "undefined");
+            localStorage.setItem("home", "undefined");
+            localStorage.setItem("checkout", "undefined");
+            localStorage.setItem("purchase", "undefined");
+            constants.products.forEach((x: ProductType) => localStorage.setItem("products/" + x.id, "undefined"));
             location.href = "/terms";
         }
     }
