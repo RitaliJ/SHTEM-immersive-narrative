@@ -122,25 +122,6 @@ export default function Checkout() {
     const handleSubmit = () => {
         if (firstName && lastName && address && city && state && confirm && inBudget
             && zip.toString().length === 5) {
-            const data = {
-                email,
-                firstName: account.firstName,
-                billingFirstName: firstName,
-                billingLastName: lastName,
-                address: `${address}, ${city}, ${state} ${zip}`,
-                address2,
-                items: account.items,
-                total,
-                shipping,
-            };
-            fetch("/api/email", { //send email request to api route
-                method: "POST",
-                headers: {
-                    "Accept": "application/json, text/plain, */*",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
             let acc = account; //reset shopping cart in localStorage account info
             if (!acc.purchases[0]) {
                 acc.purchases = acc.items;
@@ -150,6 +131,7 @@ export default function Checkout() {
             acc.items = [undefined as unknown as ItemType];
             acc.balance -= total; //remove spent money from balance
             localStorage.setItem("shtemAccount", JSON.stringify(acc));
+            setIsOpen(true);
         }
     }
 
@@ -209,7 +191,7 @@ export default function Checkout() {
                             && zip.toString().length === 5 ?
                             "/checkout" : "/checkout"}>
                             <button
-                                onClick={() => setIsOpen(true)}
+                                onClick={() => handleSubmit()}
                                 className={"duration-150 text-lg px-10 py-3 rounded-lg "
                                     + (firstName && lastName && address && city && state && zip && inBudget && confirm
                                     && zip.toString().length === 5 && account.email && account.items[0] ?
@@ -315,7 +297,7 @@ export default function Checkout() {
                                 Call 714-202-2636 to get access to the data the TNGers collected.
                             </p>
                             {account.showCaptions &&
-                                <a target="_blank" href="https://docs.google.com/document/d/15EgF0-q02IMwhMsa07M9iehvmstVqulP1nvN6D0SXF0/edit">
+                                <a target="_blank" rel="noreferrer" href="https://docs.google.com/document/d/15EgF0-q02IMwhMsa07M9iehvmstVqulP1nvN6D0SXF0/edit">
                                     <p className="text-3xl text-blue-500 underline">
                                         Link to call transcript
                                     </p>
