@@ -41,7 +41,7 @@ module.exports = {
                             "None",
                             "Sibling",
                             "Family dog",
-                            "grandparent",
+                            "Favorite Grandparent",
                         ],
                     },
                 ],
