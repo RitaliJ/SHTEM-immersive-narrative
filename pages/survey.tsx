@@ -55,6 +55,7 @@ export default function Survey() {
         "Scandanavian",
         "German",
         "Other",
+        "prefer not to say",
     ];
     const pronounOptions = [
         "he/him",
@@ -63,6 +64,7 @@ export default function Survey() {
         "he/them",
         "she/them",
         "other",
+        "prefer not to say",
     ];
 
     const [start, setStart] = useState(0);
