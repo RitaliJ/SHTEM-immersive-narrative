@@ -128,8 +128,8 @@ export default function Dataleak() {
             return "Has close bond with sibling";
         } else if (famfeud["Name the family member that you would bring with you on a trip to disneyland."] == "Family dog") {
             return "Thinks of their dog as part of their family";
-        } else if (famfeud["Name the family member that you would bring with you on a trip to disneyland."] == "Wine aunt") {
-            return "Perhaps sees aunt as more of a parental role or figure and even feels more comfortable with them.";
+        } else if (famfeud["Name the family member that you would bring with you on a trip to disneyland."] == "grandparent") {
+            return "likely has or had a close bond with at least one grandparent";
         }
     } 
     const plane = () => {
