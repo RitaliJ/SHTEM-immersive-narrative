@@ -1,11 +1,18 @@
 import Image from "next/image";
 import { Popover, Transition } from '@headlessui/react';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 //modal for help popup
 export default function HelpPopover(props: {html: ReactNode, outerHtml: ReactNode}) {
-    const {html, outerHtml} = props;
+    const {outerHtml} = props;
+    const [html, setHtml] = useState<ReactNode>();
     const [opened, setOpened] = useState(false);
+
+    useEffect(() => {
+        if (props.html) {
+            setHtml(props.html);
+        }
+    }, [props.html]);
 
     return (
         <Popover as="div" className="relative">

@@ -314,6 +314,13 @@ export default function Checkout() {
                             <p className="text-3xl text-red-600">
                                 Call 714-202-2636 to get access to the data the TNGers collected.
                             </p>
+                            {account.showCaptions &&
+                                <a target="_blank" href="https://docs.google.com/document/d/15EgF0-q02IMwhMsa07M9iehvmstVqulP1nvN6D0SXF0/edit">
+                                    <p className="text-3xl text-blue-500 underline">
+                                        Link to call transcript
+                                    </p>
+                                </a>
+                            }
                             <div className="text-2xl text-red-600 flex flex-col gap-4">
                                 <InputGroup label="Code" callback={setCode} />
                                 <button

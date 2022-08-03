@@ -88,8 +88,6 @@ export default function Dataleak() {
             if (home && home !== "undefined") tempData.home = JSON.parse(home);
             const checkout = localStorage.getItem('checkout');
             if (checkout && checkout !== "undefined") tempData.checkout = JSON.parse(checkout);
-            const purchase = localStorage.getItem('purchase');
-            if (purchase && purchase !== "undefined") tempData.purchase = JSON.parse(purchase);
 
             let products: {millis: number, clicks: number}[] = [];
             constants.products.forEach((p: ProductType) => {
@@ -339,15 +337,6 @@ export default function Dataleak() {
                                         Checkout page:
                                     </p>
                                     <p>{formatMs(data.checkout.millis)}; {data.checkout.clicks === 1 ? "1 click" : data.checkout.clicks + " clicks"}</p>
-                                </div>
-                            }
-                            {data.purchase &&
-                                <div className="flex gap-2">
-                                    <p>•</p>
-                                    <p className="grow pr-4">
-                                        Purchase confirmation page:
-                                    </p>
-                                    <p>{formatMs(data.purchase.millis)}; {data.purchase.clicks === 1 ? "1 click" : data.purchase.clicks + " clicks"}</p>
                                 </div>
                             }
                             {data.products.map((p, i) =>

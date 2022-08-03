@@ -89,6 +89,15 @@ export default function Home() {
         }
     }, [account]);
 
+    useEffect(() => {
+        if (!helpOpen) {
+            const acc = localStorage.getItem("shtemAccount");
+            if (acc) {
+                setAccount(JSON.parse(acc));
+            }
+        }
+    }, [helpOpen]);
+
     return (
         <>
             <Head>
