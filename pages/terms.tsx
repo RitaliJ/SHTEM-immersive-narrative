@@ -62,9 +62,9 @@ export default function Terms() {
     return (
         <div className="w-screen h-screen bg-blue-100">
             <Head>
-                <title>SHTEM Website | Terms</title>
-                <meta name="description" content="Survey" />
-                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
+                <title>Sahara Prime | Terms</title>
+                <meta name="description" content="Terms" />
+                <link rel="icon" href="/logo.png" />
             </Head>
             <main className="container w-min h-full flex justify-center items-center">
                 <div className="bg-white p-6 rounded-lg flex flex-col gap-3 items-center mt-24">

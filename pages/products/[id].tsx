@@ -91,9 +91,9 @@ export default function Product(){
     return (
         <div className="h-screen flex flex-col">
             <Head>
-                <title>{"SHTEM | " + (product && product.name)}</title>
-                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
-
+                <title>{"Sahara Prime | " + (product && product.name)}</title>
+                <meta name="description" content="Product" />
+                <link rel="icon" href="/logo.png" />
             </Head>
             
             <Header

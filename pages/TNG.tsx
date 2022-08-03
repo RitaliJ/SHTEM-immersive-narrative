@@ -278,9 +278,9 @@ export default function TNG() {
     return (
         <div className="px-8">
             <Head>
-                <title>SHTEM Website | TNG</title>
+                <title>TNG</title>
                 <meta name="description" content="TNG" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/tng.png" />
             </Head>
             
             <main className="container flex flex-col gap-3 mt-12 mb-24 w-full h-full overflow-y-auto bg-white text-left text-lg">

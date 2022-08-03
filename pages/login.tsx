@@ -88,9 +88,9 @@ export default function Login() {
     return (
         <div className="w-screen h-screen bg-blue-100">
             <Head>
-                <title>SHTEM Website | Login</title>
+                <title>Sahara Prime | Login</title>
                 <meta name="description" content="Login" />
-                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
+                <link rel="icon" href="/logo.png" />
             </Head>
         
             <main className="container h-full flex justify-center items-center">

@@ -92,9 +92,9 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>SHTEM Website</title>
-                <meta name="description" content="Shtem website" />
-                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
+                <title>Sahara Prime</title>
+                <meta name="description" content="Home" />
+                <link rel="icon" href="/logo.png" />
             </Head>
             
             <Header

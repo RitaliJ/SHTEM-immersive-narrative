@@ -64,9 +64,9 @@ export default function Purchase() {
     return (
         <>
             <Head>
-                <title>SHTEM Website | Purchase</title>
+                <title>Sahara Prime | Purchase</title>
                 <meta name="description" content="Purchase" />
-                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
+                <link rel="icon" href="/logo.png" />
             </Head>
 
             <Header/>

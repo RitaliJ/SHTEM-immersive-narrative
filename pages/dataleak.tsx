@@ -214,9 +214,9 @@ export default function Dataleak() {
     return (
         <div className="w-screen h-screen overflow-hidden">
             <Head>
-                <title>SHTEM Website</title>
-                <meta name="description" content="Shtem website" />
-                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
+                <title>{account && account.firstName + "'s data"}</title>
+                <meta name="description" content="Dataleak" />
+                <link rel="icon" href="/tng.png" />
             </Head>
 
             <main className="flex flex-col gap-1 p-12 items-center font-mono bg-gray-900 text-red-600 w-full h-full overflow-y-auto">

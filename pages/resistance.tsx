@@ -5,9 +5,9 @@ export default function Resistance() {
     return (
         <>
             <Head>
-                <title>SHTEM Website | Resistance</title>
+                <title>TNG | Resistance</title>
                 <meta name="description" content="Resistance" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/tng.png" />
             </Head>
 
             <div className="flex justify-center items-center">

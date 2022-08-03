@@ -153,9 +153,9 @@ export default function Checkout() {
     return (
         <>
             <Head>
-                <title>SHTEM Website | Checkout</title>
-                <meta name="description" content="Cart" />
-                <link rel="icon" href="https://media.discordapp.net/attachments/999069731732594699/1001568457806053486/unknown.png" />
+                <title>Sahara Prime | Checkout</title>
+                <meta name="description" content="Checkout" />
+                <link rel="icon" href="/logo.png" />
             </Head>
             
             <Header psaHtml="Order things here!" />
