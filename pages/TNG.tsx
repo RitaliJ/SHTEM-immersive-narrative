@@ -9,7 +9,7 @@ export default function TNG() {
     const pages: ReactNode[] = [
         <div key={0}>
             <div className="flex justify-center">
-                <img className="h-96 my-4" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
+                <img className="h-96 my-4" src="https://freepngimg.com/thumb/hourglass/151171-photos-sandglass-animated-hourglass-png-free-photo.png" />
             </div>
             <h1 className="text-blue-600 text-2xl">
                 Welcome back...
@@ -218,7 +218,7 @@ export default function TNG() {
                 This is your choice.
             </p>
             <div className="flex justify-center">
-                <img className="h-96 my-4" src="http://www.clipartbest.com/cliparts/9cR/57X/9cR57XMMi.gif" />
+                <img className="h-96 my-4" src="https://freepngimg.com/thumb/hourglass/151171-photos-sandglass-animated-hourglass-png-free-photo.png" />
             </div>
             <div className="flex gap-2 justify-center">
                 <Link href="/resistance">
