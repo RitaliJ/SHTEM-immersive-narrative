@@ -299,12 +299,12 @@ export default function Header(props: {
                         <VideoAd
                             isOpen={watchAdOpen}
                             setIsOpen={setWatchAdOpen}
-                            id="1WN4SrqZm50"
+                            id="9Z9yqPjEZ5U"
                         />
                         <VideoAd 
                             isOpen= {watchAd2Open}
                             setIsOpen={setWatchAd2Open}
-                            id="EdmesCSJbC4"
+                            id="hA6GTuAU8Yg"
                         />
                         <NewsletterModal
                             isOpen={newsLetterOpen}
